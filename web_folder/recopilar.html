@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Recopilar Metadatos de Recibos</title>
+    <link rel="stylesheet" type=text/css href="css/estilos.css">
+    <script type="text/javascript" src="js/funciones.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+
+<body>
+    <aside>
+        <div id="logo">
+            <h1>
+                <a href="/main.html">SYSTEM RECI</a>
+            </h1>
+        </div>
+        <div id="menu">
+
+
+            <div id="recop">
+                <h2>
+                    <a href="recopilar.html">
+                        RECOPILAR DATOS
+                    </a>
+                </h2>
+            </div>
+            <div id="buscar">
+                <h2>
+                    <a href="">
+                        BUSCAR RECIBOS
+                    </a>
+                </h2>
+            </div>
+            <div id="extraer">
+                <h2>
+                    <a href="">
+                        EXTRER HOJAS
+                    </a>
+
+                </h2>
+            </div>
+            <div id="respaldar">
+                <h2>
+                    <a href="main.html">
+                        RESPALDAR TIMBRES Y RECIBOS
+                    </a>
+
+                </h2>
+            </div>
+        </div>
+    </aside>
+
+    <section id="recopilador">
+        <div id="contenedor">
+            <div id="cont-ruta">
+                <label for="">Ruta de Recibos</label>
+                <input type="text" name="ruta-reci" readonly/>
+                <button id="btn-explorador-archivos" type="button" onclick="mostrar_ruta_metadatos()">...</button>
+            </div>
+
+            <div class="btn-aceptar">
+                <button type="button" onclick="mostrar_ruta_metadatos()">Iniciar</button>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

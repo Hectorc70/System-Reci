@@ -1,0 +1,20 @@
+{
+  "name": "System-Reci",
+  "version": "1.0.0",
+  "description": "System-Reci",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hectorc70/System-Reci.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hectorc70/System-Reci/issues"
+  },
+  "homepage": "https://github.com/Hectorc70/System-Reci#readme"
+}
