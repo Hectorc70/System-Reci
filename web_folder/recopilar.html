@@ -4,7 +4,8 @@
 <head>
     <title>Recopilar Metadatos de Recibos</title>
     <link rel="stylesheet" type=text/css href="css/estilos.css">
-    <script type="text/javascript" src="js/funciones.js"></script>
+    <link rel="stylesheet" type=text/css href="css/recop.css">
+    <script type="text/javascript" src="js/recopilador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 
@@ -55,13 +56,25 @@
         <div id="contenedor">
             <div id="cont-ruta">
                 <label for="">Ruta de Recibos</label>
-                <input type="text" name="ruta-reci" readonly/>
-                <button id="btn-explorador-archivos" type="button" onclick="mostrar_ruta_metadatos()">...</button>
+                <input type="text" name="ruta-reci" readonly />
+                <button id="btn-explorador-archivos" type="button" onclick="mostrarDirectorio()">...</button>
             </div>
 
             <div class="btn-aceptar">
-                <button type="button" onclick="mostrar_ruta_metadatos()">Iniciar</button>
+                <button type="button" onclick="mostrarEnTabla()">Iniciar</button>
             </div>
+        </div>
+        <div id="tbl">
+            <table>
+                <tr id="titulos">
+                    <th><input type="checkbox">Todos</th>
+                    <th>Periodo</th>
+                    <th>Año</th>
+                    <th>Nomina</th>
+                    <th>Ruta</th>
+                </tr>
+                <tbody id="tbl-datos"></tbody>
+            </table>
         </div>
     </section>
 
