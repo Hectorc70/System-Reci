@@ -9,9 +9,14 @@ eel.init('web_folder', allowed_extensions=['.js','.html'])
 @eel.expose
 def ruta_metadatos(): 
     directorio = abrir_directorio()    
-    rutas_recibos(directorio)
-    print(directorio)
+    
     return directorio
+
+@eel.expose
+def mostrar_periodos(directorio):
+    rutas = rutas_recibos(directorio)
+    
+    return rutas
 """
 def ejecutar()   
 reci = ReciboNomina()
