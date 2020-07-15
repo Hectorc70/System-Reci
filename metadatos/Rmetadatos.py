@@ -1,14 +1,18 @@
-from metadatos.ayuda.txt import ArchivoTxt
+
 from metadatos.ayuda.rutas import dividir_cadena
+from metadatos.ayuda.pdf import ArchivoPdf
 
 
-class ArchivoMetadatos(ArchivoTxt):
+
+class Metadatos(ArchivoTxt):
 
 	def __init__(self, archivo):
 		super().__init__(archivo)
 
-	def guardar(self):
+	def recuperar():
 		
+	def guardar(self):
+
 	def leer(self):
 
 		empleado = dict()			
