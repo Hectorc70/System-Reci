@@ -1,8 +1,8 @@
 from os.path import splitext
 
-from ayuda.pdf import ArchivoPdf
-from ayuda.rutas import Rutas, unir_cadenas, comprobar_rutas, abrir_archivo, dividir_cadena
-from ayuda.buscador import Buscador
+from metadatos.ayuda.pdf import ArchivoPdf
+from metadatos.ayuda.rutas import Rutas, unir_cadenas, comprobar_rutas, abrir_archivo, dividir_cadena
+from metadatos.ayuda.buscador import Buscador
 
 
 PATRONES = ['CONTROL: [0123456789]{8}', 'PERIODO:[0123456789]{2}/[0123456789]{4}']
@@ -14,23 +14,28 @@ PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 
 
 def rutas_recibos(ruta_recibos):
-		rutas_pdf = list()
+		rutas_pdf = dict()
 
 		rutas = Rutas()
 		rutas = rutas.recuperar_rutas(ruta_recibos, True)
 		ruta_base_num = len(ruta_recibos.split('\\'))
 		
-
+		contador = 0
 		for ruta in rutas:
+			
 
 			tipo_archivo = splitext(ruta[-1])[-1]
 			if tipo_archivo == '.pdf':
-				per = ruta[ruta_base_num].split('_')[0]
-				carp_reci = ruta[ruta_base_num+3]
-
-				if per in PERIODOS and carp_reci == 'RECIBOS':		
+				per = ruta[ruta_base_num+1].split('_')[0]
+				anno = ruta[ruta_base_num+1].split('_')[1]
+				nomina = ruta[ruta_base_num+2]				
+				carp_reci = ruta[ruta_base_num+4]
+				
+				if per in PERIODOS and carp_reci == 'RECIBOS':
+					contador = contador+1		
 					ruta_completa = unir_cadenas('\\', ruta)
-					rutas_pdf.append(ruta_completa)
+					rutas_pdf[str(contador)] = {'anno':anno, 'per':per,
+												'nom':nomina, 'ruta':ruta_completa}
 		
 		return rutas_pdf
 

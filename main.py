@@ -13,7 +13,7 @@ def ruta_metadatos():
     return directorio
 
 @eel.expose
-def mostrar_periodos(directorio):
+def mostrar_rutas_recibos(directorio):
     rutas = rutas_recibos(directorio)
     
     return rutas

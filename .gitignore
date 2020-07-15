@@ -1,0 +1,4 @@
+
+*.pyc
+
+metadatos/__pycache__/

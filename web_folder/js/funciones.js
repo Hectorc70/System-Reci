@@ -8,13 +8,28 @@ async function mostrar_ruta_metadatos(){
     console.log(ruta);
 }
 
-async function mostrar_en_tabla(datos, nombre_tabla){
-    let ruta = await eel.mostrar_periodos()();   
-    document.getElementsByName("ruta-reci")[0].value = ruta;
-    console.log(ruta);
-}
-/* eel.expose(prueba);
-function prueba(){
-    console.log("22")
+async function mostrar_en_tabla(){
+
+    let directorio = document.getElementsByName("ruta-reci")[0].value;
+    let rutas = await eel.mostrar_rutas_recibos(directorio)();
+    const rutas_num = Object.getOwnPropertyNames(rutas)
+
+    debugger;
+    for(let i=1; i<rutas_num.length; i++){
+
+        let tr = document.createElement('tr');
+        let rutas_datos_num = Object.getOwnPropertyDescriptor
+        for (j = 1; j < rutas[i].length; j++) {
+            let td = document.createElement('td');
+
+            td.appendChild(document.createTextNode(rutas[i][j]));
+            tr.appendChild(td)
+        }
+
+
+        
+
     
-} */
+    
+}
+}
