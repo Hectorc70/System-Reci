@@ -13,9 +13,9 @@ PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 
 
 
-def rutas_recibos(ruta_recibos):
+def rutas_recibos(directorio):
 		rutas_pdf = dict()
-
+		ruta_recibos = directorio.replace('/', '\\')
 		rutas = Rutas()
 		rutas = rutas.recuperar_rutas(ruta_recibos, True)
 		ruta_base_num = len(ruta_recibos.split('\\'))
@@ -26,10 +26,10 @@ def rutas_recibos(ruta_recibos):
 
 			tipo_archivo = splitext(ruta[-1])[-1]
 			if tipo_archivo == '.pdf':
-				per = ruta[ruta_base_num+1].split('_')[0]
-				anno = ruta[ruta_base_num+1].split('_')[1]
-				nomina = ruta[ruta_base_num+2]				
-				carp_reci = ruta[ruta_base_num+4]
+				per = ruta[ruta_base_num].split('_')[0]
+				anno = ruta[ruta_base_num].split('_')[1]
+				nomina = ruta[ruta_base_num+1]				
+				carp_reci = ruta[ruta_base_num+3]
 				
 				if per in PERIODOS and carp_reci == 'RECIBOS':
 					contador = contador+1		

@@ -17,12 +17,7 @@ def mostrar_rutas_recibos(directorio):
     rutas = rutas_recibos(directorio)
     
     return rutas
-"""
-def ejecutar()   
-reci = ReciboNomina()
-    rutas = rutas_recibos(directorio)   
-    
-"""
+
 
 try:
     eel.start('main.html')
