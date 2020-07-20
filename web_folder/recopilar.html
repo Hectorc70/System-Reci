@@ -7,6 +7,8 @@
     <link rel="stylesheet" type=text/css href="css/recop.css">
     <script type="text/javascript" src="js/recopilador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -59,15 +61,21 @@
                 <input type="text" name="ruta-reci" readonly />
                 <button id="btn-explorador-archivos" type="button" onclick="mostrarDirectorio()">...</button>
             </div>
+            <div id="datos-in">
+                <label for="anno">Año</label>
+                <input type="text" min="6" max="6" name="anno" placeholder="2020">
+                <label for="periodo">Periodo</label>
+                <input type="text" min="6" max="6" name="periodo" placeholder="01">
+            </div>
 
             <div class="btn-aceptar">
-                <button type="button" onclick="mostrarEnTabla()">Iniciar</button>
+                <button type="button" onclick="elementosTabla()">Iniciar</button>
             </div>
+
         </div>
         <div id="tbl">
             <table>
-                <tr id="titulos">
-                    <th><input type="checkbox">Todos</th>
+                <tr id="titulos">                   
                     <th>Periodo</th>
                     <th>Año</th>
                     <th>Nomina</th>
