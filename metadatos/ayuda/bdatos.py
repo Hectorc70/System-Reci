@@ -1,39 +1,38 @@
-import sqlite3
+import pymysql
 
-
-conec = 'C:\\pruebas\\mibdat-p.db'
 
 class Bdatos:
-    def __init__(self, coneccion):
-        self.coneccion = sqlite3.connect(coneccion)
-        self.cursor    = self.coneccion.cursor()
+    def __init__(self, host, usuario, psword, nombre_bd):       
+        self.host    = host
+        self.usuario = usuario
+        self.psw     = psword
+        self.nombre_bd = nombre_bd
+        self.conexion = pymysql.connect(self.host, self.usuario, self.psw, self.nombre_bd)
+        self.cursor    = self.conexion.cursor()
+        self.errores_guardado = dict()
 
-    def crear_tabla(self, nombre_tabla, campos):
-        """Ejemplo: 'Recibos', ['control text,', 
-                    'periodo text,', 'año text'])"""
+    def insertar_filas(self, nombre_tabla, datos, campos):
         
+        orden = "INSERT INTO {}({}) \
+                VALUES({})".format(nombre_tabla, campos, datos)
         
-        orden = "CREATE TABLE IF NOT EXISTS " + nombre_tabla + '(' 
-        for campo in campos:
-            orden = orden + campo
-        orden = orden + ')'
-        
-        self.cursor.execute(orden)
-        self.coneccion.commit()
-        self.coneccion.close()
+        try: 
+            self.cursor.execute(orden)
+            self.conexion.commit()
+
+            self.conexion.close()
+        except pymysql.err.IntegrityError:
+            self.errores_guardado[datos[0]] = datos
+            pass
         
 
-    def escribir_registros(self, nombre_tabla, registros, num_campos):
-        orden = "INSERT INTO " + nombre_tabla + "VALUES (" + campos + "), " + registros
+host = '127.0.0.1'
+usuario = 'root'
+psword = ''
+bd_nombre = 'recibosnomina'
 
-        
-        self.cursor.executemany(orden)
+campos = 'id, control, periodo, anno, pagina, ruta'
+datos = "'31821201202010', 318212, '01', '2020', 10, 'C:/pruebas/prueba.pdf'"
 
-        self.coneccion.commit()
-        self.coneccion.close()
-        
-campos = ['control VARCHAR(8),', 'IDnomina VARCHAR(10),', 'periodo VARCHAR(2),', 'año VARCHAR(4),', 'pagina INTEGER(4),', 'ruta VARCHAR(300)']
-
-
-recibos = Bdatos(conec)
-recibos.crear_tabla('Recibos', campos)
+recibos = Bdatos(host, usuario, psword, bd_nombre)
+recibos.insertar_filas('r2020', datos, campos)
