@@ -60,19 +60,22 @@ async function mostrarEnTabla(){
 
 
 function elementosTabla(){
+    var rutas = [];
     let filaPer = document.getElementsByClassName("cl-per");
-    debugger;
-    for(let i=1; i<=filaPer.length; i++){
+
+    for(let i=0; i<filaPer.length; i++){
 
         checkBox = filaPer[i].getElementsByClassName("c-box");
         if(checkBox[0].checked == true){
-            let filaRuta = document.getElementsByClassName("cl-ruta")[0].value;
-            console.log('fila seleccionada ' + filaRuta);
+            let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
+            rutas.push(filaRuta);
         }
         else{
             console.log("fila no seleccionada");
         }
     }
+
+    eel.recopilacion_metadatos(rutas)();
 
     
 } 

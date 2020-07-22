@@ -17,7 +17,14 @@ def mostrar_rutas_recibos(directorio):
     rutas = rutas_recibos(directorio)
     
     return rutas
+    
 
+@eel.expose
+def recopilacion_metadatos(rutas):
+    for ruta in rutas:
+        recibo = ReciboNomina(ruta)
+        texto = recibo.buscar_datos()
+        print(texto)
 
 try:
     eel.start('main.html')

@@ -18,12 +18,10 @@ class Buscador:
 
         buscador = re.search(self.palabra, self.texto)
         
-        if buscador:
+        if buscador:            
             
-            print("Se ha encontrado la palabra:")
-            self.posiciones.append(buscador.span())            
-            return buscador.span()
+            return buscador.span()       
+            
         else:
-            print("No se ha encontrado la palabra:", self.texto)
-    
-        return self.posiciones
+            pass
+        

@@ -3,25 +3,15 @@ from PyPDF2 import PdfFileReader
 
 
 class ArchivoPdf():
-			
+	def __init__(self, ruta):
 
-	def leer_pdf(self, ruta):
-		"""Lee archivo pdf"""		
-		datos_recibos = list()
+		self.ruta = ruta
+		self.contenido = PdfFileReader(ruta,'rb')
+		self.num_paginas = self.contenido.numPages
 
-		for archivo in self.rutas_pdf:				
-			self.lectura =PdfFileReader(archivo,'rb')
-			paginas = self.lectura.numPages
-			datos =  self.extraer_contenido(paginas, self.lectura, archivo, PATRONES)
-			if len(datos) == 0:
-				continue
-			datos_recibos.append(datos)
-		
-		return datos_recibos
-		
 		
 	
-	def extraer_contenido(self, paginas, pdf_leido, ruta_archivo, patrones):
+	def extraer_contenido(self):
 		"""Retorna el contenido por hoja del Archivo PDF,
 			el numero de pagina, la ruta del archivo"""
 
@@ -29,19 +19,16 @@ class ArchivoPdf():
 		datos_pag = dict()
 
 			
-		for pagina in range(paginas):
-			if pdf_leido.isEncrypted:
-				self.lectura_encriptada(pdf_leido, pagina)				
+		for pagina in range(self.num_paginas):
+			if self.contenido.isEncrypted:
+				self.lectura_encriptada(self.contenido, pagina)				
 
 			else:
-				pagina_lect = pdf_leido.getPage(pagina)
+				pagina_lect = self.contenido.getPage(pagina)
 				pdf_texto = pagina_lect.extractText()	
 				pag = pagina+1
 
-				buscar = self.buscar_texto(patrones, pdf_texto)
-				if len(buscar) == 0:
-					continue
-				datos_pag[buscar[0]] = 	[pag, buscar[1], ruta_archivo]
+				datos_pag[pag] = 	[pdf_texto]
 		
 		return datos_pag
 
