@@ -4,7 +4,7 @@
 
 async function mostrarDirectorio(){
     let directorio = await eel.ruta_metadatos()();     
-
+    
     document.getElementsByName("ruta-reci")[0].value = directorio;
     
     console.log(directorio);
@@ -16,7 +16,7 @@ async function mostrarEnTabla(){
 
     let directorio = document.getElementsByName("ruta-reci")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
-    let rutas = await eel.mostrar_rutas_recibos(directorio)();
+    let rutas = await eel.mostrar_rutas_recibos(directorio, periodo)();
     const rutasNum = Object.getOwnPropertyNames(rutas);
 
     /* debugger; */
@@ -62,7 +62,7 @@ async function mostrarEnTabla(){
 function elementosTabla(){
     var rutas = [];
     let filaPer = document.getElementsByClassName("cl-per");
-
+    let anno = document.getElementsByName("anno")[0].value;
     for(let i=0; i<filaPer.length; i++){
 
         checkBox = filaPer[i].getElementsByClassName("c-box");
@@ -75,7 +75,7 @@ function elementosTabla(){
         }
     }
 
-    eel.recopilacion_metadatos(rutas)();
+    eel.guardar_mdatos(rutas, anno)();
 
     
 } 

@@ -2,6 +2,7 @@ import eel
 
 from metadatos.ayuda.rutas import Rutas, abrir_directorio
 from metadatos.recibo import ReciboNomina, rutas_recibos
+from metadatos.metadatos import ReciMetadatos
 eel.init('web_folder', allowed_extensions=['.js','.html'])
 
 
@@ -13,18 +14,20 @@ def ruta_metadatos():
     return directorio
 
 @eel.expose
-def mostrar_rutas_recibos(directorio):
-    rutas = rutas_recibos(directorio)
+def mostrar_rutas_recibos(directorio, periodo):
+    rutas = rutas_recibos(directorio, periodo)
     
     return rutas
     
 
 @eel.expose
-def recopilacion_metadatos(rutas):
+def guardar_mdatos(rutas, anno):
     for ruta in rutas:
         recibo = ReciboNomina(ruta)
-        texto = recibo.buscar_datos()
-        print(texto)
+        metadatos_recibos = recibo.formateo_datos()
+
+        mtdatos = ReciMetadatos(metadatos_recibos, anno)
+        mtdatos.guardar()
 
 try:
     eel.start('main.html')
