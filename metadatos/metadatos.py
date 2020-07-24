@@ -2,6 +2,7 @@
 from metadatos.ayuda.rutas import dividir_cadena, unir_cadenas
 from metadatos.recibo import ReciboNomina
 from metadatos.ayuda.bdatos import Bdatos
+from metadatos.ayuda.log import Log
 
 
 
@@ -21,7 +22,10 @@ class ReciMetadatos(Bdatos):
 		Bdatos.__init__(self,self.host, self.usuario, self.psw, self.nombre_bd)
 	
 	
-	
+	def log(self, datos):
+		log = Log("Log")
+		
+
 	def guardar(self):
 		"""invoca el metodo para insertar filas en la tabla de la base
 			de datos
@@ -29,7 +33,12 @@ class ReciMetadatos(Bdatos):
 		
 		for clave, datos in self.datos.items():						
 						
-			self.insertar_filas(self.nombre_tbl, self.campos_col, datos)
+			errores = self.insertar_filas(self.nombre_tbl, self.campos_col, datos)
+
+			if errores:
+				return errores
+			else: 
+				continue
 
 
 	
