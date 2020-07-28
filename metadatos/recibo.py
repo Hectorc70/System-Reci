@@ -10,35 +10,31 @@ PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 
 
 
-def rutas_recibos(ruta_recibos, periodo='0'):
+def rutas_recibos(ruta_recibos, anno, periodo='0'):
 		rutas_pdf = dict()		
 		rutas = Rutas()
+		if periodo !='':
+			rutas_recibos = rutas_recibos + '/' + periodo+'_'+anno 
+		
 		rutas = rutas.recuperar_rutas(ruta_recibos, True)
 		ruta_base_num = len(ruta_recibos.split('/'))
 		
 		contador = 0
-		for ruta in rutas:
-			
+		for ruta in rutas:			
 
 			tipo_archivo = splitext(ruta[-1])[-1]
 			if tipo_archivo == '.pdf':
 				per = ruta[ruta_base_num].split('_')[0]
 				anno = ruta[ruta_base_num].split('_')[1]
 				nomina = ruta[ruta_base_num+1]				
-				carp_reci = ruta[ruta_base_num+3]
+				carp_reci = ruta[ruta_base_num+3]				
 				
-				if periodo!='0':
-					if per == periodo and carp_reci == 'RECIBOS':
-						contador = contador+1		
-						ruta_completa = unir_cadenas('/', ruta)
-						rutas_pdf[str(contador)] = {'anno':anno, 'per':per,
-													'nom':nomina, 'ruta':ruta_completa}
-				else:
-					if per in PERIODOS and carp_reci == 'RECIBOS':
-						contador = contador+1		
-						ruta_completa = unir_cadenas('/', ruta)
-						rutas_pdf[str(contador)] = {'anno':anno, 'per':per,
-													'nom':nomina, 'ruta':ruta_completa}
+				if per == periodo and carp_reci == 'RECIBOS':
+					contador = contador+1		
+					ruta_completa = unir_cadenas('/', ruta)
+					rutas_pdf[str(contador)] = {'anno':anno, 'per':per,
+												'nom':nomina, 'ruta':ruta_completa}
+				
 
 		return rutas_pdf
 

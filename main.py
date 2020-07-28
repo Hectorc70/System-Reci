@@ -33,7 +33,6 @@ def guardar_mdatos(rutas, anno):
             return errores
         else:
             True
-
 try:
     eel.start('main.html')
 
