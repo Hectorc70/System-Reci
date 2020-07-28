@@ -1,15 +1,24 @@
 'use stric'
 
 
-
 async function mostrarDirectorio(){
-    let directorio = await eel.ruta_metadatos()();     
-    
-    document.getElementsByName("ruta-reci")[0].value = directorio;
-    
-    console.log(directorio);
+    var periodoIn = document.getElementsByName("periodo")[0].value;
+    var annoIn = document.getElementsByName("anno")[0].value;
 
+    
+    if(periodoIn!=='' && annoIn !== ''){
+
+        let directorio = await eel.ruta_metadatos()();     
+    
+        document.getElementsByName("ruta-reci")[0].value = directorio;
+    
+        console.log(directorio);
     mostrarEnTabla()
+    }
+    else{
+        alert("Escribe un Año y Periodo para continuar")
+    }
+    
 }
 
 async function mostrarEnTabla(){
