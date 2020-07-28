@@ -9,27 +9,32 @@
     text-align: center;
     
 }
-
-#cont-ruta{ 
+#contenedor{
     margin-top: 80px;
+    background-color: tomato;
+    height: 10%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
-    height: 40px;
-    width: 90%;
+}
+#cont-ruta{   
     display: block;
     text-align: center;
     padding-top: 10px;
     background-color: #2b2a2a;
 }
+#datos-in input{
+    width: 55px;
+    text-align: center;
 
-
+}
 
 label{
     margin-top: 10px;
     font-size: 25px;
     color: black;
-
 }
+
 input{      
     width: 50%;
 }
