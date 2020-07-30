@@ -1,7 +1,7 @@
 import eel
 from os.path import exists
 from metadatos.ayuda.rutas import Rutas, abrir_directorio
-from metadatos.recibo import ReciboNomina, rutas_recibos
+from metadatos.recibo import ReciboNomina, RutaRecibo
 from metadatos.metadatos import ReciMetadatos
 eel.init('web_folder', allowed_extensions=['.js','.html'])
 
@@ -18,7 +18,8 @@ def ruta_metadatos():
 
 @eel.expose
 def mostrar_rutas_recibos(directorio, anno, periodo):
-    rutas = rutas_recibos(directorio, anno, periodo)
+    ruta_archivos =  RutaRecibo(directorio, anno, periodo)
+    rutas = ruta_archivos.recuperacion()
     
     return rutas
     

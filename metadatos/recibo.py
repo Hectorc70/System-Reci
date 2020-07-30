@@ -9,35 +9,90 @@ PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 			]
 
 
+class RutaRecibo(Rutas):
+	def __init__(self, ruta, in_anno, in_periodo, periodos = PERIODOS):
+		self.ruta = ruta
+		self.in_periodo = in_periodo
+		self.in_anno =  in_anno
+		self.periodos = PERIODOS
+		Rutas.__init__(self)
+		
 
-def rutas_recibos(directorio, anno, periodo):
-		rutas_pdf = dict()		
-		rutas = Rutas()
-		ruta_recibos = directorio
-		if periodo !='':
-			ruta_recibos = directorio + '/' + periodo+'_'+anno 
-		
-		rutas = rutas.recuperar_rutas(ruta_recibos, True)
-		ruta_base_num = len(ruta_recibos.split('/'))
-		
+	def recuperacion(self):
+
+		if self.in_periodo == '':
+			rutas = self.recuperar_anno()
+			return rutas
+		else:
+			rutas = self.recuperar_periodo()
+
+			return rutas
+	def recuperar_anno(self):
+		"""Buscar archivos que sean recibos partiendo
+		de la ruta que se le da que siempre
+		debe ser el anno 'C:/CFDI_2019'
+		dentro de la carpeta deben estar los periodo organizados por
+		periodo con la siguien nomenglatura de nombre '01_2019'
+		asi retornara todos los archivos de recibos de todo el
+		año"""
+
+
+
+		rutas_archivos = dict()
+
+		rutas = self.recuperar_rutas(self.ruta, True)
+		ruta_base_num = len(self.ruta.split('/'))
+
 		contador = 0
-		for ruta in rutas:			
-
+		for ruta in rutas:	
 			tipo_archivo = splitext(ruta[-1])[-1]
+
 			if tipo_archivo == '.pdf':
 				per = ruta[ruta_base_num].split('_')[0]
 				anno = ruta[ruta_base_num].split('_')[1]
 				nomina = ruta[ruta_base_num+1]				
 				carp_reci = ruta[ruta_base_num+3]				
 				
-				if per == periodo and carp_reci == 'RECIBOS':
+				if per in self.periodos and carp_reci == 'RECIBOS' or nomina=='JUBILADOS_PDF':
 					contador = contador+1		
 					ruta_completa = unir_cadenas('/', ruta)
-					rutas_pdf[str(contador)] = {'anno':anno, 'per':per,
+					rutas_archivos[str(contador)] = {'anno':anno, 'per':per,
 												'nom':nomina, 'ruta':ruta_completa}
 				
 
-		return rutas_pdf
+		return rutas_archivos
+		
+	def recuperar_periodo(self):
+		"""Recupera los archivos de recibos por periodo
+		si la propiedad de in_periodo se puso '01'...etc
+		buscara en la carpeta de ese periodo"""
+
+
+		rutas_archivos = dict() 
+		ruta_base = self.ruta + '/' + self.in_periodo + '_' + self.in_anno 
+
+		rutas = self.recuperar_rutas(ruta_base, True)
+		ruta_base_num = len(ruta_base.split('/'))
+
+		contador = 0
+		for ruta in rutas:	
+			tipo_archivo = splitext(ruta[-1])[-1]
+
+			if tipo_archivo == '.pdf':
+				per = ruta[ruta_base_num-1].split('_')[0]
+				anno = ruta[ruta_base_num-1].split('_')[1]
+				nomina = ruta[ruta_base_num]				
+				carp_reci = ruta[ruta_base_num+2]				
+				
+				if per in self.periodos and carp_reci == 'RECIBOS' or nomina=='JUBILADOS_PDF':
+					contador = contador+1		
+					ruta_completa = unir_cadenas('/', ruta)
+					rutas_archivos[str(contador)] = {'anno':anno, 'per':per,
+												'nom':nomina, 'ruta':ruta_completa}
+				
+
+		return rutas_archivos
+
 
 class ReciboNomina(ArchivoPdf):
 	def __init__(self, ruta):
@@ -100,10 +155,3 @@ class ReciboNomina(ArchivoPdf):
 		
 
 		return clave_format.replace("'",''), datos_r
-
-
-""" ruta = 'C:\\Users\\Hector\\Documents\\ARCHIVOS_PARA_PRUEBAS\\recibos'
-reci = ReciboNomina()
-rutas = reci.rutas_recibos(ruta)
-
-print(rutas) """
