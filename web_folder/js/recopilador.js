@@ -5,8 +5,8 @@ async function mostrarDirectorio(){
     var periodoIn = document.getElementsByName("periodo")[0].value;
     var annoIn = document.getElementsByName("anno")[0].value;
 
-    
-    if(periodoIn!=='' && annoIn !== ''){
+    debugger;
+    if(annoIn !== ''){
 
         let directorio = await eel.ruta_metadatos()();     
     
@@ -25,7 +25,8 @@ async function mostrarEnTabla(){
 
     let directorio = document.getElementsByName("ruta-reci")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
-    let rutas = await eel.mostrar_rutas_recibos(directorio, periodo)();
+    let anno = document.getElementsByName("anno")[0].value;
+    let rutas = await eel.mostrar_rutas_recibos(directorio,anno, periodo)();
     const rutasNum = Object.getOwnPropertyNames(rutas);
 
     /* debugger; */

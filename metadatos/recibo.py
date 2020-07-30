@@ -10,11 +10,12 @@ PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 
 
 
-def rutas_recibos(ruta_recibos, anno, periodo='0'):
+def rutas_recibos(directorio, anno, periodo):
 		rutas_pdf = dict()		
 		rutas = Rutas()
+		ruta_recibos = directorio
 		if periodo !='':
-			rutas_recibos = rutas_recibos + '/' + periodo+'_'+anno 
+			ruta_recibos = directorio + '/' + periodo+'_'+anno 
 		
 		rutas = rutas.recuperar_rutas(ruta_recibos, True)
 		ruta_base_num = len(ruta_recibos.split('/'))
