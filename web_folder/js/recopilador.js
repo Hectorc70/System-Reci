@@ -22,6 +22,10 @@ async function mostrarDirectorio(){
 }
 
 async function mostrarEnTabla(){
+    let contenedor =document.getElementById("contenedor");
+    let carga = document.createElement("div");
+    carga.setAttribute("class", "loading");    
+    contenedor.appendChild(carga);
 
     let directorio = document.getElementsByName("ruta-reci")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
@@ -58,12 +62,9 @@ async function mostrarEnTabla(){
         tr.appendChild(columnaAnno);
         tr.appendChild(columnaNom);
         tr.appendChild(columnaRuta);
-
-        
-
     
-    
-}
+    }
+    contenedor.removeChild(carga);
 }
 
 
