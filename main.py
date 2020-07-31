@@ -38,7 +38,9 @@ def guardar_mdatos(rutas, anno):
         else:
             True
 try:
-    eel.start('main.html')
+    opciones = ["--start-fullscreen"]
+    
+    eel.start('main.html', cmdline_args=opciones)
 
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
