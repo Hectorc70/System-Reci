@@ -5,26 +5,39 @@ body{
     height: 100%;
     margin: 0px;
     padding: 0px;
-   /*  background-color: thistle; */
+    background-image: url("../img/patron.png");
+    /*background: linear-gradient(to right, #93cede 0%, rgba(118,189,209,1) 47%, rgba(117,189,209,1) 48%, rgba(115,188,208,1) 50%, rgba(73,165,191,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );    */
 }
 
 
 /* LOGO */
-#logo{    
+.logo{   
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center; 
+    width: 150px;
+    height: 150px;
+    background-color: #00466e;
+    border-radius: 100%;
 }
-#logo a{
-    text-decoration: none;
-    color: white;    
+.logo img{
+    width: 100%;
+    height: 95%;
+    margin: auto;
+    padding: 5px;
 }
 
+
 /* MENU */
-aside{    
+aside{   
     float: left;
     width: 15%;
-    height: 100%;    
+    height: 98%;    
     background-color: #565656;
-    box-shadow:  10px 5px 5px #7a7a7a;
+    margin-top: 10px;
+    box-shadow:  7px 5px 5px #2f2f2f;
 }
 /* Botones */
 #btn-explorador-archivos{
@@ -77,3 +90,50 @@ aside div h2 a{
     text-align: center;
 }
 
+/* SECCION PRINCIPAL */
+#s-logo{
+    height: 100%;
+    width: 85%;
+    float: left;
+    text-align: center; 
+}
+@keyframes a-latido1{
+    0% {
+    border: 0em solid #00466e;
+    }
+    25%{
+        border: .4em solid #00466e;
+    }
+    50%{
+        border: .8em solid #00466e;
+    }
+
+    75% {
+    border: .4em solid #0083CD;
+    }
+    100%{
+        border: 0em solid #00466e;
+    }
+}
+
+#logo-r{
+    clear: both;
+    height: 700px;
+    width: 700px;   
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.capa{
+    clear: both; 
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100%;       
+}
+#capa1{
+    margin-top: 200px;
+    padding: 10px;  
+    height:740px;
+    width: 740px;
+    animation: a-latido1 3s infinite linear;
+}
