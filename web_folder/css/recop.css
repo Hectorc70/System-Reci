@@ -48,43 +48,32 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    background-color: #32add3;
+    box-shadow:  5px 5px 4px #616161;
 }
 #cont-ruta{   
     display: block;
-    text-align: center;
+    text-align: left;
     padding-top: 10px;
-    background-color: #2b2a2a;
+    padding-left: 20px;
+    padding-top: 10px; 
 }
 #datos-in input{
-    width: 55px;
-    text-align: center;
+    width: 55px;  
 
 }
 
 label{
     margin-top: 10px;
-    font-size: 25px;
-    color: black;
+    font-size: 20px;
+    color: white;
 }
 
-input{      
+input{   
+    margin-left: 10px;   
     width: 50%;
 }
 
-button{
-    border: none;
-    display: block;  
-    width: 100px;
-    height: 30px; 
-    margin: auto;
-    background-color: #030303;
-    color: #ffffff;
-    text-align: center;
-    font-size: 18px;
-    text-transform: uppercase;
-    border-radius: .9em ;
-    
-}
 
 /* TABLA */
 #tbl{
@@ -114,7 +103,8 @@ table #titulos th{
     height: 35px;
     text-transform: uppercase;
     font-size: 14px;
-    background-color: #d1ecf5;
+    background-color: #32add3;
+    color: white;
     
 }
 #tbl-datos{
@@ -133,3 +123,34 @@ table #titulos th{
     word-wrap: break-word;
     word-break: break-all;
 } */
+
+/* Botones */
+#btn-explorador-archivos{
+    display: inline;
+    border: none;   
+    width: 50px;
+    height: 20px; 
+    margin: auto;
+    background-color: #030303;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-radius: .9em ;
+    
+}
+button{
+    border: none;
+    display: block;  
+    width: 100px;
+    height: 30px; 
+    margin: auto;
+    background-color: #030303;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-radius: .9em ;
+    
+}
+

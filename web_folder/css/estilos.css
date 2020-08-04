@@ -11,14 +11,24 @@ body{
 }
 
 
+/* MENU */
+aside{   
+    float: left;
+    width: 15%;
+    height: 98%;    
+    background-color: #565656;
+    margin-top: 8px;
+    box-shadow:  7px 5px 5px #2f2f2f;
+}
 /* LOGO */
-.logo{   
-    margin-top: 20px;
+.logo{
+    display: block;
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
     text-align: center; 
-    width: 150px;
-    height: 150px;
+    width: 57%;
+    height: 15%;
     background-color: #00466e;
     border-radius: 100%;
 }
@@ -28,37 +38,10 @@ body{
     margin: auto;
     padding: 5px;
 }
-
-
-/* MENU */
-aside{   
-    float: left;
-    width: 15%;
-    height: 98%;    
-    background-color: #565656;
-    margin-top: 10px;
-    box-shadow:  7px 5px 5px #2f2f2f;
-}
-/* Botones */
-#btn-explorador-archivos{
-    display: inline;
-    border: none;   
-    width: 50px;
-    height: 20px; 
-    margin: auto;
-    background-color: #030303;
-    color: #ffffff;
-    text-align: center;
-    font-size: 18px;
-    text-transform: uppercase;
-    border-radius: .9em ;
-    
-}
 #menu{
-    margin-top: 40px;
-    /*background-color: teal; */
+    margin-top: 40px;   
     width: 100%;
-    height: 80%;
+    height: 70%;
 }
 
 aside #menu div{    
@@ -66,7 +49,7 @@ aside #menu div{
     height: 60px;
     padding: 1px;
     margin-bottom: 10px;
-  
+
 }
 
 aside #menu div:hover{
@@ -92,11 +75,15 @@ aside div h2 a{
 
 /* SECCION PRINCIPAL */
 #s-logo{
-    height: 100%;
+    margin-top: 100px;
+    height: 80%;
     width: 85%;
     float: left;
     text-align: center; 
+
 }
+
+
 @keyframes a-latido1{
     0% {
     border: 0em solid #00466e;
@@ -115,25 +102,27 @@ aside div h2 a{
         border: 0em solid #00466e;
     }
 }
-
-#logo-r{
-    clear: both;
-    height: 700px;
-    width: 700px;   
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .capa{
     clear: both; 
     margin-left: auto;
     margin-right: auto;
     border-radius: 100%;       
 }
-#capa1{
-    margin-top: 200px;
-    padding: 10px;  
-    height:740px;
-    width: 740px;
+
+#capa1{      
+    height:75%;
+    width: 39%;    
     animation: a-latido1 3s infinite linear;
+    padding: 30px; 
 }
+
+#logo-r{
+    clear: both;
+    height: 100%;
+    width: 100%;   
+    margin-left: auto;
+    margin-right: auto;
+    margin: 0px;
+    
+}
+
