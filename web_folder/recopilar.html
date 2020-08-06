@@ -53,7 +53,7 @@
             <div id="cont-ruta">
                 <label for="">Ruta de Recibos</label>
                 <input type="text" name="ruta-reci" readonly />
-                <button id="btn-explorador-archivos" type="button" onclick="mostrarDirectorio()">...</button>
+                <button class="btn" type="button" onclick="mostrarDirectorio()">BUSCAR EN...</button>
             </div>
             <div id="datos-in">
                 <label for="anno">Año</label>
@@ -61,10 +61,8 @@
                 <label for="periodo">Periodo</label>
                 <input type="text" min="6" max="6" name="periodo" placeholder="01">
             </div>
-
-            <div class="btn-aceptar">
-                <button type="button" onclick="elementosTabla()">Iniciar</button>
-            </div>
+            <button  type="button" onclick="elementosTabla()">Iniciar</button>
+        
 
         </div>
         <div id="tbl">
