@@ -22,7 +22,11 @@ async function mostrarDirectorio(){
 }
 
 async function mostrarEnTabla(){
-    let tabla =document.getElementById("tbl");
+/* 
+    let datos = document.getElementById("tbl-datos");
+    datos.removeChild(tr) */
+
+    let tabla =document.getElementById("tbl");  
     let carga = document.createElement("div");
     carga.setAttribute("class", "loading");    
     tabla.appendChild(carga);
@@ -90,3 +94,11 @@ function elementosTabla(){
 
     
 } 
+
+
+function eliminarFilas(){
+    function deleteRow(row){
+        var d = row.parentNode.parentNode.rowIndex;
+        document.getElementById('dsTable').deleteRow(d);
+    }
+}

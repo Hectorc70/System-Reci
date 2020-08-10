@@ -44,7 +44,7 @@
 #contenedor{
     margin-top: 80px;
     background-color: tomato;
-    height: 10%;
+    height: 15%;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -58,12 +58,8 @@
     text-align: left;
     padding-top: 10px;
     padding-left: 20px;
-    padding-top: 10px; 
     
-}
-#datos-in input{
-    width: 55px;  
-
+    
 }
 
 label{
@@ -75,37 +71,48 @@ label{
 input{   
     margin-left: 10px;   
     width: 50%;
-    height: 30px;
+    height: 25px;
     border-radius: .9em;
 
 }
 
+#datos-in{
+    display: block;
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 20px;
+
+}
+
+#datos-in input{
+    width: 55px;  
+
+}
 
 /* TABLA */
 #tbl{
-    overflow: scroll;
+    overflow: auto;
+    scrollbar-width: 5px;
     width: 90%;
     height: 60%;
     margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #ffffff;
-    
-    
-
+    background-color: #c6f2ff;
 }
+
 table{    
     width: 100%;  
 
 }
 #titulos{  
     clear: both;
-    width: 100%;
+    width: 80%;    
     box-shadow:  4px 5px 5px #7a7a7a;
     }
 
 table #titulos th{             
-    padding: 3px;
+    padding: 3px;    
     height: 35px;
     text-transform: uppercase;
     font-size: 14px;
@@ -115,7 +122,8 @@ table #titulos th{
 }
 #tbl-datos{
     box-shadow:  4px 5px 3px #7a7a7a;
-    background-color: white;
+    background-color:white;
+    margin-top: 10px;
 }
 #tbl-datos td{
     /* background-color: white; */
@@ -123,6 +131,14 @@ table #titulos th{
     text-align: left;
     padding: 2px;
     padding-left: 4px;
+    border-radius: .5em;
+        
+    
+}
+#tbl-datos td:hover{
+    /* background-color: white; */
+    box-shadow: 0px 0px 10px 2px #7a7a7a;    
+    color: #32add3;
 }
 
 /* #tabla-datos td:last-child{
@@ -133,10 +149,10 @@ table #titulos th{
 /* Botones */
 
 button{
-    border: none;
-    display: block;  
+    display: inline;
+    border: none;   
     width: 100px;
-    height: 30px; 
+    height: 25px; 
     margin: auto;
     background-color: #2b2a2a;
     color: #ffffff;
@@ -144,22 +160,18 @@ button{
     font-size: 18px;
     text-transform: uppercase;
     border-radius: .9em ;
-    
+        
 }
 button:hover{
-    background-color: #32add3;
+    background-color: #00466e;    
 }
-button::after{
-    content: "";
-}
-.btn{
-    display: inline;
+
+.btn{   
     border: none;       
     margin: auto;    
     color: #ffffff;
     text-align: center;    
     text-transform: uppercase;
-    width: 150px;
-    
+    width: 150px;    
     
 }
