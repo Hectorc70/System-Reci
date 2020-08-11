@@ -37,11 +37,10 @@ class Bdatos:
 			orden = "INSERT INTO {}({}) \
 			VALUES({})".format(nombre_tabla, campos, datos) 
 			self.cursor.execute(orden)
-			self.conexion.commit()
-			self.conexion.close()
+			self.conexion.commit()			
 					
 		except pymysql.err.IntegrityError:
-			self.errores_guardado[datos[0]] = datos
+			self.errores_guardado[datos.split(',')[0]] = datos
 			pass
 
 		

@@ -31,12 +31,9 @@ def guardar_mdatos(rutas, anno):
         metadatos_recibos = recibo.formateo_datos()
 
         mtdatos = ReciMetadatos(metadatos_recibos, anno)
-        errores = mtdatos.guardar()
+        mtdatos.guardar()
 
-        if errores:
-            return errores
-        else:
-            True
+        
 try:
     opciones = ["--start-fullscreen"]
     
