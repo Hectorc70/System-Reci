@@ -26,7 +26,7 @@
             </div>
             <div id="buscar">
                 <h2>
-                    <a href="buscar.html">
+                    <a href="">
                         BUSCAR RECIBOS
                     </a>
                 </h2>
@@ -49,34 +49,29 @@
     </aside>
 
     <section class="secc">
-        <div id="contenedor">
-            <div id="cont-ruta">
-                <label for="">Ruta de Recibos</label>
-                <input type="text" name="ruta-reci" readonly />
-                <button class="btn" type="button" onclick="mostrarDirectorio()">BUSCAR EN...</button>
-            </div>
-            <div id="datos-in">
-                <label for="anno">Año</label>
-                <input type="text" min="6" max="6" name="anno" placeholder="2020">
-                <label for="periodo">Periodo</label>
-                <input type="text" min="6" max="6" name="periodo" placeholder="01">
-                <button  type="button" onclick="elementosTabla()">Iniciar</button>
-            </div>
+        <div id="contenedor">      
             
-        
+            <div class="cont-inputs">
+                <label for="">No Control</label>
+                <input type="text" name="control" placeholder="320100">
+            </div>
+            <div class="cont-inputs">
+                <label for="periodo-ini">Periodo Inicial</label>
+                <input type="text" name="periodo-ini">
+                <label for="anno-ini">Año Inicial</label>
+                <input type="text" name="anno-ini">
+            </div>
 
         </div>
-        <div id="tbl">
-            <!-- <div class="loading"></div> -->
+        <div id="tbl">           
             <table>
                 <tr id="titulos">
-                    <th>Periodo</th>
-                    <th>Año</th>
-                    <th>Nomina</th>
+                    <th>Control</th>
+                    <th>periodo</th>
+                    <th>año</th>
                     <th>Ruta</th>
                 </tr>
                 <tbody id="tbl-datos">
-
                 </tbody>
             </table>
         </div>
