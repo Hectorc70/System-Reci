@@ -50,9 +50,27 @@ class Bdatos:
 		print("Datos insertados en la Base de datos " + nombre_tabla)
 			
 			
+	
+	def consultar(self, periodo, nombre_tabla, control):
+		try:
+			tabla = "SELECT 1 FROM {} LIMIT 1".format(nombre_tabla)
+			self.cursor.execute(tabla)
+
+		except pymysql.err.ProgrammingError:
+			print("No existen datos de este año")
+			return False
+			pass
 		
+		orden = "SELECT * FROM r2019 " \
+			"WHERE control = '1695' AND periodo = '02'"
+				
 
+		self.cursor.execute(orden)
+		
+		registro = self.cursor.fetchall()
+		return registro
 
+		
 campos = 'id, control, periodo, anno, pagina, ruta'
 datos = "'31821201202010', 318212, '01', '2020', 10, 'C:/pruebas/prueba.pdf'"
 

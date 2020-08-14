@@ -43,10 +43,19 @@ class ReciMetadatos(Bdatos):
 
 	
 
-	def leer(self, control, fecha_ini ,fecha_final):
+	def leer(self, control, periodos,):
+		"""Devuelve los recibos de los periodos
+		pasados como parametro, del numero de control
+		pasado como parametro, los parametros deben ser en
+		string y los periodos como diccionarios"""
 
-		pass
 
+		for anno, periodos in periodos.items():
+
+			for periodo in periodos:
+				self.consultar(periodo,self.nombre_tbl, control)
+		
+		self.conexion.close()
 
 
 
