@@ -6,10 +6,8 @@
     <link rel="stylesheet" type=text/css href="css/estilos.css">
     <link rel="stylesheet" type=text/css href="css/recop.css">
     <link rel="stylesheet" type=text/css href="css/buscador.css">
-    <script type="text/javascript" src="js/recopilador.js"></script>
+    <script type="text/javascript" src="js/buscador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -52,9 +50,9 @@
     <section class="secc">
         <div id="contenedor">
             <form name="in-buscar" action="">
-                <label  for="control">Numero de Control</label>
+                <label for="control">Numero de Control</label>
                 <input id="in-control" type="text" name="control" placeholder="310540">
-                <button  type="button" onclick="">Buscar</button>
+                <button type="button" onclick="enviarDatosBusqueda()">Buscar</button>
                 <div id="fechas">
                     <label for="">Periodo Inicial</label>
                     <select class="periodos" name="periodo-ini">
@@ -130,9 +128,9 @@
                         <option value="2014">2020</option>
                     </select>
                 </div>
-        
-            </div>
-            </form>
+
+        </div>
+        </form>
         </div>
         </div>
         <div id="tbl">
