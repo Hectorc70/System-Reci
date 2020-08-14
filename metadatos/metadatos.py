@@ -43,8 +43,10 @@ class ReciMetadatos(Bdatos):
 
 	
 
-	def leer(self):
+	def leer(self, control, fecha_ini ,fecha_final):
+
 		pass
+
 
 
 
