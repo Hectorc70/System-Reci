@@ -5,14 +5,13 @@
     <title>Recopilar Metadatos de Recibos</title>
     <link rel="stylesheet" type=text/css href="css/estilos.css">
     <link rel="stylesheet" type=text/css href="css/recop.css">
-    <script type="text/javascript" src="js/recopilador.js"></script>
+    <link rel="stylesheet" type=text/css href="css/buscador.css">
+    <script type="text/javascript" src="js/buscador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
-    <aside>        
+    <aside>
         <a class="logo" href="main.html">
             <img src="/img/Logo-SR.png" alt="logo">
         </a>
@@ -49,21 +48,92 @@
     </aside>
 
     <section class="secc">
-        <div id="contenedor">      
-            
-            <div class="cont-inputs">
-                <label for="">No Control</label>
-                <input type="text" name="control" placeholder="320100">
-            </div>
-            <div class="cont-inputs">
-                <label for="periodo-ini">Periodo Inicial</label>
-                <input type="text" name="periodo-ini">
-                <label for="anno-ini">Año Inicial</label>
-                <input type="text" name="anno-ini">
-            </div>
+        <div id="contenedor">
+            <form name="in-buscar" action="">
+                <label for="control">Numero de Control</label>
+                <input id="in-control" type="text" name="control" placeholder="310540">
+                <button type="button" onclick="enviarDatosBusqueda()">Buscar</button>
+                <div id="fechas">
+                    <label for="">Periodo Inicial</label>
+                    <select class="periodos" name="periodo-ini">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                    <select class="anno" name="anno-ini">
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+
+                    <label for="">Periodo Final</label>
+                    <select class="periodos" name="periodo-fin">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                    <select class="anno" name="anno-fin">
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
 
         </div>
-        <div id="tbl">           
+        </form>
+        </div>
+        </div>
+        <div id="tbl">
             <table>
                 <tr id="titulos">
                     <th>Control</th>
