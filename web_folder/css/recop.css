@@ -97,14 +97,14 @@ input{
 }
 
 table{    
-    width: 100%;  
-
+    width: 100%;
 }
+
 #titulos{  
     clear: both;
     width: 80%;    
     box-shadow:  4px 5px 5px #7a7a7a;
-    }
+}
 
 table #titulos th{             
     padding: 3px;    
@@ -125,8 +125,7 @@ table #titulos th{
     text-align: left;
     padding: 2px;
     padding-left: 4px;
-    border-radius: .5em;
-        
+    border-radius: .5em;        
     
 }
 #tbl-datos td:hover{

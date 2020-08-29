@@ -36,6 +36,8 @@ def guardar_mdatos(rutas, anno):
         mtdatos.guardar()
 @eel.expose
 def buscador_recibo(control, p_ini, a_ini, p_fin, a_fin, auto_extraer=True):
+    
+    
     if a_ini == a_fin:
         periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
         datos = ReciMetadatos('', a_ini)

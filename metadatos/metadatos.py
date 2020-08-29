@@ -14,7 +14,7 @@ class ReciMetadatos(Bdatos):
 	def __init__(self, metadatos, anno):
 		self.host      = '127.0.0.1'
 		self.usuario   = 'root'
-		self.psw       = '' 
+		self.psw       = ''
 		self.nombre_bd ='recibosnomina'
 
 		self.datos     = metadatos
