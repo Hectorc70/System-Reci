@@ -18,7 +18,7 @@ class ReciMetadatos(Bdatos):
 		self.nombre_bd ='recibosnomina'
 
 		self.datos     = metadatos
-		self.nombre_tbl = 'r'+str(anno)
+		self.nombre_tbl = 'recibos'
 		self.campos_col = 'id, control, periodo, anno, pagina, ruta'
 		Bdatos.__init__(self,self.host, self.usuario, self.psw, self.nombre_bd)
 	
