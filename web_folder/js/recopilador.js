@@ -4,8 +4,7 @@
 async function mostrarDirectorio(){
     var periodoIn = document.getElementsByName("periodo")[0].value;
     var annoIn = document.getElementsByName("anno")[0].value;
-
-    debugger;
+    
     if(annoIn !== ''){
 
         let directorio = await eel.ruta_metadatos()();     
@@ -75,22 +74,40 @@ async function mostrarEnTabla(){
 
 
 function elementosTabla(){
+    let tabla =document.getElementById("tbl");  
+    let carga = document.createElement("div");
+    carga.setAttribute("class", "loading");    
+    tabla.appendChild(carga);
+
     var rutas = [];
     let filaPer = document.getElementsByClassName("cl-per");
     let anno = document.getElementsByName("anno")[0].value;
-    for(let i=0; i<filaPer.length; i++){
+    checkBoxTodo = document.getElementsByName("todo");
 
+    if(checkBoxTodo[0].checked == true){
+
+        for(let i=0; i<filaPer.length; i++){
+            let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
+            rutas.push(filaRuta);
+        }
+    }    
+    
+    for(let i=0; i<filaPer.length; i++){
+        
+        
         checkBox = filaPer[i].getElementsByClassName("c-box");
+        
         if(checkBox[0].checked == true){
             let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
             rutas.push(filaRuta);
         }
-        else{
-            console.log("fila no seleccionada");
-        }
     }
 
     eel.guardar_mdatos(rutas, anno)();
+    tabla.removeChild(carga);
+
+
+
 
     
 } 

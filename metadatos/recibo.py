@@ -119,19 +119,25 @@ class ReciboNomina(ArchivoPdf):
 				buscador 		 = Buscador(patron, conte[0])
 				posiciones 		 = buscador.buscar()
 
-				texto_encontrado = self.extraer_texto(posiciones[0], posiciones[1], conte[0])	
+				if posiciones !=None:
+					texto_encontrado = self.extraer_texto(posiciones[0], posiciones[1], conte[0])	
 
-				texto.append(texto_encontrado)			
+					texto.append(texto_encontrado)			
+				
 			
-			control = 	int(texto[0].split(':')[1])
-			periodo = 	int(texto[1].split(':')[1].split('/')[0])		
-			anno    =   str(texto[1].split(':')[1].split('/')[1])
+			if texto:
+				control = 	int(texto[0].split(':')[1])
+				periodo = 	int(texto[1].split(':')[1].split('/')[0])		
+				anno    =   str(texto[1].split(':')[1].split('/')[1])
 
-			datos = [control, periodo, anno, hoja, self.ruta_pdf]
-			datos_f = self.formatear_datos(datos)
-			datos_recibo[datos_f[0]] = datos_f[1]
-			texto.clear()
-		
+				datos = [control, periodo, anno, hoja, self.ruta_pdf]
+				datos_f = self.formatear_datos(datos)
+				datos_recibo[datos_f[0]] = datos_f[1]
+				texto.clear()
+			else:
+				print("--- Error al leer la hoja -----")
+				continue
+
 		return datos_recibo
 
 	def formatear_datos(self, datos):

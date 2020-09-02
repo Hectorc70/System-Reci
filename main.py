@@ -34,6 +34,12 @@ def guardar_mdatos(rutas, anno):
 
         mtdatos = ReciMetadatos(metadatos_recibos, anno)
         mtdatos.guardar()
+        print("Datos Procesados: " + ruta)
+    
+    print('------------------ SE PROCESARON TODOS LOS ARCHIVOS SELECCIONADOS -------------------------')
+
+
+    
 @eel.expose
 def buscador_recibo(control, p_ini, a_ini, p_fin, a_fin, auto_extraer=True):
     

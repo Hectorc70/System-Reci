@@ -20,7 +20,7 @@
     margin: 20px 0 0 100px;            
     height: 100px;
     width: 100px;
-    border: 6px solid white;
+    border: 6px solid #c6f2ff;
     border-top-color: #2b2a2a;
     border-bottom-color: #32add3;
     border-radius: 100%;
@@ -83,14 +83,28 @@ input{
     width: 55px;  
 
 }
+#todos{
+    display: block;
+    background-color: #c6f2ff;
+    width: 90%;
+    margin: 10px auto;
+    margin-top: 50px;
+    text-align: left;
+    padding-left: 10px;
+    
+}
+
+#todos label{
+    margin-right: 5px !important;
+    color: #2b2a2a;
+}
 
 /* TABLA */
 #tbl{
     overflow: auto;
     scrollbar-width: 5px;
     width: 90%;
-    height: 60%;
-    margin-top: 80px;
+    height: 60%;  
     margin-left: auto;
     margin-right: auto;
     background-color: #c6f2ff;
@@ -112,7 +126,9 @@ table #titulos th{
     text-transform: uppercase;
     font-size: 14px;
     background-color: #32add3;
-    color: white;    
+    color: white;  
+    position: sticky;
+    top: 0%;  
 }
 #tbl-datos{
     box-shadow:  4px 5px 3px #7a7a7a;

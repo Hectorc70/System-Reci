@@ -41,13 +41,13 @@ class Bdatos:
 					
 		except pymysql.err.IntegrityError:
 			self.errores_guardado[datos.split(',')[0]] = datos
+			print("WARNING: Ya Existe el registro: {} No se Pudo Guardar".format(datos.split(',')[0]))
 			pass
 
 		
-		if self.errores_guardado:
-			return self.errores_guardado
 		
-		print("Datos insertados en la Base de datos " + nombre_tabla)
+		return self.errores_guardado		
+		
 			
 			
 	

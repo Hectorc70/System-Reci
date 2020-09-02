@@ -1,5 +1,9 @@
+import datetime
+
 from metadatos.ayuda.txt import ArchivoTxt
 from metadatos.ayuda.rutas import unir_cadenas
+
+
 
 
 
@@ -14,9 +18,11 @@ class Log(ArchivoTxt):
         """Guarda los datos pasados por parametro
         deben ser en diccionarios ejemplo
         'error':["dato1", datos2, 'dato3', 'error']"""
-
+        
+        fecha = datetime.datetime.now()
         for clave, datos in datos.items():
-            self.crear(datos)
+            datos = datos + '|' + fecha.strftime("%Y-%m-%d %H:%M.%S")
+            self.comprobar_si_existe(datos)
 
 
 
