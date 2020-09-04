@@ -153,7 +153,7 @@ class ReciboNomina(ArchivoPdf):
 		ruta_format = "'"+datos[-1]+"'" 
 		clave_format = "'"+str(datos[0])+str("{:02d}".format(datos[1]))+datos[2]+hoja_format+"'"
 		
-		datos_f = [clave_format, control_format,
+		datos_f = [control_format,
 					per_format, anno_format, 
 					hoja_format, ruta_format]
 		datos_r = unir_cadenas(',',datos_f)
