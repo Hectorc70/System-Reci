@@ -43,7 +43,7 @@ class ReciMetadatos(Bdatos):
 
 	
 
-	def leer(self, control, periodos,):
+	def leer(self, control, anno, periodos,):
 		"""Devuelve los recibos de los periodos
 		pasados como parametro, del numero de control
 		pasado como parametro, los parametros deben ser en
@@ -53,8 +53,8 @@ class ReciMetadatos(Bdatos):
 		for anno, periodos in periodos.items():
 
 			for periodo in periodos:
-				self.consultar(periodo,self.nombre_tbl, control)
-		
+				datos = self.consultar(self.nombre_tbl, control, anno, periodo,)
+				ReciboNomina
 		self.conexion.close()
 
 

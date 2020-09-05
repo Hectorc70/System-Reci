@@ -52,18 +52,17 @@ class Bdatos:
 			
 			
 	
-	def consultar(self, periodo, nombre_tabla, control):
+	def consultar(self,nombre_tabla, control, anno, periodo):
 		try:
-			tabla = "SELECT 1 FROM {} LIMIT 1".format(nombre_tabla)
+			tabla = "SELECT pagina, ruta FROM {} LIMIT 1".format(nombre_tabla)
 			self.cursor.execute(tabla)
 
 		except pymysql.err.ProgrammingError:
-			print("No existen datos de este año")
-			return False
+			print("No existen datos de este año")		
 			pass
 		
-		orden = "SELECT * FROM r2019 " \
-			"WHERE control = '1695' AND periodo = '02'"
+		orden = "SELECT pagina, ruta FROM recibosnomina.recibos\
+				WHERE control={} and anno = {} and periodo={}".format(control, anno, periodo)
 				
 
 		self.cursor.execute(orden)

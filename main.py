@@ -47,7 +47,7 @@ def buscador_recibo(control, p_ini, a_ini, p_fin, a_fin, auto_extraer=True):
     if a_ini == a_fin:
         periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
         datos = ReciMetadatos('', a_ini)
-        datos.leer(control, periodos)
+        datos.leer(control, a_ini, periodos)
     elif a_ini != a_fin:
         periodos_inter = armar_periodos_intermedios(a_ini, a_fin)
         periodos_ini = armar_periodos(a_ini, periodo_ini=p_ini)

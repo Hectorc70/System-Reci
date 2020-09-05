@@ -1,5 +1,5 @@
 
-from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
 class ArchivoPdf():
@@ -32,14 +32,24 @@ class ArchivoPdf():
 		
 		return datos_pag
 
-
-
-			
+		
 		
 									
 	def lectura_encriptada(self, archivo, pag):
 		pass
 
 
+	def extraer_hoja(self, paginas, ruta_guardado, nombre_pdf):
+        pdf_nuevo = PdfFileWriter()
 
+		for pagina in paginas:
+        	df_nuevo.addPage(self.contenido.getPage(int(pagina)))
+        
+        self.guardar_archivo(ruta_guardado, nombre_pdf, pdf_nuevo)
 
+	def guardar_archivo(self, ruta, nombre_pdf, pdf):  
+        nombre_archivo = ruta + '\\'+ nombre_pdf
+        with open(nombre_archivo,'wb') as fp: 
+            pdf.write(fp)
+
+	
