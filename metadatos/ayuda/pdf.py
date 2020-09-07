@@ -1,6 +1,7 @@
 
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 
+from metadatos.ayuda.rutas import crear_directorio
 
 class ArchivoPdf():
 	def __init__(self, ruta=''):
@@ -48,16 +49,22 @@ class ArchivoPdf():
 
 
 	def extraer_hoja(self, ruta_guardado, nombre_pdf, archivos):
-		for archivo, datos in archivos.items():
+		
+		crear_directorio(ruta_guardado)
+		
+		
+		for archivo, datos in archivos.items():	
 			
-			self.contenido = PdfFileReader(datos[2],'rb')
+			archivo = datos[2].split('/')[-1].split('.')[0]
+			original = PdfFileReader(datos[2],'rb')
+			org_pag = original.getPage(datos[1])
 
-			pdf_nuevo = PdfFileWriter()
-			pdf_nuevo.addPage(self.contenido.getPage(int(datos[1]-1)))
+			pdf_salida = PdfFileWriter()
+			pdf_salida.addPage(org_pag)		
+			
+			
+			self.guardar_archivo(ruta_guardado, nombre_pdf+archivo, pdf_salida)
 		
-		
-			self.guardar_archivo(ruta_guardado, nombre_pdf, pdf_nuevo)
-
 	def guardar_archivo(self, ruta, nombre_pdf, pdf):  
 		nombre_archivo = ruta + '\\'+ nombre_pdf + '.pdf'
 		with open(nombre_archivo,'wb') as fp: 

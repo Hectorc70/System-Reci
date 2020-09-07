@@ -1,5 +1,6 @@
 import os
 from os.path import exists
+from os import makedirs
 
 from tkinter.filedialog import askdirectory, askopenfilename
 
@@ -97,3 +98,9 @@ def abrir_directorio():
     ruta = askdirectory()
 
     return ruta
+
+def crear_directorio(directorio):
+    ruta = comprobar_rutas(directorio)
+
+    if not ruta:
+        os.makedirs(directorio)

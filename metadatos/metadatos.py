@@ -60,7 +60,9 @@ class ReciMetadatos(Bdatos):
 				
 		
 		self.conexion.close()
-		nombre_recibo = '\\'+control +'_'+ anno + periodo
+		
+		nombre_recibo = control +'_'
+		ruta_guardado = ruta_guardado + '/' + control
 		recibo = ReciboNomina()
 		recibo.extraer_hoja(ruta_guardado, nombre_recibo, periodo_recibos)
 		
