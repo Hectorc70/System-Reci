@@ -61,7 +61,7 @@ class Bdatos:
 			print("No existen datos de este año")		
 			pass
 		
-		orden = "SELECT pagina, ruta FROM recibosnomina.recibos\
+		orden = "SELECT id, pagina, ruta FROM recibosnomina.recibos\
 				WHERE control={} and anno = {} and periodo={}".format(control, anno, periodo)
 				
 

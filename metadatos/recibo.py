@@ -95,7 +95,7 @@ class RutaRecibo(Rutas):
 
 
 class ReciboNomina(ArchivoPdf):
-	def __init__(self, ruta):
+	def __init__(self, ruta = ''):
 		self.ruta_pdf = ruta
 		ArchivoPdf.__init__(self, self.ruta_pdf)
 		self.patrones = PATRONES = ['CONTROL: [0123456789]{8}', 
@@ -103,7 +103,7 @@ class ReciboNomina(ArchivoPdf):
 									]	
 
 
-	def formateo_datos(self):  
+	def almacenar_datos(self):  
 		"""retorna los metadatos formateados
 		clave:control, periodo, año, pagina, ruta""" 
 

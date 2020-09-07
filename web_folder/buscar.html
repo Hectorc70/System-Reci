@@ -52,7 +52,9 @@
             <form name="in-buscar" action="">
                 <label for="control">Numero de Control</label>
                 <input id="in-control" type="text" name="control" placeholder="310540">
-                <button type="button" onclick="enviarDatosBusqueda()">Buscar</button>
+                <label for="ruta">Guardar En...</label>
+                <input type="text" name="ruta"/>
+                <button type="button" onclick="mostrarDirGuardado()">...</button>
                 <div id="fechas">
                     <label for="">Periodo Inicial</label>
                     <select class="periodos" name="periodo-ini">
@@ -128,7 +130,7 @@
                         <option value="2020">2020</option>
                     </select>
                 </div>
-
+                <button type="button" onclick="enviarDatosBusqueda()">Buscar</button>
         </div>
         </form>
         </div>

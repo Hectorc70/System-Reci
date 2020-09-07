@@ -30,7 +30,7 @@ def mostrar_rutas_recibos(directorio, anno, periodo):
 def guardar_mdatos(rutas, anno):
     for ruta in rutas:
         recibo = ReciboNomina(ruta)
-        metadatos_recibos = recibo.formateo_datos()
+        metadatos_recibos = recibo.almacenar_datos()
 
         mtdatos = ReciMetadatos(metadatos_recibos, anno)
         mtdatos.guardar()
@@ -41,13 +41,16 @@ def guardar_mdatos(rutas, anno):
 
     
 @eel.expose
-def buscador_recibo(control, p_ini, a_ini, p_fin, a_fin, auto_extraer=True):
+def buscador_recibo(control, p_ini, a_ini, p_fin, a_fin, ruta_guardado, auto_extraer=True):
     
     
     if a_ini == a_fin:
         periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
         datos = ReciMetadatos('', a_ini)
-        datos.leer(control, a_ini, periodos)
+        datos.leer(control, a_ini, periodos, ruta_guardado)
+        print('Archivo creado en: ' + ruta_guardado)
+        
+    
     elif a_ini != a_fin:
         periodos_inter = armar_periodos_intermedios(a_ini, a_fin)
         periodos_ini = armar_periodos(a_ini, periodo_ini=p_ini)

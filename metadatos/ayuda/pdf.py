@@ -3,14 +3,22 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
 class ArchivoPdf():
-	def __init__(self, ruta):
+	def __init__(self, ruta=''):
 
 		self.ruta = ruta
-		self.contenido = PdfFileReader(ruta,'rb')
-		self.num_paginas = self.contenido.numPages
+		self.contenido = self.contenido_pdf()[0]
+		self.num_paginas = self.contenido_pdf()[1]
 
 		
-	
+	def contenido_pdf(self):
+		try:
+			contenido = PdfFileReader(self.ruta,'rb')
+			paginas = contenido.numPages
+			return contenido, paginas
+		except FileNotFoundError:
+			return '', ''
+
+
 	def extraer_contenido(self):
 		"""Retorna el contenido por hoja del Archivo PDF,
 			el numero de pagina, la ruta del archivo"""
@@ -39,17 +47,21 @@ class ArchivoPdf():
 		pass
 
 
-	def extraer_hoja(self, paginas, ruta_guardado, nombre_pdf):
-        pdf_nuevo = PdfFileWriter()
+	def extraer_hoja(self, ruta_guardado, nombre_pdf, archivos):
+		for archivo, datos in archivos.items():
+			
+			self.contenido = PdfFileReader(datos[2],'rb')
 
-		for pagina in paginas:
-        	df_nuevo.addPage(self.contenido.getPage(int(pagina)))
-        
-        self.guardar_archivo(ruta_guardado, nombre_pdf, pdf_nuevo)
+			pdf_nuevo = PdfFileWriter()
+			pdf_nuevo.addPage(self.contenido.getPage(int(datos[1]-1)))
+		
+		
+			self.guardar_archivo(ruta_guardado, nombre_pdf, pdf_nuevo)
 
 	def guardar_archivo(self, ruta, nombre_pdf, pdf):  
-        nombre_archivo = ruta + '\\'+ nombre_pdf
-        with open(nombre_archivo,'wb') as fp: 
-            pdf.write(fp)
+		nombre_archivo = ruta + '\\'+ nombre_pdf + '.pdf'
+		with open(nombre_archivo,'wb') as fp: 
+			pdf.write(fp)
 
-	
+		
+
