@@ -59,12 +59,12 @@ class ReciMetadatos(Bdatos):
 					periodo_recibos[str(periodo)+str(registro[0])] = registro
 				
 		
-		self.conexion.close()
+		self.conexion.close()		
 		
-		nombre_recibo = control +'_'
 		ruta_guardado = ruta_guardado + '/' + control
 		recibo = ReciboNomina()
-		recibo.extraer_hoja(ruta_guardado, nombre_recibo, periodo_recibos)
+		recibo.guardar_recibos_extraidos(control, ruta_guardado, 
+										periodo_recibos)
 		
 
 

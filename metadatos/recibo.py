@@ -1,6 +1,6 @@
 from os.path import splitext
 
-from metadatos.ayuda.rutas import Rutas, unir_cadenas, comprobar_rutas, abrir_archivo, dividir_cadena
+from metadatos.ayuda.rutas import Rutas, unir_cadenas, comprobar_rutas, abrir_archivo, dividir_cadena, crear_directorio
 from metadatos.ayuda.pdf import ArchivoPdf
 from metadatos.ayuda.buscador import Buscador
 
@@ -161,3 +161,15 @@ class ReciboNomina(ArchivoPdf):
 		
 
 		return clave_format.replace("'",''), datos_r
+
+	def guardar_recibos_extraidos(self, nombre_pdf,ruta_guardado, archivos):
+
+		crear_directorio(ruta_guardado)
+
+		for id_bd, datos in archivos.items():	
+
+			nombre_archivo = datos[2].split('/')[-1].split('.')[0]
+			nombre = [nombre_pdf, str(datos[0]), nombre_archivo]
+			nombre = unir_cadenas('_', nombre)
+
+			self.extraer_hoja(datos[2], datos[1], ruta_guardado, nombre)
