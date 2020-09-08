@@ -52,9 +52,10 @@
             <form name="in-buscar" action="">
                 <label for="control">Numero de Control</label>
                 <input id="in-control" type="text" name="control" placeholder="310540">
+                
                 <label for="ruta">Guardar En...</label>
-                <input type="text" name="ruta"/>
-                <button type="button" onclick="mostrarDirGuardado()">...</button>
+                <input id="ruta-g" type="text" name="ruta" readonly />
+                <button id="btn-explorar" type="button" onclick="mostrarDirGuardado()">...</button>
                 <div id="fechas">
                     <label for="">Periodo Inicial</label>
                     <select class="periodos" name="periodo-ini">
@@ -129,19 +130,23 @@
                         <option value="2019">2019</option>
                         <option value="2020">2020</option>
                     </select>
+                    <button id="btn-buscar-reci" type="button" onclick="mostrarRecibos()">Buscar</button>
+                    <button id="btn-extraer" type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
                 </div>
-                <button type="button" onclick="enviarDatosBusqueda()">Buscar</button>
+
         </div>
         </form>
-        </div>
+        <div id="todos">
+            <label for="todos">Todo</label>
+            <input name="todo" type="checkbox">
         </div>
         <div id="tbl">
             <table>
                 <tr id="titulos">
-                    <th>Control</th>
-                    <th>periodo</th>
-                    <th>año</th>
-                    <th>Ruta</th>
+                    <th>ID</th>
+                    <th>PERIODO</th>
+                    <th>AÑO</th>
+                    <th>ARCHIVO</th>
                 </tr>
                 <tbody id="tbl-datos">
                 </tbody>

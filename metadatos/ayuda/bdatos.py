@@ -52,7 +52,7 @@ class Bdatos:
 			
 			
 	
-	def consultar(self,nombre_tabla, control, anno, periodo):
+	def consultar(self,nombre_tabla, condiciones, campos):
 		try:
 			tabla = "SELECT pagina, ruta FROM {} LIMIT 1".format(nombre_tabla)
 			self.cursor.execute(tabla)
@@ -61,8 +61,8 @@ class Bdatos:
 			print("No existen datos de este año")		
 			pass
 		
-		orden = "SELECT id, pagina, ruta FROM recibosnomina.recibos\
-				WHERE control={} and anno = {} and periodo={}".format(control, anno, periodo)
+		orden = "SELECT {} FROM recibosnomina.recibos\
+				WHERE {}".format(campos, condiciones)
 				
 
 		self.cursor.execute(orden)

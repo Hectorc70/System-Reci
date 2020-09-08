@@ -162,14 +162,18 @@ class ReciboNomina(ArchivoPdf):
 
 		return clave_format.replace("'",''), datos_r
 
-	def guardar_recibos_extraidos(self, nombre_pdf,ruta_guardado, archivos):
+	def guardar_recibos_extraidos(self, nombre_pdf,ruta_guardado, datos):
+		"""Llama a los metodos para la extraccion de un recibo
+		ademas de crear una carpeta nueva con el nombre de numero de control
+		antes de"""
 
+		
+		ruta_guardado = ruta_guardado + '/' + str(nombre_pdf)
 		crear_directorio(ruta_guardado)
 
-		for id_bd, datos in archivos.items():	
+		for dato in datos:
 
-			nombre_archivo = datos[2].split('/')[-1].split('.')[0]
-			nombre = [nombre_pdf, str(datos[0]), nombre_archivo]
-			nombre = unir_cadenas('_', nombre)
-
-			self.extraer_hoja(datos[2], datos[1], ruta_guardado, nombre)
+			nombre_archivo = dato[-1].split('/')[-1].split('.')[0]
+			nombre = [str(nombre_pdf), str(dato[0]), nombre_archivo]
+			nombre = unir_cadenas('_', nombre)		
+			self.extraer_hoja(dato[2], ruta_guardado, nombre)

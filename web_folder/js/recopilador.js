@@ -105,11 +105,6 @@ function elementosTabla(){
 
     eel.guardar_mdatos(rutas, anno)();
     tabla.removeChild(carga);
-
-
-
-
-    
 } 
 
 

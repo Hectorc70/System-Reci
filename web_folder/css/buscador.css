@@ -11,18 +11,36 @@ form{
     width: 8%;
     text-align: center;
 }
-
+#ruta-g{
+    width: 30%;
+}
 #fechas{
     margin-top: 10px;
     
 }
-#fechas label{
-    margin-right: 10px;
-    
-}
+
 #fechas select{
     margin-right: 10px;
     height: 25px;
     border-radius: .7em;  
     border: none;  
 }
+
+#contenedor label{
+    margin-right: 10px;
+
+}
+#contenedor input{
+    margin-right: 10px;
+}
+
+
+#contenedor #btn-explorar{
+    width: 60px;
+}
+#fechas #btn-buscar-reci{
+    float: none;
+    clear: both;   
+}
+
+#
