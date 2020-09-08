@@ -53,7 +53,7 @@ class ArchivoPdf():
 	
 		
 			original = PdfFileReader(archivo_org,'rb')
-			org_pag = original.getPage(pagina)
+			org_pag = original.getPage(pagina-1)
 
 			pdf_salida = PdfFileWriter()
 			pdf_salida.addPage(org_pag)		
