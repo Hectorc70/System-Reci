@@ -61,8 +61,8 @@ class Bdatos:
 			print("No existen datos de este año")		
 			pass
 		
-		orden = "SELECT {} FROM recibosnomina.recibos\
-				WHERE {}".format(campos, condiciones)
+		orden = "SELECT {} FROM recibosnomina.{}\
+				WHERE {}".format(campos, nombre_tabla, condiciones)
 				
 
 		self.cursor.execute(orden)

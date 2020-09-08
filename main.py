@@ -2,15 +2,19 @@ from os.path import exists
 
 import eel
 
-from metadatos.ayuda.rutas import Rutas, abrir_directorio
-from metadatos.recibo import ReciboNomina, RutaRecibo
-from metadatos.metadatos import ReciMetadatos
-from buscar.ayuda.periodos import armar_periodos_intermedios, armar_periodos
+from modulos.rutas import abrir_directorio
+from datos.recibo import ReciboNomina, RutaRecibo
+from datos.metadatos import ReciMetadatos
+from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 eel.init('web_folder', allowed_extensions=['.js','.html'])
 
 
-
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***RECOPILADOR***
+**---------------------------------------------------------------------------------------------**
+"""
 @eel.expose
 def ruta_metadatos(): 
     directorio = abrir_directorio()    
@@ -40,6 +44,11 @@ def guardar_mdatos(rutas, anno):
     
     print('------------------ SE PROCESARON TODOS LOS ARCHIVOS SELECCIONADOS -------------------------')
 
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***BUSCADOR***
+**---------------------------------------------------------------------------------------------**
+"""
 
 @eel.expose
 def obtener_reci_buscados(control, p_ini, a_ini, p_fin, a_fin):
@@ -62,6 +71,14 @@ def buscador_recibo(ids, ruta_guardado):
     print('Archivos Guardados en: ' + ruta_guardado)
     
     return True
+
+
+
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***CONFIG EEL***
+**---------------------------------------------------------------------------------------------**
+"""
 try:
     opciones = ["--start-fullscreen"]
     
