@@ -4,14 +4,10 @@ function enviarDatosBusqueda(){
     let annoIni = document.getElementsByName("anno-ini")[0].value;
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
     let annoFin = document.getElementsByName("anno-fin")[0].value;
-    let ruta = document.getElementsByName("ruta")[0].value;
+  
 
-    if (annoIni < annoFin || annoIni == annoFin){
-        
-        if(ruta != ""){
-            eel.buscador_recibo(control, periodoIni, annoIni, periodoFin, annoFin, ruta);
-        }
-        
+    if (annoIni < annoFin || annoIni == annoFin){       
+        eel.obtener_reci_buscados(control, periodoIni, annoIni, periodoFin, annoFin);
     }
     else{
         alert('los Años no son validos')
@@ -24,7 +20,106 @@ function enviarDatosBusqueda(){
 async function mostrarDirGuardado(){
     let directorio = await eel.ruta_metadatos()();     
     
-    document.getElementsByName("ruta")[0].value = directorio;
+    document.getElementsByName("ruta")[0].value = directorio;    
     
-    console.log(directorio);
 }
+
+
+async function mostrarRecibos(){
+    /* 
+        let datos = document.getElementById("tbl-datos");
+        datos.removeChild(tr) */
+        
+        let tabla =document.getElementById("tbl");  
+        let carga = document.createElement("div");
+        carga.setAttribute("class", "loading");    
+        tabla.appendChild(carga);
+    
+        let control = document.getElementsByName("control")[0].value;
+        let periodoIni = document.getElementsByName("periodo-ini")[0].value;
+        let annoIni = document.getElementsByName("anno-ini")[0].value;
+        let periodoFin = document.getElementsByName("periodo-fin")[0].value;
+        let annoFin = document.getElementsByName("anno-fin")[0].value;
+        
+        let recibos = await eel.obtener_reci_buscados(control, periodoIni, annoIni, periodoFin, annoFin)();
+        const recibosNum = Object.getOwnPropertyNames(recibos);
+            
+        /* debugger; */
+        for(let i=0; i<recibosNum.length; i++){
+            let lista = document.getElementById("tbl-datos");
+            let tr = document.createElement("tr");      
+            let checkBox = document.createElement("input");
+            checkBox.setAttribute("type", "checkbox");
+            checkBox.setAttribute("class", "c-box");
+            
+    
+            let columnaId = document.createElement("td"); 
+            columnaId.setAttribute("class", "cl-id");    
+            columnaId.innerHTML = recibos[recibosNum[i]][0];
+            columnaId.appendChild(checkBox)    
+            let columnaPeriodo = document.createElement("td");
+            columnaPeriodo.innerHTML = recibos[recibosNum[i]][1];
+            let columnaAnno = document.createElement("td");
+            columnaAnno.innerHTML = recibos[recibosNum[i]][2];    
+            let columnaArchivo = document.createElement("td");     
+            columnaArchivo.innerHTML = recibos[recibosNum[i]][4];   
+                
+            
+            lista.appendChild(tr);                 
+            columnaId.appendChild(checkBox);
+            tr.appendChild(columnaId);      
+            tr.appendChild(columnaPeriodo);
+            tr.appendChild(columnaAnno);
+            tr.appendChild(columnaArchivo);
+        
+        }
+        tabla.removeChild(carga);
+    }
+    
+
+
+
+function EnviarDatosExtraccion(){
+    debugger;
+    let ruta = document.getElementsByName("ruta")[0].value;
+    let tabla =document.getElementById("tbl");
+    if(ruta != ''){
+                
+        let recibos = [];
+        let filaId = document.getElementsByClassName("cl-id");       
+        checkBoxTodo = document.getElementsByName("todo");
+    
+        if(checkBoxTodo[0].checked == true){
+    
+            for(let i=0; i<filaId.length; i++){
+                recibos.push(filaId[i].innerText);
+            }
+        }
+        
+        for(let i=0; i<filaId.length; i++){
+            
+            
+            checkBox = filaId[i].getElementsByClassName("c-box");
+            
+            if(checkBox[0].checked == true){
+                recibos.push(filaId[i].innerText);
+            }
+        }
+        
+        if(recibos.length >0){
+            eel.buscador_recibo(recibos, ruta)();
+        
+        }
+        else{
+            alert("seleccione Todo o algun Registro")
+        }
+
+        
+        
+        
+    } 
+    else{
+        alert("Seleccione ruta de guardado")
+    }
+    tabla.removeChild(carga);    
+}   

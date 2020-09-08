@@ -77,7 +77,12 @@ def dividir_cadena(separador, cadena):
 
     
 def unir_cadenas(separador, lista_datos):
+    """Une una lista en un string solo, 
+        los datos deben ser string.
 
+        Parametros  separador='|', 
+        lista_datos= [dato1, dato2, daton...]"""
+  
     cadena = separador.join(lista_datos)
     return cadena
 

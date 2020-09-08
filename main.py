@@ -1,5 +1,7 @@
-import eel
 from os.path import exists
+
+import eel
+
 from metadatos.ayuda.rutas import Rutas, abrir_directorio
 from metadatos.recibo import ReciboNomina, RutaRecibo
 from metadatos.metadatos import ReciMetadatos
@@ -39,29 +41,28 @@ def guardar_mdatos(rutas, anno):
     print('------------------ SE PROCESARON TODOS LOS ARCHIVOS SELECCIONADOS -------------------------')
 
 
-    
 @eel.expose
-def buscador_recibo(control, p_ini, a_ini, p_fin, a_fin, ruta_guardado, auto_extraer=True):
-    
-    
+def obtener_reci_buscados(control, p_ini, a_ini, p_fin, a_fin):
     if a_ini == a_fin:
         periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
         datos = ReciMetadatos('', a_ini)
-        datos.leer(control, a_ini, periodos, ruta_guardado)
-        print('Archivo creado en: ' + ruta_guardado)
+        recibos = datos.devolver_datos(control, a_ini, periodos)
+
+        return recibos
+
+@eel.expose
+def buscador_recibo(ids, ruta_guardado):
+    """llama al metodo que busca registros
+    en la base de datos pasando como parametro el id
+    del registro de la bd"""  
+
+    
+    datos = ReciMetadatos('', '')
+    datos.consultar_extraer_recibos(ids, ruta_guardado)
+
+    print('Archivos Guardados en: ' + ruta_guardado)
         
     
-    elif a_ini != a_fin:
-        periodos_inter = armar_periodos_intermedios(a_ini, a_fin)
-        periodos_ini = armar_periodos(a_ini, periodo_ini=p_ini)
-        periodos_fin = armar_periodos(a_fin, ultimo_periodo=p_fin)
-        
-    
-
-    
-    
-
-
 try:
     opciones = ["--start-fullscreen"]
     
