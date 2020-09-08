@@ -6,6 +6,7 @@ from metadatos.ayuda.log import Log
 
 
 
+
 class ReciMetadatos(Bdatos):
 	"""Clase que maneja los metadatos de los recibos 
 	de nomina y se comunica con la base de datos"""
@@ -13,18 +14,14 @@ class ReciMetadatos(Bdatos):
 	def __init__(self, metadatos, anno):
 		self.host      = '127.0.0.1'
 		self.usuario   = 'root'
-		self.psw       = '' 
+		self.psw       = ''
 		self.nombre_bd ='recibosnomina'
 
 		self.datos     = metadatos
-		self.nombre_tbl = 'r'+str(anno)
-		self.campos_col = 'id, control, periodo, anno, pagina, ruta'
+		self.nombre_tbl = 'recibos'
+		self.campos_col = 'control, periodo, anno, pagina, ruta'
 		Bdatos.__init__(self,self.host, self.usuario, self.psw, self.nombre_bd)
 	
-	
-	def log(self, datos):
-		log = Log("Log")
-		
 
 	def guardar(self):
 		"""invoca el metodo para insertar filas en la tabla de la base
@@ -32,22 +29,45 @@ class ReciMetadatos(Bdatos):
 			su parametro deben ser un diccionarios"""
 		
 		for clave, datos in self.datos.items():						
-						
+			self.errores_guardado.clear()			
 			errores = self.insertar_filas(self.nombre_tbl, self.campos_col, datos)
 
 			if errores:
-				return errores
+				log = Log('log.txt', 'C:\log_recibos_metadatos')
+				log.guardar_datos(self.errores_guardado, '|')
 			else: 
 				continue
+		
+		self.conexion.close()
 
 
 	
 
-	def leer(self):
-		pass
+	def leer(self, control, anno, periodos, ruta_guardado):
+		"""Devuelve los recibos de los periodos
+		pasados como parametro, del numero de control
+		pasado como parametro, los parametros deben ser en
+		string y los periodos como diccionarios"""
 
+		periodo_recibos = dict()
+		for anno, periodos in periodos.items():
 
-
-
-
+			for periodo in periodos:
+				registros = self.consultar(self.nombre_tbl, control, anno, periodo,)
+				
+				for registro in registros:
+					periodo_recibos[str(periodo)+str(registro[0])] = registro
+				
 		
+		self.conexion.close()		
+		
+		ruta_guardado = ruta_guardado + '/' + control
+		recibo = ReciboNomina()
+		recibo.guardar_recibos_extraidos(control, ruta_guardado, 
+										periodo_recibos)
+		
+
+
+
+
+

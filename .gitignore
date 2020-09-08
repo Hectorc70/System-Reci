@@ -4,3 +4,5 @@
 metadatos/__pycache__/
 
 docs_pruebas/
+
+.vscode/settings.json

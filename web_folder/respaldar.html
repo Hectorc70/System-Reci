@@ -5,14 +5,13 @@
     <title>Recopilar Metadatos de Recibos</title>
     <link rel="stylesheet" type=text/css href="css/estilos.css">
     <link rel="stylesheet" type=text/css href="css/recop.css">
-    <script type="text/javascript" src="js/recopilador.js"></script>
+    <link rel="stylesheet" type=text/css href="css/buscador.css">
+    <script type="text/javascript" src="js/buscador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
-    <aside>        
+    <aside>
         <a class="logo" href="main.html">
             <img src="/img/Logo-SR.png" alt="logo">
         </a>
@@ -33,7 +32,7 @@
             </div>
             <div id="buscar">
                 <h2>
-                    <a href="buscar.html">
+                    <a href="">
                         BUSCAR RECIBOS
                     </a>
                 </h2>
@@ -46,7 +45,6 @@
 
                 </h2>
             </div>
-            
     </aside>
 
     <section class="secc">
@@ -101,21 +99,16 @@
             
             </div>
         </div>
-        <div id="todos">
-            <label for="todos">Todo</label>
-            <input name="todo" type="checkbox">
-        </div>
         <div id="tbl">
-            <!-- <div class="loading"></div> -->
             <table>
                 <tr id="titulos">
-                    <th>Periodo</th>
-                    <th>Año</th>
-                    <th>Nomina</th>
-                    <th>Ruta</th>
+                    <th>AÑO</th>
+                    <th>PERIODO</th>
+                    <th>NOMINA</th>
+                    <th>RUTA</th>
+                    <th>RUTA DESTINO</th>
                 </tr>
                 <tbody id="tbl-datos">
-                    
                 </tbody>
             </table>
         </div>

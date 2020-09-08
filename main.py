@@ -1,8 +1,10 @@
 import eel
-
+from os.path import exists
 from metadatos.ayuda.rutas import Rutas, abrir_directorio
-from metadatos.recibo import ReciboNomina, rutas_recibos
+from metadatos.recibo import ReciboNomina, RutaRecibo
 from metadatos.metadatos import ReciMetadatos
+from buscar.ayuda.periodos import armar_periodos_intermedios, armar_periodos
+
 eel.init('web_folder', allowed_extensions=['.js','.html'])
 
 
@@ -11,11 +13,15 @@ eel.init('web_folder', allowed_extensions=['.js','.html'])
 def ruta_metadatos(): 
     directorio = abrir_directorio()    
     
-    return directorio
+    if exists(directorio):
+        return directorio
+    else:
+        return ''
 
 @eel.expose
-def mostrar_rutas_recibos(directorio, periodo):
-    rutas = rutas_recibos(directorio, periodo)
+def mostrar_rutas_recibos(directorio, anno, periodo):
+    ruta_archivos =  RutaRecibo(directorio, anno, periodo)
+    rutas = ruta_archivos.recuperacion()
     
     return rutas
     
@@ -24,17 +30,42 @@ def mostrar_rutas_recibos(directorio, periodo):
 def guardar_mdatos(rutas, anno):
     for ruta in rutas:
         recibo = ReciboNomina(ruta)
-        metadatos_recibos = recibo.formateo_datos()
+        metadatos_recibos = recibo.almacenar_datos()
 
         mtdatos = ReciMetadatos(metadatos_recibos, anno)
-        errores = mtdatos.guardar()
+        mtdatos.guardar()
+        print("Datos Procesados: " + ruta)
+    
+    print('------------------ SE PROCESARON TODOS LOS ARCHIVOS SELECCIONADOS -------------------------')
 
-        if errores:
-            return errores
-        else:
-            True
+
+    
+@eel.expose
+def buscador_recibo(control, p_ini, a_ini, p_fin, a_fin, ruta_guardado, auto_extraer=True):
+    
+    
+    if a_ini == a_fin:
+        periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
+        datos = ReciMetadatos('', a_ini)
+        datos.leer(control, a_ini, periodos, ruta_guardado)
+        print('Archivo creado en: ' + ruta_guardado)
+        
+    
+    elif a_ini != a_fin:
+        periodos_inter = armar_periodos_intermedios(a_ini, a_fin)
+        periodos_ini = armar_periodos(a_ini, periodo_ini=p_ini)
+        periodos_fin = armar_periodos(a_fin, ultimo_periodo=p_fin)
+        
+    
+
+    
+    
+
+
 try:
-    eel.start('main.html')
+    opciones = ["--start-fullscreen"]
+    
+    eel.start('main.html', cmdline_args=opciones)
 
 
 except(SystemExit, MemoryError, KeyboardInterrupt):

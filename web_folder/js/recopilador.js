@@ -4,9 +4,8 @@
 async function mostrarDirectorio(){
     var periodoIn = document.getElementsByName("periodo")[0].value;
     var annoIn = document.getElementsByName("anno")[0].value;
-
     
-    if(periodoIn!=='' && annoIn !== ''){
+    if(annoIn !== ''){
 
         let directorio = await eel.ruta_metadatos()();     
     
@@ -22,10 +21,19 @@ async function mostrarDirectorio(){
 }
 
 async function mostrarEnTabla(){
+/* 
+    let datos = document.getElementById("tbl-datos");
+    datos.removeChild(tr) */
+
+    let tabla =document.getElementById("tbl");  
+    let carga = document.createElement("div");
+    carga.setAttribute("class", "loading");    
+    tabla.appendChild(carga);
 
     let directorio = document.getElementsByName("ruta-reci")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
-    let rutas = await eel.mostrar_rutas_recibos(directorio, periodo)();
+    let anno = document.getElementsByName("anno")[0].value;
+    let rutas = await eel.mostrar_rutas_recibos(directorio,anno, periodo)();
     const rutasNum = Object.getOwnPropertyNames(rutas);
 
     /* debugger; */
@@ -57,34 +65,57 @@ async function mostrarEnTabla(){
         tr.appendChild(columnaAnno);
         tr.appendChild(columnaNom);
         tr.appendChild(columnaRuta);
-
-        
-
     
-    
-}
+    }
+    tabla.removeChild(carga);
 }
 
 
 
 
 function elementosTabla(){
+    let tabla =document.getElementById("tbl");  
+    let carga = document.createElement("div");
+    carga.setAttribute("class", "loading");    
+    tabla.appendChild(carga);
+
     var rutas = [];
     let filaPer = document.getElementsByClassName("cl-per");
     let anno = document.getElementsByName("anno")[0].value;
-    for(let i=0; i<filaPer.length; i++){
+    checkBoxTodo = document.getElementsByName("todo");
 
+    if(checkBoxTodo[0].checked == true){
+
+        for(let i=0; i<filaPer.length; i++){
+            let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
+            rutas.push(filaRuta);
+        }
+    }    
+    
+    for(let i=0; i<filaPer.length; i++){
+        
+        
         checkBox = filaPer[i].getElementsByClassName("c-box");
+        
         if(checkBox[0].checked == true){
             let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
             rutas.push(filaRuta);
         }
-        else{
-            console.log("fila no seleccionada");
-        }
     }
 
     eel.guardar_mdatos(rutas, anno)();
+    tabla.removeChild(carga);
+
+
+
 
     
 } 
+
+
+function eliminarFilas(){
+    function deleteRow(row){
+        var d = row.parentNode.parentNode.rowIndex;
+        document.getElementById('dsTable').deleteRow(d);
+    }
+}
