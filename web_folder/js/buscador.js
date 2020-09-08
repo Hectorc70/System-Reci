@@ -79,10 +79,15 @@ async function mostrarRecibos(){
 
 
 
-function EnviarDatosExtraccion(){
-    debugger;
+async function EnviarDatosExtraccion(){
+    
     let ruta = document.getElementsByName("ruta")[0].value;
+    let control = document.getElementsByName("control")[0].value;
     let tabla =document.getElementById("tbl");
+    let carga = document.createElement("div");
+    carga.setAttribute("class", "loading");    
+    tabla.appendChild(carga);
+
     if(ruta != ''){
                 
         let recibos = [];
@@ -107,8 +112,12 @@ function EnviarDatosExtraccion(){
         }
         
         if(recibos.length >0){
-            eel.buscador_recibo(recibos, ruta)();
-        
+            let reci = await eel.buscador_recibo(recibos, ruta)();
+            debugger;
+            if(reci==true){
+                tabla.removeChild(carga);
+                alert("Se Guardaron todos los Recibos en: "+ ruta + "/" + control)
+            }
         }
         else{
             alert("seleccione Todo o algun Registro")
@@ -121,5 +130,5 @@ function EnviarDatosExtraccion(){
     else{
         alert("Seleccione ruta de guardado")
     }
-    tabla.removeChild(carga);    
+   
 }   

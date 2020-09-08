@@ -55,14 +55,13 @@ def buscador_recibo(ids, ruta_guardado):
     """llama al metodo que busca registros
     en la base de datos pasando como parametro el id
     del registro de la bd"""  
-
     
     datos = ReciMetadatos('', '')
     datos.consultar_extraer_recibos(ids, ruta_guardado)
 
     print('Archivos Guardados en: ' + ruta_guardado)
-        
     
+    return True
 try:
     opciones = ["--start-fullscreen"]
     
