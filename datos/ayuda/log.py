@@ -1,7 +1,7 @@
 import datetime
 
-from metadatos.ayuda.txt import ArchivoTxt
-from metadatos.ayuda.rutas import unir_cadenas
+from datos.ayuda.txt import ArchivoTxt
+from modulos.rutas import unir_cadenas
 
 
 

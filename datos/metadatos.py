@@ -1,8 +1,8 @@
 
-from metadatos.ayuda.rutas import dividir_cadena, unir_cadenas
-from metadatos.recibo import ReciboNomina
-from metadatos.ayuda.bdatos import Bdatos
-from metadatos.ayuda.log import Log
+from modulos.rutas import unir_cadenas
+from datos.recibo import ReciboNomina
+from modulos.bdatos import Bdatos
+from datos.ayuda.log import Log
 
 
 
@@ -73,13 +73,6 @@ class ReciMetadatos(Bdatos):
 		
 		return periodo_recibos
 
-		#ruta_guardado = ruta_guardado + '/' + control
-		#recibo = ReciboNomina()
-		#recibo.guardar_recibos_extraidos(control, ruta_guardado, 
-		#								periodo_recibos)
-		
-
-
 
 	def consultar_extraer_recibos(self, id_registros, ruta_guardado):
 		"""Consulta los registros y llama al metodo que extraer
@@ -91,3 +84,5 @@ class ReciMetadatos(Bdatos):
 
 			recibo = ReciboNomina(registro[0][-1])
 			recibo.guardar_recibos_extraidos(registro[0][1], ruta_guardado, registro)
+
+		self.conexion.close()
