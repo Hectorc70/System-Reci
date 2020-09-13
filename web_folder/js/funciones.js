@@ -1,6 +1,6 @@
 
 window.onload = function () {
-    setTimeout(carga, 4000);
+    setTimeout(carga, 1000);
 }
 
 function carga(){

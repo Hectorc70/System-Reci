@@ -6,12 +6,14 @@
     <link rel="stylesheet" type=text/css href="css/estilos.css">
     <link rel="stylesheet" type=text/css href="css/recop.css">
     <link rel="stylesheet" type=text/css href="css/buscador.css">
+    <link rel="stylesheet" type=text/css href="css/generales-op.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script type="text/javascript" src="js/buscador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 
 <body>
-    <aside>
+    <aside class="z-depth-4 animate__animated animate__fadeInLeftBig">
         <a class="logo" href="main.html">
             <img src="/img/Logo-SR.png" alt="logo">
         </a>
@@ -47,12 +49,12 @@
             </div>
     </aside>
 
-    <section class="secc">
-        <div id="contenedor">
+    <section class="secc animate__animated animate__fadeInRightBig">
+        <div id="cont-inputs">
             <form name="in-buscar" action="">
                 <label for="control">Numero de Control</label>
                 <input id="in-control" type="text" name="control" placeholder="310540">
-                
+
                 <label for="ruta">Guardar En...</label>
                 <input id="ruta-g" type="text" name="ruta" readonly />
                 <button id="btn-explorar" type="button" onclick="mostrarDirGuardado()">...</button>
@@ -133,9 +135,9 @@
                     <button id="btn-buscar-reci" type="button" onclick="mostrarRecibos()">Buscar</button>
                     <button id="btn-extraer" type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
                 </div>
-
+            </form>
         </div>
-        </form>
+
         <div id="todos">
             <label for="todos">Todo</label>
             <input name="todo" type="checkbox">
