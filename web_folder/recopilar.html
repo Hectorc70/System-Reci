@@ -6,6 +6,7 @@
     <link rel="stylesheet" type=text/css href="css/estilos.css">
     <link rel="stylesheet" type=text/css href="css/recop.css">
     <link rel="stylesheet" type=text/css href="css/generales-op.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script type="text/javascript" src="js/recopilador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -24,7 +25,7 @@
                 </a>
 
             </div>
-            <div class="mor" id="recop">
+            <div class="select" id="recop">
                 <a href="recopilar.html">
                     RECOPILAR DATOS
                 </a>
@@ -53,7 +54,7 @@
                 <div class="contenedor-form">
                     <div id="cont-ruta">
                         <label class="in-lbl" for="">Ruta de Recibos</label>
-                        <input class= "in-buscar" type="text" name="ruta-reci" readonly />
+                        <input class="in-buscar" type="text" name="ruta-reci" readonly />
                         <button class="btn btn-explorar" type="button" onclick="mostrarDirectorio()">...</button>
                     </div>
                 </div>
@@ -103,13 +104,17 @@
                 </div>
             </form>
         </div>
+
+
+
         <div id="tbl">
             <!-- <div class="loading"></div> -->
+            <div class="conte-tbl">
             <table>
                 <tr id="titulos">
-                    <th>                                                   
-                        <input name="todo"type="checkbox">
-                        
+                    <th>
+                        <input class="ch-box" name="todo" type="checkbox">
+
                         Periodo
                     </th>
                     <th>Año</th>
@@ -120,7 +125,9 @@
 
                 </tbody>
             </table>
+            </div>
         </div>
+
     </section>
 
 </body>

@@ -30,7 +30,7 @@
                 </a>
 
             </div>
-            <div class="red" id="buscar">
+            <div class="select" id="buscar">
 
                 <a href="buscar.html">
                     BUSCAR RECIBOS
@@ -47,7 +47,7 @@
             </div>
     </aside>
 
-    <section class="secc animate__animated animate__fadeInRightBig">
+    <section class="secc">
         <div class="cont-inputs">
             <form name="in-buscar" action="">
                 <div class="contenedor-form">
@@ -137,26 +137,27 @@
                     <label class="in-lbl" for="ruta">Guardar En...</label>
                     <input class="in-buscar" id="ruta-g" type="text" name="ruta" placeholder="C:/RECIBOS" readonly />
                     <button class="btn btn-explorar" type="button" onclick="mostrarDirGuardado()">...</button>
-                    <button class="btn"  type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
+                    <button class="btn" type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
                 </div>
             </form>
         </div>
 
-        <div id="todos">
-            <label for="todos">Todo</label>
-            <input name="todo" type="checkbox">
-        </div>
         <div id="tbl">
-            <table>
-                <tr id="titulos">
-                    <th>ID</th>
-                    <th>PERIODO</th>
-                    <th>AÑO</th>
-                    <th>ARCHIVO</th>
-                </tr>
-                <tbody id="tbl-datos">
-                </tbody>
-            </table>
+            <div class="conte-tbl">
+                <table>
+                    <tr id="titulos">
+                        <th>
+                            <input type="checkbox" name="todo">
+                            ID
+                        </th>
+                        <th>PERIODO</th>
+                        <th>AÑO</th>
+                        <th>ARCHIVO</th>
+                    </tr>
+                    <tbody id="tbl-datos">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 

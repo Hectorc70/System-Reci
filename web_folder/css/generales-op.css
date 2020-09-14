@@ -42,9 +42,15 @@ hr{
     margin-top: 40px;   
     width: 100%;
     height: 80%;
+    
 
 }
-
+.select{
+    background-color: #5a9ea3 !important;
+    border-bottom-color: #222121 !important;
+    border-bottom-style: solid;  
+    
+}
 aside #menu div{    
     background-color: #222121;
     height: 60px;
@@ -64,9 +70,12 @@ aside div  a{
     display: block;
     text-decoration:none ;
     text-decoration: none;
-    font-size: 18px;
-    color: white;
-    text-align: center;
+    text-align: center;    
+    font-size: 16px;
+    font-family: Roboto;
+    color: white;        
+    height: 100%;
+    padding-top: 10px;
 }
 
 .cont-inputs{
@@ -103,8 +112,7 @@ aside div  a{
     margin-left: 10px;
 
 }
-.in-buscar{
-    border: none;
+.in-buscar{    
     background-color: #40A7AD;
     font-size: 16px;
     text-transform: uppercase;
@@ -194,10 +202,23 @@ aside div  a{
     margin-right: auto;
     background-color: #008992;
     box-shadow:  5px 5px 4px #000000;
+    padding: 1px;
 }
-table{    
+.conte-tbl{
+    background-color: #40A7AD;
+    width: 95%;
+    height: 95%;
+    margin: 10px;
+    margin-right: auto;
+    margin-left: auto;   
+    border-radius: .6em;
+    padding: 10px;
+    padding-top: 5px;
 
+}
+table{   
     width: 100%;
+    
 }
 #titulos th{             
     padding: 3px;    
@@ -205,12 +226,13 @@ table{
     margin-bottom: 100px; 
     text-transform: uppercase;
     font-size: 14px;
-    background-color: #222121;
+    background-color: #008992;
     color: white;  
     position: sticky;
     top: 0%;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
+    border-radius: .4em;
 }
 
 table #titulos th:first-child{
@@ -226,8 +248,7 @@ table #titulos th:last-child{
     width: 200px;
 }
 
-#tbl-datos{    
-    background-color: white;
+#tbl-datos{      
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -235,14 +256,14 @@ table #titulos th:last-child{
 
 #tbl-datos td{
     /* background-color: white; */
-    color: black;
+    color: white;
     text-align: left;
     padding: 2px;
     padding-left: 10px;
+    border: solid 2px #008992;    
 }
 #tbl-datos td:hover{
-    /* background-color: white; */
-    box-shadow: 0px 0px 10px 2px #7a7a7a;
-    background-color: #40A7AD;    
-    color: white;
+    /* background-color: white; */        
+    border: solid 3px #6fd1d8
 }
+
