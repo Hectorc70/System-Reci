@@ -1,40 +1,40 @@
-
-
-
-#in-control{
-    width: 8%;
-    text-align: center;
+.red{
+    background-color: #eb9d97 !important;
+    border-bottom-color: #222121 !important;
+    border-bottom-style: solid;  
 }
-#ruta-g{
-    width: 30%;
+
+#conte-control{  
+    width: 20%;
+    display: inline-block;    
+    text-align: left;
+    
+}
+#conte-control input{
+    width: 25%;
+}
+.btn-circulo{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
 }
 #fechas{
-    margin-top: 10px;
+    display: inline-block;
+    width: 30%;      
+    text-align: left;
     
 }
 
-#fechas select{
-    margin-right: 10px;
-    height: 25px;
-    border-radius: .7em;  
-    border: none;  
+#ruta-g{
+    width: 30%;    
 }
 
-#contenedor label{
-    margin-right: 10px;
 
-}
-#contenedor input{
-    margin-right: 10px;
-}
 
 
 #contenedor #btn-explorar{
     width: 60px;
 }
-#fechas #btn-buscar-reci{
-    float: none;
-    clear: both;   
-}
 
-#
+

@@ -1,14 +1,18 @@
-
+section {
+    height: 100%;
+    width: 85%;
+    float: left;      
+    text-align: center;
+    padding-left: 30px;    
+    
+}
 /* MENU */
 aside{      
     float: left;
-    width: 15%;
-    height: 99%;    
+    width: 13%;
+    height: 98%;    
     background-color: #008992;   
-    box-shadow:  5px 5px 4px #1a1919; 
-    margin-top: 8px;
-
-
+    box-shadow:  5px 5px 4px #000000; 
 }   
 
 .logo{
@@ -50,7 +54,7 @@ aside #menu div{
 }
 
 aside #menu div:hover{
-    border-bottom-style: solid;
+    border-bottom-style: solid;  
     border-bottom-color: #222121;
     background-color: #5a9ea3;    
     cursor: pointer;     
@@ -65,21 +69,180 @@ aside div  a{
     text-align: center;
 }
 
-
-
-#cont-inputs{
+.cont-inputs{
     margin-top: 30px;   
     height: 15%;
-    width: 90%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     background-color: #008992;   
-    box-shadow:  5px 5px 4px #1a1919;
+    box-shadow:  5px 5px 4px #000000;
+    font-family: Arial, Helvetica, sans-serif;
 }
-#cont-inputs form{
+.cont-inputs form{
     width: 95%;
     height: 100%;
     text-align: left;
-    padding: 30px;
-    margin: 10px auto;    
+    padding: 20px;
+    margin: 10px auto;        
+}
+
+/* CONTENEDORES INPUTS */
+.contenedor-form{
+    background-color: #40A7AD;
+    padding: 10px;  
+    border-radius: .5em;
+    font-size: 16PX;
+    margin-bottom: 10px;    
+}
+.in-lbl{
+    color: white;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+    margin-left: 10px;
+
+}
+.in-buscar{
+    border: none;
+    background-color: #40A7AD;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+    width: 10%;     
+    font-size: 14px;
+    padding: 2px;
+    border-radius: .5em;
+    border: solid 2px #008992;   
+}
+
+.in-buscar:hover{
+    border: solid 2.5px #6fd1d8
+}
+
+.slt{
+    display: inline-block;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+    height: 25px;
+    width: 60px; 
+    border-radius: .5em;
+    border: none;
+    background:transparent ;
+    color: white;
+    
+}
+.slt option{
+    color: black;
+    scrollbar-width: none;
+}
+
+.slt:focus{
+    outline: none;
+    outline-width: 0; 
+}
+::-webkit-scrollbar-track{    
+    border-radius: .5em;   
+}
+.in-buscar:focus{
+    outline: none;
+    outline-width: 0;
+    
+}
+.cont-inputs .linea{
+    margin-bottom: 10px;
+    outline: none;
+    
+    
+}
+
+/* BOTONES */
+.btn{
+    display: inline-block;
+    border: none;   
+    width: 100px;
+    height: 23px; 
+    margin: auto;
+    margin-right: 10px;
+    background-color: white;
+    color: #000000;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: .5em ;
+        
+}
+.btn:hover{
+    background-color: #008992;
+    color: white; 
+}
+.btn:focus{
+    outline: none;
+}
+.btn-explorar{
+    width: 35px;    
+}
+
+#tbl{
+    margin-top: 80px;    
+    overflow: auto;
+    scrollbar-width: 5px;
+    width: 100%;
+    height: 72%;  
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #008992;
+    box-shadow:  5px 5px 4px #000000;
+}
+table{    
+
+    width: 100%;
+}
+#titulos th{             
+    padding: 3px;    
+    height: 35px;   
+    margin-bottom: 100px; 
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: #222121;
+    color: white;  
+    position: sticky;
+    top: 0%;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table #titulos th:first-child{
+    width: 10px;
+}
+table #titulos th:nth-child(2){
+    width: 30px;
+}
+table #titulos th:nth-child(3){
+    width: 50px;
+}
+table #titulos th:last-child{
+    width: 200px;
+}
+
+#tbl-datos{    
+    background-color: white;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#tbl-datos td{
+    /* background-color: white; */
+    color: black;
+    text-align: left;
+    padding: 2px;
+    padding-left: 10px;
+}
+#tbl-datos td:hover{
+    /* background-color: white; */
+    box-shadow: 0px 0px 10px 2px #7a7a7a;
+    background-color: #40A7AD;    
+    color: white;
 }

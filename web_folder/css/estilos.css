@@ -17,7 +17,7 @@ body{
     padding: 0px;
     /* background-image: url("../img/patron.png"); */
     /* background: radial-gradient(ellipse at center, rgba(66,65,66,1) 0%, rgba(66,66,66,1) 50%, rgba(64,64,64,1) 65%, rgba(59,59,59,1) 72%, rgba(38,38,38,1) 100%); */
-    background-color: #222121;
+    background-color: #363535;
 }
 
 #preloader{
@@ -37,7 +37,11 @@ body{
     padding: 20px;
 }
 #opciones{      
-    margin: 150px auto;   
+    margin: 150px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;  
 }
 .opcion{
     display: inline-block;    
@@ -45,9 +49,9 @@ body{
     background-color: #008992;
     height: 100px;
     width: 24.03%;      
-    padding: 5px;
-    margin-top: 7px;
-    box-shadow:  5px 5px 4px #1a1919;    
+    padding: 5px; 
+    margin: 6px;  
+    box-shadow: 5px 5px 10px #1a1919;
 }
 .opcion:nth-child(2){
     background-color: #520092;
@@ -84,6 +88,7 @@ body{
     font-size: 24px;
     color: white;
     font-family: Roboto;
+    text-transform: uppercase;
 }
 
 #s-logo{
