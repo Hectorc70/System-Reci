@@ -5,13 +5,11 @@
 
 
 /* RECOPILADOR */
-.mor{
-    
-}
+
 #cont-ruta{   
     display: block;
-    text-align: left;
-    padding-top: 10px;
+    width: 90%;
+    text-align: left;  
     padding-left: 20px;    
 }
 #cont-ruta input{
