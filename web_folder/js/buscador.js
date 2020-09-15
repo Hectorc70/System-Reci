@@ -65,9 +65,9 @@ async function mostrarRecibos(){
             columnaArchivo.innerHTML = recibos[recibosNum[i]][4];   
                 
             
-            lista.appendChild(tr);                 
-            columnaId.appendChild(checkBox);
-            tr.appendChild(columnaId);      
+            lista.appendChild(tr);  
+            tr.appendChild(columnaId);
+            columnaId.appendChild(checkBox);      
             tr.appendChild(columnaPeriodo);
             tr.appendChild(columnaAnno);
             tr.appendChild(columnaArchivo);
@@ -91,16 +91,9 @@ async function EnviarDatosExtraccion(){
     if(ruta != ''){
                 
         let recibos = [];
-        let filaId = document.getElementsByClassName("cl-id");       
-        checkBoxTodo = document.getElementsByName("todo");
+        let filaId = document.getElementsByClassName("cl-id");     
+
     
-        if(checkBoxTodo[0].checked == true){
-    
-            for(let i=0; i<filaId.length; i++){
-                recibos.push(filaId[i].innerText);
-            }
-        }
-        
         for(let i=0; i<filaId.length; i++){
             
             

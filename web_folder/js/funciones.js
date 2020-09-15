@@ -1,4 +1,5 @@
-
+'use strict'
+/* MAIN */
 window.onload = function () {
     setTimeout(carga, 1000);
 }
@@ -7,6 +8,12 @@ function carga(){
     $('#preloader').fadeOut();
     $('#menu-principal').removeClass('hide');
 }
+/* tabla */
+
+/* SELECCIONA TODAS LAS FILAS DE CHECKBOX */
+
+
+
 
 async function mostrar_ruta_metadatos() {
     let ruta = await eel.ruta_metadatos()();

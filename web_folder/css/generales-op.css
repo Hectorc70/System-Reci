@@ -1,3 +1,30 @@
+@keyframes loading {
+    0% {
+    transform: rotate(0deg);
+    }
+
+    100% {
+    transform: rotate(360deg);
+    }
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 20px 0 0 100px;            
+    height: 100px;
+    width: 100px;
+    border: 6px solid #c6f2ff;
+    border-top-color: #2b2a2a;
+    border-bottom-color: #32add3;
+    border-radius: 100%;
+    animation: loading 1.5s infinite linear; 
+}
+
+
+
+
 section {
     height: 100%;
     width: 85%;
@@ -12,7 +39,7 @@ aside{
     width: 13%;
     height: 98%;    
     background-color: #008992;   
-    box-shadow:  5px 5px 4px #000000; 
+    box-shadow: 5px 5px 10px #1a1919;
 }   
 
 .logo{
@@ -79,30 +106,31 @@ aside div  a{
 }
 
 .cont-inputs{
-    margin-top: 30px;   
+    margin-top: 20px;   
     height: 15%;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
     background-color: #008992;   
-    box-shadow:  5px 5px 4px #000000;
+    box-shadow: 5px 5px 10px #1a1919;
     font-family: Arial, Helvetica, sans-serif;
 }
 .cont-inputs form{
-    width: 95%;
-    height: 100%;
+    width: 100%;
+    height: 95%;
     text-align: left;
-    padding: 20px;
-    margin: 10px auto;        
+    padding: 15px;
+    margin: 0px auto;        
 }
 
 /* CONTENEDORES INPUTS */
 .contenedor-form{
     background-color: #40A7AD;
-    padding: 10px;  
+    padding: 7px;      
     border-radius: .5em;
     font-size: 16PX;
-    margin-bottom: 10px;    
+    margin-bottom: 35px;
+    margin-top: 5px;
 }
 .in-lbl{
     color: white;
@@ -120,8 +148,10 @@ aside div  a{
     width: 10%;     
     font-size: 14px;
     padding: 2px;
+    padding-left: 10px;
     border-radius: .5em;
-    border: solid 2px #008992;   
+    border: solid 2px #008992;
+    text-align: left; 
 }
 
 .in-buscar:hover{
@@ -139,7 +169,11 @@ aside div  a{
     border: none;
     background:transparent ;
     color: white;
+    border: solid 2px #008992;
     
+}
+.slt:hover{
+    border: solid 2.5px #6fd1d8;
 }
 .slt option{
     color: black;
@@ -193,37 +227,37 @@ aside div  a{
 }
 
 #tbl{
-    margin-top: 80px;    
     overflow: auto;
     scrollbar-width: 5px;
     width: 100%;
-    height: 72%;  
+    height: 72%; 
+    margin-top: 60px;   
     margin-left: auto;
     margin-right: auto;
     background-color: #008992;
-    box-shadow:  5px 5px 4px #000000;
-    padding: 1px;
+    box-shadow: 5px 5px 10px #1a1919;
+    padding: 20px;
 }
 .conte-tbl{
     background-color: #40A7AD;
-    width: 95%;
-    height: 95%;
-    margin: 10px;
+    width: 100%;
+    height: 100%;    
     margin-right: auto;
     margin-left: auto;   
     border-radius: .6em;
     padding: 10px;
-    padding-top: 5px;
+    padding-top: 0px;
 
 }
 table{   
     width: 100%;
     
+    
 }
+
 #titulos th{             
     padding: 3px;    
-    height: 35px;   
-    margin-bottom: 100px; 
+    height: 35px;      
     text-transform: uppercase;
     font-size: 14px;
     background-color: #008992;
@@ -249,7 +283,7 @@ table #titulos th:last-child{
 }
 
 #tbl-datos{      
-    margin-top: 10px;
+    
     font-family: Arial, Helvetica, sans-serif;
 }
 
