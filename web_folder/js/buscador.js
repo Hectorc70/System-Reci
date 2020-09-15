@@ -84,16 +84,16 @@ async function EnviarDatosExtraccion(){
     let ruta = document.getElementsByName("ruta")[0].value;
     let control = document.getElementsByName("control")[0].value;
     let tabla =document.getElementById("tbl");
-    let carga = document.createElement("div");
-    carga.setAttribute("class", "loading");    
-    tabla.appendChild(carga);
+    
 
     if(ruta != ''){
                 
         let recibos = [];
         let filaId = document.getElementsByClassName("cl-id");     
 
-    
+        let carga = document.createElement("div");
+        carga.setAttribute("class", "loading");    
+        tabla.appendChild(carga);
         for(let i=0; i<filaId.length; i++){
             
             

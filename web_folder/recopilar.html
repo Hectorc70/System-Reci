@@ -10,7 +10,20 @@
     <script type="text/javascript" src="js/recopilador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#check-todos').click(function () {
+                if ($(this).is(':checked')) {
+                    $('.c-box').prop("checked", true);
+                    console.log('todos seleccionado');
+                }
+                else{
+                    $('.c-box').prop("checked", false);
+                }
+            })
+        })
 
+    </script>
 </head>
 
 <body>
