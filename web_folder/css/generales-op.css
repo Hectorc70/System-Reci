@@ -1,3 +1,8 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
 @keyframes loading {
     0% {
     transform: rotate(0deg);

@@ -2,12 +2,29 @@
 <html>
 
 <head>
-    <title>Recopilar Metadatos de Recibos</title>
+    <title>Respaldar</title>
     <link rel="stylesheet" type=text/css href="css/estilos.css">
     <link rel="stylesheet" type=text/css href="css/generales-op.css">
-    
+    <link rel="stylesheet" type=text/css href="css/resp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="js/buscador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#check-todos').click(function () {
+                if ($(this).is(':checked')) {
+                    $('.c-box').prop("checked", true);
+                    console.log('todos seleccionado');
+                }
+                else {
+                    $('.c-box').prop("checked", false);
+                }
+            })
+        })
+
+    </script>
 </head>
 
 <body>
@@ -16,7 +33,7 @@
             <img src="/img/Logo-SR.png" alt="logo">
         </a>
         <div id="menu">
-            <div id="respaldar">
+            <div class="select" id="respaldar">
                 <a href="respaldar.html">
                     RESPALDAR TIMBRES Y RECIBOS
                 </a>
@@ -46,69 +63,40 @@
     </aside>
 
     <section class="secc">
-        <div id="contenedor">
-            <div id="cont-ruta">
-                <label for="">Ruta de Recibos</label>
-                <input type="text" name="ruta-reci" readonly />
-                <button class="btn" type="button" onclick="mostrarDirectorio()">BUSCAR EN...</button>
-            </div>
-            <div id="datos-in">
-                <label for="anno">Año</label>
-                <select class="anno" name="anno">
-                    <option value=""> </option>
-                    <option value="2014">2014</option>
-                    <option value="2015">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                </select>
-                <label for="periodo">Periodo</label>
-                <select class="periodos" name="periodo">
-                    <option value=""> </option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                </select>
-                <button  type="button" onclick="elementosTabla()">Iniciar</button>
-            
-            
-            </div>
+        <div class="cont-inputs">
+            <form name="in-buscar" action="">
+                <div class="contenedor-form">
+                    <div id="conte-ruta">
+                        <label class="in-lbl" for="ruta">Ubicación Recibos</label>
+                        <input class="in-buscar" type="text" name="ruta" readonly placeholder="C:/CFDI/">
+                        <button class="btn btn-explorar">...</button>
+                    </div>
+                </div>
+                <div class="contenedor-form">
+                    <label class="in-lbl" for="ruta">Guardar En...</label>
+                    <input class="in-buscar" id="ruta-g" type="text" name="ruta" placeholder="C:/RECIBOS" readonly />
+                    <button class="btn btn-explorar" type="button" onclick="mostrarDirGuardado()">...</button>
+                    <button class="btn" type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
+                </div>
+            </form>
         </div>
+
         <div id="tbl">
-            <table>
-                <tr id="titulos">
-                    <th>AÑO</th>
-                    <th>PERIODO</th>
-                    <th>NOMINA</th>
-                    <th>RUTA</th>
-                    <th>RUTA DESTINO</th>
-                </tr>
-                <tbody id="tbl-datos">
-                </tbody>
-            </table>
+            <div class="conte-tbl">
+                <table>
+                    <tr id="titulos">
+                        <th>
+                            <input id="check-todos" type="checkbox" name="todo">
+                            ID
+                        </th>
+                        <th>PERIODO</th>
+                        <th>AÑO</th>
+                        <th>ARCHIVO</th>
+                    </tr>
+                    <tbody id="tbl-datos">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 

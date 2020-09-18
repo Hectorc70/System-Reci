@@ -1,11 +1,7 @@
 /* Preloader */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
 
 
 /* RECOPILADOR */
-
 #cont-ruta{   
     display: block;
     width: 90%;
@@ -15,12 +11,6 @@
 #cont-ruta input{
     width: 350px;
 }
-
-
-
-/* TABLA */
-
-
 
 
 
