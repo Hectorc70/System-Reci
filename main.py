@@ -2,12 +2,29 @@ from os.path import exists
 
 import eel
 
+from respaldar.reci_xml import ArchivosOrig
 from modulos.rutas import abrir_directorio
 from datos.recibo import ReciboNomina, RutaRecibo
 from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 eel.init('web_folder', allowed_extensions=['.js','.html'])
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***RESPALDAR XML Y RECIBOS***
+**---------------------------------------------------------------------------------------------**
+"""
+
+@eel.expose
+def rutas_recibos_orig():
+    ruta = 'Y:\CFDI_2020\CFDI_NOMINA_2020'
+    anno = '2020'
+    perio = '01'
+
+    originales = ArchivosOrig(ruta, anno, perio)
+    recibos = originales.archivos_pdf()
+
+    return recibos
 
 
 """
