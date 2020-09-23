@@ -9,7 +9,11 @@ from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 eel.init('web_folder', allowed_extensions=['.js','.html'])
-
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***GENERALES***
+**---------------------------------------------------------------------------------------------**
+"""
 @eel.expose
 def enviar_ruta(): 
     directorio = abrir_directorio()    
@@ -28,12 +32,9 @@ def enviar_ruta():
 """
 
 @eel.expose
-def rutas_recibos_orig():
-    ruta = 'Y:\CFDI_2020\CFDI_NOMINA_2020'
-    anno = '2020'
-    perio = '01'
+def rutas_recibos_orig(ruta, anno, periodo):  
 
-    originales = ArchivosOrig(ruta, anno, perio)
+    originales = ArchivosOrig(ruta, anno, periodo)
     recibos = originales.archivos_pdf()
 
     return recibos

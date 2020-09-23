@@ -10,14 +10,14 @@ class ArchivosOrig:
 		self.periodo = periodo
 		self.anno = anno
 		self.ruta_com = self.formar_ruta()
-		self.ruta_num  = len(self.ruta_com.split("\\"))	
+		self.ruta_num  = len(self.ruta_com.split("/"))	
 		self.rutas = Rutas()
 		self.rutas_archivos = self.rutas.recuperar_rutas(self.ruta_com, True)
 		self.datos_archivos = self.depurar_rutas()
 	
 	def formar_ruta(self):
 		periodo_comp =  self.periodo + '_' + self.anno
-		ruta = unir_cadenas('\\', [self.ruta, periodo_comp])
+		ruta = unir_cadenas('/', [self.ruta, periodo_comp])
 
 		return ruta
 
@@ -49,9 +49,14 @@ class ArchivosOrig:
 			if datos[self.ruta_num].upper().split('_')[0]=='JUBILADOS':				 
 				datos_jub = self.archivos_pdf_jub(datos)
 				if datos_jub:
+					ruta = unir_cadenas('\\', datos_jub)
+					datos_jub.append(ruta)
 					recibos.append(datos_jub)
 
-			elif datos[self.ruta_num+2].upper() == 'RECIBOS':
+			elif (datos[self.ruta_num+2].upper() == 'RECIBOS' and
+					datos[-2].upper() != 'MOD'):
+				ruta = unir_cadenas('\\', datos)
+				datos.append(ruta)
 				recibos.append(datos)
 
 		return recibos

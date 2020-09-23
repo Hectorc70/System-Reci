@@ -5,13 +5,15 @@ async function mostrarRutas(){
         
         let tabla =document.getElementById("tbl");  
         let carga = document.createElement("div");
+        let ruta = document.getElementsByName("ruta")[0].value;
+        let anno = document.getElementsByName("anno")[0].value;
+        let periodo = document.getElementsByName("periodo")[0].value;
         carga.setAttribute("class", "loading");    
         tabla.appendChild(carga);    
         
-        let recibos = await eel.rutas_recibos_orig()();
+        let recibos = await eel.rutas_recibos_orig(ruta, anno, periodo)();
         const recibosNum = Object.getOwnPropertyNames(recibos);
             
-        debugger;
         for(let i=0; i<recibosNum.length; i++){
             let lista = document.getElementById("tbl-datos");
             let tr = document.createElement("tr");      
