@@ -38,4 +38,3 @@ async function mostrarRutas(){
         }
         tabla.removeChild(carga);
     }
-    

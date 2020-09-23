@@ -69,7 +69,7 @@
                     <div id="conte-control"> <label class="in-lbl" for="control">N.Control</label>
                         <input class="in-buscar" autocomplete="off" maxlength="8" type="text" name="control"
                             placeholder="310540">
-                        <button class="btn btn-circulo">+</button>
+                        <button class="btn">+</button>
                     </div>
                     <div id="fechas">
                         <label class="in-lbl" for="">De:</label>
@@ -151,8 +151,8 @@
                 </div>
                 <div class="contenedor-form">
                     <label class="in-lbl" for="ruta">Guardar En...</label>
-                    <input class="in-buscar" id="ruta-g" type="text" name="ruta" placeholder="C:/RECIBOS" readonly />
-                    <button class="btn btn-explorar" type="button" onclick="mostrarDirGuardado()">...</button>
+                    <input class="in-buscar" id="ruta-g" type="text" name="ruta-guardado" placeholder="C:/RECIBOS" readonly />
+                    <button class="btn btn-explorar" type="button" onclick="mostrarRuta('ruta-guardado')">...</button>
                     <button class="btn" type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
                 </div>
             </form>

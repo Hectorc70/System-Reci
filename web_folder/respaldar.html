@@ -69,13 +69,13 @@
                     <div id="conte-ruta">
                         <label class="in-lbl" for="ruta">Ubicación Recibos</label>
                         <input class="in-buscar" type="text" name="ruta" readonly placeholder="C:/CFDI/">
-                        <button class="btn btn-explorar">...</button>
+                        <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta')">...</button>
                     </div>
                 </div>
                 <div class="contenedor-form">
                     <label class="in-lbl" for="ruta">Guardar En...</label>
                     <input class="in-buscar" id="ruta-g" type="text" name="ruta" placeholder="C:/RECIBOS" readonly />
-                    <button class="btn btn-explorar" type="button" onclick="mostrarDirGuardado()">...</button>
+                    <button class="btn btn-explorar" type="button" onclick="">...</button>
                     <button class="btn" type="button" onclick="mostrarRutas()">RECUPERAR</button>
                 </div>
             </form>

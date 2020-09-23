@@ -8,6 +8,7 @@
     <link rel="stylesheet" type=text/css href="css/generales-op.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script type="text/javascript" src="js/recopilador.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -68,7 +69,8 @@
                     <div id="cont-ruta">
                         <label class="in-lbl" for="">Ruta de Recibos</label>
                         <input class="in-buscar" type="text" name="ruta-reci" readonly />
-                        <button class="btn btn-explorar" type="button" onclick="mostrarDirectorio()">...</button>
+                        <button class="btn btn-explorar" type="button" onclick="mostrarRuta('ruta-reci')">...</button>
+                        <button class="btn" type="button" onclick="validarInputs()">BUSCAR</button>
                     </div>
                 </div>
                 <div class="contenedor-form">

@@ -1,18 +1,14 @@
 'use stric'
 
 
-async function mostrarDirectorio(){
-    var periodoIn = document.getElementsByName("periodo")[0].value;
-    var annoIn = document.getElementsByName("anno")[0].value;
+async function validarInputs(){
+    let periodoIn = document.getElementsByName("periodo")[0].value;
+    let annoIn = document.getElementsByName("anno")[0].value;
+    
     
     if(annoIn !== ''){
-
-        let directorio = await eel.ruta_metadatos()();     
-    
-        document.getElementsByName("ruta-reci")[0].value = directorio;
-    
-        console.log(directorio);
-    mostrarEnTabla()
+        let directorio = document.getElementsByName("ruta-reci")[0].value;
+        mostrarEnTabla(directorio, periodoIn, annoIn)
     }
     else{
         alert("Escribe un Año y Periodo para continuar")
@@ -20,7 +16,7 @@ async function mostrarDirectorio(){
     
 }
 
-async function mostrarEnTabla(){
+async function mostrarEnTabla(directorio, periodo, anno){
 /* 
     let datos = document.getElementById("tbl-datos");
     datos.removeChild(tr) */
@@ -28,11 +24,7 @@ async function mostrarEnTabla(){
     let tabla =document.getElementById("tbl");  
     let carga = document.createElement("div");
     carga.setAttribute("class", "loading");    
-    tabla.appendChild(carga);
-
-    let directorio = document.getElementsByName("ruta-reci")[0].value;
-    let periodo = document.getElementsByName("periodo")[0].value;
-    let anno = document.getElementsByName("anno")[0].value;
+    tabla.appendChild(carga);    
     let rutas = await eel.mostrar_rutas_recibos(directorio,anno, periodo)();
     const rutasNum = Object.getOwnPropertyNames(rutas);
 

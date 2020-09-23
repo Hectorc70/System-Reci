@@ -12,14 +12,14 @@ function carga(){
 
 /* SELECCIONA TODAS LAS FILAS DE CHECKBOX */
 
-
-
-
-async function mostrar_ruta_metadatos() {
-    let ruta = await eel.ruta_metadatos()();
-    document.getElementsByName("ruta-reci")[0].value = ruta;
+async function mostrarRuta(nombre) {
+    let ruta = await eel.enviar_ruta()();
+    document.getElementsByName(nombre)[0].value = ruta;
     console.log(ruta);
 }
+
+
+
 
 async function mostrar_en_tabla() {
 

@@ -17,14 +17,6 @@ function enviarDatosBusqueda(){
 
 
 
-async function mostrarDirGuardado(){
-    let directorio = await eel.ruta_metadatos()();     
-    
-    document.getElementsByName("ruta")[0].value = directorio;    
-    
-}
-
-
 async function mostrarRecibos(){
     /* 
         let datos = document.getElementById("tbl-datos");
@@ -81,7 +73,7 @@ async function mostrarRecibos(){
 
 async function EnviarDatosExtraccion(){
     
-    let ruta = document.getElementsByName("ruta")[0].value;
+    let ruta = document.getElementsByName("ruta-guardado")[0].value;
     let control = document.getElementsByName("control")[0].value;
     let tabla =document.getElementById("tbl");
     

@@ -9,6 +9,18 @@ from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 eel.init('web_folder', allowed_extensions=['.js','.html'])
+
+@eel.expose
+def enviar_ruta(): 
+    directorio = abrir_directorio()    
+    
+    if exists(directorio):
+        return directorio
+    else:
+        return ''
+
+
+
 """
 **---------------------------------------------------------------------------------------------**
                         ***RESPALDAR XML Y RECIBOS***
@@ -32,14 +44,6 @@ def rutas_recibos_orig():
                         ***RECOPILADOR***
 **---------------------------------------------------------------------------------------------**
 """
-@eel.expose
-def ruta_metadatos(): 
-    directorio = abrir_directorio()    
-    
-    if exists(directorio):
-        return directorio
-    else:
-        return ''
 
 @eel.expose
 def mostrar_rutas_recibos(directorio, anno, periodo):
