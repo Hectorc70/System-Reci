@@ -8,8 +8,27 @@ function carga(){
     $('#preloader').fadeOut();
     $('#menu-principal').removeClass('hide');
 }
-/* tabla */
+/* LOADER */
+function loader_tarea(){      
+    let carga = document.getElementById("loader");    
+    carga.setAttribute("class", "preloader_2");
+}
+/* deshabilitar DIV */
+function deshabilitar(elemento){
+    let etiqueta = document.getElementById(elemento);
+    etiqueta.setAttribute("class", "deshabilitado");
+    
+    
+}
 
+function habilitar(elemento){ 
+    let carga = document.getElementById("loader");  
+    let etiqueta = document.getElementById(elemento);  
+    carga.removeAttribute("class");   
+    etiqueta.removeAttribute("class");
+    
+    
+}
 /* SELECCIONA TODAS LAS FILAS DE CHECKBOX */
 
 async function mostrarRuta(nombre) {

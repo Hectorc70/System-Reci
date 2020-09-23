@@ -75,45 +75,31 @@ async function EnviarDatosExtraccion(){
     
     let ruta = document.getElementsByName("ruta-guardado")[0].value;
     let control = document.getElementsByName("control")[0].value;
-    let tabla =document.getElementById("tbl");
-    
+    let recibos = [];
+    let filaId = document.getElementsByClassName("cl-id");
 
-    if(ruta != ''){
-                
-        let recibos = [];
-        let filaId = document.getElementsByClassName("cl-id");     
-
-        let carga = document.createElement("div");
-        carga.setAttribute("class", "loading");    
-        tabla.appendChild(carga);
-        for(let i=0; i<filaId.length; i++){
+    for(let i=0; i<filaId.length; i++){
             
             
-            checkBox = filaId[i].getElementsByClassName("c-box");
-            
-            if(checkBox[0].checked == true){
-                recibos.push(filaId[i].innerText);
-            }
+        checkBox = filaId[i].getElementsByClassName("c-box");
+        
+        if(checkBox[0].checked == true){
+            recibos.push(filaId[i].innerText);
         }
-        
-        if(recibos.length >0){
-            let reci = await eel.buscador_recibo(recibos, ruta)();
-            debugger;
-            if(reci==true){
-                tabla.removeChild(carga);
-                alert("Se Guardaron todos los Recibos en: "+ ruta + "/" + control)
-            }
-        }
-        else{
-            alert("seleccione Todo o algun Registro")
-        }
-
-        
-        
-        
-    } 
-    else{
-        alert("Seleccione ruta de guardado")
     }
-   
+
+    if(ruta != '' & recibos.length >0){
+        deshabilitar('principal');
+        loader_tarea();
+        let reci = await eel.buscador_recibo(recibos, ruta)();
+            if(reci==true){
+                habilitar('principal');                
+                alert("Se Guardaron todos los Recibos en: "+ ruta + "/" + control)
+            }               
+    } 
+    
+    else{
+        alert("Seleccione ruta de guardado Y/O Recibo(s) para extraer")
+    }
+
 }   
