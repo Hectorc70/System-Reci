@@ -1,46 +1,42 @@
-
-form{
-    width: 100%;
-    height: 100%;
-    text-align: left;
-    padding-left: 20px;
-    padding-top: 20px;
+.red{
+    background-color: #eb9d97 !important;
+    border-bottom-color: #222121 !important;
+    border-bottom-style: solid;  
 }
 
-#in-control{
-    width: 8%;
-    text-align: center;
-}
-#ruta-g{
+#conte-control{  
     width: 30%;
+    display: inline-block;    
+    text-align: left;
+    
+    
+}
+#conte-control input{
+    width: 25%;
+    
+}
+.btn-circulo{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
 }
 #fechas{
-    margin-top: 10px;
+    display: inline-block;
+    width: 40%;      
+    text-align: left;
     
 }
 
-#fechas select{
-    margin-right: 10px;
-    height: 25px;
-    border-radius: .7em;  
-    border: none;  
+#ruta-g{
+    width: 30%;    
 }
 
-#contenedor label{
-    margin-right: 10px;
 
-}
-#contenedor input{
-    margin-right: 10px;
-}
 
 
 #contenedor #btn-explorar{
     width: 60px;
 }
-#fechas #btn-buscar-reci{
-    float: none;
-    clear: both;   
-}
 
-#
+

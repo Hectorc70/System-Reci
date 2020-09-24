@@ -2,27 +2,64 @@ from os.path import exists
 
 import eel
 
+from respaldar.reci_xml import ArchivosOrig
+from respaldar.reci_xml import ArchivoRecibo
+
 from modulos.rutas import abrir_directorio
 from datos.recibo import ReciboNomina, RutaRecibo
 from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
+
 eel.init('web_folder', allowed_extensions=['.js','.html'])
-
-
 """
 **---------------------------------------------------------------------------------------------**
-                        ***RECOPILADOR***
+                        ***GENERALES***
 **---------------------------------------------------------------------------------------------**
 """
 @eel.expose
-def ruta_metadatos(): 
+def enviar_ruta(): 
     directorio = abrir_directorio()    
     
     if exists(directorio):
         return directorio
     else:
         return ''
+
+
+
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***RESPALDAR XML Y RECIBOS***
+**---------------------------------------------------------------------------------------------**
+"""
+
+@eel.expose
+def rutas_recibos_orig(ruta, anno, periodo):  
+
+    originales = ArchivosOrig(ruta, anno, periodo)
+    recibos = originales.archivos_pdf()
+
+    return recibos
+
+@eel.expose
+def copiado_recibos(carpt_orig, carpt_dest ,archivos):
+    
+    for archivo in archivos:
+        datos = archivo.split('\\')
+        nombre = datos[-1]
+
+        reci = ArchivoRecibo(carpt_orig, archivo,carpt_dest, nombre, True)
+        reci.comprobar_acciones()
+    
+    print("Archivos copiados")
+    return True
+
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***RECOPILADOR***
+**---------------------------------------------------------------------------------------------**
+"""
 
 @eel.expose
 def mostrar_rutas_recibos(directorio, anno, periodo):
