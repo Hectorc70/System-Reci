@@ -76,6 +76,7 @@ async function iniciarCopiado() {
         let proceso = await eel.copiado_recibos(carp_orig, carp_dest, archivos)();
         if (proceso==true) {
             habilitar('principal');
+            alert('Archivos Copiados');
         }
 
     }
