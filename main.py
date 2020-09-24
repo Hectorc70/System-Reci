@@ -51,7 +51,9 @@ def copiado_recibos(carpt_orig, carpt_dest ,archivos):
 
         reci = ArchivoRecibo(carpt_orig, archivo,carpt_dest, nombre, True)
         reci.comprobar_acciones()
-
+    
+    print("Archivos copiados")
+    return True
 
 """
 **---------------------------------------------------------------------------------------------**

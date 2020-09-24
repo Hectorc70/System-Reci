@@ -356,7 +356,7 @@ table{
 }
 
 table #titulos th:first-child{
-    width: 10px;
+    width: 20px;
 }
 table #titulos th:nth-child(2){
     width: 30px;
