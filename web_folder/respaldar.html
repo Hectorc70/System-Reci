@@ -76,6 +76,7 @@
                         <label class="in-lbl" for="ruta">Ubicación Recibos</label>
                         <input class="in-buscar" type="text" name="ruta" readonly placeholder="C:/CFDI/">
                         <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta')">...</button>
+                        
                         <label class="in-lbl" for="anno">Año</label>
                     <select class="slt anno" name="anno">
                         <option value=""> </option>
@@ -115,13 +116,14 @@
                         <option value="23">23</option>
                         <option value="24">24</option>
                     </select>
+                    <button class="btn" type="button" onclick="mostrarRutas()">RECUPERAR</button>
                     </div>
                 </div>
                 <div class="contenedor-form">
-                    <label class="in-lbl" for="ruta">Guardar En...</label>
-                    <input class="in-buscar" id="ruta-g" type="text" name="ruta" placeholder="C:/RECIBOS" readonly />
-                    <button class="btn btn-explorar" type="button" onclick="">...</button>
-                    <button class="btn" type="button" onclick="mostrarRutas()">RECUPERAR</button>
+                    <label class="in-lbl" for="ruta_destino">Destino</label>
+                    <input class="in-buscar" type="text" name="ruta_destino" readonly />
+                    <button class="btn btn-explorar" type="button" onclick="mostrarRuta('ruta_destino')">...</button>
+                    <button class="btn" type="button" onclick="iniciarCopiado()">RESPALDAR</button>
                     
                 </div>
             </form>
