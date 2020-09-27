@@ -8,12 +8,12 @@ function carga(){
     $('#preloader').fadeOut();
     $('#menu-principal').removeClass('hide');
 }
-/* LOADER */
+/* Funciones que son para mostrar una animación de loader*/
 function loader_tarea(){      
     let carga = document.getElementById("loader");    
     carga.setAttribute("class", "preloader_2");
 }
-/* deshabilitar DIV */
+
 function deshabilitar(elemento){
     let etiqueta = document.getElementById(elemento);
     etiqueta.setAttribute("class", "deshabilitado");
@@ -26,19 +26,25 @@ function habilitar(elemento){
     let etiqueta = document.getElementById(elemento);  
     carga.removeAttribute("class");   
     etiqueta.removeAttribute("class");
-    
-    
-}
-/* SELECCIONA TODAS LAS FILAS DE CHECKBOX */
+        
 
+}
+
+/* Muestra una ruta en el imput pasado como parametro */
 async function mostrarRuta(nombre) {
     let ruta = await eel.enviar_ruta()();
     document.getElementsByName(nombre)[0].value = ruta;
     console.log(ruta);
 }
 
+/* Validación de Inputs */
 
+/* function validarInputs(){
+    //let valorInput = document.getElementsByName('')[0].value;
+    prompt("hola");
+} */
 
+validarInputs()
 
 async function mostrar_en_tabla() {
 
