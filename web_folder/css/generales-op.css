@@ -116,8 +116,11 @@ aside{
     text-align: center; 
     width: 57%;
     height: 15%;
-    background-color: #00466e;
+    background-color: #1a1919;
     border-radius: 100%;
+}
+.logo:hover{
+    background-color: #5a9ea3;
 }
 .logo img{
     width: 100%;
