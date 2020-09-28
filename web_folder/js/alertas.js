@@ -17,7 +17,7 @@ function Precaucion(mensaje) {
 
 function satisfactorio(mensaje) {
     Swal.fire({
-        title: 'AVISO',
+        title: 'HECHO',
         text: mensaje,
         icon: 'success',
         confirmButtonText: 'Entendido',

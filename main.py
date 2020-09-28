@@ -79,7 +79,8 @@ def guardar_mdatos(rutas, anno):
         mtdatos.guardar()
         print("Datos Procesados: " + ruta)
     
-    print('------------------ SE PROCESARON TODOS LOS ARCHIVOS SELECCIONADOS -------------------------')
+    return True
+    
 
 """
 **---------------------------------------------------------------------------------------------**
