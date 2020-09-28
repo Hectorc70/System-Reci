@@ -7,6 +7,8 @@
     <link rel="stylesheet" type=text/css href="css/buscador.css">
     <link rel="stylesheet" type=text/css href="css/generales-op.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="js/alertas.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="js/buscador.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
@@ -80,6 +82,7 @@
                         <div id="fechas">
                             <label class="in-lbl" for="">De:</label>
                             <select class="slt periodos" name="periodo-ini">
+                                <option value=""></option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
                                 <option value="03">03</option>
@@ -106,6 +109,7 @@
                                 <option value="24">24</option>
                             </select>
                             <select class="slt anno" name="anno-ini">
+                                <option value=""></option>
                                 <option value="2014">2014</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -116,6 +120,7 @@
                             </select>
                             <label class="in-lbl" for="">Hasta:</label>
                             <select class="slt periodos" name="periodo-fin">
+                                <option value=""></option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
                                 <option value="03">03</option>
@@ -142,6 +147,7 @@
                                 <option value="24">24</option>
                             </select>
                             <select class="slt anno" name="anno-fin">
+                                <option value=""></option>
                                 <option value="2014">2014</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -150,7 +156,7 @@
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                             </select>
-                            <button class="btn" type="button" onclick="mostrarRecibos()">BUSCAR</button>
+                            <button class="btn" type="button" onclick="enviarDatosBusqueda()">BUSCAR</button>
                         </div>
 
 

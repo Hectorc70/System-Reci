@@ -30,7 +30,8 @@ function habilitarElemento(elemento){
 function habilitar(elemento){ 
     let carga = document.getElementById("loader");  
     let etiqueta = document.getElementById(elemento);  
-    carga.removeAttribute("class");   
+    carga.removeAttribute("class");
+    etiqueta.removeAttribute("class");
     
         
 

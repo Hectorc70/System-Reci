@@ -31,3 +31,18 @@ function satisfactorio(mensaje) {
 
 }
 
+function error(mensaje) {
+    Swal.fire({
+        title: 'ERROR',
+        text: mensaje,
+        icon: 'error',
+        confirmButtonText: 'Entendido',
+        confirmButtonColor: '#008992',
+        background: '#363535',
+        backdrop: false,
+        width: '18rem',
+        heightAuto: false,
+    })
+    habilitarElemento('principal');
+
+}

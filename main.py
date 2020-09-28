@@ -94,8 +94,11 @@ def obtener_reci_buscados(control, p_ini, a_ini, p_fin, a_fin):
         periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
         datos = ReciMetadatos('', a_ini)
         recibos = datos.devolver_datos(control, a_ini, periodos)
-
-        return recibos
+        
+        if recibos:
+            return recibos
+        else:
+            return False
 
 @eel.expose
 def buscador_recibo(ids, ruta_guardado):
@@ -107,6 +110,7 @@ def buscador_recibo(ids, ruta_guardado):
     datos.consultar_extraer_recibos(ids, ruta_guardado)
 
     print('Archivos Guardados en: ' + ruta_guardado)
+    
     
     return True
 
