@@ -20,12 +20,18 @@ function deshabilitar(elemento){
     
     
 }
+function habilitarElemento(elemento){
+    let etiqueta = document.getElementById(elemento);
+    etiqueta.removeAttribute("class");
+    
+    
+}
 
 function habilitar(elemento){ 
     let carga = document.getElementById("loader");  
     let etiqueta = document.getElementById(elemento);  
     carga.removeAttribute("class");   
-    etiqueta.removeAttribute("class");
+    
         
 
 }
@@ -37,14 +43,9 @@ async function mostrarRuta(nombre) {
     console.log(ruta);
 }
 
-/* Validación de Inputs */
 
-/* function validarInputs(){
-    //let valorInput = document.getElementsByName('')[0].value;
-    prompt("hola");
-} */
 
-validarInputs()
+
 
 async function mostrar_en_tabla() {
 
