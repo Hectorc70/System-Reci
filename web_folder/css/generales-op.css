@@ -100,6 +100,8 @@ section {
     
 }
 /* MENU */
+
+
 aside{      
     float: left;
     width: 13%;
@@ -128,40 +130,46 @@ aside{
     margin: auto;
     padding: 5px;
 }
-hr{
-    margin-top: 20px;
-    height: 5px;
-    border:none;
-    background-color: #363535;
+
+.select{
+    background-color: #555 !important; 
+    border-bottom-color: #222121 !important;  
+    border-bottom-style: solid;    
+}
+.titulo-menu{
+    display: block;
+    padding: 5px;
+    text-align: center;
+    background-color: #5a9ea3;
+    color: white;
+    font-size: 12px;
+    font-family: Roboto;
+    margin-top: 0px;
 }
 #menu{
     margin-top: 40px;   
-    width: 100%;
-    height: 40%;
-    background-color: #e74c3c;
+    width: 100%;  
+    padding: .1px    
 }
-.select{
-    background-color: #5a9ea3 !important;
-    border-bottom-color: #222121 !important;
-    border-bottom-style: solid;  
-    
-}
-aside #menu div{    
+
+.bar-opcion{    
     background-color: #222121;
     height: 60px;
     padding: 5px;
-    margin-bottom: 20px;
-
+    margin-top: 10px;
+    margin-bottom: 10px;  
+    
 }
+/* ICON OPCIONES */
 
-aside #menu div:hover{
+.bar-opcion:hover{
     border-bottom-style: solid;  
     border-bottom-color: #222121;
-    background-color: #5a9ea3;    
+    background-color: #555;    
     cursor: pointer;     
 }
 
-aside div  a{
+.bar-opcion  a{
     display: block;
     text-decoration:none ;
     text-decoration: none;
@@ -172,7 +180,13 @@ aside div  a{
     height: 100%;
     padding-top: 10px;
 }
+#menu-config{
+    display: block;
+    width:100%;
 
+    margin-top: 15px;  
+    padding: .1px;
+}
 .cont-inputs{
     margin-top: 20px;   
     height: 15%;
@@ -189,15 +203,6 @@ aside div  a{
     text-align: left;
     padding: 15px;
     margin: 0px auto;        
-}
-/* ICON OPCIONES */
-#config{
-    position: relative;
-    bottom: -1%;
-    background-color: #40A7AD;
-    display: block;
-    margin-top: 10px;
-    
 }
 
 /* CONTENEDORES INPUTS */
