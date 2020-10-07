@@ -1,3 +1,8 @@
 {
-    "python.pythonPath": "C:\\Python38\\python.exe"
+    "python.pythonPath": "C:\\Python38\\python.exe",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#213215",
+        "titleBar.activeBackground": "#2E461D",
+        "titleBar.activeForeground": "#F9FCF7"
+    }
 }

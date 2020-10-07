@@ -24,10 +24,10 @@ def directorios(ruta1, ruta2):
     directorio_orig = Directorio(ruta1)
     directorio_dos= Directorio(ruta2)
 
-    dif_rutas1 = directorio_orig.comparar_directorios(directorio_dos.contenido)
-    dif_rutas2 = directorio_dos.comparar_directorios(directorio_orig.contenido)
+    dif_rutas1 = directorio_orig.comparar_directorios(directorio_dos.rutas_sin_base)
+    #dif_rutas2 = directorio_dos.comparar_directorios(directorio_orig.contenido)
 
-    return directorio_orig.contenido
+    return dif_rutas1
 
 """
 **---------------------------------------------------------------------------------------------**
