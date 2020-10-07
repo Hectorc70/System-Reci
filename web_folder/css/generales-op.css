@@ -210,7 +210,7 @@ aside{
     background-color: #40A7AD;
     padding: 7px;      
     border-radius: .5em;
-    font-size: 16PX;
+    font-size: 16px;
     margin-bottom: 35px;
     margin-top: 5px;
 }
@@ -294,7 +294,7 @@ aside{
     text-align: center;
     font-size: 14px;
     text-transform: uppercase;
-    border-radius: .5em ;
+    border-radius: .5em ;   
         
 }
 .btn:hover{

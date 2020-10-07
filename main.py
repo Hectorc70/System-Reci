@@ -10,8 +10,25 @@ from datos.recibo import ReciboNomina, RutaRecibo
 from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
+from herramientas.directorio import Directorio
 
 eel.init('web_folder', allowed_extensions=['.js','.html'])
+
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***HERRAMIENTAS***
+**---------------------------------------------------------------------------------------------**
+"""
+@eel.expose
+def directorios(ruta1, ruta2):
+    directorio_orig = Directorio(ruta1)
+    directorio_dos= Directorio(ruta2)
+
+    dif_rutas1 = directorio_orig.comparar_directorios(directorio_dos.contenido)
+    dif_rutas2 = directorio_dos.comparar_directorios(directorio_orig.contenido)
+
+    return directorio_orig.contenido
+
 """
 **---------------------------------------------------------------------------------------------**
                         ***GENERALES***

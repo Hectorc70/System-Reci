@@ -1,23 +1,98 @@
-.cont-inputs{
-    height: 10%;
-}
-#conte-directorios div{
-    display: inline-block; 
-    width: 43%;
-    margin-left: 10px;
-    text-align: center;
-}
-#conte-directorios div:nth-child(2){
-    width: 10%;
+
+@font-face{
+    font-family: "Tana";
+    src: url("../fonts/TanaestelDoodleArrows01-Regular.ttf");
 }
 
-#conte-directorios div >input{
-    clear: both;
-    width: 70%;
+#pantalla{    
+    margin-top: 30px;
+    width: 100%;
+    height: 95%;
+    background-color: #008992;
+   
+    box-shadow: 5px 5px 10px #1a1919;    
+}
+
+.contenedor{
+    display: inline-block;
+    background-color: #40A7AD;
+    padding: 7px;      
+    border-radius: .5em;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;    
+    width: 45%;  
+    margin: 20px auto;  
+}
+.btn{
+    margin-right: 5px;
+    margin-left:  5px;
+}
+
+.btn a{   
+    font-family: Tana;        
+    color: #1a1919;   
+}
+.btn-scan:hover{
+    background-color: #40A7AD;
+}
+.btn:hover a{
+    color: white;
+}
+.in-buscar{   
+    width: 75%;
+}
+#separador{
+    display: inline-block;
+    width: 90px; 
+    height: 90%;   
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 0px;
+    background-color: tomato;  
+}
+.flecha{
+    display: inline;
+    font-family: Tana;
+    text-decoration: none;
+    margin: 10px;    
+    background-color: thistle;
+}
+.conte-tbl{
+    overflow: auto;
+    scrollbar-width: 5px;   
+    display: inline-block;
+    width: 45%;
+    height: 90%;  
+    background-color: #40A7AD; 
+}
+.tabla{   
+    width: 100%;  
     
 }
-
-#tbl{
-    margin-top: 40px;
-    height: 82%;
+.tabla thead{
+    background-color: #008992;   
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 0px;
+    width: 100%;
+    position: sticky;
+    top: 0%;
+}
+tbody{
+    background-color: #40A7AD;
+    width: 100%;       
+    margin-right: auto;
+    margin-left: auto;   
+    border-radius: .6em;
+    padding: 10px;
+    padding-top: 0px;
+}
+tbody tr td{ 
+    display: block;
+    text-align: left;    
+    padding: 5px;  
+    border: solid 2px #008992;    
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }

@@ -101,7 +101,7 @@
         </div>
     </aside>
 
-    <section class="secc">        
+    <section class="secc">
         <!-- <div class="cont-inputs">
             <form name="in-buscar" action="">
                 <div class="contenedor-form">
@@ -127,12 +127,48 @@
         </div>
         <div id="tbl">
         </div> -->
-    
-    <div id="pantalla">
-        <div>
 
+        <div id="pantalla">
+            <div class="contenedor">
+                <label class="in-lbl" for="ruta1">Directorio1</label>
+                <input class="in-buscar" type="text" name="ruta1" readonly>
+                <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta1')">...</button>
+            </div>
+
+            <button type="button" class="btn btn-scan" onclick="mostrarDirectorioRutas()">scan <a>F</a></button>
+
+            <div class="contenedor">
+                <label class="in-lbl" for="ruta2">Directorio2</label>
+                <input class="in-buscar" type="text" name="ruta2" readonly>
+                <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta2')">...</button>
+            </div>
+
+            <div class="conte-tbl">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>RUTA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="t-datos1">                     
+                    </tbody>
+                </table>
+            </div>
+            <div id="separador"> 
+                
+            </div>
+            <div class="conte-tbl">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>RUTA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="t-datos2">                     
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
     </section>
 
 </body>
