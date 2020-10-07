@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Comparar Carpetas</title>
+    <link rel="stylesheet" type=text/css href="css/estilos.css">
+    <link rel="stylesheet" type=text/css href="css/generales-op.css">
+    <link rel="stylesheet" type=text/css href="css/comparar-dir.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script type="text/javascript" src="js/funciones.js"></script>
+    <script type="text/javascript" src="js/comparar_dir.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="js/alertas.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#check-todos').click(function () {
+                if ($(this).is(':checked')) {
+                    $('.c-box').prop("checked", true);
+                    console.log('todos seleccionado');
+                }
+                else {
+                    $('.c-box').prop("checked", false);
+                }
+            })
+
+        })
+
+    </script>
+</head>
+
+<body id="principal">
+    <div id="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <aside class="z-depth-4 animate__animated animate__fadeInLeftBig">
+        <a class="logo" href="main.html">
+            <img src="/img/Logo-SR.png" alt="logo">
+        </a>
+        <div id="menu">
+            <h3 class="titulo-menu">RECIBOS DE NOMINA</h3>
+            <div class="bar-opcion" id="respaldar">
+                <a href="respaldar.html">
+                    RESPALDAR TIMBRES Y RECIBOS
+                </a>
+
+            </div>
+            <div class="bar-opcion" id="recop">
+                <a href="recopilar.html">
+                    RECOPILAR DATOS
+                </a>
+
+            </div>
+            <div class="bar-opcion" id="buscar">
+
+                <a href="buscar.html">
+                    BUSCAR RECIBOS
+                </a>
+
+            </div>
+        </div>
+
+        <div>
+            <h3 class="titulo-menu">HERRAMIENTAS</h3>
+            <div class="select bar-opcion">
+                <a href="comparar-dir.html">
+                    COMPARAR DIRECTORIOS
+                </a>
+
+            </div>
+            <div class="bar-opcion">
+                <a href="#">
+                    ARCHIVOS PDF
+                </a>
+
+            </div>
+            <div class="bar-opcion">
+                <a href="#">
+                    PRUEBAS
+                </a>
+
+            </div>
+            <div class="bar-opcion">
+                <a href="#">
+                    PRUEBAS
+                </a>
+
+            </div>
+        </div>
+        <div id="menu-config">
+            <h3 class="titulo-menu">OTROS</h3>
+            <div class="bar-opcion">
+                <a href="">
+                    CONFIGURACION
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <section class="secc">
+        <!-- <div class="cont-inputs">
+            <form name="in-buscar" action="">
+                <div class="contenedor-form">
+                    <div id="conte-directorios">
+                        <div>
+                            <label class="in-lbl" for="ruta1">Directorio1</label>
+                            <input class="in-buscar" type="text" name="ruta1" readonly>
+                            <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta1')">...</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn" onclick="mostrarDirectorioRutas()">ESCANEAR</button>
+                        </div>
+                        <div>
+                            <label class="in-lbl" for="ruta2">Directorio2</label>
+                            <input class="in-buscar" type="text" name="ruta2" readonly>
+                            <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta2')">...</button>
+                        </div>
+                    </div>
+                    <div class="remov"></div>
+                </div>
+
+            </form>
+        </div>
+        <div id="tbl">
+        </div> -->
+
+        <div id="pantalla">
+            <div class="contenedor">
+                <label class="in-lbl" for="ruta1">Directorio1</label>
+                <input class="in-buscar" type="text" name="ruta1" readonly>
+                <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta1')">...</button>
+            </div>
+
+            <button type="button" class="btn btn-scan" onclick="mostrarDirectorioRutas()">scan <a>F</a></button>
+
+            <div class="contenedor">
+                <label class="in-lbl" for="ruta2">Directorio2</label>
+                <input class="in-buscar" type="text" name="ruta2" readonly>
+                <button type="button" class="btn btn-explorar" onclick="mostrarRuta('ruta2')">...</button>
+            </div>
+
+            <div class="conte-tbl">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>RUTA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="t-datos1">
+                    </tbody>
+                </table>
+            </div>
+            <div id="separador">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input id="check-todos" type="checkbox" name="todo">DIR
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="t-flechas">
+                    </tbody>
+                </table>
+            </div>
+            <div class="conte-tbl">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>RUTA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="t-datos2">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

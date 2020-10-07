@@ -8,41 +8,45 @@ async function mostrarRutas() {
     let ruta = document.getElementsByName("ruta")[0].value;
     let anno = document.getElementsByName("anno")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
-    carga.setAttribute("class", "loading");
-    tabla.appendChild(carga);
 
-    let recibos = await eel.rutas_recibos_orig(ruta, anno, periodo)();
-    const recibosNum = Object.getOwnPropertyNames(recibos);
+    if (ruta != '' && anno != '' && periodo != '') {
+        carga.setAttribute("class", "loading");
+        tabla.appendChild(carga);
 
-
-    for (let i = 1; i < recibosNum.length; i++) {
-        let lista = document.getElementById("tbl-datos");
-        let tr = document.createElement("tr");
-        let checkBox = document.createElement("input");
-        checkBox.setAttribute("type", "checkbox");
-        checkBox.setAttribute("class", "c-box");
+        let recibos = await eel.rutas_recibos_orig(ruta, anno, periodo)();
+        const recibosNum = Object.getOwnPropertyNames(recibos);
 
 
-        let ultimo = recibos[recibosNum[i - 1]]["length"];
-
-        let columnaPeriodo = document.createElement("td");
-        columnaPeriodo.setAttribute("class", "cl-per")
-        columnaPeriodo.innerHTML = recibos[recibosNum[i - 1]][3];
-        let columnaNomina = document.createElement("td");
-        columnaNomina.innerHTML = recibos[recibosNum[i - 1]][4];
-        let columnaArchivo = document.createElement("td");
-        columnaArchivo.setAttribute("class", "ruta-archivo");
-        columnaArchivo.innerHTML = recibos[recibosNum[i - 1]][ultimo - 1];
+        for (let i = 1; i < recibosNum.length; i++) {
+            let lista = document.getElementById("tbl-datos");
+            let tr = document.createElement("tr");
+            let checkBox = document.createElement("input");
+            checkBox.setAttribute("type", "checkbox");
+            checkBox.setAttribute("class", "c-box");
 
 
-        lista.appendChild(tr);
-        tr.appendChild(columnaPeriodo);
-        columnaPeriodo.appendChild(checkBox);
-        tr.appendChild(columnaNomina);
-        tr.appendChild(columnaArchivo);
+            let ultimo = recibos[recibosNum[i - 1]]["length"];
 
+            let columnaPeriodo = document.createElement("td");
+            columnaPeriodo.setAttribute("class", "cl-per")
+            columnaPeriodo.innerHTML = recibos[recibosNum[i - 1]][3];
+            let columnaNomina = document.createElement("td");
+            columnaNomina.innerHTML = recibos[recibosNum[i - 1]][4];
+            let columnaArchivo = document.createElement("td");
+            columnaArchivo.setAttribute("class", "ruta-archivo");
+            columnaArchivo.innerHTML = recibos[recibosNum[i - 1]][ultimo - 1];
+
+
+            lista.appendChild(tr);
+            tr.appendChild(columnaPeriodo);
+            columnaPeriodo.appendChild(checkBox);
+            tr.appendChild(columnaNomina);
+            tr.appendChild(columnaArchivo);
+
+        }
+        tabla.removeChild(carga);
     }
-    tabla.removeChild(carga);
+    else Precaucion('Seleccione Ruta, Año y Periodo');
 }
 
 
@@ -52,8 +56,7 @@ async function iniciarCopiado() {
     let archivos = [];
     let filaPeriodo = document.getElementsByClassName("cl-per");
 
-    if (carp_dest != '' & carp_orig != '' &
-        filaPeriodo.length > 0) {
+    if (filaPeriodo.length > 0) {
         for (let i = 0; i < filaPeriodo.length; i++) {
             checkBox = filaPeriodo[i].getElementsByClassName("c-box");
 
@@ -63,26 +66,32 @@ async function iniciarCopiado() {
             }
 
         }
+        if (archivos.length > 0 && carp_dest != '') {
 
-    }
-    else {
-        alert('Se debe seleccionar Directorios de Destino Y/O Origen y buscar Archivos Primero');
-    }
+            if (carp_orig != carp_dest) {
+                deshabilitar('principal');
+                loader_tarea();
+                let proceso = await eel.copiado_recibos(carp_orig, carp_dest, archivos)();
+                if (proceso == true) {
+                    habilitar('principal');                    
+                }
+                satisfactorio('Archivos Copiados');
+            }
+            else{
+                Precaucion('La ruta de Destino y la Original No pueden ser la misma');
+            }
+        }
 
-
-    if (archivos.length > 0) {
-        deshabilitar('principal');
-        loader_tarea();
-        let proceso = await eel.copiado_recibos(carp_orig, carp_dest, archivos)();
-        if (proceso==true) {
-            habilitar('principal');
-            alert('Archivos Copiados');
+        else {
+            Precaucion('Seleccione almenos una fila y la ruta de Destino');
         }
 
     }
-
     else {
-        alert('Seleccione almenos una fila');
+        Precaucion('Debe buscar primero los Archivos');
     }
+
+
+
 
 }
