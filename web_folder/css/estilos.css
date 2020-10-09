@@ -57,9 +57,7 @@ body{
 
 /* SECCION PRINCIPAL */
 #menu-principal{
-    display: block;
-    overflow: auto;
-    scrollbar-width: 5px;
+    display: block;   
     width: 70%;    
     height: 98%;   
     margin: 0px auto; 
@@ -104,24 +102,30 @@ body{
     border-radius: .5em;
     width: 48%;
     height: 100%;
-    margin: 6px;
-    padding: 15px;
-    padding-top: 20px;
+    margin: 6px;       
+    padding: 15px;    
+    padding-top: 5px;
+    overflow: auto;
+    scrollbar-width: 5px;
 }
 .subtitulo{
-    display: block;
-    background-color: #40A7AD;
-    border-radius: .5em;
-    margin-top: 0px;
+    display: block;    
+    background-color:#2c2c2c;  
+    border-radius: .5em;  
+    margin-top: 5px;
     height: 50px;
     text-align: center;
+    padding: 10px;   
+    
 }
 .subtitulo h2{
     display: block;
-    background-color: #520092;
-    font-size: 25px;
+    height: 100%;  
+    font-size: 25px;    
     font-family: Arial, Helvetica, sans-serif;
     color: white;
+    margin-top: 0px;
+    text-shadow: 5px 10px 5px #1a1919;
     
 }
 .opcion{
@@ -134,6 +138,10 @@ body{
     margin-top: 20px;
     box-shadow: 5px 5px 10px #1a1919;
     
+}
+.submenu .opcion:nth-child(2){  
+    margin-top: 30px !important;
+
 }
 .conte-opcion{
     display: block;
@@ -161,7 +169,7 @@ body{
     text-transform: uppercase;    
     text-align: center;     
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 0px;    
 }
  /* COLORES OPCIONES */ 
 .opcion:hover .conte-opcion{
