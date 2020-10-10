@@ -102,6 +102,9 @@
     </aside>
 
     <section class="secc">
+        <div class="t-seccion">
+            <h3>RESPALDAR RECIBOS & TIMBRES</h3>
+        </div>
         <div class="cont-inputs">
             <form name="in-buscar" action="">
                 <div class="contenedor-form">
@@ -163,18 +166,23 @@
                 </div>
             </form>
         </div>
-
+        <button class="limpiar-tbl" onclick="limpiarTabla('tbl-datos', '')">
+            <img src="img/actualizar.svg" alt="limpiar-tbl">
+        </button>
         <div id="tbl">
             <div class="conte-tbl">
                 <table>
-                    <tr id="titulos">
-                        <th>
-                            <input id="check-todos" type="checkbox" name="todo">
-                            PERIODO
-                        </th>
-                        <th>NOMINA</th>
-                        <th>RUTA</th>
-                    </tr>
+                    <thead>
+                        <tr id="titulos">
+                            <th>
+                                <input id="check-todos" type="checkbox" name="todo">
+                                PERIODO
+                            </th>
+                            <th>NOMINA</th>
+                            <th>RUTA</th>
+                        </tr>
+                    </thead>
+                    
                     <tbody id="tbl-datos">
                     </tbody>
                 </table>

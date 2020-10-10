@@ -8,7 +8,7 @@
     <link rel="stylesheet" type=text/css href="css/generales-op.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
-    <script type="text/javascript" src="js/alertas.js"></script>    
+    <script type="text/javascript" src="js/alertas.js"></script>
     <script type="text/javascript" src="js/recopilador.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
@@ -20,7 +20,7 @@
                     $('.c-box').prop("checked", true);
                     console.log('todos seleccionado');
                 }
-                else{
+                else {
                     $('.c-box').prop("checked", false);
                 }
             })
@@ -29,7 +29,7 @@
     </script>
 </head>
 
-<body id="principal">   
+<body id="principal">
     <div id="loader">
         <span></span>
         <span></span>
@@ -60,13 +60,13 @@
                     BUSCAR RECIBOS
                 </a>
 
-            </div>         
+            </div>
         </div>
-                
+
         <div>
             <h3 class="titulo-menu">HERRAMIENTAS</h3>
             <div class="bar-opcion">
-                <a href="#">
+                <a href="comparar-dir.html">
                     COMPARAR DIRECTORIOS
                 </a>
 
@@ -101,6 +101,9 @@
     </aside>
 
     <section class="secc">
+        <div class="t-seccion">
+            <h3>RECOPILAR DATOS DE RECIBOS</h3>
+        </div>
         <div class="cont-inputs">
             <form name="in-recopilar" action="">
                 <div class="contenedor-form">
@@ -157,27 +160,29 @@
                 </div>
             </form>
         </div>
-
-
-
+        <button class="limpiar-tbl" onclick="limpiarTabla('tbl-datos', '')">
+            <img src="img/actualizar.svg" alt="limpiar-tbl">
+        </button>
         <div id="tbl">
             <!-- <div class="loading"></div> -->
             <div class="conte-tbl">
-            <table>
-                <tr id="titulos">
-                    <th>
-                        <input class="ch-box" name="todo" type="checkbox">
+                <table>
+                    <thead>
+                        <tr id="titulos">
+                            <th>
+                                <input class="ch-box" name="todo" type="checkbox">
 
-                        Periodo
-                    </th>
-                    <th>Año</th>
-                    <th>Nomina</th>
-                    <th>Ruta</th>
-                </tr>
-                <tbody id="tbl-datos">
+                                Periodo
+                            </th>
+                            <th>Año</th>
+                            <th>Nomina</th>
+                            <th>Ruta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-datos">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
             </div>
         </div>
 
