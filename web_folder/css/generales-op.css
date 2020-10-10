@@ -91,22 +91,16 @@
     pointer-events: none;
 }
 
-section {
-    height: 100%;
-    width: 85%;
-    float: left;      
-    text-align: center;
-    padding-left: 30px;    
-    
-}
+
 /* MENU */
 
 
 aside{      
     float: left;
     width: 13%;
-    height: 98%;    
-    background-color: #008992;   
+    margin-top: 30px;
+    height: 100%;    
+    background-color: #16585a;   
     box-shadow: 5px 5px 10px #1a1919;
 }   
 
@@ -187,15 +181,42 @@ aside{
     margin-top: 15px;  
     padding: .1px;
 }
-.cont-inputs{
-    margin-top: 20px;   
-    height: 15%;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #008992;   
+section {
+    display: block;
+    height: 100%;
+    width: 85%;
+    float: left; 
+    margin-left: 20px;
+    margin-top: 30px;   
+    text-align: center;    
+    padding: 20px;  
+    padding-top: 15px;
+    background-color: #16585a;
     box-shadow: 5px 5px 10px #1a1919;
+}
+.t-seccion{
+    display: block;
+    background-color: #008992;
+    border-radius: .5em;
+    width: 100%;   
+    margin-bottom: 15px;
+}
+
+.t-seccion h3{
+    display: block;   
+    font-size: 24px;    
+    font-family: Roboto;
+    color: white;
+    margin: 2px;
+    text-shadow: 5px 10px 10px #16585a;   
+}
+.cont-inputs{   
+    height: 150px;
+    width: 100%;
+    margin: 0px auto;   
+    background-color: #008992;     
     font-family: Arial, Helvetica, sans-serif;
+    border-radius: .5em;
 }
 .cont-inputs form{
     width: 100%;
@@ -294,7 +315,8 @@ aside{
     text-align: center;
     font-size: 14px;
     text-transform: uppercase;
-    border-radius: .5em ;   
+    border-radius: .5em ; 
+    cursor: pointer;  
         
 }
 .btn:hover{
@@ -307,18 +329,41 @@ aside{
 .btn-explorar{
     width: 35px;    
 }
+.limpiar-tbl{
+    display: block;
+    height: 40px;
+    width: 40px;
+    float: right;    
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;   
+    cursor: pointer;
+}
+.limpiar-tbl:focus{
+    outline: none;
+}
+.limpiar-tbl img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 
+.limpiar-tbl:hover{
+    background-color: #008992;
+}
 #tbl{
     overflow: auto;
     scrollbar-width: 5px;
     width: 100%;
     height: 72%; 
-    margin-top: 90px;   
+    margin-top: 40px;   
     margin-left: auto;
     margin-right: auto;
-    background-color: #008992;
-    box-shadow: 5px 5px 10px #1a1919;
+    background-color: #008992;  
     padding: 20px;
+    border-radius: .5em;
 }
 ::-webkit-scrollbar {
     width: 10px;
@@ -326,17 +371,17 @@ aside{
 
   /* Track */
 ::-webkit-scrollbar-track {
-    background: #40A7AD; 
+    background: #008992; 
 }
 
   /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #05585e; 
+    background: #008992; 
 }
 
   /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #008992; 
 }
 ::-webkit-scrollbar:hover {
     width: 10px;

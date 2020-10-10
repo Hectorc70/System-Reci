@@ -73,3 +73,16 @@ async function mostrar_en_tabla() {
 
     }
 }
+
+/* Limpia Tabla */
+
+function limpiarTabla(nombreTabla, tabla2){
+    
+    let tbl = document.getElementById(nombreTabla);   
+    tbl.innerHTML = '';    
+
+    if(tabla2 !=''){
+        let tbl2 = document.getElementById(tabla2);
+        tbl2.innerHTML = '';
+    }
+}

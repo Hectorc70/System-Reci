@@ -29,182 +29,187 @@
     </script>
 </head>
 
-<body id="principal">   
-        <div id="loader">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+<body id="principal">
+    <div id="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <aside class="z-depth-4 animate__animated animate__fadeInLeftBig">
+        <a class="logo" href="main.html">
+            <img src="/img/Logo-SR.png" alt="logo">
+        </a>
+        <div id="menu">
+            <h3 class="titulo-menu">RECIBOS DE NOMINA</h3>
+            <div class="bar-opcion" id="respaldar">
+                <a href="respaldar.html">
+                    RESPALDAR TIMBRES Y RECIBOS
+                </a>
+
+            </div>
+            <div class="bar-opcion" id="recop">
+                <a href="recopilar.html">
+                    RECOPILAR DATOS
+                </a>
+
+            </div>
+            <div class="select bar-opcion" id="buscar">
+
+                <a href="buscar.html">
+                    BUSCAR RECIBOS
+                </a>
+
+            </div>
         </div>
-        <aside class="z-depth-4 animate__animated animate__fadeInLeftBig">
-            <a class="logo" href="main.html">
-                <img src="/img/Logo-SR.png" alt="logo">
-            </a>
-            <div id="menu">
-                <h3 class="titulo-menu">RECIBOS DE NOMINA</h3>
-                <div class="bar-opcion" id="respaldar">
-                    <a href="respaldar.html">
-                        RESPALDAR TIMBRES Y RECIBOS
-                    </a>
-    
-                </div>
-                <div class="bar-opcion" id="recop">
-                    <a href="recopilar.html">
-                        RECOPILAR DATOS
-                    </a>
-    
-                </div>
-                <div class="select bar-opcion" id="buscar">
-    
-                    <a href="buscar.html">
-                        BUSCAR RECIBOS
-                    </a>
-    
-                </div>         
-            </div>
-                    
-            <div>
-                <h3 class="titulo-menu">HERRAMIENTAS</h3>
-                <div class="bar-opcion">
-                    <a href="#">
-                        COMPARAR DIRECTORIOS
-                    </a>
-    
-                </div>
-                <div class="bar-opcion">
-                    <a href="#">
-                        ARCHIVOS PDF
-                    </a>
-    
-                </div>
-                <div class="bar-opcion">
-                    <a href="#">
-                        PRUEBAS
-                    </a>
-    
-                </div>
-                <div class="bar-opcion">
-                    <a href="#">
-                        PRUEBAS
-                    </a>
-    
-                </div>
-            </div>
-            <div id="menu-config">
-                <h3 class="titulo-menu">OTROS</h3>
-                <div class="bar-opcion">
-                    <a href="">
-                        CONFIGURACION
-                    </a>
-                </div>
-            </div>
-        </aside>
 
-        <section class="secc ">
-            <div class="cont-inputs">
-                <form name="in-buscar" action="">
-                    <div class="contenedor-form">
-                        <div id="conte-control"> <label class="in-lbl" for="control">N.Control</label>
-                            <input class="in-buscar" autocomplete="off" maxlength="8" type="text" name="control"
-                                placeholder="310540">
-                            <button class="btn">+</button>
-                        </div>
-                        <div id="fechas">
-                            <label class="in-lbl" for="">De:</label>
-                            <select class="slt periodos" name="periodo-ini">
-                                <option value=""></option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
-                                <option value="03">03</option>
-                                <option value="04">04</option>
-                                <option value="05">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="09">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                            </select>
-                            <select class="slt anno" name="anno-ini">
-                                <option value=""></option>
-                                <option value="2014">2014</option>
-                                <option value="2015">2015</option>
-                                <option value="2016">2016</option>
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
-                            </select>
-                            <label class="in-lbl" for="">Hasta:</label>
-                            <select class="slt periodos" name="periodo-fin">
-                                <option value=""></option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
-                                <option value="03">03</option>
-                                <option value="04">04</option>
-                                <option value="05">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="09">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                            </select>
-                            <select class="slt anno" name="anno-fin">
-                                <option value=""></option>
-                                <option value="2014">2014</option>
-                                <option value="2015">2015</option>
-                                <option value="2016">2016</option>
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
-                            </select>
-                            <button class="btn" type="button" onclick="enviarDatosBusqueda()">BUSCAR</button>
-                        </div>
+        <div>
+            <h3 class="titulo-menu">HERRAMIENTAS</h3>
+            <div class="bar-opcion">
+                <a href="comparar-dir.html">
+                    COMPARAR DIRECTORIOS
+                </a>
 
+            </div>
+            <div class="bar-opcion">
+                <a href="#">
+                    ARCHIVOS PDF
+                </a>
 
+            </div>
+            <div class="bar-opcion">
+                <a href="#">
+                    PRUEBAS
+                </a>
+
+            </div>
+            <div class="bar-opcion">
+                <a href="#">
+                    PRUEBAS
+                </a>
+
+            </div>
+        </div>
+        <div id="menu-config">
+            <h3 class="titulo-menu">OTROS</h3>
+            <div class="bar-opcion">
+                <a href="">
+                    CONFIGURACION
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <section class="secc ">
+        <div class="t-seccion">
+            <h3>BUSCAR RECIBOS DE NOMINA</h3>
+        </div>
+        <div class="cont-inputs">
+            <form name="in-buscar" action="">
+                <div class="contenedor-form">
+                    <div id="conte-control"> <label class="in-lbl" for="control">N.Control</label>
+                        <input class="in-buscar" autocomplete="off" maxlength="8" type="text" name="control"
+                            placeholder="310540">
+                        <button class="btn">+</button>
                     </div>
-                    <div class="contenedor-form">
-                        <label class="in-lbl" for="ruta">Guardar En...</label>
-                        <input class="in-buscar" id="ruta-g" type="text" name="ruta-guardado" placeholder="C:/RECIBOS"
-                            readonly />
-                        <button class="btn btn-explorar" type="button"
-                            onclick="mostrarRuta('ruta-guardado')">...</button>
-                        <button class="btn" type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
+                    <div id="fechas">
+                        <label class="in-lbl" for="">De:</label>
+                        <select class="slt periodos" name="periodo-ini">
+                            <option value=""></option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                        </select>
+                        <select class="slt anno" name="anno-ini">
+                            <option value=""></option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                        <label class="in-lbl" for="">Hasta:</label>
+                        <select class="slt periodos" name="periodo-fin">
+                            <option value=""></option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                        </select>
+                        <select class="slt anno" name="anno-fin">
+                            <option value=""></option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                        <button class="btn" type="button" onclick="enviarDatosBusqueda()">BUSCAR</button>
                     </div>
-                </form>
-            </div>
 
-            <div id="tbl">
-                <div class="conte-tbl">
-                    <table>
+
+                </div>
+                <div class="contenedor-form">
+                    <label class="in-lbl" for="ruta">Guardar En...</label>
+                    <input class="in-buscar" id="ruta-g" type="text" name="ruta-guardado" placeholder="C:/RECIBOS"
+                        readonly />
+                    <button class="btn btn-explorar" type="button" onclick="mostrarRuta('ruta-guardado')">...</button>
+                    <button class="btn" type="button" onclick="EnviarDatosExtraccion()">Extraer</button>
+                </div>
+            </form>
+        </div>
+        <button class="limpiar-tbl" onclick="limpiarTabla('tbl-datos', '')">
+            <img src="img/actualizar.svg" alt="limpiar-tbl">
+        </button>
+        <div id="tbl">
+            <div class="conte-tbl">
+                <table>
+                    <thead>
                         <tr id="titulos">
                             <th>
                                 <input id="check-todos" type="checkbox" name="todo">
@@ -214,13 +219,15 @@
                             <th>AÑO</th>
                             <th>ARCHIVO</th>
                         </tr>
-                        <tbody id="tbl-datos">
-                        </tbody>
-                    </table>
-                </div>
+                    </thead>
+
+                    <tbody id="tbl-datos">
+                    </tbody>
+                </table>
             </div>
-        </section>
-    
+        </div>
+    </section>
+
 </body>
 
 </html>
