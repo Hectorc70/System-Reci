@@ -44,6 +44,12 @@ async function mostrarRuta(nombre) {
     console.log(ruta);
 }
 
+async function mostrarRutaArchivo(nombre){
+    let ruta = await eel.enviar_ruta_archivo()();
+
+    document.getElementsByName(nombre)[0].value = ruta;
+
+}
 
 
 

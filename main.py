@@ -5,13 +5,14 @@ import eel
 from respaldar.reci_xml import ArchivosOrig
 from respaldar.reci_xml import ArchivoRecibo
 
-from modulos.rutas import abrir_directorio
+from modulos.rutas import abrir_directorio, abrir_archivo
+from modulos.txt import ArchivoTxt
+
 from datos.recibo import ReciboNomina, RutaRecibo
 from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 from herramientas.directorio import Directorio
-
 eel.init('web_folder', allowed_extensions=['.js','.html'])
 
 """
@@ -43,8 +44,11 @@ def enviar_ruta():
     else:
         return ''
 
+@eel.expose
+def enviar_ruta_archivo():
+    ruta = abrir_archivo()
 
-
+    return ruta
 """
 **---------------------------------------------------------------------------------------------**
                         ***RESPALDAR XML Y RECIBOS***
@@ -131,8 +135,13 @@ def buscador_recibo(ids, ruta_guardado):
     
     return True
 
+@eel.expose
+def leer_txt(ruta):   
+    txt = ArchivoTxt(ruta)
+    contenido = txt.leer()
 
-
+    print(contenido)
+    return contenido
 """
 **---------------------------------------------------------------------------------------------**
                         ***CONFIG EEL***

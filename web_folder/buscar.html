@@ -110,7 +110,12 @@
                     <div id="conte-control"> <label class="in-lbl" for="control">N.Control</label>
                         <input class="in-buscar" autocomplete="off" maxlength="8" type="text" name="control"
                             placeholder="310540">
-                        <button class="btn">+</button>
+                        
+                    </div>
+                    <div id="conte-ctrl-masivo">
+                        <label class="in-lbl" for="masivo">Busqueda Masiva</label>
+                        <input type="text" class="in-buscar" readonly name="ruta-masivo">
+                        <button type="button" class=" btn btn-explorar" onclick="mostrarRutaArchivo('ruta-masivo')">...</button>
                     </div>
                     <div id="fechas">
                         <label class="in-lbl" for="">De:</label>

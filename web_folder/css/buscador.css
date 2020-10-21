@@ -5,22 +5,26 @@
 }
 
 #conte-control{  
-    width: 30%;
+    width: 15%;
     display: inline-block;    
     text-align: left;
     
     
-}
-#conte-control input{
-    width: 25%;
     
 }
-.btn-circulo{
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    margin-left: 10px;
+#conte-control input{
+    width: 120px;
+    
 }
+#conte-ctrl-masivo{
+   
+    display: inline-block;    
+    width: 30%;
+}
+#conte-ctrl-masivo input{
+    width: 50%;
+}
+
 #fechas{
     display: inline-block;
     width: 40%;      
@@ -35,8 +39,5 @@
 
 
 
-#contenedor #btn-explorar{
-    width: 60px;
-}
 
 
