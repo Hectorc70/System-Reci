@@ -49,6 +49,11 @@ async function mostrarRecibos() {
                     columnaAnno.innerHTML = recibos[recibosNum[i]][2];
                     let columnaArchivo = document.createElement("td");
                     columnaArchivo.innerHTML = recibos[recibosNum[i]][4];
+                    let columnaV = document.createElement("td");
+                    let opcionVer = document.createElement("button");                   
+                    opcionVer.setAttribute("class","btn btn-ver");
+                    opcionVer.setAttribute("onclick", "verRecibo()");
+                    opcionVer.innerHTML = "Ver";
 
 
                     lista.appendChild(tr);
@@ -57,6 +62,9 @@ async function mostrarRecibos() {
                     tr.appendChild(columnaPeriodo);
                     tr.appendChild(columnaAnno);
                     tr.appendChild(columnaArchivo);
+                    tr.appendChild(columnaV);
+                    columnaV.appendChild(opcionVer)
+
                 }
 
             }
@@ -120,4 +128,27 @@ async function buscarVariosEmpleados() {
     }
     document.getElementsByName("control")[0].value = '';
 
+}
+
+
+async function verRecibo(){
+    let visualizador = document.getElementById("overlay");
+    visualizador.removeAttribute("class");
+    deshabilitar("menu")
+}
+
+async function salirVerRecibo(){
+    let visualizador = document.getElementById("overlay");
+    visualizador.setAttribute("class", "no-mostrar")
+    habilitarElemento("menu")
+}
+
+
+/* VISOR DE PDF'S */
+
+
+async function VerPdf(){
+    pdfjsLib.getDocument('../img/Control_ORDINARIA_202019.pdf').then((pdf) => {
+        
+    });
 }
