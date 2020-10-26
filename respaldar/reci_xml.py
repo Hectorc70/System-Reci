@@ -27,3 +27,5 @@ class ArchivoRecibo(Archivo):
 		
 		return destino
 
+	def recibos(self):
+		pass
