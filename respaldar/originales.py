@@ -10,13 +10,13 @@ class ArchivosOrig:
 		self.ruta = ruta		
 		self.periodo = periodo
 		self.anno = anno
-		self.ruta_com = self.formar_ruta()
+		self.ruta_com = self._formar_ruta()
 		self.ruta_num  = len(self.ruta_com.split("/"))	
 		self.rutas = Rutas()
 		self.rutas_archivos = self.rutas.recuperar_rutas(self.ruta_com, True)
 		
 	
-	def formar_ruta(self):
+	def _formar_ruta(self):
 		periodo_comp =  self.periodo + '_' + self.anno
 		ruta = unir_cadenas('/', [self.ruta, periodo_comp])
 
@@ -42,12 +42,27 @@ class ArchivosOrig:
 		return archivos_pdf, archivos_xml
 
 
-class Timbre():
+class Timbre(ArchivosOrig):
+
+	def __init__(self, ruta, periodo, anno):	
+		self.ruta = ruta		
+		self.periodo = periodo
+		self.anno = anno
+		ArchivosOrig.__init__(self, self.ruta, self.periodo, self.anno)
 	
-	def archivos_xml(self, archivos, ruta_num):
-		for datos in archivos:
-			if len(datos[-1].split('_')[0]) == 8:
-				print('HOLA')
+	
+	def recuperar_timbres(self):
+		archivos = self.depurar_rutas()
+		timbres = list()
+
+		for datos in archivos[1]:
+			nomina = datos[self.ruta_num].split('_')[0]
+			if len(datos[-1].split('_')[0]) == 8:				
+				timbres.append(unir_cadenas('\\', datos))
+		
+		
+		return timbres
+			
 
 
 class Recibo(ArchivosOrig):
@@ -124,5 +139,5 @@ class Recibo(ArchivosOrig):
 
 
 ruta = 'Y:/CFDI_2020/CFDI_NOMINA_2020'
-origen = Recibo(ruta, '2020', '08')
-origen.recuperar_recibos()
+origen = Timbre(ruta, '08',  '2020')
+origen.recuperar_timbres()
