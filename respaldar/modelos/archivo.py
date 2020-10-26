@@ -3,13 +3,15 @@ from os.path import exists
 from os import makedirs
 
 from modulos.rutas import unir_cadenas, crear_directorio
+
+
+
 class Archivo:
-    def __init__(self, origen, destino, nombre, cop=False, mov=False):
+    def __init__(self, origen, destino, copiar=False, mover=False):
         self.origen = origen        
-        self.destino = destino     
-        self.nombre = nombre
-        self.copiar = cop
-        self.mover = mov
+        self.destino = destino        
+        self.copiar = copiar
+        self.mover = mover
 
         
     def comprobar_acciones(self):
@@ -22,14 +24,11 @@ class Archivo:
         pass
 
     def copiar_archivo(self):
-        carpeta = self.destino.split('\\')[0:-1]
-        carpeta = unir_cadenas('\\', carpeta)
-        if exists(carpeta):
-            
-            copy(self.origen, self.destino)
-        else:           
-            crear_directorio(carpeta)       
-            self.copiar_archivo()
+        carpeta = self.destino.split('/')[0:-1]
+        carpeta = unir_cadenas('/', carpeta)
+        crear_directorio(carpeta) 
+
+        copy(self.origen, self.destino)
 
 
     def mover_archivo(self):

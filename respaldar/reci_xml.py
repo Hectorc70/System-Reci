@@ -1,10 +1,47 @@
 from os.path import splitext
 
-from modulos.rutas import Rutas, unir_cadenas
-from respaldar.modulos.archivo import Archivo
+from modulos.rutas import Rutas, unir_cadenas, crear_directorio
+from respaldar.originales import ArchivoTimbre
+from respaldar.modelos.archivo import Archivo
 
 
-class ArchivoRecibo(Archivo):
+class TimbreCop(ArchivoTimbre):
+	def __init__(self, ruta, periodo, anno, destino):	
+		self.ruta = ruta		
+		self.periodo = periodo
+		self.anno = anno
+
+		self.ruta_dest = destino
+		
+
+		ArchivoTimbre.__init__(self, self.ruta, self.periodo, self.anno)
+		
+	def _formar_ruta_destino(self, ruta_orig):
+		"""Forma la ruta de destino del archivo XML(TIMBRE)"""
+		ruta = unir_cadenas('/', ruta_orig)
+		ruta_destino = ruta.replace(self.ruta, self.ruta_dest)
+		
+		
+		return ruta_destino
+
+	def copiado_archivos(self):
+		"""Ejecuta el proceso de copiado de timbres XMLs
+		de todas las nominas por periodo"""
+		
+		timbres = self.recuperar_timbres()
+		
+		for timbre in timbres:
+			ruta_destino = self._formar_ruta_destino(timbre)
+			ruta_orig = unir_cadenas('/', timbre)
+			tim = Archivo(ruta_orig, ruta_destino, copiar=True)
+			tim.comprobar_acciones()
+		
+		
+		print('El proceso de copiado ah Terminado!!!')
+	
+
+
+class Recibo(Archivo):
 	"""Clase que forma los datos
 	y llama a los metodos correspondientes
 	para el backup limpio de los recibos de nomina 

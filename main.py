@@ -2,8 +2,8 @@ from os.path import exists
 
 import eel
 
-from respaldar.reci_xml import ArchivosOrig
-from respaldar.reci_xml import ArchivoRecibo
+from respaldar.reci_xml import TimbreCop
+from respaldar.reci_xml import Recibo
 
 from modulos.rutas import abrir_directorio, abrir_archivo
 from modulos.txt import ArchivoTxt
@@ -14,6 +14,18 @@ from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js','.html'])
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***PRUEBAS***
+**---------------------------------------------------------------------------------------------**
+"""
+def ejecutar(ruta, periodo, anno, ruta_destino):
+    timbre = TimbreCop(ruta, periodo, anno, ruta_destino)
+    timbre.copiado_archivos()
+
+ruta = 'Y:/CFDI_2020/CFDI_NOMINA_2020'
+ruta_destino = 'X:/CFDI_NOMINA_2020'
+ejecutar(ruta, '01',  '2020', ruta_destino)
 
 """
 **---------------------------------------------------------------------------------------------**
