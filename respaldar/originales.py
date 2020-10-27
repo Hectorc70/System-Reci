@@ -5,7 +5,7 @@ from modulos.rutas import Rutas, unir_cadenas
 
 class ArchivosOrig:     
 	"""Clase que recupera los
-	archivos PDF Y XML""""
+	archivos PDF Y XML"""
 	def __init__(self, ruta, periodo, anno):
 
 		self.ruta = ruta		
@@ -59,10 +59,14 @@ class ArchivoTimbre(ArchivosOrig):
 		timbres = list()
 
 		for datos in archivos[1]:
-			nomina = datos[self.ruta_num].split('_')[0]
+			
 			if len(datos[-1].split('_')[0]) == 8:				
+				nomina = datos[self.ruta_num].split('_')[0]
+				periodo_anno = datos[self.ruta_num-1]	
+				ruta = unir_cadenas('/', datos)
+				datos = [periodo_anno, nomina , ruta]
 				timbres.append(datos)
-		
+
 		
 		return timbres
 			

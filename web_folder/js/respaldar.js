@@ -3,21 +3,22 @@ async function mostrarRutas() {
         let datos = document.getElementById("tbl-datos");
         datos.removeChild(tr) */
 
-    let tabla = document.getElementById("tbl");
-    let carga = document.createElement("div");
+    /* let tabla = document.getElementById("tbl");
+    let carga = document.createElement("div"); */
     let ruta = document.getElementsByName("ruta")[0].value;
     let anno = document.getElementsByName("anno")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
 
+
     if (ruta != '' && anno != '' && periodo != '') {
         carga.setAttribute("class", "loading");
         tabla.appendChild(carga);
+        debugger;
+        let rutas = await eel.rutas_timbres_orig(ruta, periodo, anno)();
+        const rutasNum = Object.getOwnPropertyNames(rutas);
 
-        let recibos = await eel.rutas_recibos_orig(ruta, anno, periodo)();
-        const recibosNum = Object.getOwnPropertyNames(recibos);
 
-
-        for (let i = 1; i < recibosNum.length; i++) {
+        for (let i = 1; i < rutasNum.length; i++) {
             let lista = document.getElementById("tbl-datos");
             let tr = document.createElement("tr");
             let checkBox = document.createElement("input");
@@ -25,16 +26,18 @@ async function mostrarRutas() {
             checkBox.setAttribute("class", "c-box");
 
 
-            let ultimo = recibos[recibosNum[i - 1]]["length"];
+            /* let ultimo = recibos[recibosNum[i - 1]]["length"]; */
 
             let columnaPeriodo = document.createElement("td");
             columnaPeriodo.setAttribute("class", "cl-per")
-            columnaPeriodo.innerHTML = recibos[recibosNum[i - 1]][3];
+            columnaPeriodo.innerHTML = rutas[i][0];
+            
             let columnaNomina = document.createElement("td");
-            columnaNomina.innerHTML = recibos[recibosNum[i - 1]][4];
+            columnaNomina.innerHTML = rutas[i][1];
+            
             let columnaArchivo = document.createElement("td");
             columnaArchivo.setAttribute("class", "ruta-archivo");
-            columnaArchivo.innerHTML = recibos[recibosNum[i - 1]][ultimo - 1];
+            columnaArchivo.innerHTML = rutas[i][2];
 
 
             lista.appendChild(tr);
@@ -44,7 +47,7 @@ async function mostrarRutas() {
             tr.appendChild(columnaArchivo);
 
         }
-        tabla.removeChild(carga);
+      
     }
     else Precaucion('Seleccione Ruta, Año y Periodo');
 }

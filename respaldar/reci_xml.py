@@ -18,12 +18,12 @@ class TimbreCop(ArchivoTimbre):
 		
 	def _formar_ruta_destino(self, ruta_orig):
 		"""Forma la ruta de destino del archivo XML(TIMBRE)"""
-		ruta = unir_cadenas('/', ruta_orig)
-		ruta_destino = ruta.replace(self.ruta, self.ruta_dest)
+		ruta_destino = ruta_orig.replace(self.ruta, self.ruta_dest)
 		
 		
 		return ruta_destino
 
+	
 	def copiado_archivos(self):
 		"""Ejecuta el proceso de copiado de timbres XMLs
 		de todas las nominas por periodo"""
@@ -31,9 +31,9 @@ class TimbreCop(ArchivoTimbre):
 		timbres = self.recuperar_timbres()
 		
 		for timbre in timbres:
-			ruta_destino = self._formar_ruta_destino(timbre)
-			ruta_orig = unir_cadenas('/', timbre)
-			tim = Archivo(ruta_orig, ruta_destino, copiar=True)
+			ruta_destino = self._formar_ruta_destino(timbre[-1])
+			
+			tim = Archivo(timbre[-1], ruta_destino, copiar=True)
 			tim.comprobar_acciones()
 		
 		
