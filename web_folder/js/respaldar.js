@@ -1,9 +1,8 @@
 'use strict'
 
-async function comprobarOpcionMostrar() {
+function comprobarOpcionMostrar() {
     let rBtnRecibos = document.getElementById('op-recibos');
-    let rBtnTimbres = document.getElementById('op-timbres');
-    debugger;
+    let rBtnTimbres = document.getElementById('op-timbres');   
 
     if (rBtnRecibos.checked == true) {
         mostrarRutasRecibos();
@@ -13,6 +12,19 @@ async function comprobarOpcionMostrar() {
     }
     
 
+}
+
+function comprobarOpcionCopiar(){
+    let rBtnRecibos = document.getElementById('op-recibos');
+    let rBtnTimbres = document.getElementById('op-timbres');
+
+
+    if (rBtnRecibos.checked == true) {
+        iniciarCopiadoRecibos();
+    }
+    else if (rBtnTimbres.checked == true) {
+        iniciarCopiadoTimbres();
+    }
 }
 async function mostrarRutasRecibos() {
     /* 
