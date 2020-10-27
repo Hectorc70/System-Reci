@@ -7,9 +7,11 @@ from modulos.rutas import unir_cadenas, crear_directorio
 
 
 class Archivo:
+    """Clase que trata con archivos, copia, mueve
+    origen: ruta_origen, destino=ruta_destino"""
     def __init__(self, origen, destino, copiar=False, mover=False):
-        self.origen = origen        
-        self.destino = destino        
+        self.ruta_archivo_origen = origen        
+        self.ruta_archivo_destino = destino        
         self.copiar = copiar
         self.mover = mover
 
@@ -24,11 +26,11 @@ class Archivo:
         pass
 
     def copiar_archivo(self):
-        carpeta = self.destino.split('/')[0:-1]
+        carpeta = self.ruta_archivo_destino.split('/')[0:-1]
         carpeta = unir_cadenas('/', carpeta)
         crear_directorio(carpeta) 
 
-        copy(self.origen, self.destino)
+        copy(self.ruta_archivo_origen, self.ruta_archivo_destino)
 
 
     def mover_archivo(self):

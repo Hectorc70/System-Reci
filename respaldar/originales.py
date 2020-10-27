@@ -47,11 +47,11 @@ class ArchivosOrig:
 class ArchivoTimbre(ArchivosOrig):
 	"""Clase que depura archivos dejando solo
 	los timbres de todas las nominas"""
-	def __init__(self, ruta, periodo, anno):	
-		self.ruta = ruta		
+	def __init__(self, origen, periodo, anno):	
+		self.carpeta_origen = origen		
 		self.periodo = periodo
 		self.anno = anno
-		ArchivosOrig.__init__(self, self.ruta, self.periodo, self.anno)
+		ArchivosOrig.__init__(self, self.carpeta_origen, self.periodo, self.anno)
 	
 	
 	def recuperar_timbres(self):

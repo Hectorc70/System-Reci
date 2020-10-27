@@ -11,8 +11,8 @@ async function mostrarRutas() {
 
 
     if (ruta != '' && anno != '' && periodo != '') {
-        carga.setAttribute("class", "loading");
-        tabla.appendChild(carga);
+        
+    
         debugger;
         let rutas = await eel.rutas_timbres_orig(ruta, periodo, anno)();
         const rutasNum = Object.getOwnPropertyNames(rutas);
@@ -53,7 +53,7 @@ async function mostrarRutas() {
 }
 
 
-async function iniciarCopiado() {
+async function iniciarCopiadoRecibos() {
     let carp_orig = document.getElementsByName("ruta")[0].value;
     let carp_dest = document.getElementsByName("ruta_destino")[0].value;
     let archivos = [];
@@ -97,4 +97,49 @@ async function iniciarCopiado() {
 
 
 
+}
+
+async function iniciarCopiadoTimbres(){
+    let carp_orig = document.getElementsByName("ruta")[0].value;
+    let carp_dest = document.getElementsByName("ruta_destino")[0].value;
+    let archivos = [];
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
+
+    let filaPeriodo = document.getElementsByClassName("cl-per");
+
+    if (filaPeriodo.length > 0) {
+        for (let i = 0; i < filaPeriodo.length; i++) {
+            checkBox = filaPeriodo[i].getElementsByClassName("c-box");
+
+            if (checkBox[0].checked == true) {
+                let filaRuta = document.getElementsByClassName("ruta-archivo")[i].innerText;
+                archivos.push(filaRuta);
+            }
+
+        }
+        if (archivos.length > 0 && carp_dest != '') {
+
+            if (carp_orig != carp_dest) {
+                deshabilitar('principal');
+                loader_tarea();
+                let proceso = await eel.copiar_timbres(carp_orig ,carp_dest, archivos, anno, periodo)();
+                if (proceso == true) {
+                    habilitar('principal');                    
+                }
+                satisfactorio('Archivos Copiados');
+            }
+            else{
+                Precaucion('La ruta de Destino y la Original No pueden ser la misma');
+            }
+        }
+
+        else {
+            Precaucion('Seleccione almenos una fila y la ruta de Destino');
+        }
+
+    }
+    else {
+        Precaucion('Debe buscar primero los Archivos');
+    }
 }

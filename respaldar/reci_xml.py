@@ -5,36 +5,31 @@ from respaldar.originales import ArchivoTimbre
 from respaldar.modelos.archivo import Archivo
 
 
-class TimbreCop(ArchivoTimbre):
-	def __init__(self, ruta, periodo, anno, destino):	
-		self.ruta = ruta		
+class TimbreCop():
+	def __init__(self, origen, periodo, anno, destino):	
+		self.carp_origen = origen		
 		self.periodo = periodo
 		self.anno = anno
 
-		self.ruta_dest = destino
-		
-
-		ArchivoTimbre.__init__(self, self.ruta, self.periodo, self.anno)
+		self.carp_destino = destino	
 		
 	def _formar_ruta_destino(self, ruta_orig):
 		"""Forma la ruta de destino del archivo XML(TIMBRE)"""
-		ruta_destino = ruta_orig.replace(self.ruta, self.ruta_dest)
+		ruta_destino = ruta_orig.replace(self.carp_origen, self.carp_destino)
 		
 		
 		return ruta_destino
 
 	
-	def copiado_archivos(self):
+	def copiado_archivos(self, ruta_archivo):
 		"""Ejecuta el proceso de copiado de timbres XMLs
 		de todas las nominas por periodo"""
 		
-		timbres = self.recuperar_timbres()
-		
-		for timbre in timbres:
-			ruta_destino = self._formar_ruta_destino(timbre[-1])
 			
-			tim = Archivo(timbre[-1], ruta_destino, copiar=True)
-			tim.comprobar_acciones()
+		ruta_destino = self._formar_ruta_destino(ruta_archivo)
+		
+		tim = Archivo(ruta_archivo, ruta_destino, copiar=True)
+		tim.comprobar_acciones()
 		
 		
 		print('El proceso de copiado ah Terminado!!!')

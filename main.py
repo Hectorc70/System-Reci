@@ -74,6 +74,19 @@ def rutas_timbres_orig(ruta,periodo, anno):
     timbres = originales.recuperar_timbres()
 
     return timbres
+
+
+@eel.expose
+def copiar_timbres(carpeta_origen,carpt_dest, archivos, anno, periodo):
+
+    for archivo in archivos:
+
+        timbre = TimbreCop(carpeta_origen, periodo,anno, carpt_dest)
+        timbre.copiado_archivos(archivo)
+
+    return True
+
+
 @eel.expose
 def rutas_recibos_orig(ruta, anno, periodo):  
 
