@@ -4,7 +4,7 @@ import eel
 
 from respaldar.reci_xml import TimbreCop
 from respaldar.originales import ArchivoTimbre
-from respaldar.reci_xml import Recibo
+from respaldar.originales import ArchivoRecibo
 
 from modulos.rutas import abrir_directorio, abrir_archivo
 from modulos.txt import ArchivoTxt
@@ -90,8 +90,8 @@ def copiar_timbres(carpeta_origen,carpt_dest, archivos, anno, periodo):
 @eel.expose
 def rutas_recibos_orig(ruta, anno, periodo):  
 
-    originales = ArchivosOrig(ruta, anno, periodo)
-    recibos = originales.archivos_pdf()
+    originales = ArchivoRecibo(ruta, anno, periodo)
+    recibos = originales.recuperar_recibos()
 
     return recibos
 

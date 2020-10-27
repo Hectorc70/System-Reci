@@ -1,8 +1,42 @@
+
+
+
+#conte-ruta{
+    display: inline-block;  
+    width: 100%;  
+  
+}
+
 #conte-ruta input{    
-    width: 30%;
+    width: 20%;
+    
 
 }
 
 #conte-destino input{
     width: 30%;
+    
+}
+
+.conte-radiobtn{
+    display: inline-block;
+    width: 280px;
+    border-radius: .5em;
+    border: solid 2px #008992;  
+    
+}
+.btn-radio{
+    display: inline-block;
+    border: none;
+    
+    
+}
+
+.conte-radiobtn .in-lbl{
+    margin: 0px;
+    padding: 0px;
+}
+
+#conte-ruta > button{
+    margin-left: 20px;  
 }

@@ -1,4 +1,20 @@
-async function mostrarRutas() {
+'use strict'
+
+async function comprobarOpcionMostrar() {
+    let rBtnRecibos = document.getElementById('op-recibos');
+    let rBtnTimbres = document.getElementById('op-timbres');
+    debugger;
+
+    if (rBtnRecibos.checked == true) {
+        mostrarRutasRecibos();
+    }
+    else if (rBtnTimbres.checked == true) {
+        mostrarRutasTimbres();
+    }
+    
+
+}
+async function mostrarRutasRecibos() {
     /* 
         let datos = document.getElementById("tbl-datos");
         datos.removeChild(tr) */
@@ -11,8 +27,62 @@ async function mostrarRutas() {
 
 
     if (ruta != '' && anno != '' && periodo != '') {
-        
-    
+
+
+
+        let rutas = await eel.rutas_recibos_orig(ruta, anno, periodo)();
+        const rutasNum = Object.getOwnPropertyNames(rutas);
+
+
+        for (let i = 1; i < rutasNum.length; i++) {
+            let lista = document.getElementById("tbl-datos");
+            let tr = document.createElement("tr");
+            let checkBox = document.createElement("input");
+            checkBox.setAttribute("type", "checkbox");
+            checkBox.setAttribute("class", "c-box");
+
+
+            /* let ultimo = recibos[recibosNum[i - 1]]["length"]; */
+
+            let columnaPeriodo = document.createElement("td");
+            columnaPeriodo.setAttribute("class", "cl-per")
+            columnaPeriodo.innerHTML = rutas[i][0];
+
+            let columnaNomina = document.createElement("td");
+            columnaNomina.innerHTML = rutas[i][1];
+
+            let columnaArchivo = document.createElement("td");
+            columnaArchivo.setAttribute("class", "ruta-archivo");
+            columnaArchivo.innerHTML = rutas[i][2];
+
+
+            lista.appendChild(tr);
+            tr.appendChild(columnaPeriodo);
+            columnaPeriodo.appendChild(checkBox);
+            tr.appendChild(columnaNomina);
+            tr.appendChild(columnaArchivo);
+
+        }
+
+    }
+    else Precaucion('Seleccione Ruta, Año y Periodo');
+}
+
+async function mostrarRutasTimbres() {
+    /* 
+        let datos = document.getElementById("tbl-datos");
+        datos.removeChild(tr) */
+
+    /* let tabla = document.getElementById("tbl");
+    let carga = document.createElement("div"); */
+    let ruta = document.getElementsByName("ruta")[0].value;
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
+
+
+    if (ruta != '' && anno != '' && periodo != '') {
+
+
         debugger;
         let rutas = await eel.rutas_timbres_orig(ruta, periodo, anno)();
         const rutasNum = Object.getOwnPropertyNames(rutas);
@@ -31,10 +101,10 @@ async function mostrarRutas() {
             let columnaPeriodo = document.createElement("td");
             columnaPeriodo.setAttribute("class", "cl-per")
             columnaPeriodo.innerHTML = rutas[i][0];
-            
+
             let columnaNomina = document.createElement("td");
             columnaNomina.innerHTML = rutas[i][1];
-            
+
             let columnaArchivo = document.createElement("td");
             columnaArchivo.setAttribute("class", "ruta-archivo");
             columnaArchivo.innerHTML = rutas[i][2];
@@ -47,7 +117,7 @@ async function mostrarRutas() {
             tr.appendChild(columnaArchivo);
 
         }
-      
+
     }
     else Precaucion('Seleccione Ruta, Año y Periodo');
 }
@@ -76,11 +146,11 @@ async function iniciarCopiadoRecibos() {
                 loader_tarea();
                 let proceso = await eel.copiado_recibos(carp_orig, carp_dest, archivos)();
                 if (proceso == true) {
-                    habilitar('principal');                    
+                    habilitar('principal');
                 }
                 satisfactorio('Archivos Copiados');
             }
-            else{
+            else {
                 Precaucion('La ruta de Destino y la Original No pueden ser la misma');
             }
         }
@@ -99,7 +169,7 @@ async function iniciarCopiadoRecibos() {
 
 }
 
-async function iniciarCopiadoTimbres(){
+async function iniciarCopiadoTimbres() {
     let carp_orig = document.getElementsByName("ruta")[0].value;
     let carp_dest = document.getElementsByName("ruta_destino")[0].value;
     let archivos = [];
@@ -123,13 +193,13 @@ async function iniciarCopiadoTimbres(){
             if (carp_orig != carp_dest) {
                 deshabilitar('principal');
                 loader_tarea();
-                let proceso = await eel.copiar_timbres(carp_orig ,carp_dest, archivos, anno, periodo)();
+                let proceso = await eel.copiar_timbres(carp_orig, carp_dest, archivos, anno, periodo)();
                 if (proceso == true) {
-                    habilitar('principal');                    
+                    habilitar('principal');
                 }
                 satisfactorio('Archivos Copiados');
             }
-            else{
+            else {
                 Precaucion('La ruta de Destino y la Original No pueden ser la misma');
             }
         }

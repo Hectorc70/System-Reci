@@ -96,57 +96,57 @@ class ArchivoRecibo(ArchivosOrig):
 
 			nomina = datos_rutas[self.ruta_num].upper().split('_')[0]
 
-			if nomina=='ORDINARIA' or 'COMPLEMENTARIA':
-				reci_ord = dict()
-				ruta_reci = self.recibos_ordinaria(datos_rutas)
-				if ruta_reci:
-					reci_ord[nomina] = ruta_reci
-					recibos.append(reci_ord)
-			elif nomina=='JUBILADOS':
-				reci_jub = dict()
+			if nomina=='ORDINARIA':				
+				ruta_reci = self.recibos_nominas(datos_rutas)
+				
+				if ruta_reci:					
+					recibos.append(ruta_reci)
+
+			elif nomina=='JUBILADOS':			
 				ruta_reci = self.recibos_jubilados(datos_rutas)
 				
-				if ruta_reci:
-					reci_jub[nomina] = ruta_reci
-					recibos.append(reci_jub)
+				if ruta_reci:				
+					recibos.append(ruta_reci)
 					
 			elif nomina != 'REPORTES':
-				carpeta = datos_rutas[self.ruta_num+2].upper()
-				if carpeta == 'RECIBOS':
-					ruta = unir_cadenas('\\', datos_rutas)
-					print(ruta)
+				ruta_reci = self.recibos_nominas(datos_rutas)
+				if ruta_reci:
+					recibos.append(ruta_reci)
+			
+		return recibos
 
-	def recibos_ordinaria(self, datos):
-		recibos = dict()
 		
+	def recibos_nominas(self, datos):		
 
 		carpeta = datos[self.ruta_num+2].upper()
 
 		if carpeta.upper() == 'RECIBOS':
 			ruta = unir_cadenas('\\', datos)
-			t_nom =  datos[-2]
+			nomina = datos[self.ruta_num]
+			periodo_anno = datos[self.ruta_num-1]
 
-			if t_nom == 'BASE':
+			return [periodo_anno, nomina,ruta]
+
+
+		""" 	if t_nom == 'BASE':
 				recibos['R-BASE'] = ruta
 			elif t_nom == 'BASE4':
 				recibos['R-BASE4'] = ruta
 			elif t_nom == 'CONFIANZA':
 				recibos['R-CONFIANZA'] = ruta			
 		else:
-			pass
+			pass """
 
-		return recibos
+		
 		
 
 
 	def recibos_jubilados(self, datos):				
 		if datos[self.ruta_num+1].upper() == 'RECIBOS':
 			ruta = unir_cadenas('\\', datos)
-			return ruta
+			nomina = datos[self.ruta_num]
+			periodo_anno = datos[self.ruta_num-1]
+		
+			return [periodo_anno, nomina, ruta]
 
 
-
-
-""" ruta = 'Y:/CFDI_2020/CFDI_NOMINA_2020'
-origen = Timbre(ruta, '08',  '2020')
-origen.recuperar_timbres() """
