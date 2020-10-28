@@ -98,7 +98,7 @@ class ReciboNomina(ArchivoPdf):
 	def __init__(self, ruta = ''):
 		self.ruta_pdf = ruta
 		ArchivoPdf.__init__(self, self.ruta_pdf)
-		self.patrones = PATRONES = ['CONTROL: [0123456789]{8}', 
+		self.patrones =  ['CONTROL: [0123456789]{8}', 
 									'PERIODO:[0123456789]{1,2}/[0123456789]{4}'
 									]	
 

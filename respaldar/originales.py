@@ -1,6 +1,5 @@
 
 from os.path import splitext
-
 from modulos.rutas import Rutas, unir_cadenas
 
 class ArchivosOrig:     
@@ -115,7 +114,7 @@ class ArchivoRecibo(ArchivosOrig):
 			
 		return recibos
 
-		
+
 	def recibos_nominas(self, datos):		
 
 		carpeta = datos[self.ruta_num+2].upper()

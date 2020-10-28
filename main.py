@@ -2,9 +2,8 @@ from os.path import exists
 
 import eel
 
-from respaldar.reci_xml import TimbreCop
-from respaldar.originales import ArchivoTimbre
-from respaldar.originales import ArchivoRecibo
+from respaldar.reci_xml import TimbreCop, ReciboCop
+from respaldar.originales import ArchivoTimbre, ArchivoRecibo 
 
 from modulos.rutas import abrir_directorio, abrir_archivo
 from modulos.txt import ArchivoTxt
@@ -98,12 +97,10 @@ def rutas_recibos_orig(ruta, anno, periodo):
 @eel.expose
 def copiado_recibos(carpt_orig, carpt_dest ,archivos):
     
-    for archivo in archivos:
-        datos = archivo.split('\\')
-        nombre = datos[-1]
+    for archivo in archivos:   
 
-        reci = ArchivoRecibo(carpt_orig, archivo,carpt_dest, nombre, True)
-        reci.comprobar_acciones()
+        reci = ReciboCop(carpt_orig, archivo,carpt_dest)
+        reci.separar_en_recibos()
     
     print("Archivos copiados")
     return True

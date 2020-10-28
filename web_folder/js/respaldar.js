@@ -143,7 +143,7 @@ async function iniciarCopiadoRecibos() {
 
     if (filaPeriodo.length > 0) {
         for (let i = 0; i < filaPeriodo.length; i++) {
-            checkBox = filaPeriodo[i].getElementsByClassName("c-box");
+            let checkBox = filaPeriodo[i].getElementsByClassName("c-box");
 
             if (checkBox[0].checked == true) {
                 let filaRuta = document.getElementsByClassName("ruta-archivo")[i].innerText;
@@ -192,7 +192,7 @@ async function iniciarCopiadoTimbres() {
 
     if (filaPeriodo.length > 0) {
         for (let i = 0; i < filaPeriodo.length; i++) {
-            checkBox = filaPeriodo[i].getElementsByClassName("c-box");
+            let checkBox = filaPeriodo[i].getElementsByClassName("c-box");
 
             if (checkBox[0].checked == true) {
                 let filaRuta = document.getElementsByClassName("ruta-archivo")[i].innerText;
