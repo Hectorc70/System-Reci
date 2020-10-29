@@ -8,7 +8,7 @@ from respaldar.originales import ArchivoTimbre, ArchivoRecibo
 from modulos.rutas import abrir_directorio, abrir_archivo
 from modulos.txt import ArchivoTxt
 
-from datos.recibo import ReciboNomina, RutaRecibo
+from datos.recibo import RutaRecibo
 from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
@@ -114,7 +114,7 @@ def copiado_recibos(carpt_orig, carpt_dest ,archivos):
 @eel.expose
 def mostrar_rutas_recibos(directorio, anno, periodo):
     ruta_archivos =  RutaRecibo(directorio, anno, periodo)
-    rutas = ruta_archivos.recuperacion()
+    rutas = ruta_archivos.recuperar_periodo()
     
     return rutas
     

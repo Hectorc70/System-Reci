@@ -15,7 +15,7 @@ class Bdatos:
 	def crear_tabla(self, tabla):
 		orden = "CREATE TABLE {}.{}(id INT AUTO_INCREMENT,control INT(8) NOT NULL, \
 				periodo VARCHAR(2) NOT NULL, anno VARCHAR(4) NOT NULL, \
-				pagina INT(4) NOT NULL, ruta VARCHAR(300) NOT NULL,\
+				ruta VARCHAR(300) NOT NULL,\
 				PRIMARY KEY(id), UNIQUE KEY(id))".format(self.nombre_bd, tabla)
 
 
@@ -24,6 +24,9 @@ class Bdatos:
 		
 
 	def insertar_filas(self, nombre_tabla, campos, datos):
+		"""Parametros, str:nombre_tabla, str:campos('control, periodo, etc'),
+			str:datos('318212,01,n')
+		"""
 		
 		try:
 			tabla = "SELECT 1 FROM {} LIMIT 1".format(nombre_tabla)

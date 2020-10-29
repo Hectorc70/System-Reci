@@ -1,5 +1,5 @@
 
-from modulos.rutas import unir_cadenas
+from modulos.rutas import unir_cadenas, Rutas
 from datos.recibo import ReciboNomina
 from modulos.bdatos import Bdatos
 from datos.ayuda.log import Log
@@ -15,11 +15,11 @@ class ReciMetadatos(Bdatos):
 		self.host      = '127.0.0.1'
 		self.usuario   = 'root'
 		self.psw       = ''
-		self.nombre_bd ='recibosnomina'
+		self.nombre_bd ='pruebas_recibos'
 
 		self.datos     = metadatos
 		self.nombre_tbl = 'recibos'
-		self.campos_col = 'control, periodo, anno, pagina, ruta'
+		self.campos_col = 'control, periodo, anno, ruta'
 		Bdatos.__init__(self,self.host, self.usuario, self.psw, self.nombre_bd)
 	
 

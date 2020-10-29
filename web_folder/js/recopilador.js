@@ -20,14 +20,11 @@ async function mostrarEnTabla(directorio, periodo, anno) {
         let datos = document.getElementById("tbl-datos");
         datos.removeChild(tr) */
 
-    let tabla = document.getElementById("tbl");
-    let carga = document.createElement("div");
-    carga.setAttribute("class", "loading");
-    tabla.appendChild(carga);
+
     let rutas = await eel.mostrar_rutas_recibos(directorio, anno, periodo)();
     const rutasNum = Object.getOwnPropertyNames(rutas);
 
-    /* debugger; */
+
     for (let i = 1; i <= rutasNum.length; i++) {
         let lista = document.getElementById("tbl-datos");
         let tr = document.createElement("tr");
@@ -38,16 +35,16 @@ async function mostrarEnTabla(directorio, periodo, anno) {
 
         let columnaPer = document.createElement("td");
         columnaPer.setAttribute("class", "cl-per");
-        columnaPer.innerHTML = rutas[i].per;
+        columnaPer.innerHTML = rutas[i][0]
         columnaPer.appendChild(checkBox)
 
         let columnaAnno = document.createElement("td");
-        columnaAnno.innerHTML = rutas[i].anno;
+        columnaAnno.innerHTML = rutas[i][1];
         let columnaNom = document.createElement("td");
-        columnaNom.innerHTML = rutas[i].nom;
+        columnaNom.innerHTML = rutas[i][2];
 
         let columnaRuta = document.createElement("td");
-        columnaRuta.innerHTML = rutas[i].ruta;
+        columnaRuta.innerHTML = rutas[i][3];
         columnaRuta.setAttribute("class", "cl-ruta");
 
         lista.appendChild(tr);
@@ -58,7 +55,7 @@ async function mostrarEnTabla(directorio, periodo, anno) {
         tr.appendChild(columnaRuta);
 
     }
-    tabla.removeChild(carga);
+
 }
 
 
