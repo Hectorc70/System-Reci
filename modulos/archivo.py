@@ -7,8 +7,16 @@ from modulos.rutas import unir_cadenas, crear_directorio
 
 
 class Archivo:
-    """Clase que trata con archivos, copia, mueve
-    origen: ruta_origen, destino=ruta_destino"""
+    """Clase que trata con archivos, copia, mueve.
+
+    origen: ruta_origen, destino=ruta_destino, las rutas deben ser la ruta
+    completa(C:/ORIGEN/ARCHIVO.pdf, C:/DESTINO/ARCHIVO_copia.pdf).
+
+    Crea automaticamente la carpeta de destino de 
+    la copia.
+    """
+
+
     def __init__(self, origen, destino, copiar=False, mover=False):
         self.ruta_archivo_origen = origen        
         self.ruta_archivo_destino = destino        
@@ -26,7 +34,7 @@ class Archivo:
         pass
 
     def copiar_archivo(self):
-        carpeta = self.ruta_archivo_destino.split('/')[0:-1]
+        carpeta = self.ruta_archivo_destino.split('/')[:-1]
         carpeta = unir_cadenas('/', carpeta)
         crear_directorio(carpeta) 
 

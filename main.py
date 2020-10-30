@@ -8,7 +8,7 @@ from respaldar.originales import ArchivoTimbre, ArchivoRecibo
 from modulos.rutas import abrir_directorio, abrir_archivo
 from modulos.txt import ArchivoTxt
 
-from datos.recibo import RutaRecibo
+from datos.ayuda.recibo import RutaRecibo, NuevoReciNom
 from datos.metadatos import ReciMetadatos
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
@@ -140,7 +140,7 @@ def guardar_mdatos(archivos_pdf):
 def obtener_reci_buscados(control, p_ini, a_ini, p_fin, a_fin):
     if a_ini == a_fin:
         periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
-        datos = ReciMetadatos('', a_ini)
+        datos = ReciMetadatos(datos='')
         recibos = datos.devolver_datos(control, a_ini, periodos)
         
         if recibos:
@@ -154,8 +154,8 @@ def buscador_recibo(ids, ruta_guardado):
     en la base de datos pasando como parametro el id
     del registro de la bd"""  
     
-    datos = ReciMetadatos('', '')
-    datos.consultar_extraer_recibos(ids, ruta_guardado)
+    datos = ReciMetadatos('')
+    datos.extraer_recibos(ids, ruta_guardado)
 
     print('Archivos Guardados en: ' + ruta_guardado)
     

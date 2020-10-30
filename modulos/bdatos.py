@@ -56,16 +56,10 @@ class Bdatos:
 			
 	
 	def consultar(self,nombre_tabla, condiciones, campos):
-		try:
-			tabla = "SELECT pagina, ruta FROM {} LIMIT 1".format(nombre_tabla)
-			self.cursor.execute(tabla)
-
-		except pymysql.err.ProgrammingError:
-			print("No existen datos de este año")		
-			pass
 		
-		orden = "SELECT {} FROM recibosnomina.{}\
-				WHERE {}".format(campos, nombre_tabla, condiciones)
+		
+		orden = "SELECT {} FROM {}.{}\
+				WHERE {}".format(campos, self.nombre_bd, nombre_tabla, condiciones)
 				
 
 		self.cursor.execute(orden)

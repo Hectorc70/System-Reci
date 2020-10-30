@@ -1,6 +1,6 @@
 
 from modulos.rutas import unir_cadenas, Rutas
-from datos.recibo import ReciboNomina
+from datos.ayuda.recibo import NuevoReciNom
 from modulos.bdatos import Bdatos
 from datos.ayuda.log import Log
 
@@ -61,36 +61,31 @@ class ReciMetadatos(Bdatos):
 		for anno, periodos in periodos.items():
 
 			for periodo in periodos:
-				campos = "id, periodo, anno, ruta"
+				campos = "id, control,periodo, anno, nomina,ruta"
 				cond_control = "control = " + "'" + str(control) + "'"
 				cond_anno = "anno = " + "'" + str(anno) + "'"
 				cond_per = "periodo = " + "'" + str(periodo) + "'"
 				condiciones = [cond_control, cond_anno, cond_per]
 				condiciones = unir_cadenas(' AND ', condiciones)
 
-				registros = self.consultar(
-					self.nombre_tbl, condiciones, campos)
-
-				for registro in registros:
-					nombre_archivo = registro[-1].split('/')[-1].split('.')[0]
-					registro = list(registro)
-					registro.append(nombre_archivo)
-					periodo_recibos[str(registro[0])] = registro
+				registros = self.consultar(self.nombre_tbl, condiciones, campos)
+				datos = list(registros[0])
+				
+				periodo_recibos[datos[0]] = datos
 
 		self.conexion.close()
 
 		return periodo_recibos
 
-	def consultar_extraer_recibos(self, id_registros, ruta_guardado):
+	def extraer_recibos(self, registros, ruta_guardado):
 		"""Consulta los registros y llama al metodo que extraer
 				los recibos"""
-		for id_registro in id_registros:
-			campos = "id, control, pagina, ruta"
-			condiciones = "id = " + "'" + id_registro + "'"
-			registro = self.consultar(self.nombre_tbl, condiciones, campos)
+		for registro in registros:
 
-			recibo = ReciboNomina(registro[0][-1])
-			recibo.guardar_recibos_extraidos(
-				registro[0][1], ruta_guardado, registro)
+			nuevo_recibo = NuevoReciNom(ruta_guardado, registro)
+			nuevo_recibo.guardar_recibo_buscado()
+
+		
 
 		self.conexion.close()
+

@@ -3,7 +3,10 @@
     border-bottom-color: #222121 !important;
     border-bottom-style: solid;  
 }
-
+.ocultar-colum{
+    display: none;
+    visibility: hidden;
+}
 #conte-control{  
     width: 15%;
     display: inline-block;    

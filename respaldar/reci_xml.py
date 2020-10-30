@@ -1,6 +1,6 @@
 
 from modulos.rutas import unir_cadenas, crear_directorio
-from respaldar.modelos.archivo import Archivo
+from modulos.archivo import Archivo
 
 from modulos.pdf import ArchivoPdf
 from respaldar.modelos.buscador import Buscador

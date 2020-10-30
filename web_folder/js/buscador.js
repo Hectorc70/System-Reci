@@ -2,13 +2,18 @@
 
 function enviarDatosBusqueda() {
 
-    let control = document.getElementsByName("control")[0].value; 
+    let control = document.getElementsByName("control")[0].value;
     let ruta = document.getElementsByName("ruta-masivo")[0].value;
     if (ruta != '') {
         buscarVariosEmpleados()
     }
-    if (control != '') {
+    else if (control != '') {
         mostrarRecibos()
+    }
+
+    else {
+        Precaucion('Escriba un numero de control para poder Buscar\
+        O seleccione archivo de carga masiva');
     }
 }
 
@@ -26,10 +31,11 @@ async function mostrarRecibos() {
         if (annoIni < annoFin || annoIni == annoFin) {
             deshabilitar('principal');
             loader_tarea();
-            let control = document.getElementsByName("control")[0].value;          
+            let control = document.getElementsByName("control")[0].value;
             let recibos = await eel.obtener_reci_buscados(control, periodoIni, annoIni, periodoFin, annoFin)();
             const recibosNum = Object.getOwnPropertyNames(recibos);
             habilitar('principal');
+            
             if (recibos != false) {
                 for (let i = 0; i < recibosNum.length; i++) {
                     let lista = document.getElementById("tbl-datos");
@@ -39,28 +45,46 @@ async function mostrarRecibos() {
                     checkBox.setAttribute("class", "c-box");
 
 
+                    let columnaCtrl = document.createElement("td");
+                    columnaCtrl.innerHTML = recibos[recibosNum[i]][1];
+                    columnaCtrl.setAttribute("class", "cl-ctrl");
+                    columnaCtrl.appendChild(checkBox)
+
                     let columnaId = document.createElement("td");
-                    columnaId.setAttribute("class", "cl-id");
+                    columnaId.setAttribute("class", "cl-id  ocultar-colum");
                     columnaId.innerHTML = recibos[recibosNum[i]][0];
-                    columnaId.appendChild(checkBox)
+
                     let columnaPeriodo = document.createElement("td");
-                    columnaPeriodo.innerHTML = recibos[recibosNum[i]][1];
+                    columnaPeriodo.setAttribute("class", "cl-per");
+                    columnaPeriodo.innerHTML = recibos[recibosNum[i]][2];
+
                     let columnaAnno = document.createElement("td");
-                    columnaAnno.innerHTML = recibos[recibosNum[i]][2];
+                    columnaAnno.setAttribute("class", "cl-anno");
+                    columnaAnno.innerHTML = recibos[recibosNum[i]][3];
+
+                    let columnaNom = document.createElement("td");
+                    columnaNom.setAttribute("class", "cl-nom");
+                    columnaNom.innerHTML = recibos[recibosNum[i]][4];
+
                     let columnaArchivo = document.createElement("td");
-                    columnaArchivo.innerHTML = recibos[recibosNum[i]][4];
+                    columnaArchivo.setAttribute("class", "cl-ruta ocultar-colum");
+                    columnaArchivo.innerHTML = recibos[recibosNum[i]][5];
+
                     let columnaV = document.createElement("td");
-                    let opcionVer = document.createElement("button");                   
-                    opcionVer.setAttribute("class","btn btn-ver");
+                    let opcionVer = document.createElement("button");
+                    opcionVer.setAttribute("class", "btn btn-ver");
                     opcionVer.setAttribute("onclick", "verRecibo()");
                     opcionVer.innerHTML = "Ver";
 
 
                     lista.appendChild(tr);
+                    tr.appendChild(columnaCtrl);
+                    columnaCtrl.appendChild(checkBox);
+
                     tr.appendChild(columnaId);
-                    columnaId.appendChild(checkBox);
                     tr.appendChild(columnaPeriodo);
                     tr.appendChild(columnaAnno);
+                    tr.appendChild(columnaNom);
                     tr.appendChild(columnaArchivo);
                     tr.appendChild(columnaV);
                     columnaV.appendChild(opcionVer)
@@ -92,15 +116,24 @@ async function EnviarDatosExtraccion() {
     let ruta = document.getElementsByName("ruta-guardado")[0].value;
     let control = document.getElementsByName("control")[0].value;
     let recibos = [];
-    let filaId = document.getElementsByClassName("cl-id");
-
-    for (let i = 0; i < filaId.length; i++) {
-        let checkBox = filaId[i].getElementsByClassName("c-box");
+    let filaControl = document.getElementsByClassName("cl-ctrl");
+    debugger;
+    for (let i = 0; i < filaControl.length; i++) {
+        let checkBox = filaControl[i].getElementsByClassName("c-box");
         if (checkBox[0].checked == true) {
-            recibos.push(filaId[i].innerText);
+            let filaId = document.getElementsByClassName("cl-id")[i].innerText;
+            let filaPer = document.getElementsByClassName("cl-per")[i].innerText;
+            let filaAnno = document.getElementsByClassName("cl-anno")[i].innerText;
+            let filaNomina = document.getElementsByClassName("cl-nom")[i].innerText;
+            let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
+            
+            let datos = [];
+            datos = [filaControl[i].innerText, filaId, filaPer, filaAnno, filaNomina, filaRuta]
+            recibos.push(datos);
         }
     }
 
+    debugger;
     if (ruta != '' & recibos.length > 0) {
         deshabilitar('principal');
         loader_tarea();
@@ -131,13 +164,13 @@ async function buscarVariosEmpleados() {
 }
 
 
-async function verRecibo(){
+async function verRecibo() {
     let visualizador = document.getElementById("overlay");
     visualizador.removeAttribute("class");
     deshabilitar("menu")
 }
 
-async function salirVerRecibo(){
+async function salirVerRecibo() {
     let visualizador = document.getElementById("overlay");
     visualizador.setAttribute("class", "no-mostrar")
     habilitarElemento("menu")
@@ -147,8 +180,8 @@ async function salirVerRecibo(){
 /* VISOR DE PDF'S */
 
 
-async function VerPdf(){
+async function VerPdf() {
     pdfjsLib.getDocument('../img/Control_ORDINARIA_202019.pdf').then((pdf) => {
-        
+
     });
 }
