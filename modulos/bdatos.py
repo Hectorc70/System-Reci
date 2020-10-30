@@ -13,9 +13,9 @@ class Bdatos:
 	
 	
 	def crear_tabla(self, tabla):
-		orden = "CREATE TABLE {}.{}(id INT AUTO_INCREMENT,control INT(8) NOT NULL, \
+		orden = "CREATE TABLE {}.{}(id INT AUTO_INCREMENT, control INT(8) NOT NULL, \
 				periodo VARCHAR(2) NOT NULL, anno VARCHAR(4) NOT NULL, \
-				ruta VARCHAR(300) NOT NULL,\
+				nomina VARCHAR(30) NOT NULL, ruta VARCHAR(300) NOT NULL,\
 				PRIMARY KEY(id), UNIQUE KEY(id))".format(self.nombre_bd, tabla)
 
 

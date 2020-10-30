@@ -120,14 +120,12 @@ def mostrar_rutas_recibos(directorio, anno, periodo):
     
 
 @eel.expose
-def guardar_mdatos(rutas, anno):
-    for ruta in rutas:
-        recibo = ReciboNomina(ruta)
-        metadatos_recibos = recibo.almacenar_datos()
+def guardar_mdatos(archivos_pdf):
+    for datos in archivos_pdf:    
 
-        mtdatos = ReciMetadatos(metadatos_recibos, anno)
+        mtdatos = ReciMetadatos(datos)
         mtdatos.guardar()
-        print("Datos Procesados: " + ruta)
+        print("Datos Procesados: {}".format(datos[-1]))
     
     return True
     
