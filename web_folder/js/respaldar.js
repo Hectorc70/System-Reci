@@ -58,14 +58,14 @@ async function mostrarRutasRecibos() {
 
             let columnaPeriodo = document.createElement("td");
             columnaPeriodo.setAttribute("class", "cl-per")
-            columnaPeriodo.innerHTML = rutas[i][0];
+            columnaPeriodo.innerHTML = rutas[i-1][0];
 
             let columnaNomina = document.createElement("td");
-            columnaNomina.innerHTML = rutas[i][1];
+            columnaNomina.innerHTML = rutas[i-1][1];
 
             let columnaArchivo = document.createElement("td");
             columnaArchivo.setAttribute("class", "ruta-archivo");
-            columnaArchivo.innerHTML = rutas[i][2];
+            columnaArchivo.innerHTML = rutas[i-1][2];
 
 
             lista.appendChild(tr);
@@ -112,14 +112,14 @@ async function mostrarRutasTimbres() {
 
             let columnaPeriodo = document.createElement("td");
             columnaPeriodo.setAttribute("class", "cl-per")
-            columnaPeriodo.innerHTML = rutas[i][0];
+            columnaPeriodo.innerHTML = rutas[i-1][0];
 
             let columnaNomina = document.createElement("td");
-            columnaNomina.innerHTML = rutas[i][1];
+            columnaNomina.innerHTML = rutas[i-1][1];
 
             let columnaArchivo = document.createElement("td");
             columnaArchivo.setAttribute("class", "ruta-archivo");
-            columnaArchivo.innerHTML = rutas[i][2];
+            columnaArchivo.innerHTML = rutas[i-1][2];
 
 
             lista.appendChild(tr);
