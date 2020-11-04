@@ -2,13 +2,12 @@
 
 
 from modulos.rutas import unir_cadenas, Rutas
-from datos.ayuda.recibo import NuevoReciNom
-from modulos.bdatos import Bdatos
-from datos.ayuda.log import Log
+from almacenar.ayuda.recibo import NuevoReciNom
+from almacenar.ayuda.log import Log
 
 	
 
-class ReciMetadatos(Bdatos):
+class ReciMetadatos():
 	"""Clase que maneja los metadatos de los recibos 
 	de nomina y se comunica con la base de datos"""
 
@@ -20,9 +19,7 @@ class ReciMetadatos(Bdatos):
 
 		self.datos = datos
 		self.nombre_tbl = 'recibos'
-		self.campos_col = 'control, periodo, anno, nomina, ruta'
-		Bdatos.__init__(self, self.host, self.usuario,
-						self.psw, self.nombre_bd)
+		self.campos_col = 'control, periodo, anno, nomina, ruta'	
 
 	def _formar_datos(self):
 		"""Formatea los datos 

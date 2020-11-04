@@ -1,19 +1,19 @@
 from os.path import exists
 
 import eel
+from modulos.rutas import abrir_directorio, abrir_archivo
+from modulos.txt import ArchivoTxt
+from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
-from modulos.cliente import Cliente
+from almacenar.cliente import Cliente
 from configuraciones import Configuracion
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo 
 
-from modulos.rutas import abrir_directorio, abrir_archivo
-from modulos.txt import ArchivoTxt
+from almacenar.registro import Registro
 
-from datos.ayuda.recibo import RutaRecibo, NuevoReciNom
-from datos.metadatos import ReciMetadatos
-from modulos.periodos import armar_periodos_intermedios, armar_periodos
+
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js','.html'])
@@ -134,7 +134,7 @@ def copiado_recibos(carpt_orig, carpt_dest ,archivos):
 
 """
 **---------------------------------------------------------------------------------------------**
-                        ***RECOPILADOR***
+                        ***ALMACENAR DATOS EN BASE DE DATOS***
 **---------------------------------------------------------------------------------------------**
 """
 
@@ -148,10 +148,14 @@ def mostrar_rutas_recibos(directorio, anno, periodo):
 
 @eel.expose
 def guardar_mdatos(archivos_pdf):
-    for datos in archivos_pdf:    
+    for datos in archivos_pdf:
+        datos
 
-        mtdatos = ReciMetadatos(datos)
-        mtdatos.guardar()
+        recibo = Registro(datos[0], datos[0] ,datos[0], datos[0], datos[0])
+        recibo.guardar()
+
+        #mtdatos = ReciMetadatos(datos)
+        #mtdatos.guardar()
         print("Datos Procesados: {}".format(datos[-1]))
     
     return True
