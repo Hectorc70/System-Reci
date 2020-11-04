@@ -47,8 +47,8 @@ def comprobar_conexiones():
         psw = opciones_param['PSWORD']
         bd = opciones_param['BASE-DATOS']
         tabla = opciones_param['TABLA']
-
-        conexion = Cliente(ip, int(puerto), usuario, psw, bd, tabla, 'CONSULTAR')
+        accion = "CONSULTAR:control = 318212 AND anno ='2020'|control, periodo, anno, ruta"
+        conexion = Cliente(ip, int(puerto), usuario, psw, bd, tabla, accion)
         cliente = conexion.conectar()
         
         if cliente == True:       

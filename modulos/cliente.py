@@ -20,18 +20,18 @@ class Cliente:
 
 		datos = [self.accion, self.usuario, self.psw, self.bd, self.tabla]
 
-		datos = unir_cadenas(',', datos)
+		datos = unir_cadenas('_', datos)
 		
 		return datos
 
-	def conectar(self):
-		
-			self.cliente.connect((self.ip, self.puerto))
-			
+	def conectar(self):		
+			self.cliente.connect((self.ip, self.puerto))			
 			datos = self._formatear_datos()
-
+			
 			self.cliente.send(datos.encode())
 			print('CONECTADO CON EXITO')
+			respuesta = self.cliente.recv(1024).decode()
+			print(respuesta)
 			self.cliente.close()
 			return True
 
