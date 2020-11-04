@@ -11,6 +11,8 @@ class Bdatos:
 		self.cursor    = self.conexion.cursor()
 		self.errores_guardado = dict()
 	
+
+	
 	
 	def crear_tabla(self, tabla):
 		orden = "CREATE TABLE {}.{}(id INT AUTO_INCREMENT, control INT(8) NOT NULL, \

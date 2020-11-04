@@ -2,6 +2,9 @@ from os.path import exists
 
 import eel
 
+from modulos.cliente import Cliente
+from configuraciones import Configuracion
+
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo 
 
@@ -32,6 +35,30 @@ ejecutar(ruta, '01',  '2020', ruta_destino) """
                         ***HERRAMIENTAS***
 **---------------------------------------------------------------------------------------------**
 """
+
+def comprobar_conexiones():
+    opciones = Configuracion()
+    opciones_param = opciones.cargar_opciones()
+    
+    if opciones_param:
+        ip = opciones_param['SERVER-HOST']        
+        puerto = opciones_param['PUERTO']
+        usuario = opciones_param['USUARIO']
+        psw = opciones_param['PSWORD']
+        bd = opciones_param['BASE-DATOS']
+        tabla = opciones_param['TABLA']
+
+        conexion = Cliente(ip, int(puerto), usuario, psw, bd, tabla, 'CONSULTAR')
+        cliente = conexion.conectar()
+        
+        if cliente == True:       
+            return True
+        else:
+            print('Conexion con servidor no exitosa')
+            
+
+comprobar_conexiones()
+
 @eel.expose
 def directorios(ruta1, ruta2):
     directorio_orig = Directorio(ruta1)

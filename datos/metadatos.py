@@ -1,9 +1,12 @@
+9
+
 
 from modulos.rutas import unir_cadenas, Rutas
 from datos.ayuda.recibo import NuevoReciNom
 from modulos.bdatos import Bdatos
 from datos.ayuda.log import Log
 
+	
 
 class ReciMetadatos(Bdatos):
 	"""Clase que maneja los metadatos de los recibos 
