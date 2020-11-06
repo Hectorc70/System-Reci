@@ -1,52 +1,43 @@
 'use stric'
 
 
-async function mostrarDirectorio(){
-    var periodoIn = document.getElementsByName("periodo")[0].value;
-    var annoIn = document.getElementsByName("anno")[0].value;
-    
-    if(annoIn !== ''){
+async function validarInputs() {
+    let periodoIn = document.getElementsByName("periodo")[0].value;
+    let annoIn = document.getElementsByName("anno")[0].value;
+    let directorio = document.getElementsByName("ruta-reci")[0].value;
 
-        let directorio = await eel.ruta_metadatos()();     
-    
-        document.getElementsByName("ruta-reci")[0].value = directorio;
-    
-        console.log(directorio);
-    mostrarEnTabla()
+    if (annoIn !== '' && periodoIn != '' && directorio != '') {
+        mostrarEnTabla(directorio, periodoIn, annoIn)
     }
-    else{
-        alert("Escribe un Año y Periodo para continuar")
+    else {
+        Precaucion("Selecciona Ruta, Año y Periodo para continuar");
     }
-    
+
 }
 
-async function mostrarEnTabla(){
-/* 
-    let datos = document.getElementById("tbl-datos");
-    datos.removeChild(tr) */
+async function mostrarEnTabla(directorio, periodo, anno) {
+    /* 
+        let datos = document.getElementById("tbl-datos");
+        datos.removeChild(tr) */
 
-    let tabla =document.getElementById("tbl");  
+    let tabla = document.getElementById("tbl");
     let carga = document.createElement("div");
-    carga.setAttribute("class", "loading");    
+    carga.setAttribute("class", "loading");
     tabla.appendChild(carga);
-
-    let directorio = document.getElementsByName("ruta-reci")[0].value;
-    let periodo = document.getElementsByName("periodo")[0].value;
-    let anno = document.getElementsByName("anno")[0].value;
-    let rutas = await eel.mostrar_rutas_recibos(directorio,anno, periodo)();
+    let rutas = await eel.mostrar_rutas_recibos(directorio, anno, periodo)();
     const rutasNum = Object.getOwnPropertyNames(rutas);
 
     /* debugger; */
-    for(let i=1; i<=rutasNum.length; i++){
+    for (let i = 1; i <= rutasNum.length; i++) {
         let lista = document.getElementById("tbl-datos");
-        let tr = document.createElement("tr");      
+        let tr = document.createElement("tr");
         let checkBox = document.createElement("input");
         checkBox.setAttribute("type", "checkbox");
         checkBox.setAttribute("class", "c-box");
-        
 
-        let columnaPer = document.createElement("td"); 
-        columnaPer.setAttribute("class", "cl-per");    
+
+        let columnaPer = document.createElement("td");
+        columnaPer.setAttribute("class", "cl-per");
         columnaPer.innerHTML = rutas[i].per;
         columnaPer.appendChild(checkBox)
 
@@ -55,17 +46,17 @@ async function mostrarEnTabla(){
         let columnaNom = document.createElement("td");
         columnaNom.innerHTML = rutas[i].nom;
 
-        let columnaRuta = document.createElement("td");     
-        columnaRuta.innerHTML = rutas[i].ruta;   
-        columnaRuta.setAttribute("class", "cl-ruta");    
-        
-        lista.appendChild(tr);                 
+        let columnaRuta = document.createElement("td");
+        columnaRuta.innerHTML = rutas[i].ruta;
+        columnaRuta.setAttribute("class", "cl-ruta");
+
+        lista.appendChild(tr);
         columnaPer.appendChild(checkBox);
-        tr.appendChild(columnaPer);      
+        tr.appendChild(columnaPer);
         tr.appendChild(columnaAnno);
         tr.appendChild(columnaNom);
         tr.appendChild(columnaRuta);
-    
+
     }
     tabla.removeChild(carga);
 }
@@ -73,44 +64,38 @@ async function mostrarEnTabla(){
 
 
 
-function elementosTabla(){
-    let tabla =document.getElementById("tbl");  
-    let carga = document.createElement("div");
-    carga.setAttribute("class", "loading");    
-    tabla.appendChild(carga);
-
+async function elementosTabla() {
     var rutas = [];
     let filaPer = document.getElementsByClassName("cl-per");
     let anno = document.getElementsByName("anno")[0].value;
-    checkBoxTodo = document.getElementsByName("todo");
-
-    if(checkBoxTodo[0].checked == true){
-
-        for(let i=0; i<filaPer.length; i++){
-            let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
-            rutas.push(filaRuta);
+    if (filaPer.length > 0) {
+        for (let i = 0; i < filaPer.length; i++) {
+            checkBox = filaPer[i].getElementsByClassName("c-box");
+            if (checkBox[0].checked == true) {
+                let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
+                rutas.push(filaRuta);
+            }
         }
-    }    
-    
-    for(let i=0; i<filaPer.length; i++){
-        
-        
-        checkBox = filaPer[i].getElementsByClassName("c-box");
-        
-        if(checkBox[0].checked == true){
-            let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
-            rutas.push(filaRuta);
+
+        if (rutas.length > 0) {
+            deshabilitar('principal');
+            loader_tarea();
+            let proceso = await eel.guardar_mdatos(rutas, anno)();
+            if (proceso == true) {
+                habilitar('principal');
+                satisfactorio('Proceso Terminado');
+            }
+        }
+
+        else {
+            Precaucion('Seleccione almenos una fila');
         }
     }
-
-    eel.guardar_mdatos(rutas, anno)();
-    tabla.removeChild(carga);
-} 
-
-
-function eliminarFilas(){
-    function deleteRow(row){
-        var d = row.parentNode.parentNode.rowIndex;
-        document.getElementById('dsTable').deleteRow(d);
+    else {
+        Precaucion('Se debe buscar primero');
     }
+
+
+
+
 }

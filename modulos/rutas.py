@@ -35,18 +35,18 @@ class Rutas():
         return rutas
         
 
-    def recuperar_carpetas(self, carpeta_1 = False):
+    def recuperar_carpetas(self, carpeta, carpeta_1 = False):
         carpetas_recuperadas = list()
 
         if carpeta_1:
-            for ruta, carpetas, archivos in os.walk(self.carpeta,topdown = True):
+            for ruta, carpetas, archivos in os.walk(carpeta,topdown = True):
                 for carpeta in carpetas:
                     ruta_full = self.ruta_completa(ruta, carpeta)                
                     carpetas_recuperadas.append(ruta_full)
                 break    
 
         elif carpeta_1 == False:
-            for ruta, carpetas, archivos in os.walk(self.carpeta,topdown = True):          
+            for ruta, carpetas, archivos in os.walk(carpeta,topdown = True):          
             
                 for carpeta in carpetas:
                     

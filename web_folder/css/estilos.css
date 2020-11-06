@@ -1,86 +1,259 @@
+/* fuentes */
+@font-face{
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Black.ttf");
+}
+
+@font-face{
+    font-family: "Nova-Flat";
+    src: url("../fonts/NovaFlat-Regular.ttf");
+}
+
+
 html,
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    height: 100%;
+    height: 98%;
     margin: 0px;
     padding: 0px;
-    background-image: url("../img/patron.png");
-    /*background: linear-gradient(to right, #93cede 0%, rgba(118,189,209,1) 47%, rgba(117,189,209,1) 48%, rgba(115,188,208,1) 50%, rgba(73,165,191,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );    */
+    /* background-image: url("../img/patron.png"); */
+    /* background: radial-gradient(ellipse at center, rgba(66,65,66,1) 0%, rgba(66,66,66,1) 50%, rgba(64,64,64,1) 65%, rgba(59,59,59,1) 72%, rgba(38,38,38,1) 100%); */
+    background-color: #363535;
+}
+
+#preloader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 99vh;
+    width: 30%;  
+    margin:auto; 
+}
+/* SCROOLL BAR */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #4e4e4e; 
+}
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4e4e4e; 
+}
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #4e4e4e; 
+}
+::-webkit-scrollbar:hover {
+    width: 10px;
 }
 
 
-/* MENU */
-aside{   
-    float: left;
-    width: 15%;
-    height: 98%;    
-    background-color: #565656;
-    margin-top: 8px;
-    box-shadow:  7px 5px 5px #2f2f2f;
-}
-/* LOGO */
-.logo{
-    display: block;
-    margin-top: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center; 
-    width: 57%;
-    height: 15%;
-    background-color: #00466e;
-    border-radius: 100%;
-}
-.logo img{
-    width: 100%;
-    height: 95%;
-    margin: auto;
-    padding: 5px;
-}
-#menu{
-    margin-top: 40px;   
-    width: 100%;
-    height: 70%;
-}
 
-aside #menu div{    
-    background-color: #2b2a2a;
-    height: 60px;
-    padding: 1px;
-    margin-bottom: 10px;
 
-}
-
-aside #menu div:hover{
-    border-bottom-style: solid;
-    border-bottom-color: white;
-    background-color: #0083CD;
-    cursor: pointer;   
-}
-aside div h2 {
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    text-align: center;
-}
-
-aside div h2 a{
-    text-decoration:none ;
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    text-align: center;
-}
 
 /* SECCION PRINCIPAL */
+#menu-principal{
+    display: block;   
+    width: 70%;    
+    height: 98%;   
+    margin: 0px auto; 
+    margin-top: 40px;  
+    padding: 20px;
+    background-color: #4e4e4e;    
+    box-shadow: 5px 5px 10px #1a1919;
+   
+}
+#titulo{
+    display: block;
+    background-color: #363535;
+    margin:2px auto;
+    width: 100%;
+    text-align: center;
+    color: white;
+    border-radius: .5em;
+    padding: 1px;   
+    /* position: sticky;
+    top: -3%; */
+
+}
+#titulo h1{
+    font-size: 26px;
+    font-family: Roboto;
+    text-shadow: 10px 5px 10px #1a1919;
+}
+.box-opciones{      
+    margin: 50px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: start;  
+    height: 75%;     
+    /* border-radius: .5em; */    
+}
+
+.submenu{
+    display: block;
+    background-color: #363535;
+    border-radius: .5em;
+    width: 48%;
+    height: 100%;
+    margin: 6px;       
+    padding: 15px;    
+    padding-top: 5px;
+    overflow: auto;
+    scrollbar-width: 5px;
+}
+.subtitulo{
+    display: block;    
+    background-color:#2c2c2c;  
+    border-radius: .5em;  
+    margin-top: 5px;
+    height: 50px;
+    text-align: center;
+    padding: 10px;   
+    
+}
+.subtitulo h2{
+    display: block;
+    height: 100%;  
+    font-size: 25px;    
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin-top: 0px;
+    text-shadow: 5px 10px 5px #1a1919;
+    
+}
+.opcion{
+    display: block;    
+    background-color: #008992;
+    height: 150px;
+    width: 90%;      
+    padding: 5px; 
+    margin: 6px auto;  
+    margin-top: 20px;
+    box-shadow: 5px 5px 10px #1a1919;
+    
+}
+.submenu .opcion:nth-child(2){  
+    margin-top: 30px !important;
+
+}
+.conte-opcion{
+    display: block;
+    background-color: #40A7AD;
+    border-radius: .5em;
+    width: 95%;
+    height: 95%;
+    margin: 2px auto;
+    padding: 5px;    
+    
+}
+.conte-opcion img{
+    display: block;
+    width: 100%;
+    height: 60%;  
+    margin-top: 5px;    
+}
+.opcion h3{   
+    display: block;    
+    height: 30%;
+    width: 100%;     
+    font-size: 18px;
+    color: white;
+    font-family: Roboto;
+    text-transform: uppercase;    
+    text-align: center;     
+    margin-top: 5px;
+    margin-bottom: 0px;    
+}
+ /* COLORES OPCIONES */ 
+.opcion:hover .conte-opcion{
+    background-color: #008992;
+}
+.opcion:hover{
+    background-color: #40A7AD;
+}
+.rojo{
+    background-color: #920900;
+}
+.rojo .conte-opcion{
+    background-color: #af352d;
+}
+.rojo:hover .conte-opcion{
+    background-color: #920900;
+}
+.rojo:hover{
+    background-color: #af352d;
+}
+
+
+.morado{
+    background-color: #520092;
+}
+.morado .conte-opcion{
+    background-color: #6c2b9e;
+}.morado:hover .conte-opcion{
+    background-color: #520092;
+}
+.morado:hover{
+    background-color: #6c2b9e;
+}
+
+.azul{
+    background-color: #005892;
+}
+.azul .conte-opcion{
+    background-color: #19689c;
+}
+.azul:hover .conte-opcion{
+    background-color: #005892;
+}
+
+.azul:hover{
+    background-color: #19689c;
+}
+
+
+
+.opcion:hover .conte-opcion img{
+    width: 30px;
+    height: 30px;
+    transition: 300ms;
+
+}
+.opcion:hover .conte-opcion h3{
+    font-size: 14px;
+    height: 20%;
+ 
+}
+
+
+
+.no-mostrar{
+    display: none;
+    visibility: hidden;
+    color: white;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}   
+.opcion:hover .no-mostrar{
+    display: block;
+    visibility: visible;
+    margin-top: 0px;
+    height: 50%;    
+}
+
 #s-logo{
     margin-top: 100px;
     height: 80%;
     width: 85%;
     float: left;
     text-align: center; 
-
 }
 
 
