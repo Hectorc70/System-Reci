@@ -17,17 +17,16 @@ class Cliente:
 	
 
 	def _formatear_datos(self):
+		datos_conexion = unir_cadenas(',', [self.usuario, self.psw, self.bd, self.tabla])
+		datos = [self.accion, datos_conexion]
 
-		datos = [self.accion, self.usuario, self.psw, self.bd, self.tabla]
-
-		datos = unir_cadenas('_', datos)
+		datos = unir_cadenas('|', datos)
 		
 		return datos
 
 	def conectar(self):		
 			conexion = self.cliente.connect((self.ip, self.puerto))
-			
-	
+				
 			print('CONECTADO CON EXITO')		
 			datos = self._formatear_datos()	
 					

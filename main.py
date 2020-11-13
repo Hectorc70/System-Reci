@@ -7,11 +7,12 @@ from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 from almacenar.cliente import Cliente
 from configuraciones import Configuracion
+from almacenar.registro import RegistroRecibo
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo 
 
-from almacenar.registro import Registro
+
 
 
 
@@ -45,10 +46,11 @@ def comprobar_conexiones():
         puerto = opciones_param['PUERTO']
         usuario = opciones_param['USUARIO']
         psw = opciones_param['PSWORD']
-        bd = opciones_param['BASE-DATOS']
-        tabla = opciones_param['TABLA']
-        accion = "CONSULTAR:control = 318212 AND anno ='2020'|control, periodo, anno, ruta"
-        conexion = Cliente(ip, int(puerto), usuario, psw, bd, tabla, accion)
+        bd = opciones_param['BASE-DATOS']   
+
+        accion = "INSERTAR:NombreArchivo, RutaArchivo, Periodo, TipoNomina, Nocontrol|'Archivo2', 'C:PRUEBA/', '202003', 'ORDINARIA', '318212'"
+        
+        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'recibos',accion)
         cliente = conexion.conectar()
         
         if cliente == True:       
@@ -150,7 +152,7 @@ def mostrar_rutas_recibos(directorio, anno, periodo):
 def guardar_mdatos(archivos_pdf):
     for datos in archivos_pdf:
         datos
-
+        
         recibo = Registro(datos[0], datos[0] ,datos[0], datos[0], datos[0])
         recibo.guardar()
 
