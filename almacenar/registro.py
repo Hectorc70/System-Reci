@@ -7,15 +7,17 @@ class RegistroRecibo:
 	Clase que maneja registros(recibos de nomina)
 	"""
 
-	def __init__(self, control, periodo, anno, t_nomina, ruta_archivo):
-		self.control = control
+	def __init__(self, nombre_archivo, ruta_archivo, periodo, t_nomina, control):
+		
+		self.nombre_archivo = nombre_archivo
+		self.ruta_archivo = ruta_archivo		
 		self.periodo = periodo
-		self.anno = anno
 		self.t_nomina = t_nomina
-		self.ruta_archivo = ruta_archivo
+		self.control = control
+		
 
-		self.campos = "control, periodo, anno, nomina, ruta"
-
+		self.campos = "NombreArchivo, RutaArchivo, Periodo, TipoNomina, Nocontrol"
+	
 	def guardar(self):
 		"""Crea la cadena que se envia
 		hacia el servidor para insertar 
@@ -23,14 +25,15 @@ class RegistroRecibo:
 		devuelve  una cadena de texto"""
 
 
-		self.control = "'"+str(self.control)+"'"
-		self.periodo = "'"+str(self.periodo)+"'"
-		self.anno = "'"+str(self.anno)+"'"
+		self.nombre_archivo = "'"+str(self.nombre_archivo)+"'"
+		self.periodo = "'"+str(self.periodo)+"'"	
 		self.t_nomina = "'"+str(self.t_nomina)+"'"
 		self.ruta_archivo = "'"+str(self.ruta_archivo)+"'"
+		self.control = "'"+str(self.control)+"'"
 
-		datos = unir_cadenas(',', [self.control, self.periodo, 
-							self.anno, self.t_nomina, self.ruta_archivo])
+		datos = unir_cadenas(',', [self.nombre_archivo, self.ruta_archivo,
+									self.periodo, self.t_nomina, 
+									self.control])
 		
 		accion = "INSERTAR:" + self.campos + '|' + datos
 		

@@ -7,7 +7,8 @@ from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
 from almacenar.cliente import Cliente
 from configuraciones import Configuracion
-from almacenar.registro import RegistroRecibo
+from almacenar.registro import RegistroRecibo, RegistroEmpleado
+from almacenar.ayuda.recibo import RutaRecibo
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo 
@@ -59,7 +60,7 @@ def comprobar_conexiones():
             print('Conexion con servidor no exitosa')
             
 
-comprobar_conexiones()
+
 
 @eel.expose
 def directorios(ruta1, ruta2):
@@ -150,15 +151,32 @@ def mostrar_rutas_recibos(directorio, anno, periodo):
 
 @eel.expose
 def guardar_mdatos(archivos_pdf):
-    for datos in archivos_pdf:
-        datos
-        
-        recibo = Registro(datos[0], datos[0] ,datos[0], datos[0], datos[0])
-        recibo.guardar()
+    opciones = Configuracion()
+    opciones_param = opciones.cargar_opciones()
+    
+    if opciones_param:
+        ip = opciones_param['SERVER-HOST']        
+        puerto = opciones_param['PUERTO']
+        usuario = opciones_param['USUARIO']
+        psw = opciones_param['PSWORD']
+        bd = opciones_param['BASE-DATOS']   
+       
 
-        #mtdatos = ReciMetadatos(datos)
-        #mtdatos.guardar()
-        print("Datos Procesados: {}".format(datos[-1]))
+    for datos in archivos_pdf:        
+        archivo = datos[-1].split('/')[-1]
+        control = archivo.split('_')[0]
+        periodo = str(datos[1]) + str(datos[0])
+        
+        recibo = RegistroRecibo(archivo, datos[-1] ,periodo, datos[2], control)
+        cadena_accion = recibo.guardar()
+        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'recibos')
+        respuesta = conexion.enviar_datos(cadena_accion)
+
+        print(respuesta)
+        print("Datos Procesados: {}".format(datos))
+    
+    conexion.cerrar_conexion()
+
     
     return True
     

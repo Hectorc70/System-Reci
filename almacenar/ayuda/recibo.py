@@ -52,7 +52,7 @@ class RutaRecibo(Rutas):
 					rutas_archivos.append(ruta_ord)
 
 				elif nomina == 'JUBILADOS':
-					ruta_jub = unir_cadenas('\\', ruta)
+					ruta_jub = unir_cadenas('/', ruta)
 					datos_recibos_rutas=[periodo, anno, nomina, ruta_jub]
 
 					rutas_archivos.append(datos_recibos_rutas)
@@ -69,7 +69,7 @@ class RutaRecibo(Rutas):
 		carpeta=datos[self.ruta_num+2].upper()
 
 		if carpeta.split('_')[-1] == 'PDF':
-			ruta=unir_cadenas('\\', datos)
+			ruta=unir_cadenas('/', datos)
 			datos_recibos_rutas=[periodo, anno, nomina, ruta]
 		
 
@@ -81,7 +81,7 @@ class RutaRecibo(Rutas):
 		carpeta=datos[self.ruta_num+2].upper()
 
 		if carpeta == 'PDF':
-			ruta=unir_cadenas('\\', datos)
+			ruta=unir_cadenas('/', datos)
 			datos_recibos_rutas=[periodo, anno, nomina, ruta]		
 
 			return datos_recibos_rutas

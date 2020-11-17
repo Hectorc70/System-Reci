@@ -5,7 +5,7 @@ from modulos.rutas import unir_cadenas
 
 class Cliente:
 
-	def __init__(self, ip, puerto, usuario, psw, bd, tabla, accion):
+	def __init__(self, ip, puerto, usuario, psw, bd, tabla):
 		self.ip = ip
 		self.puerto = puerto
 		self.cliente = socket.socket()
@@ -13,28 +13,33 @@ class Cliente:
 		self.psw 	  = psw
 		self.bd 	  = bd	
 		self.tabla 	  = tabla
-		self.accion   = accion
-	
+		
 
-	def _formatear_datos(self):
+		self._conectar()
+
+	def _formatear_datos(self, instruccion):
 		datos_conexion = unir_cadenas(',', [self.usuario, self.psw, self.bd, self.tabla])
-		datos = [self.accion, datos_conexion]
+		datos = [instruccion, datos_conexion]
 
 		datos = unir_cadenas('|', datos)
 		
 		return datos
 
-	def conectar(self):		
-			conexion = self.cliente.connect((self.ip, self.puerto))
+	def _conectar(self):		
+			self.cliente.connect((self.ip, self.puerto))
 				
 			print('CONECTADO CON EXITO')		
-			datos = self._formatear_datos()	
-					
-			self.cliente.send(datos.encode())
-				
-			respuesta = self.cliente.recv(1024).decode()
-			print(respuesta)
-			self.cliente.close()
-			return True
+			
 
-	
+	def enviar_datos(self, instruccion):
+
+		datos = self._formatear_datos(instruccion)	
+					
+		self.cliente.send(datos.encode())				
+		respuesta = self.cliente.recv(1024).decode()
+		
+		return respuesta
+
+	def cerrar_conexion(self):
+		self.cliente.close()
+		
