@@ -24,6 +24,8 @@ async function mostrarRecibos() {
     let annoIni = document.getElementsByName("anno-ini")[0].value;
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
     let annoFin = document.getElementsByName("anno-fin")[0].value;
+    let nombre = '0'
+
 
     if (periodoIni != '' && annoIni != '' &&
         periodoFin != '' && annoFin != '') {
@@ -32,7 +34,11 @@ async function mostrarRecibos() {
             deshabilitar('principal');
             loader_tarea();
             let control = document.getElementsByName("control")[0].value;
-            let recibos = await eel.obtener_reci_buscados(control, periodoIni, annoIni, periodoFin, annoFin)();
+            
+            
+            let recibos = await eel.mostrar_datos_encontrados(control,nombre, 
+                                                            periodoIni, annoIni, 
+                                                            periodoFin, annoFin)();
             const recibosNum = Object.getOwnPropertyNames(recibos);
             habilitar('principal');
             

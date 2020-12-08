@@ -11,14 +11,11 @@ from almacenar.registro import RegistroRecibo, RegistroEmpleado
 from almacenar.ayuda.recibo import RutaRecibo
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
-from respaldar.originales import ArchivoTimbre, ArchivoRecibo 
-
-
-
+from respaldar.originales import ArchivoTimbre, ArchivoRecibo
 
 
 from herramientas.directorio import Directorio
-eel.init('web_folder', allowed_extensions=['.js','.html'])
+eel.init('web_folder', allowed_extensions=['.js', '.html'])
 """
 **---------------------------------------------------------------------------------------------**
                         ***PRUEBAS***
@@ -38,66 +35,65 @@ ejecutar(ruta, '01',  '2020', ruta_destino) """
 **---------------------------------------------------------------------------------------------**
 """
 
-def comprobar_conexiones():
+
+def leer_config_bd():
     opciones = Configuracion()
     opciones_param = opciones.cargar_opciones()
-    
-    if opciones_param:
-        ip = opciones_param['SERVER-HOST']        
-        puerto = opciones_param['PUERTO']
-        usuario = opciones_param['USUARIO']
-        psw = opciones_param['PSWORD']
-        bd = opciones_param['BASE-DATOS']   
 
-        accion = "INSERTAR:NombreArchivo, RutaArchivo, Periodo, TipoNomina, Nocontrol|'Archivo2', 'C:PRUEBA/', '202003', 'ORDINARIA', '318212'"
-        
-        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'recibos',accion)
-        cliente = conexion.conectar()
-        
-        if cliente == True:       
-            return True
-        else:
-            print('Conexion con servidor no exitosa')
-            
+    if opciones_param:       
+
+        return opciones_param
+
+    else: 
+        print("No existen configuraciones")
 
 
 
 @eel.expose
 def directorios(ruta1, ruta2):
     directorio_orig = Directorio(ruta1)
-    directorio_dos= Directorio(ruta2)
+    directorio_dos = Directorio(ruta2)
 
-    dif_rutas1 = directorio_orig.comparar_directorios(directorio_dos.rutas_sin_base)
-    #dif_rutas2 = directorio_dos.comparar_directorios(directorio_orig.contenido)
+    dif_rutas1 = directorio_orig.comparar_directorios(
+        directorio_dos.rutas_sin_base)
+    # dif_rutas2 = directorio_dos.comparar_directorios(directorio_orig.contenido)
 
     return dif_rutas1
+
 
 """
 **---------------------------------------------------------------------------------------------**
                         ***GENERALES***
 **---------------------------------------------------------------------------------------------**
 """
+
+
 @eel.expose
-def enviar_ruta(): 
-    directorio = abrir_directorio()    
-    
+def enviar_ruta():
+    directorio = abrir_directorio()
+
     if exists(directorio):
         return directorio
     else:
         return ''
+
 
 @eel.expose
 def enviar_ruta_archivo():
     ruta = abrir_archivo()
 
     return ruta
+
+
 """
 **---------------------------------------------------------------------------------------------**
                         ***RESPALDAR XML Y RECIBOS***
 **---------------------------------------------------------------------------------------------**
 """
+
+
 @eel.expose
-def rutas_timbres_orig(ruta,periodo, anno):  
+def rutas_timbres_orig(ruta, periodo, anno):
 
     originales = ArchivoTimbre(ruta, periodo, anno)
     timbres = originales.recuperar_timbres()
@@ -106,34 +102,36 @@ def rutas_timbres_orig(ruta,periodo, anno):
 
 
 @eel.expose
-def copiar_timbres(carpeta_origen,carpt_dest, archivos, anno, periodo):
+def copiar_timbres(carpeta_origen, carpt_dest, archivos, anno, periodo):
 
     for archivo in archivos:
 
-        timbre = TimbreCop(carpeta_origen, periodo,anno, carpt_dest)
+        timbre = TimbreCop(carpeta_origen, periodo, anno, carpt_dest)
         timbre.copiado_archivos(archivo)
 
     return True
 
 
 @eel.expose
-def rutas_recibos_orig(ruta, anno, periodo):  
+def rutas_recibos_orig(ruta, anno, periodo):
 
     originales = ArchivoRecibo(ruta, anno, periodo)
     recibos = originales.recuperar_recibos()
 
     return recibos
 
-@eel.expose
-def copiado_recibos(carpt_orig, carpt_dest ,archivos):
-    
-    for archivo in archivos:   
 
-        reci = ReciboCop(carpt_orig, archivo,carpt_dest)
+@eel.expose
+def copiado_recibos(carpt_orig, carpt_dest, archivos):
+
+    for archivo in archivos:
+
+        reci = ReciboCop(carpt_orig, archivo, carpt_dest)
         reci.separar_en_recibos()
-    
+
     print("Archivos copiados")
     return True
+
 
 """
 **---------------------------------------------------------------------------------------------**
@@ -141,45 +139,49 @@ def copiado_recibos(carpt_orig, carpt_dest ,archivos):
 **---------------------------------------------------------------------------------------------**
 """
 
+
 @eel.expose
 def mostrar_rutas_recibos(directorio, anno, periodo):
-    ruta_archivos =  RutaRecibo(directorio, anno, periodo)
+    ruta_archivos = RutaRecibo(directorio, anno, periodo)
     rutas = ruta_archivos.recuperar_periodo()
-    
+
     return rutas
-    
+
 
 @eel.expose
 def guardar_mdatos(archivos_pdf):
     opciones = Configuracion()
     opciones_param = opciones.cargar_opciones()
-    
+
     if opciones_param:
-        ip = opciones_param['SERVER-HOST']        
+        ip = opciones_param['SERVER-HOST']
         puerto = opciones_param['PUERTO']
         usuario = opciones_param['USUARIO']
         psw = opciones_param['PSWORD']
-        bd = opciones_param['BASE-DATOS']   
-       
+        bd = opciones_param['BASE-DATOS']
 
-    for datos in archivos_pdf:        
+    for datos in archivos_pdf:
         archivo = datos[-1].split('/')[-1]
         control = archivo.split('_')[0]
         periodo = str(datos[1]) + str(datos[0])
-        
-        recibo = RegistroRecibo(archivo, datos[-1] ,periodo, datos[2], control)
+
+        recibo = RegistroRecibo(archivo, datos[-1], periodo, datos[2], control)
         cadena_accion = recibo.guardar()
         conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'recibos')
         respuesta = conexion.enviar_datos(cadena_accion)
 
         print(respuesta)
         print("Datos Procesados: {}".format(datos))
-    
+
     conexion.cerrar_conexion()
 
-    
     return True
-    
+
+
+def cargar_empleados():
+
+    pass
+
 
 """
 **---------------------------------------------------------------------------------------------**
@@ -187,39 +189,118 @@ def guardar_mdatos(archivos_pdf):
 **---------------------------------------------------------------------------------------------**
 """
 
+
 @eel.expose
-def obtener_reci_buscados(control, p_ini, a_ini, p_fin, a_fin):
-    if a_ini == a_fin:
-        periodos = armar_periodos(a_ini, periodo_ini=p_ini, ultimo_periodo=p_fin)
-        datos = ReciMetadatos(datos='')
-        recibos = datos.devolver_datos(control, a_ini, periodos)
-        
-        if recibos:
-            return recibos
+def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, anno_f):
+    """ Devuelve todos los datos encontrados de acuerdo a los parametros
+    pasados
+    """
+    
+    opciones_param = leer_config_bd()
+
+    ip = opciones_param['SERVER-HOST']
+    puerto = opciones_param['PUERTO']
+    usuario = opciones_param['USUARIO']
+    psw = opciones_param['PSWORD']
+    bd = opciones_param['BASE-DATOS']
+
+    def comprobar_fechas(**kwargs):
+        """Busca recibos de los periodos
+        indicados pasados como parametros"""
+
+        periodos_por_buscar = list()
+
+        if kwargs['anno_inicial'] == kwargs['anno_final']:
+
+            periodos = armar_periodos(kwargs['anno_inicial'],
+                                    kwargs['periodo_inicial'],
+                                    kwargs['periodo_final'], True)          
+
+            return [periodos]
+
+        elif int(kwargs['anno_inicial']) + 1 == int(kwargs['anno_final']):
+
+            periodos_ini = armar_periodos(kwargs['anno_inicial'],
+                                        kwargs['periodo_inicial'],format=True)
+
+            periodos_finales = armar_periodos(kwargs['anno_final'],
+                                            ultimo_periodo=kwargs['periodo_final'], format=True)   
+
+            return [periodos_ini, periodos_finales]
+
         else:
-            return False
+            periodos_ini = armar_periodos(kwargs['anno_inicial'],
+                                        kwargs['periodo_inicial'], format=True)
+
+            periodos_interm = armar_periodos_intermedios(kwargs['anno_inicial'],
+                                                        kwargs['anno_final'], True)
+
+            periodos_finales = armar_periodos(kwargs['anno_final'],
+                                            ultimo_periodo=kwargs['periodo_final'], format=True)
+
+            return [periodos_ini, periodos_interm, periodos_finales]
+
+
+    def convertir_a_lista(string_servidor):
+
+        if "," in string_servidor:
+            dtos_servidor = string_servidor.split(',')
+
+            return dtos_servidor
+
+
+    if control != '':
+        annos_periodos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
+                        periodo_final=periodo_f, anno_final=anno_f)
+
+        campos = "empleados.NoControl, recibos.Periodo, recibos.TipoNomina, recibos.IdRecibo"
+        
+        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'empleados')
+
+        for anno_per in annos_periodos:
+            for anno , periodos in anno_per.items():
+                for periodo in periodos:
+                    condiciones = "ON empleados.NoControl = '{}' AND recibos.Periodo='{}'".format(control, periodo)
+                    empleado = RegistroEmpleado(control,'','','')
+                    query_consulta = empleado.consultar(campos, condiciones)
+
+                    
+                    respuesta = conexion.enviar_datos(query_consulta)
+                    datos = convertir_a_lista(respuesta)
+                    
+
+
+
+
+
+    if control:
+        pass
+
 
 @eel.expose
 def buscador_recibo(ids, ruta_guardado):
     """llama al metodo que busca registros
     en la base de datos pasando como parametro el id
-    del registro de la bd"""  
-    
+    del registro de la bd"""
+
+
     datos = ReciMetadatos('')
     datos.extraer_recibos(ids, ruta_guardado)
 
     print('Archivos Guardados en: ' + ruta_guardado)
-    
-    
+
     return True
 
+
 @eel.expose
-def leer_txt(ruta):   
+def leer_txt(ruta):
     txt = ArchivoTxt(ruta)
     contenido = txt.leer()
 
     print(contenido)
     return contenido
+
+
 """
 **---------------------------------------------------------------------------------------------**
                         ***CONFIG EEL***
@@ -227,7 +308,7 @@ def leer_txt(ruta):
 """
 try:
     opciones = ["--start-fullscreen"]
-    
+
     eel.start('main.html', cmdline_args=opciones)
 
 

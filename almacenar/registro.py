@@ -5,9 +5,11 @@ from modulos.rutas import unir_cadenas
 class RegistroRecibo:
 	"""
 	Clase que maneja registros(recibos de nomina)
+	Crea el string que se envia por el socket
+	y lleva la orden a la base de datos
 	"""
 
-	def __init__(self, nombre_archivo, ruta_archivo, periodo, t_nomina, control):
+	def __init__(self, control, periodo, t_nomina, nombre_archivo, ruta_archivo):
 		
 		self.nombre_archivo = nombre_archivo
 		self.ruta_archivo = ruta_archivo		
@@ -41,8 +43,8 @@ class RegistroRecibo:
 		
 
 	def consultar(self):
-		pass
 
+		accion = "CONSULTAR:" + self.campos + '|' + datos
 	def modificar(self):
 		pass
 
@@ -80,8 +82,14 @@ class RegistroEmpleado():
 		return accion
 
 
-	def consultar(self):
-		pass
+	def consultar(self, campos, condiciones):
+		"""Retorna una QUERY para la consulta a la base
+		de datos"""
 
+		accion = "CONSULTAR:{}|{}".format(campos, condiciones)
+
+		return accion
+
+		
 	def modificar(self):
 		pass

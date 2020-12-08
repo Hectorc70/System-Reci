@@ -32,6 +32,8 @@ class Cliente:
 			
 
 	def enviar_datos(self, instruccion):
+		"""RETORNA DATOS DEL
+		SERVIDOR"""
 
 		datos = self._formatear_datos(instruccion)	
 					
