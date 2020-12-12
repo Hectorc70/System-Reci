@@ -1,7 +1,7 @@
 from os.path import exists
 
 import eel
-from modulos.rutas import abrir_directorio, abrir_archivo
+from modulos.rutas import abrir_directorio, abrir_archivo, unir_cadenas
 from modulos.txt import ArchivoTxt
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 
@@ -9,6 +9,7 @@ from almacenar.cliente import Cliente
 from configuraciones import Configuracion
 from almacenar.registro import RegistroRecibo, RegistroEmpleado
 from almacenar.ayuda.recibo import RutaRecibo
+from almacenar.empleado import DatosEmpleados
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo
@@ -165,7 +166,7 @@ def guardar_mdatos(archivos_pdf):
         control = archivo.split('_')[0]
         periodo = str(datos[1]) + str(datos[0])
 
-        recibo = RegistroRecibo(archivo, datos[-1], periodo, datos[2], control)
+        recibo = RegistroRecibo(control, periodo,datos[2], archivo, datos[-1])
         cadena_accion = recibo.guardar()
         conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'recibos')
         respuesta = conexion.enviar_datos(cadena_accion)
@@ -178,10 +179,32 @@ def guardar_mdatos(archivos_pdf):
     return True
 
 
-def cargar_empleados():
+def guardar_empleados():
+    ruta = abrir_archivo()
+    datos = DatosEmpleados(ruta)
+    datos_empleados = datos.leer_datos_empleados()
 
-    pass
+    opciones_param = leer_config_bd()   
+    ip = opciones_param['SERVER-HOST']
+    puerto = opciones_param['PUERTO']
+    usuario = opciones_param['USUARIO']
+    psw = opciones_param['PSWORD']
+    bd = opciones_param['BASE-DATOS']
+    
+    for dato in datos_empleados:
+        registro = RegistroEmpleado(dato[0], dato[1], dato[2], dato[3])
+        query_empleado = registro.guardar()
+        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'empleados')
+        respuesta = conexion.enviar_datos(query_empleado)
+        conexion.cerrar_conexion()
+    
 
+
+    print('PROCESO TERMINADO')
+    return True
+
+
+#guardar_empleados()
 
 """
 **---------------------------------------------------------------------------------------------**
@@ -267,7 +290,7 @@ def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, ann
                     
                     respuesta = conexion.enviar_datos(query_consulta)
                     datos = convertir_a_lista(respuesta)
-                    
+
 
 
 
