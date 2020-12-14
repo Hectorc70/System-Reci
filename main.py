@@ -170,11 +170,12 @@ def guardar_mdatos(archivos_pdf):
         cadena_accion = recibo.guardar()
         conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'recibos')
         respuesta = conexion.enviar_datos(cadena_accion)
+        conexion.cerrar_conexion()
 
         print(respuesta)
         print("Datos Procesados: {}".format(datos))
 
-    conexion.cerrar_conexion()
+    
 
     return True
 
@@ -264,13 +265,24 @@ def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, ann
             return [periodos_ini, periodos_interm, periodos_finales]
 
 
-    def convertir_a_lista(string_servidor):
+    def convertir_datos(datos_encontrados):
 
-        if "," in string_servidor:
-            dtos_servidor = string_servidor.split(',')
+        datos_format = list()  
 
-            return dtos_servidor
+        for registros in datos_encontrados:    
+            if ',' in registros:
+                registros_datos = registros.split(',')
 
+                for datos_r in registros_datos:
+                    datos = datos_r.split('|')
+
+                    datos_format.append(datos)
+            if ',' not in registros:
+                datos = registros.split('|')
+                datos_format.append(datos)
+
+                
+        return datos_format
 
     if control != '':
         annos_periodos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
@@ -278,22 +290,28 @@ def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, ann
 
         campos = "empleados.NoControl, recibos.Periodo, recibos.TipoNomina, recibos.IdRecibo"
         
-        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'empleados')
-
+        datos_encontrados = list()
         for anno_per in annos_periodos:
             for anno , periodos in anno_per.items():
-                for periodo in periodos:
-                    condiciones = "ON empleados.NoControl = '{}' AND recibos.Periodo='{}'".format(control, periodo)
+                for periodo in periodos: 
+                    conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'empleados')                   
+                    condiciones = "ON empleados.NoControl = recibos.NoControl WHERE empleados.NoControl = '{}' AND recibos.Periodo='{}'".format(control, periodo)
                     empleado = RegistroEmpleado(control,'','','')
-                    query_consulta = empleado.consultar(campos, condiciones)
-
-                    
+                    query_consulta = empleado.consultar(campos, condiciones)                   
                     respuesta = conexion.enviar_datos(query_consulta)
-                    datos = convertir_a_lista(respuesta)
+                    conexion.cerrar_conexion()
+                    
+                    if respuesta != '':                        
+                        datos_encontrados.append(respuesta)
 
-
-
-
+                    else:
+                        continue
+        
+        if datos_encontrados:
+            datos = convertir_datos(datos_encontrados)
+            return datos
+        else:
+            return False
 
 
     if control:

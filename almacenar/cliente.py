@@ -1,8 +1,9 @@
 import socket
+import time
 
 from modulos.rutas import unir_cadenas
 from modulos.txt import ArchivoTxt
-
+from modulos.fechas import 	RangoFechas
 
 class Cliente:
 
@@ -42,11 +43,11 @@ class Cliente:
 					
 			self.cliente.send(datos.encode())			
 			respuesta = self.cliente.recv(1024).decode()
-		
-
+			rango = RangoFechas()
+			fecha = rango.fecha_actual()
 
 			log = ArchivoTxt('log-' + self.tabla + '.txt')
-			log.comprobar_si_existe(respuesta)
+			log.comprobar_si_existe(respuesta + ' -- ' + fecha)
 			
 			return respuesta
 

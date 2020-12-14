@@ -8,7 +8,7 @@ function enviarDatosBusqueda() {
         buscarVariosEmpleados()
     }
     else if (control != '') {
-        mostrarRecibos()
+        mostrarDatosRecibos()
     }
 
     else {
@@ -19,7 +19,7 @@ function enviarDatosBusqueda() {
 
 
 
-async function mostrarRecibos() {
+async function mostrarDatosRecibos() {
     let periodoIni = document.getElementsByName("periodo-ini")[0].value;
     let annoIni = document.getElementsByName("anno-ini")[0].value;
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
@@ -41,40 +41,33 @@ async function mostrarRecibos() {
                                                             periodoFin, annoFin)();
             const recibosNum = Object.getOwnPropertyNames(recibos);
             habilitar('principal');
-            
+            debugger;
             if (recibos != false) {
-                for (let i = 0; i < recibosNum.length; i++) {
+                for (let i = 1; i < recibosNum.length; i++) {
                     let lista = document.getElementById("tbl-datos");
                     let tr = document.createElement("tr");
                     let checkBox = document.createElement("input");
                     checkBox.setAttribute("type", "checkbox");
                     checkBox.setAttribute("class", "c-box");
-
-
-                    let columnaCtrl = document.createElement("td");
-                    columnaCtrl.innerHTML = recibos[recibosNum[i]][1];
-                    columnaCtrl.setAttribute("class", "cl-ctrl");
-                    columnaCtrl.appendChild(checkBox)
-
+                    
                     let columnaId = document.createElement("td");
                     columnaId.setAttribute("class", "cl-id  ocultar-colum");
-                    columnaId.innerHTML = recibos[recibosNum[i]][0];
+                    columnaId.innerHTML = recibos[recibosNum[i-1]][3];
 
-                    let columnaPeriodo = document.createElement("td");
-                    columnaPeriodo.setAttribute("class", "cl-per");
-                    columnaPeriodo.innerHTML = recibos[recibosNum[i]][2];
-
-                    let columnaAnno = document.createElement("td");
-                    columnaAnno.setAttribute("class", "cl-anno");
-                    columnaAnno.innerHTML = recibos[recibosNum[i]][3];
-
+                    let columnaCtrl = document.createElement("td");
+                    columnaCtrl.innerHTML = recibos[recibosNum[i-1]][0];
+                    columnaCtrl.setAttribute("class", "cl-ctrl");
+                    columnaCtrl.appendChild(checkBox)
+                    
                     let columnaNom = document.createElement("td");
                     columnaNom.setAttribute("class", "cl-nom");
-                    columnaNom.innerHTML = recibos[recibosNum[i]][4];
+                    columnaNom.innerHTML = recibos[recibosNum[i-1]][2];
+                    
+                    let columnaPeriodo = document.createElement("td");
+                    columnaPeriodo.setAttribute("class", "cl-per");
+                    columnaPeriodo.innerHTML = recibos[recibosNum[i-1]][1];                    
 
-                    let columnaArchivo = document.createElement("td");
-                    columnaArchivo.setAttribute("class", "cl-ruta ocultar-colum");
-                    columnaArchivo.innerHTML = recibos[recibosNum[i]][5];
+                    
 
                     let columnaV = document.createElement("td");
                     let opcionVer = document.createElement("button");
@@ -82,16 +75,12 @@ async function mostrarRecibos() {
                     opcionVer.setAttribute("onclick", "verRecibo()");
                     opcionVer.innerHTML = "Ver";
 
-
+                    tr.appendChild(columnaId);
                     lista.appendChild(tr);
                     tr.appendChild(columnaCtrl);
-                    columnaCtrl.appendChild(checkBox);
-
-                    tr.appendChild(columnaId);
-                    tr.appendChild(columnaPeriodo);
-                    tr.appendChild(columnaAnno);
-                    tr.appendChild(columnaNom);
-                    tr.appendChild(columnaArchivo);
+                    columnaCtrl.appendChild(checkBox);                   
+                    tr.appendChild(columnaNom); 
+                    tr.appendChild(columnaPeriodo);                    
                     tr.appendChild(columnaV);
                     columnaV.appendChild(opcionVer)
 

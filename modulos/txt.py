@@ -46,6 +46,6 @@ class ArchivoTxt:
 	def crear(self, datos):
 
 		archivo_r = open(self.ruta_archivo, "w")
-		archivo_r.write(datos + '\n')
+		self.escribir(datos)
 
 
