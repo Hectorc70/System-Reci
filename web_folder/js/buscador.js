@@ -9,6 +9,7 @@ function enviarDatosBusqueda() {
     }
     else if (control != '') {
         mostrarDatosRecibos()
+    
     }
 
     else {
@@ -18,7 +19,7 @@ function enviarDatosBusqueda() {
 }
 
 
-
+/* mostrar datos RECIBOS */
 async function mostrarDatosRecibos() {
     let periodoIni = document.getElementsByName("periodo-ini")[0].value;
     let annoIni = document.getElementsByName("anno-ini")[0].value;
@@ -41,8 +42,9 @@ async function mostrarDatosRecibos() {
                                                             periodoFin, annoFin)();
             const recibosNum = Object.getOwnPropertyNames(recibos);
             habilitar('principal');
-            debugger;
+            
             if (recibos != false) {
+                let num = 0
                 for (let i = 1; i < recibosNum.length; i++) {
                     let lista = document.getElementById("tbl-datos");
                     let tr = document.createElement("tr");
@@ -67,21 +69,32 @@ async function mostrarDatosRecibos() {
                     columnaPeriodo.setAttribute("class", "cl-per");
                     columnaPeriodo.innerHTML = recibos[recibosNum[i-1]][1];                    
 
+                    let columnaRutaArchivo = document.createElement("td");
+                    num = num+1
                     
+                    let num_str = "ruta-a"+ num.toString()
+                    columnaRutaArchivo.setAttribute("id", num_str);
+                    columnaRutaArchivo.setAttribute("class", "ocultar-colum");
+                    
+                    columnaRutaArchivo.innerHTML = recibos[recibosNum[i-1]][4];
 
                     let columnaV = document.createElement("td");
                     let opcionVer = document.createElement("button");
                     opcionVer.setAttribute("class", "btn btn-ver");
-                    opcionVer.setAttribute("onclick", "verRecibo()");
-                    opcionVer.innerHTML = "Ver";
+                    let parametro = `abrirReciboExt('${num_str}')`
+                    opcionVer.setAttribute("onclick", parametro);
+
+
 
                     tr.appendChild(columnaId);
                     lista.appendChild(tr);
                     tr.appendChild(columnaCtrl);
                     columnaCtrl.appendChild(checkBox);                   
                     tr.appendChild(columnaNom); 
-                    tr.appendChild(columnaPeriodo);                    
-                    tr.appendChild(columnaV);
+                    tr.appendChild(columnaPeriodo); 
+                    tr.appendChild(columnaRutaArchivo);                        
+                    tr.appendChild(columnaV);                    
+                    opcionVer.innerHTML = "Ver";
                     columnaV.appendChild(opcionVer)
 
                 }
@@ -100,19 +113,31 @@ async function mostrarDatosRecibos() {
         Precaucion('Seleccione Fechas Validas y/o Inserte un numero de control.');
     }
 
+    
 
 }
 
 
 
 
+async function abrirReciboExt(clase) {
+
+    let filaRuta = document.getElementById(clase);
+    let ruta = filaRuta.innerText
+
+    let verReci = await eel.abrir_recibo(ruta)();
+
+}
+
+
+/* FUNCIONES QUE EJECUTAN EL PROCESO DE EXTRACCION */
 async function EnviarDatosExtraccion() {
 
     let ruta = document.getElementsByName("ruta-guardado")[0].value;
     let control = document.getElementsByName("control")[0].value;
     let recibos = [];
     let filaControl = document.getElementsByClassName("cl-ctrl");
-    debugger;
+    
     for (let i = 0; i < filaControl.length; i++) {
         let checkBox = filaControl[i].getElementsByClassName("c-box");
         if (checkBox[0].checked == true) {
@@ -128,7 +153,7 @@ async function EnviarDatosExtraccion() {
         }
     }
 
-    debugger;
+
     if (ruta != '' & recibos.length > 0) {
         deshabilitar('principal');
         loader_tarea();
@@ -149,7 +174,7 @@ async function buscarVariosEmpleados() {
     let ruta = document.getElementsByName("ruta-masivo")[0].value;
     let controles = await eel.leer_txt(ruta)();
     const controlNum = Object.getOwnPropertyNames(controles);
-    debugger;
+   
     for (let i = 1; i < controlNum.length; i++) {
         document.getElementsByName("control")[0].value = controles[i - 1];
         mostrarRecibos();
@@ -174,9 +199,3 @@ async function salirVerRecibo() {
 
 /* VISOR DE PDF'S */
 
-
-async function VerPdf() {
-    pdfjsLib.getDocument('../img/Control_ORDINARIA_202019.pdf').then((pdf) => {
-
-    });
-}

@@ -25,11 +25,10 @@
                 else {
                     $('.c-box').prop("checked", false);
                 }
-            })
+            })          
 
 
         });
-
     </script>
 </head>
 
@@ -216,11 +215,11 @@
         <button class="limpiar-tbl" onclick="limpiarTabla('tbl-datos', '')">
             <img src="img/actualizar.svg" alt="limpiar-tbl">
         </button>
-        <div id="overlay">
+        <!-- <div id="overlay">
             <div id="conte-btn-cerrar">
                 <button type="button" class="btn-cerrar" onclick="salirVerRecibo()">X</button>
-            </div>          
-        </div>
+            </div>            
+        </div> -->
         <div id="tbl">
             <div class="conte-tbl">
                 <table>
@@ -234,7 +233,8 @@
                                 CONTROL
                             </th>                    
                             <th>NOMINA</th> 
-                            <th>PERIODO</th>                            
+                            <th  class="ocultar-colum">RUTA</th>   
+                            <th>PERIODO</th>                          
                             <th></th>                         
                         </tr>
                     </thead>

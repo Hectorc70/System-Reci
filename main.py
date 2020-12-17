@@ -288,7 +288,7 @@ def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, ann
         annos_periodos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
                         periodo_final=periodo_f, anno_final=anno_f)
 
-        campos = "empleados.NoControl, recibos.Periodo, recibos.TipoNomina, recibos.IdRecibo"
+        campos = "empleados.NoControl, recibos.Periodo, recibos.TipoNomina, recibos.IdRecibo, recibos.RutaArchivo"
         
         datos_encontrados = list()
         for anno_per in annos_periodos:
@@ -316,6 +316,16 @@ def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, ann
 
     if control:
         pass
+
+
+@eel.expose
+def abrir_recibo(ruta):
+
+
+    import os
+    os.startfile(ruta)
+
+
 
 
 @eel.expose
