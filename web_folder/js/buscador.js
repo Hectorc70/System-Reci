@@ -74,7 +74,7 @@ async function mostrarDatosRecibos() {
                     
                     let num_str = "ruta-a"+ num.toString()
                     columnaRutaArchivo.setAttribute("id", num_str);
-                    columnaRutaArchivo.setAttribute("class", "ocultar-colum");
+                    columnaRutaArchivo.setAttribute("class", "ocultar-colum ruta-recibo");
                     
                     columnaRutaArchivo.innerHTML = recibos[recibosNum[i-1]][4];
 
@@ -133,34 +133,31 @@ async function abrirReciboExt(clase) {
 /* FUNCIONES QUE EJECUTAN EL PROCESO DE EXTRACCION */
 async function EnviarDatosExtraccion() {
 
-    let ruta = document.getElementsByName("ruta-guardado")[0].value;
+    let rutaGuardado = document.getElementsByName("ruta-guardado")[0].value;
     let control = document.getElementsByName("control")[0].value;
     let recibos = [];
     let filaControl = document.getElementsByClassName("cl-ctrl");
     
     for (let i = 0; i < filaControl.length; i++) {
         let checkBox = filaControl[i].getElementsByClassName("c-box");
-        if (checkBox[0].checked == true) {
-            let filaId = document.getElementsByClassName("cl-id")[i].innerText;
-            let filaPer = document.getElementsByClassName("cl-per")[i].innerText;
-            let filaAnno = document.getElementsByClassName("cl-anno")[i].innerText;
-            let filaNomina = document.getElementsByClassName("cl-nom")[i].innerText;
-            let filaRuta = document.getElementsByClassName("cl-ruta")[i].innerText;
+        if (checkBox[0].checked == true) {                      
+            
+            let filaRuta = document.getElementsByClassName("ruta-recibo")[i].innerText;
             
             let datos = [];
-            datos = [filaControl[i].innerText, filaId, filaPer, filaAnno, filaNomina, filaRuta]
+            datos = [filaControl[i].innerText, filaRuta]
             recibos.push(datos);
         }
     }
 
 
-    if (ruta != '' & recibos.length > 0) {
+    if (rutaGuardado != '' & recibos.length > 0) {
         deshabilitar('principal');
         loader_tarea();
-        let reci = await eel.buscador_recibo(recibos, ruta)();
+        let reci = await eel.recuperar_recibos(recibos, rutaGuardado)();
         if (reci == true) {
             habilitar('principal');
-            satisfactorio("Se Guardaron todos los Recibos en: " + ruta + "/" + control)
+            satisfactorio("Se Guardaron todos los Recibos en: " + rutaGuardado + "/" + control)
         }
     }
 

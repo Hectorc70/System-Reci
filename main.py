@@ -4,12 +4,14 @@ import eel
 from modulos.rutas import abrir_directorio, abrir_archivo, unir_cadenas
 from modulos.txt import ArchivoTxt
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
+from modulos.archivo import Archivo
 
 from almacenar.cliente import Cliente
 from configuraciones import Configuracion
 from almacenar.registro import RegistroRecibo, RegistroEmpleado
 from almacenar.ayuda.recibo import RutaRecibo
 from almacenar.empleado import DatosEmpleados
+
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo
@@ -329,14 +331,16 @@ def abrir_recibo(ruta):
 
 
 @eel.expose
-def buscador_recibo(ids, ruta_guardado):
+def recuperar_recibos(datos, ruta_guardado):
     """llama al metodo que busca registros
     en la base de datos pasando como parametro el id
     del registro de la bd"""
 
-
-    datos = ReciMetadatos('')
-    datos.extraer_recibos(ids, ruta_guardado)
+    for dato_ruta in datos:
+        archivo = dato_ruta[1].split('/')[-1]
+        ruta_destino = ruta_guardado + '/' + dato_ruta[0] + '/' +archivo
+        nuevo_archivo = Archivo(dato_ruta[1], ruta_destino, copiar=True)
+        nuevo_archivo.comprobar_acciones()
 
     print('Archivos Guardados en: ' + ruta_guardado)
 
