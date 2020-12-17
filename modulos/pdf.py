@@ -12,7 +12,7 @@ class ArchivoPdf():
 
 	def extraer_contenido(self):
 		"""Retorna el contenido por hoja del Archivo PDF,
-			el numero de pagina, la ruta del archivo"""
+			el dict{int:numero de pagina le suma 1  = str:contenido}"""
 
 		
 		datos_pag = dict()
@@ -38,15 +38,21 @@ class ArchivoPdf():
 		pass
 
 
-	def extraer_hoja(self, pagina, ruta_guardado, nombre):	
+	def extraer_hoja(self, pagina, ruta_guardado, nombre):
+		"""Metodo que extrae la hoja indicada en un nuevo archivo.
+		Parametros, int:pagina(pagina que se quiere extraer), 
+		str:ruta_guardado(ruta de la carpeta donde se va a guardar),
+		str:nombre(nombre de como se va a llamar el nuevo archivo debe
+		ser sin el '.pdf')
+		"""
 			
-			org_pag = self.contenido.getPage(pagina-1)
+		org_pag = self.contenido.getPage(pagina-1)
 
-			pdf_salida = PdfFileWriter()
-			pdf_salida.addPage(org_pag)		
+		pdf_salida = PdfFileWriter()
+		pdf_salida.addPage(org_pag)		
 			
 
-			self.guardar_archivo(ruta_guardado, nombre, pdf_salida)
+		self.guardar_archivo(ruta_guardado, nombre, pdf_salida)
 		
 	def guardar_archivo(self, ruta, nombre_pdf, pdf):  
 		nombre_archivo = ruta + '\\'+ nombre_pdf + '.pdf'

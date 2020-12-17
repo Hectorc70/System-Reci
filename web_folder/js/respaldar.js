@@ -1,23 +1,52 @@
-async function mostrarRutas() {
+'use strict'
+
+function comprobarOpcionMostrar() {
+    let rBtnRecibos = document.getElementById('op-recibos');
+    let rBtnTimbres = document.getElementById('op-timbres');   
+
+    if (rBtnRecibos.checked == true) {
+        mostrarRutasRecibos();
+    }
+    else if (rBtnTimbres.checked == true) {
+        mostrarRutasTimbres();
+    }
+    
+
+}
+
+function comprobarOpcionCopiar(){
+    let rBtnRecibos = document.getElementById('op-recibos');
+    let rBtnTimbres = document.getElementById('op-timbres');
+
+
+    if (rBtnRecibos.checked == true) {
+        iniciarCopiadoRecibos();
+    }
+    else if (rBtnTimbres.checked == true) {
+        iniciarCopiadoTimbres();
+    }
+}
+async function mostrarRutasRecibos() {
     /* 
         let datos = document.getElementById("tbl-datos");
         datos.removeChild(tr) */
 
-    let tabla = document.getElementById("tbl");
-    let carga = document.createElement("div");
+    /* let tabla = document.getElementById("tbl");
+    let carga = document.createElement("div"); */
     let ruta = document.getElementsByName("ruta")[0].value;
     let anno = document.getElementsByName("anno")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
 
+
     if (ruta != '' && anno != '' && periodo != '') {
-        carga.setAttribute("class", "loading");
-        tabla.appendChild(carga);
-
-        let recibos = await eel.rutas_recibos_orig(ruta, anno, periodo)();
-        const recibosNum = Object.getOwnPropertyNames(recibos);
 
 
-        for (let i = 1; i < recibosNum.length; i++) {
+
+        let rutas = await eel.rutas_recibos_orig(ruta, anno, periodo)();
+        const rutasNum = Object.getOwnPropertyNames(rutas);
+
+
+        for (let i = 1; i < rutasNum.length; i++) {
             let lista = document.getElementById("tbl-datos");
             let tr = document.createElement("tr");
             let checkBox = document.createElement("input");
@@ -25,16 +54,18 @@ async function mostrarRutas() {
             checkBox.setAttribute("class", "c-box");
 
 
-            let ultimo = recibos[recibosNum[i - 1]]["length"];
+            /* let ultimo = recibos[recibosNum[i - 1]]["length"]; */
 
             let columnaPeriodo = document.createElement("td");
             columnaPeriodo.setAttribute("class", "cl-per")
-            columnaPeriodo.innerHTML = recibos[recibosNum[i - 1]][3];
+            columnaPeriodo.innerHTML = rutas[i-1][0];
+
             let columnaNomina = document.createElement("td");
-            columnaNomina.innerHTML = recibos[recibosNum[i - 1]][4];
+            columnaNomina.innerHTML = rutas[i-1][1];
+
             let columnaArchivo = document.createElement("td");
             columnaArchivo.setAttribute("class", "ruta-archivo");
-            columnaArchivo.innerHTML = recibos[recibosNum[i - 1]][ultimo - 1];
+            columnaArchivo.innerHTML = rutas[i-1][2];
 
 
             lista.appendChild(tr);
@@ -44,13 +75,67 @@ async function mostrarRutas() {
             tr.appendChild(columnaArchivo);
 
         }
-        tabla.removeChild(carga);
+
+    }
+    else Precaucion('Seleccione Ruta, Año y Periodo');
+}
+
+async function mostrarRutasTimbres() {
+    /* 
+        let datos = document.getElementById("tbl-datos");
+        datos.removeChild(tr) */
+
+    /* let tabla = document.getElementById("tbl");
+    let carga = document.createElement("div"); */
+    let ruta = document.getElementsByName("ruta")[0].value;
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
+
+
+    if (ruta != '' && anno != '' && periodo != '') {
+
+
+        debugger;
+        let rutas = await eel.rutas_timbres_orig(ruta, periodo, anno)();
+        const rutasNum = Object.getOwnPropertyNames(rutas);
+
+
+        for (let i = 1; i < rutasNum.length; i++) {
+            let lista = document.getElementById("tbl-datos");
+            let tr = document.createElement("tr");
+            let checkBox = document.createElement("input");
+            checkBox.setAttribute("type", "checkbox");
+            checkBox.setAttribute("class", "c-box");
+
+
+            /* let ultimo = recibos[recibosNum[i - 1]]["length"]; */
+
+            let columnaPeriodo = document.createElement("td");
+            columnaPeriodo.setAttribute("class", "cl-per")
+            columnaPeriodo.innerHTML = rutas[i-1][0];
+
+            let columnaNomina = document.createElement("td");
+            columnaNomina.innerHTML = rutas[i-1][1];
+
+            let columnaArchivo = document.createElement("td");
+            columnaArchivo.setAttribute("class", "ruta-archivo");
+            columnaArchivo.innerHTML = rutas[i-1][2];
+
+
+            lista.appendChild(tr);
+            tr.appendChild(columnaPeriodo);
+            columnaPeriodo.appendChild(checkBox);
+            tr.appendChild(columnaNomina);
+            tr.appendChild(columnaArchivo);
+
+        }
+
     }
     else Precaucion('Seleccione Ruta, Año y Periodo');
 }
 
 
-async function iniciarCopiado() {
+async function iniciarCopiadoRecibos() {
     let carp_orig = document.getElementsByName("ruta")[0].value;
     let carp_dest = document.getElementsByName("ruta_destino")[0].value;
     let archivos = [];
@@ -58,7 +143,7 @@ async function iniciarCopiado() {
 
     if (filaPeriodo.length > 0) {
         for (let i = 0; i < filaPeriodo.length; i++) {
-            checkBox = filaPeriodo[i].getElementsByClassName("c-box");
+            let checkBox = filaPeriodo[i].getElementsByClassName("c-box");
 
             if (checkBox[0].checked == true) {
                 let filaRuta = document.getElementsByClassName("ruta-archivo")[i].innerText;
@@ -73,11 +158,11 @@ async function iniciarCopiado() {
                 loader_tarea();
                 let proceso = await eel.copiado_recibos(carp_orig, carp_dest, archivos)();
                 if (proceso == true) {
-                    habilitar('principal');                    
+                    habilitar('principal');
                 }
                 satisfactorio('Archivos Copiados');
             }
-            else{
+            else {
                 Precaucion('La ruta de Destino y la Original No pueden ser la misma');
             }
         }
@@ -94,4 +179,49 @@ async function iniciarCopiado() {
 
 
 
+}
+
+async function iniciarCopiadoTimbres() {
+    let carp_orig = document.getElementsByName("ruta")[0].value;
+    let carp_dest = document.getElementsByName("ruta_destino")[0].value;
+    let archivos = [];
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
+
+    let filaPeriodo = document.getElementsByClassName("cl-per");
+
+    if (filaPeriodo.length > 0) {
+        for (let i = 0; i < filaPeriodo.length; i++) {
+            let checkBox = filaPeriodo[i].getElementsByClassName("c-box");
+
+            if (checkBox[0].checked == true) {
+                let filaRuta = document.getElementsByClassName("ruta-archivo")[i].innerText;
+                archivos.push(filaRuta);
+            }
+
+        }
+        if (archivos.length > 0 && carp_dest != '') {
+
+            if (carp_orig != carp_dest) {
+                deshabilitar('principal');
+                loader_tarea();
+                let proceso = await eel.copiar_timbres(carp_orig, carp_dest, archivos, anno, periodo)();
+                if (proceso == true) {
+                    habilitar('principal');
+                }
+                satisfactorio('Archivos Copiados');
+            }
+            else {
+                Precaucion('La ruta de Destino y la Original No pueden ser la misma');
+            }
+        }
+
+        else {
+            Precaucion('Seleccione almenos una fila y la ruta de Destino');
+        }
+
+    }
+    else {
+        Precaucion('Debe buscar primero los Archivos');
+    }
 }

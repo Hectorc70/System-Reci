@@ -61,9 +61,9 @@
                     BUSCAR RECIBOS
                 </a>
 
-            </div>         
+            </div>
         </div>
-                
+
         <div>
             <h3 class="titulo-menu">HERRAMIENTAS</h3>
             <div class="bar-opcion">
@@ -152,8 +152,16 @@
                             <option value="23">23</option>
                             <option value="24">24</option>
                         </select>
-                        <button class="btn" type="button" onclick="mostrarRutas()">RECUPERAR</button>
+                        <div class="conte-radiobtn">
+                            <label class="in-lbl" for="reci">
+                                <input id="op-recibos" class="btn-radio" type="radio" name="op"/>Recibos
+                            </label>
+                            <label class="in-lbl" for="tim">
+                                <input id="op-timbres" class="btn-radio" type="radio" name="op" checked/>Timbres
+                        </div>
+                        <button class="btn" type="button" onclick="comprobarOpcionMostrar()">RECUPERAR</button>
                     </div>
+
                 </div>
                 <div class="contenedor-form">
                     <div id="conte-destino">
@@ -161,7 +169,7 @@
                         <input class="in-buscar" type="text" name="ruta_destino" readonly />
                         <button class="btn btn-explorar" type="button"
                             onclick="mostrarRuta('ruta_destino')">...</button>
-                        <button class="btn" type="button" onclick="iniciarCopiado()">RESPALDAR</button>
+                        <button class="btn" type="button" onclick="comprobarOpcionCopiar()">RESPALDAR</button>
                     </div>
                 </div>
             </form>
@@ -182,7 +190,7 @@
                             <th>RUTA</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody id="tbl-datos">
                     </tbody>
                 </table>
