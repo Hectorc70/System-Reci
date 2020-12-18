@@ -181,9 +181,8 @@ def guardar_mdatos(archivos_pdf):
 
     return True
 
-
-def guardar_empleados():
-    ruta = abrir_archivo()
+@eel.expose
+def guardar_empleados(ruta):   
     datos = DatosEmpleados(ruta)
     datos_empleados = datos.leer_datos_empleados()
 
@@ -207,7 +206,7 @@ def guardar_empleados():
     return True
 
 
-#guardar_empleados()
+
 
 """
 **---------------------------------------------------------------------------------------------**

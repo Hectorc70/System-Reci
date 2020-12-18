@@ -1,5 +1,23 @@
 'use stric'
+async function CargarEmpleados(){
+    let archivo = document.getElementsByName("ruta-carga-empleados")[0].value;
+    debugger;
+    if (archivo != ''){
+        deshabilitar('principal');
+        loader_tarea();
+        let respuesta = await eel.guardar_empleados(archivo)();
 
+        if (respuesta == true) {
+            habilitar('principal');
+            satisfactorio('Carga Terminada');
+        }
+    }
+    else{
+        Precaucion("Selecciona Archivo de Carga");
+    }
+    
+
+}
 
 async function validarInputs() {
     let periodoIn = document.getElementsByName("periodo")[0].value;

@@ -43,13 +43,14 @@ class Cliente:
 					
 			self.cliente.send(datos.encode())			
 			respuesta = self.cliente.recv(1024).decode()
-			rango = RangoFechas()
-			fecha = rango.fecha_actual()
+			while True:
+				rango = RangoFechas()
+				fecha = rango.fecha_actual()
 
-			log = ArchivoTxt('log-' + self.tabla + '.txt')
-			log.comprobar_si_existe(respuesta + ' -- ' + fecha)
-			
-			return respuesta
+				log = ArchivoTxt('log-' + self.tabla + '.txt')
+				log.comprobar_si_existe(respuesta + ' -- ' + fecha)
+				
+				return respuesta
 
 	def cerrar_conexion(self):
 		self.cliente.close()

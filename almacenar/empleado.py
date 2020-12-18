@@ -1,3 +1,4 @@
+
 from almacenar.ayuda.excel import ArchivoExcel
 from modulos.rutas import unir_cadenas
 class DatosEmpleados(ArchivoExcel):
@@ -29,10 +30,10 @@ class DatosEmpleados(ArchivoExcel):
         for datos1, datos2,datos3,datos4 in zip(range(1, len(control)),range(1, len(nombre)),
                                                 range(1, len(ape_p)), range(1, len(ape_m))):
 
-            control_datos =str([control[datos1].value][0])
-            nombre_datos = str([nombre[datos2].value][0])
-            apellido_p_datos = str([ape_p[datos3].value][0])
-            apellido_m_datos = str([ape_m[datos4].value][0])
+            control_datos =str([control[datos1].value][0]).strip()
+            nombre_datos = str([nombre[datos2].value][0]).strip()
+            apellido_p_datos = str([ape_p[datos3].value][0]).strip()
+            apellido_m_datos = str([ape_m[datos4].value][0]).strip()
 
             datos = [control_datos,nombre_datos, apellido_p_datos, apellido_m_datos]
             

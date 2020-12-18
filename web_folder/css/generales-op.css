@@ -306,8 +306,6 @@ section {
 .btn{
     display: inline-block;
     border: none;   
-    width: 100px;
-    height: 23px; 
     margin: auto;
     margin-right: 10px;
     background-color: white;
@@ -317,6 +315,9 @@ section {
     text-transform: uppercase;
     border-radius: .5em ; 
     cursor: pointer;  
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
         
 }
 .btn:hover{

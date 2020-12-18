@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>System Reci - Version 2.0.0</title>
+    <title>System Reci - Version 3.0.0</title>
     <link rel="stylesheet" type=text/css href="css/estilos.css">
     <link rel="stylesheet" type=text/css href="css/recop.css">
     <link rel="stylesheet" type=text/css href="css/generales-op.css">
@@ -107,55 +107,62 @@
         <div class="cont-inputs">
             <form name="in-recopilar" action="">
                 <div class="contenedor-form">
+                    <div id="conte-empleados-carga">
+                        <label class="in-lbl" for="">Archivo de Carga Empleados </label>
+                        <input class="in-buscar" type="text" name="ruta-carga-empleados" readonly />
+                        <button class="btn btn-explorar" type="button"
+                            onclick="mostrarRutaArchivo('ruta-carga-empleados')">...</button>
+                        <button class="btn" type="button" onclick="CargarEmpleados()">INICIAR CARGA</button>
+                    </div>
+                </div>
+                <div class="contenedor-form">
                     <div id="cont-ruta">
+                        <label class="in-lbl" for="anno">Año</label>
+                        <select class="slt anno" name="anno">
+                            <option value=""> </option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                        <label class="in-lbl" for="periodo">Periodo</label>
+                        <select class="slt periodos" name="periodo">
+                            <option value=""> </option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                        </select>
+
                         <label class="in-lbl" for="">Ruta de Recibos</label>
                         <input class="in-buscar" type="text" name="ruta-reci" readonly />
                         <button class="btn btn-explorar" type="button" onclick="mostrarRuta('ruta-reci')">...</button>
                         <button class="btn" type="button" onclick="validarInputs()">BUSCAR</button>
+                        <button class="btn" type="button" onclick="elementosTabla()">SUBIR DATOS</button>
                     </div>
-                </div>
-                <div class="contenedor-form">
-                    <label class="in-lbl" for="anno">Año</label>
-                    <select class="slt anno" name="anno">
-                        <option value=""> </option>
-                        <option value="2014">2014</option>
-                        <option value="2015">2015</option>
-                        <option value="2016">2016</option>
-                        <option value="2017">2017</option>
-                        <option value="2018">2018</option>
-                        <option value="2019">2019</option>
-                        <option value="2020">2020</option>
-                    </select>
-                    <label class="in-lbl" for="periodo">Periodo</label>
-                    <select class="slt periodos" name="periodo">
-                        <option value=""> </option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                    </select>
-                    <button class="btn" type="button" onclick="elementosTabla()">Iniciar</button>
-
 
                 </div>
             </form>
