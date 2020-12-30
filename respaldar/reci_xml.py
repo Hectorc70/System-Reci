@@ -58,7 +58,9 @@ class ReciboCop(ArchivoPdf):
 		ruta = self.ruta_origen.split('\\')
 		nomina = ruta[self.ruta_num+1].split('_')[0]
 
-		if nomina == 'ORDINARIA':			
+		if nomina == 'ORDINARIA':
+			
+			
 			carpeta_prin =  ruta[:self.ruta_num+2]
 			carpeta_destino = ruta[-2] + '_' + 'PDF'
 
@@ -67,7 +69,18 @@ class ReciboCop(ArchivoPdf):
 
 			destino = ruta_dest.replace(
 				self.carpeta_orig.replace('/','\\'), self.carpeta_dest.replace('/','\\'))
-			
+		elif (nomina == 'COMPLEMENTARIA' and ruta[-2] =='BASE' or
+			ruta[-2] =='BASE4' or  ruta[-2] =='CONFIANZA'):
+
+			carpeta_prin =  ruta[:self.ruta_num+2]
+			carpeta_destino = ruta[-2] + '_' + 'PDF'
+
+			carpeta_prin.append(carpeta_destino)
+			ruta_dest = unir_cadenas('\\', carpeta_prin)
+
+			destino = ruta_dest.replace(
+				self.carpeta_orig.replace('/','\\'), self.carpeta_dest.replace('/','\\'))
+		
 		elif nomina == 'JUBILADOS':		
 			carpeta_prin =  ruta[:self.ruta_num+2]	
 			ruta_dest = unir_cadenas('\\', carpeta_prin)		
