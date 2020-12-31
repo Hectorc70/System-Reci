@@ -174,7 +174,7 @@ async function buscarVariosEmpleados() {
    
     for (let i = 1; i < controlNum.length; i++) {
         document.getElementsByName("control")[0].value = controles[i - 1];
-        mostrarRecibos();
+        mostrarDatosRecibos();
     }
     document.getElementsByName("control")[0].value = '';
 

@@ -65,7 +65,7 @@ class RutaRecibo(Rutas):
 		return rutas_archivos
 
 	def _recuperar_recibos_ordinaria(self, datos, nomina, periodo, anno):
-		rutas_recibos=list()
+		
 		carpeta=datos[self.ruta_num+2].upper()
 
 		if carpeta.split('_')[-1] == 'PDF':
@@ -86,7 +86,11 @@ class RutaRecibo(Rutas):
 
 			return datos_recibos_rutas
 
+		else:
+			datos_recibos_rutas = self._recuperar_recibos_ordinaria(datos, nomina, periodo, anno)
 
+
+			return datos_recibos_rutas
 
 
 

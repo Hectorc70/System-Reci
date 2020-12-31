@@ -1,5 +1,6 @@
 import socket
 import time
+from os import getcwd
 
 from modulos.rutas import unir_cadenas
 from modulos.txt import ArchivoTxt
@@ -15,7 +16,7 @@ class Cliente:
 		self.psw 	  = psw
 		self.bd 	  = bd	
 		self.tabla 	  = tabla
-		
+		self.ruta_actual  = (getcwd())
 
 		
 
@@ -47,7 +48,7 @@ class Cliente:
 				rango = RangoFechas()
 				fecha = rango.fecha_actual()
 
-				log = ArchivoTxt('log-' + self.tabla + '.txt')
+				log = ArchivoTxt(self.ruta_actual + '\\' + 'log-' + self.tabla + '.txt')
 				log.comprobar_si_existe(respuesta + ' -- ' + fecha)
 				
 				return respuesta

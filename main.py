@@ -315,7 +315,7 @@ def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, ann
             return False
 
 
-    if control:
+    elif control =='':
         pass
 
 

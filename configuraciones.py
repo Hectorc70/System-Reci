@@ -1,3 +1,5 @@
+from os import getcwd
+
 from modulos.txt import ArchivoTxt
 
 
@@ -9,8 +11,8 @@ class Configuracion:
     def cargar_opciones(self):
         opciones = dict()
 
-
-        txt = ArchivoTxt('config.txt')
+        ruta_Actual  = ( getcwd ())
+        txt = ArchivoTxt(ruta_Actual + '\\' + 'config.txt')
         contenido = txt.leer()
 
         for conte in contenido:
