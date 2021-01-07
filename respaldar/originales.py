@@ -82,6 +82,22 @@ class ArchivoRecibo(ArchivosOrig):
 		self.anno = anno
 		ArchivosOrig.__init__(self, self.ruta, self.periodo, self.anno)
 
+	def __comprobar_tipo_de_nomina(self, ruta_datos):
+		"""Comprueba si el recibo esta dentro de  algunas de 
+		de las siguientes carpetas: 'BASE4', 'BASE' O 'CONFIANZA'
+		RETORNA: True o False 
+		"""
+
+		CARPETAS = ['BASE4', 'BASE', 'CONFIANZA']
+
+		
+
+		if ruta_datos[-2].upper() in CARPETAS:
+			return True
+		else:
+			return False
+
+		
 	def recuperar_recibos(self):
 		"""Retorna las rutas de los archivos de los
 		recibos incluye jubilados"""
@@ -94,10 +110,11 @@ class ArchivoRecibo(ArchivosOrig):
 		for datos_rutas in rutas[0]:		
 
 			nomina = datos_rutas[self.ruta_num].upper().split('_')[0]
-
-			if nomina=='ORDINARIA':				
-				ruta_reci = self.recibos_nominas(datos_rutas)
-				
+			
+			comprobacion = self.__comprobar_tipo_de_nomina(datos_rutas)
+			
+			if comprobacion:							
+				ruta_reci = self.recibos_nominas(datos_rutas)				
 				if ruta_reci:					
 					recibos.append(ruta_reci)
 
@@ -116,8 +133,11 @@ class ArchivoRecibo(ArchivosOrig):
 
 
 	def recibos_nominas(self, datos):		
-
-		carpeta = datos[self.ruta_num+2].upper()
+		try:
+			carpeta = datos[self.ruta_num+2].upper()
+	
+		except IndexError:
+			carpeta = ' '
 
 		if carpeta.upper() == 'RECIBOS':
 			ruta = unir_cadenas('\\', datos)
