@@ -7,30 +7,30 @@
     display: none;
     visibility: hidden;
 }
-#conte-control{  
-    width: 15%;
+
+#conte-busqueda{
+    display: block;
+    width: 100%;    
+}
+#conte-control{     
     display: inline-block;    
     text-align: left;
-    
-    
-    
 }
 #conte-control input{
     width: 120px;
     
 }
 #conte-ctrl-masivo{
-   
     display: inline-block;    
-    width: 30%;
+
 }
 #conte-ctrl-masivo input{
-    width: 50%;
+    width: 200px;
 }
 
 #fechas{
     display: inline-block;
-    width: 40%;      
+        
     text-align: left;
     
 }

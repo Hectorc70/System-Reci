@@ -24,8 +24,12 @@
                     $('.c-box').prop("checked", false);
                 }
             })
+            var height = $(window).height();
 
-        })
+            $('#aside-menu').height(height);
+            $('.secc').height(height);
+
+        });
 
     </script>
 </head>
@@ -37,10 +41,12 @@
         <span></span>
         <span></span>
     </div>
-    <aside class="z-depth-4 animate__animated animate__fadeInLeftBig">
-        <a class="logo" href="main.html">
-            <img src="/img/Logo-SR.png" alt="logo">
-        </a>
+    <aside id="aside-menu">
+        <div class="conte-logo">
+            <a class="logo" href="main.html">
+                <img src="/img/Logo-SR.png" alt="logo">
+            </a>
+        </div>
         <div id="menu">
             <h3 class="titulo-menu">RECIBOS DE NOMINA</h3>
             <div class="select bar-opcion" id="respaldar">
@@ -62,9 +68,8 @@
                 </a>
 
             </div>
-        </div>
 
-        <div>
+
             <h3 class="titulo-menu">HERRAMIENTAS</h3>
             <div class="bar-opcion">
                 <a href="comparar-dir.html">
@@ -101,7 +106,7 @@
         </div>
     </aside>
 
-    <section class="secc">
+    <section class="secc z-depth-4 animate__animated animate__fadeInRightBig">
         <div class="t-seccion">
             <h3>RESPALDAR RECIBOS & TIMBRES</h3>
         </div>
@@ -154,10 +159,10 @@
                         </select>
                         <div class="conte-radiobtn">
                             <label class="in-lbl" for="reci">
-                                <input id="op-recibos" class="btn-radio" type="radio" name="op"/>Recibos
+                                <input id="op-recibos" class="btn-radio" type="radio" name="op" />Recibos
                             </label>
                             <label class="in-lbl" for="tim">
-                                <input id="op-timbres" class="btn-radio" type="radio" name="op" checked/>Timbres
+                                <input id="op-timbres" class="btn-radio" type="radio" name="op" checked />Timbres
                         </div>
                         <button class="btn" type="button" onclick="comprobarOpcionMostrar()">RECUPERAR</button>
                     </div>

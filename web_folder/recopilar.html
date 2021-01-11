@@ -24,6 +24,10 @@
                     $('.c-box').prop("checked", false);
                 }
             })
+            var height = $(window).height();
+
+            $('#aside-menu').height(height);
+            $('.secc').height(height);
         })
 
     </script>
@@ -36,10 +40,12 @@
         <span></span>
         <span></span>
     </div>
-    <aside class="z-depth-4 animate__animated animate__fadeInLeftBig">
-        <a class="logo" href="main.html">
-            <img src="/img/Logo-SR.png" alt="logo">
-        </a>
+    <aside id="aside-menu">
+        <div class="conte-logo">
+            <a class="logo" href="main.html">
+                <img src="/img/Logo-SR.png" alt="logo">
+            </a>
+        </div>
         <div id="menu">
             <h3 class="titulo-menu">RECIBOS DE NOMINA</h3>
             <div class="bar-opcion" id="respaldar">
@@ -100,7 +106,7 @@
         </div>
     </aside>
 
-    <section class="secc">
+    <section class="secc  z-depth-4 animate__animated animate__fadeInRightBig">
         <div class="t-seccion">
             <h3>RECOPILAR DATOS DE RECIBOS</h3>
         </div>
