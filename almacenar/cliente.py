@@ -3,7 +3,7 @@ import time
 from os import getcwd
 
 from modulos.rutas import unir_cadenas
-from modulos.txt import ArchivoTxt
+from modulos.log import Log
 from modulos.fechas import 	RangoFechas
 
 class Cliente:
@@ -16,7 +16,7 @@ class Cliente:
 		self.psw 	  = psw
 		self.bd 	  = bd	
 		self.tabla 	  = tabla
-		self.ruta_actual  = (getcwd())
+		
 
 		
 
@@ -45,11 +45,8 @@ class Cliente:
 			self.cliente.send(datos.encode())			
 			respuesta = self.cliente.recv(1024).decode()
 			while True:
-				rango = RangoFechas()
-				fecha = rango.fecha_actual()
-
-				log = ArchivoTxt(self.ruta_actual + '\\' + 'log-' + self.tabla + '.txt')
-				log.comprobar_si_existe(respuesta + ' -- ' + fecha)
+				log = Log('log-' + self.tabla + '.txt')
+				log.escribir_log(respuesta.split(':')[0],respuesta.split(':')[1])
 				
 				return respuesta
 

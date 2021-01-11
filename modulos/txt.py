@@ -9,12 +9,12 @@ class ArchivoTxt:
 		
 		self.ruta_archivo = archivo	
 
-	def comprobar_si_existe(self, texto):	
+	def comprobar_si_existe(self, texto, escribir_txt =True):	
 		
 		if path.exists(self.ruta_archivo):
 			self.escribir(texto)
 		else:
-			self.crear(texto)
+			self.crear(texto, escribir_txt)
 		
 
 	def escribir(self, datos):
@@ -43,9 +43,11 @@ class ArchivoTxt:
 		
 		return conte_txt
 	
-	def crear(self, datos):
+	def crear(self, datos, escribir):
 
 		archivo_r = open(self.ruta_archivo, "w")
-		self.escribir(datos)
+		if escribir:
+			self.escribir(datos)
 
+		archivo_r.close()
 

@@ -1,10 +1,13 @@
 from os.path import exists
 
 import eel
+import os.path
+
 from modulos.rutas import abrir_directorio, abrir_archivo, unir_cadenas
 from modulos.txt import ArchivoTxt
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
 from modulos.archivo import Archivo
+from modulos.log import Log
 
 from almacenar.cliente import Cliente
 from configuraciones import Configuracion
@@ -99,7 +102,7 @@ def enviar_ruta_archivo():
 def rutas_timbres_orig(ruta, periodo, anno):
 
     originales = ArchivoTimbre(ruta, periodo, anno)
-    timbres = originales.recuperar_timbres()
+    timbres = originales.recuperar_timbres()            
 
     return timbres
 
@@ -132,8 +135,22 @@ def copiado_recibos(carpt_orig, carpt_dest, archivos):
         reci = ReciboCop(carpt_orig, archivo, carpt_dest)
         reci.separar_en_recibos()
 
-    print("Archivos copiados")
-    return True
+    try:
+        log = Log('Log-copiado-Recibos.txt')   
+        errores = log.devolver_datos('ERROR')
+        if errores:
+
+            return ['ERRORES', True]
+        else:
+            return [' ', True]
+    except FileNotFoundError:
+        return [' ', True]
+    
+    except:
+        return[' ', False]
+
+
+
 
 
 """
@@ -343,6 +360,11 @@ def recuperar_recibos(datos, ruta_guardado):
 
     print('Archivos Guardados en: ' + ruta_guardado)
 
+    """  import os
+    # Abre una carpeta del escritorio en el explorador.
+    
+    os.system(f'start {os.path.realpath(ruta_guardado)}') """
+    
     return True
 
 

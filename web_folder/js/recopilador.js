@@ -25,7 +25,9 @@ async function validarInputs() {
     let directorio = document.getElementsByName("ruta-reci")[0].value;
 
     if (annoIn !== '' && periodoIn != '' && directorio != '') {
+
         mostrarEnTabla(directorio, periodoIn, annoIn)
+        
     }
     else {
         Precaucion("Selecciona Ruta, Año y Periodo para continuar");
@@ -34,15 +36,14 @@ async function validarInputs() {
 }
 
 async function mostrarEnTabla(directorio, periodo, anno) {
-    /* 
-        let datos = document.getElementById("tbl-datos");
-        datos.removeChild(tr) */
 
 
+    deshabilitar('principal');
+    loader_tarea();
     let rutas = await eel.mostrar_rutas_recibos(directorio, anno, periodo)();
     const rutasNum = Object.getOwnPropertyNames(rutas);
 
-
+    habilitar('principal');
     for (let i = 1; i <= rutasNum.length; i++) {
         let lista = document.getElementById("tbl-datos");
         let tr = document.createElement("tr");
@@ -74,8 +75,8 @@ async function mostrarEnTabla(directorio, periodo, anno) {
         tr.appendChild(columnaAnno);
         tr.appendChild(columnaNom);
         tr.appendChild(columnaRuta);
-
     }
+    
 
 }
 
@@ -88,7 +89,7 @@ async function elementosTabla() {
     let anno = document.getElementsByName("anno")[0].value;
     
     
-    debugger;
+    
     if (filaPer.length > 0) {
         for (let i = 0; i < filaPer.length; i++) {
             checkBox = filaPer[i].getElementsByClassName("c-box");

@@ -27,12 +27,9 @@ function comprobarOpcionCopiar(){
     }
 }
 async function mostrarRutasRecibos() {
-    /* 
-        let datos = document.getElementById("tbl-datos");
-        datos.removeChild(tr) */
 
-    /* let tabla = document.getElementById("tbl");
-    let carga = document.createElement("div"); */
+
+    
     let ruta = document.getElementsByName("ruta")[0].value;
     let anno = document.getElementsByName("anno")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
@@ -45,7 +42,8 @@ async function mostrarRutasRecibos() {
         let rutas = await eel.rutas_recibos_orig(ruta, anno, periodo)();
         const rutasNum = Object.getOwnPropertyNames(rutas);
 
-
+        deshabilitar('principal');
+        loader_tarea();
         for (let i = 1; i < rutasNum.length; i++) {
             let lista = document.getElementById("tbl-datos");
             let tr = document.createElement("tr");
@@ -75,6 +73,7 @@ async function mostrarRutasRecibos() {
             tr.appendChild(columnaArchivo);
 
         }
+        habilitar('principal');
 
     }
     else Precaucion('Seleccione Ruta, Año y Periodo');
@@ -85,8 +84,7 @@ async function mostrarRutasTimbres() {
         let datos = document.getElementById("tbl-datos");
         datos.removeChild(tr) */
 
-    /* let tabla = document.getElementById("tbl");
-    let carga = document.createElement("div"); */
+    
     let ruta = document.getElementsByName("ruta")[0].value;
     let anno = document.getElementsByName("anno")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
@@ -95,7 +93,8 @@ async function mostrarRutasTimbres() {
     if (ruta != '' && anno != '' && periodo != '') {
 
 
-        debugger;
+        deshabilitar('principal');
+        loader_tarea();
         let rutas = await eel.rutas_timbres_orig(ruta, periodo, anno)();
         const rutasNum = Object.getOwnPropertyNames(rutas);
 
@@ -129,7 +128,7 @@ async function mostrarRutasTimbres() {
             tr.appendChild(columnaArchivo);
 
         }
-
+        habilitar('principal');
     }
     else Precaucion('Seleccione Ruta, Año y Periodo');
 }
@@ -157,10 +156,18 @@ async function iniciarCopiadoRecibos() {
                 deshabilitar('principal');
                 loader_tarea();
                 let proceso = await eel.copiado_recibos(carp_orig, carp_dest, archivos)();
-                if (proceso == true) {
+                debugger;
+                if (proceso[1] == true && proceso[0] != 'ERRORES') {
                     habilitar('principal');
+                    satisfactorio('Archivos Copiados Sin errores');
                 }
-                satisfactorio('Archivos Copiados');
+                else if(proceso[0] == 'ERRORES'){
+                    habilitar('principal');
+                    Precaucion('Archivos Copiado, Pero Hubo errores de Copiado');
+                }
+                else{
+                    error('ERROR INESPERADO INTENTE CORRER NUEVAMENTE EL PROCESO');
+                }
             }
             else {
                 Precaucion('La ruta de Destino y la Original No pueden ser la misma');

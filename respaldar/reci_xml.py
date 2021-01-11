@@ -1,6 +1,8 @@
+import sys
 
 from modulos.rutas import unir_cadenas, crear_directorio
 from modulos.archivo import Archivo
+from modulos.log import Log
 
 from modulos.pdf import ArchivoPdf
 from respaldar.modelos.buscador import Buscador
@@ -111,8 +113,8 @@ class ReciboCop(ArchivoPdf):
 						posiciones[0], posiciones[1], conte[0])
 
 					texto.append(texto_encontrado)
-
-			if texto:
+			
+			if texto:				
 				control = int(texto[0].split(':')[1])
 				periodo = int(texto[1].split(':')[1].split('/')[0])
 				anno = str(texto[1].split(':')[1].split('/')[1])
@@ -120,9 +122,16 @@ class ReciboCop(ArchivoPdf):
 				datos = [control, hoja, periodo, anno]               
 				datos_recibo.append(datos)
 				texto.clear()
-			else:
-				print("""--- *--Error al leer la hoja--*'\n'\
-						Archivo: {}'\n' Pagina: {}'\n' ------""").format(self.ruta_origen, hoja)
+
+			else:	
+				log = Log('Log-copiado-Recibos.txt')
+				error = 'ERROR:'
+				mensaje = 'Hoja no leida' +'|'+ self.ruta_origen +'|'+'Hoja: '+str(hoja)
+				log.escribir_log(error, mensaje)
+				
+			
+				
+				
 				
 				continue
 
@@ -134,14 +143,17 @@ class ReciboCop(ArchivoPdf):
 
 
 		contenido_paginas = self._almacenar_datos()
-		
-		for contenido in contenido_paginas:
-			control = contenido[0]
-			pagina = contenido[1]
-			per_anno = str(contenido[3]) + str("{:02d}".format(contenido[2]))
-			nomina = self.datos_nom[1]
-			
-			nombre = unir_cadenas('_', [str(control), nomina, per_anno])
-			crear_directorio(self.datos_nom[0])
+		if contenido_paginas:
+			for contenido in contenido_paginas:
+				control = contenido[0]
+				pagina = contenido[1]
+				per_anno = str(contenido[3]) + str("{:02d}".format(contenido[2]))
+				nomina = self.datos_nom[1]
+				
+				nombre = unir_cadenas('_', [str(control), nomina, per_anno])
+				crear_directorio(self.datos_nom[0])
 
-			self.extraer_hoja(int(pagina), self.datos_nom[0], nombre)
+				self.extraer_hoja(int(pagina), self.datos_nom[0], nombre)
+
+			
+		
