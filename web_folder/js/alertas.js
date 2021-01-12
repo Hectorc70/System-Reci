@@ -11,11 +11,13 @@ function Precaucion(mensaje) {
         backdrop: false,
         width: '18rem',
         heightAuto: false,
+        
     })
     habilitarElemento('principal');
 }
 
 function satisfactorio(mensaje) {
+    deshabilitar('principal');
     Swal.fire({
         title: 'HECHO',
         text: mensaje,
@@ -32,6 +34,7 @@ function satisfactorio(mensaje) {
 }
 
 function error(mensaje) {
+    deshabilitar('principal');
     Swal.fire({
         title: 'ERROR',
         text: mensaje,

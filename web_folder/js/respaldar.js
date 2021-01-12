@@ -207,8 +207,9 @@ async function iniciarCopiadoTimbres() {
             }
 
         }
+        debugger;
         if (archivos.length > 0 && carp_dest != '') {
-
+            
             if (carp_orig != carp_dest) {
                 deshabilitar('principal');
                 loader_tarea();
