@@ -21,12 +21,20 @@
     display: inline-block;
     width: 280px;
     border-radius: .5em;
-    border: solid 2px #008992;  
+    border: solid 2px #008992;      
+    margin-right: 0px;
+    margin-left: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 2px;
+/*    padding-top: 1px;
+    padding-bottom:1px ;    */
     
 }
 .btn-radio{
     display: inline-block;
     border: none;
+    padding: 0px;
+    margin: 0px;
     
     
 }
