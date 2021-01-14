@@ -18,6 +18,7 @@
 }
 #conte-control input{
     width: 120px;
+    cursor: text;
     
 }
 #conte-ctrl-masivo{
@@ -26,6 +27,7 @@
 }
 #conte-ctrl-masivo input{
     width: 200px;
+    
 }
 
 #fechas{

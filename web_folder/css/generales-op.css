@@ -303,6 +303,7 @@ section {
     border-radius: .5em;
     border: solid 2px #008992;
     text-align: left; 
+    cursor: no-drop
 }
 
 .in-buscar:hover{
@@ -321,6 +322,7 @@ section {
     background:transparent ;
     color: white;
     border: solid 2px #008992;
+    cursor: pointer;
     
 }
 .slt:hover{
@@ -377,6 +379,12 @@ section {
 }
 .btn-explorar{
     width: 35px;    
+}
+.c-box:hover{
+    cursor: pointer;
+}
+#check-todos:hover{
+    cursor: pointer;
 }
 .limpiar-tbl{
     display: block;
