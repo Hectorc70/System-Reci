@@ -1,0 +1,42 @@
+@media only screen and (max-width: 1370px){
+    /* Generales */
+    .t-seccion h3{
+        font-size: 20px;
+    }
+    .in-lbl{
+        font-size: 14px;
+        
+    }
+    .in-buscar{
+        font-size: 14px;
+        
+    }
+    .btn{
+        
+    }
+
+    #aside-menu{
+        width: 4%;
+    }
+    section{
+        width: 96%;
+    }
+
+    #tbl{
+        height: 480px;
+        
+    }
+    #titulos th{
+        top: -4.9%;
+
+    }
+
+    #tbl-datos td{
+        font-size: 14px;
+    }
+
+    /* RESPALDAR */
+
+
+    
+} 

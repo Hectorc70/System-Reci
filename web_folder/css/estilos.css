@@ -12,7 +12,7 @@
 
 html,
 body{
-    height: 98%;
+    height: 100%;
     margin: 0px;
     padding: 0px;
     /* background-image: url("../img/patron.png"); */
@@ -65,7 +65,6 @@ body{
     padding: 20px;
     background-color: #4e4e4e;    
     box-shadow: 5px 5px 10px #1a1919;
-   
 }
 #titulo{
     display: block;

@@ -383,9 +383,9 @@ def leer_txt(ruta):
 **---------------------------------------------------------------------------------------------**
 """
 try:
-    opciones = ["--start-fullscreen"]
+    opciones = [{'size':(1080, 720)}]
 
-    eel.start('main.html', cmdline_args=opciones)
+    eel.start('main.html')
 
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
