@@ -46,7 +46,11 @@ class Cliente:
 			respuesta = self.cliente.recv(1024).decode()
 			while True:
 				log = Log('log-' + self.tabla + '.txt')
-				log.escribir_log(respuesta.split(':')[0],respuesta.split(':')[1])
+				if respuesta != '':
+
+					log.escribir_log(respuesta.split(':')[0],respuesta.split(':')[1])
+				else:
+					log.escribir_log('NO ENCONTRADO:',datos)
 				
 				return respuesta
 
