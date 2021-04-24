@@ -12,28 +12,6 @@
     width: 30%;  
     margin:auto; 
 }
-/* SCROOLL BAR */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-  /* Track */
-::-webkit-scrollbar-track {
-    background: #4e4e4e; 
-}
-
-  /* Handle */
-::-webkit-scrollbar-thumb {
-    background: #4e4e4e; 
-}
-
-  /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #4e4e4e; 
-}
-::-webkit-scrollbar:hover {
-    width: 10px;
-}
 
 
 

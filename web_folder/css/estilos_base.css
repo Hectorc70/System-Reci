@@ -9,22 +9,18 @@
 
   /* Track */
 ::-webkit-scrollbar-track {
-    background: #40A7AD; 
+    background: #1e5f74; 
 }
 
   /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #008992 
+    background: #1e5f74
 }
 
   /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background:#555; 
-    cursor: pointer;
-}
-::-webkit-scrollbar:hover {
-    width: 10px;
-    cursor: pointer;
+    background:#49a2c0; 
+
 }
 
 
@@ -167,12 +163,12 @@ hr{
 
 /* BOTONES */
 .btn{
+    background-color: #133b5c;
+    border: 3px solid #1e5f74;
     display: inline-block;
-    border: none;   
     margin: auto;
     margin-right: 14px;
-    background-color: white;
-    color: #383838;
+    color: #fcdab7;
     text-align: center;
     font-size: 16px;
     text-transform: uppercase;
@@ -185,8 +181,9 @@ hr{
         
 }
 .btn:hover{
-    background-color: #40A7AD;
+    background-color: #1e5f74;
     color: white; 
+    box-shadow: 0px 5px 15px 0px #1e5f74;
 }
 .btn:focus{
     outline: none;
@@ -205,8 +202,8 @@ hr{
 
 
 .in-lbl{
-    color: white;
-    font-size: 1.7rem;
+    color: #fcdab7;
+    font-size: 1.2rem;
     margin-right: 10px;
     margin-left: 10px;
     font-family: 'Roboto-m';  
@@ -214,17 +211,17 @@ hr{
 
 }
 .in-buscar{    
-    background-color: #40A7AD;
+    background-color: #1e5f74;
     font-size: 16px;
     text-transform: uppercase;
-    color: white;
+    color: #fcdab7;
     width: 10%;     
     font-size: 14px;
     padding: 2px;
     padding-left: 10px;
     margin: 7px;
     border-radius: .5em;
-    border: solid 2px #008992;
+    border: solid 2px #1e5f74;
     text-align: left; 
     cursor: no-drop
 }
@@ -235,7 +232,7 @@ input:focus{
 }
 
 .in-buscar:hover{
-    border: solid 2.5px #6fd1d8
+    box-shadow: 0px 1px 8px 0px #1e5f74;
 }
 
 .slt{
@@ -249,12 +246,13 @@ input:focus{
     border: none;
     background:transparent ;
     color: white;
-    border: solid 2px #008992;
+    border: solid 2px #1e5f74;
     cursor: pointer;
     
 }
 .slt:hover{
-    border: solid 2.5px #6fd1d8;
+    border: solid 2.5px #1e5f74;
+    box-shadow: 0px 2px 5px 0px #1e5f74;
 }
 .slt option{
     color: black;
@@ -266,14 +264,7 @@ input:focus{
     outline-width: 0; 
 }
 
-.cont-inputs{       
-    width: 100%;
-    margin: 0px auto;   
-    background-color: #008992;     
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: .5em;
-    padding: 10px;
-}
+
 .cont-inputs form{
     width: 100%;
     height: 95%;

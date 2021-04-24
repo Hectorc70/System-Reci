@@ -9,8 +9,9 @@
     <title>System Reci - Version 3.2.0</title>
     <link rel="stylesheet" type=text/css href="css/estilos_base.css">
     <link rel="stylesheet" type=text/css href="css/estilos_login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
-    <script type="text/javascript" src="js/funciones.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 </head>
 
 <body>
@@ -22,10 +23,14 @@
             <hr>
             <label class="in-label" for="control">Control</label>
             <input class="input-data" type="text" name="control">
-
-            <label class="in-label" for="password">Contraseña</label>
-            <input class="input-data" type="password" name="control">
-            <button class="btn btn-login" type="button" onclick="">
+            
+            <div>
+                <label class="in-label" for="password">Contraseña</label>
+            </div>
+            
+            
+            <input class="input-data" type="password" name="password">
+            <button class="btn btn-login" type="button" onclick="loginUser()">
                 Entrar
             </button>
         </div>

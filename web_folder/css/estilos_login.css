@@ -10,14 +10,14 @@
     box-shadow:0px 10px 20px 0px #0c0f30 ;  
 }
 
-section
+
 .input-data{    
     background-color: #1e5f74;
-    font-size: 16px;
+    font-size: 20px;
     text-transform: uppercase;
-    color: white;
+    color: #fcdab7;
     width: 100%;     
-    height: 24px;
+    height: 30px;
     font-size: 14px;
     padding: 2px;
     padding-left: 10px;
@@ -27,9 +27,6 @@ section
     text-align: left; 
 }
 
-.input-data:hover{
-    border: solid 2.5px #6fd1d8
-}
 
 
 .btn-login{
@@ -38,12 +35,12 @@ section
     padding-left: 15px;
     padding-right: 15px;
     background-color: #133b5c;
-    border: 3px solid #1e5f74;
+    border: 3px solid #ff8882;
     color: #fcdab7
 }
 
 .btn-login:hover{
-    background-color: #1e5f74;
+    background-color: #ff8882;
 }
 
 .in-label{

@@ -9,7 +9,7 @@
     float: left;
     width: 3%;     
     height: 100%;
-    background-color: #16585a;   
+    background-color: #1d2d50;   
     border-right: 1px solid #1a1919;    
 }  
 /* Animacion  */
@@ -108,13 +108,7 @@
 
 
 
-/* #menu-config{
-    display: block;      
-    width:100%;   
-    margin-top: 50px;  
-    padding: .1px;
-    bottom: 0;
-} */
+
 section {
     display: block;    
     width: 97%;
@@ -123,12 +117,12 @@ section {
     text-align: center;    
     padding: 20px;  
     padding-top: 5px;
-    background-color: #16585a;
+    background-color: #1d2d50;
     /* box-shadow: 5px 5px 10px #1a1919;*/
 } 
 .t-seccion{
     display: block;
-    background-color: #008992;
+    background-color: #133b5c;
     border-radius: .5em;
     width: 100%;   
     margin-bottom: 10px;
@@ -138,15 +132,14 @@ section {
     display: block;   
     font-size: 24px;    
     font-family: Roboto;
-    color: white;
+    color: #fcdab7;
     margin: 2px;
-    text-shadow: 5px 10px 10px #16585a;   
 }
 
 
 /* CONTENEDORES INPUTS */
 .contenedor-form{
-    background-color: #40A7AD;
+    background-color: #133b5c;
     padding: 5px;      
     border-radius: .5em;
     font-size: 16px;
@@ -164,6 +157,14 @@ section {
     
     
 }
+.cont-inputs{       
+    width: 100%;
+    margin: 0px auto;   
+    background-color: #1e5f74;     
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: .5em;
+    padding: 10px;
+}
 
 
 
@@ -175,7 +176,7 @@ section {
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #fcdab7;;
     border: none;   
     cursor: pointer;
 }
@@ -189,7 +190,7 @@ section {
 }
 
 .limpiar-tbl:hover{
-    background-color: #008992;
+    background-color: #1d2d50;
 }
 #tbl{
     overflow: auto;
@@ -198,13 +199,13 @@ section {
     height: 740px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #008992;  
+    background-color: #133b5c;  
     padding: 20px;
     border-radius: .5em;
 }
 
 .conte-tbl{
-    background-color: #40A7AD;
+    background-color: #1e5f74;
     width: 100%;       
     margin-right: auto;
     margin-left: auto;   
@@ -224,8 +225,8 @@ table{
     height: 35px;      
     text-transform: uppercase;
     font-size: 14px;
-    background-color: #008992;
-    color: white;  
+    background-color: #133b5c;
+    color: #fcdab7;  
     position: sticky;
     top: -2.9%;
     font-size: 16px;
@@ -244,15 +245,15 @@ table{
 
 #tbl-datos td{
     /* background-color: white; */
-    color: white;
+    color: #fcdab7;
     text-align: left;
     padding: 2px;
     padding-left: 10px;
-    border: solid 2px #008992;    
+  
 }
 #tbl-datos td:hover{
     /* background-color: white; */        
-    border: solid 3px #6fd1d8
+   box-shadow: 0px 10px 15px 0px #133b5c;
 }
 
 
@@ -282,7 +283,7 @@ table{
     width: 20px;
     height: 20px;
     /* background-color: #008992; */
-    color: white;
+    color: #fcdab7;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -304,7 +305,7 @@ table{
     display: block;
     float: right;
     width: 80%;
-    background-color: #008992;
+    background-color: #133b5c;
     border-radius: .5em ;
     margin-right: 20px;
     height: 90%;
