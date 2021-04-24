@@ -3,6 +3,8 @@ from os.path import exists
 import eel
 import os.path
 
+from login.login import User
+
 from modulos.rutas import abrir_directorio, abrir_archivo, unir_cadenas
 from modulos.txt import ArchivoTxt
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
@@ -40,6 +42,10 @@ ejecutar(ruta, '01',  '2020', ruta_destino) """
                         ***HERRAMIENTAS***
 **---------------------------------------------------------------------------------------------**
 """
+
+def pruebas_api():
+    user = User("318212","es3sa21234")
+    user.get_token_user()
 
 
 def leer_config_bd():
@@ -385,7 +391,7 @@ def leer_txt(ruta):
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('main.html')
+    eel.start('main.html', port=8080)
 
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
