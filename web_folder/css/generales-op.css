@@ -109,17 +109,7 @@
 
 
 
-section {
-    display: block;    
-    width: 97%;
-    height: 100%;
-    float: right;     
-    text-align: center;    
-    padding: 20px;  
-    padding-top: 5px;
-    background-color: #1d2d50;
-    /* box-shadow: 5px 5px 10px #1a1919;*/
-} 
+
 .t-seccion{
     display: block;
     background-color: #133b5c;
@@ -249,11 +239,11 @@ table{
     text-align: left;
     padding: 2px;
     padding-left: 10px;
-  
+
 }
 #tbl-datos td:hover{
     /* background-color: white; */        
-   box-shadow: 0px 10px 15px 0px #133b5c;
+box-shadow: 0px 10px 15px 0px #133b5c;
 }
 
 

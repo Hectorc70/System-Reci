@@ -134,7 +134,16 @@
     pointer-events: none;
 }
 
+/* COLORES */
 
+:root{
+    --color-fondo:#1d2d50;
+    --color-secundario:#133b5c;
+    --color-sombra-cards: #0c0f30;
+    --color-contenedor:#1e5f74;
+    --color-texto: #fcdab7;
+    --color-resalte:#ff8882;
+}
 
     
 html,
@@ -144,11 +153,24 @@ body{
     padding: 0px;
     /* background-image: url("../img/patron.png"); */
     /* background: radial-gradient(ellipse at center, rgba(66,65,66,1) 0%, rgba(66,66,66,1) 50%, rgba(64,64,64,1) 65%, rgba(59,59,59,1) 72%, rgba(38,38,38,1) 100%); */
-    background-color: #1d2d50;
+    background-color: var(--color-fondo);
+}
+section {
+    display: flex;    
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    margin: 0px;
+    padding: 1px;
+
 }
 
+
+
+
+
 .title{
-    color:  #fcdab7;
+    color:  var(--color-texto);
     font-family: "Roboto";
     margin: 5px auto;
     text-align: center;
@@ -156,18 +178,18 @@ body{
 }
 
 hr{
-    background-color: #fcdab7;
-    border: 1px solid #fcdab7;
+    background-color: var(--color-texto);
+    border: 1px solid var(--color-texto);
+    
 }
 
 
 /* BOTONES */
 .btn{
     background-color: #133b5c;
-    border: 3px solid #1e5f74;
+    border: 3px solid #ff8882;
     display: inline-block;
     margin: auto;
-    margin-right: 14px;
     color: #fcdab7;
     text-align: center;
     font-size: 16px;
@@ -178,12 +200,10 @@ hr{
     padding-left: 8px;
     padding-right: 8px;
     font-family: 'Roboto';
-        
 }
 .btn:hover{
-    background-color: #1e5f74;
-    color: white; 
-    box-shadow: 0px 5px 15px 0px #1e5f74;
+    background-color: var(--color-resalte);
+    box-shadow: 0px 3px 10px 0px var(--color-contenedor);
 }
 .btn:focus{
     outline: none;
@@ -192,6 +212,12 @@ hr{
     width: 35px;    
 }
 
+.btn-siguiente{
+    display: block;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
 .c-box:hover{
     cursor: pointer;
 }
@@ -201,63 +227,10 @@ hr{
 }
 
 
-.in-lbl{
-    color: #fcdab7;
-    font-size: 1.2rem;
-    margin-right: 10px;
-    margin-left: 10px;
-    font-family: 'Roboto-m';  
 
 
-}
-.in-buscar{    
-    background-color: #1e5f74;
-    font-size: 16px;
-    text-transform: uppercase;
-    color: #fcdab7;
-    width: 10%;     
-    font-size: 14px;
-    padding: 2px;
-    padding-left: 10px;
-    margin: 7px;
-    border-radius: .5em;
-    border: solid 2px #1e5f74;
-    text-align: left; 
-    cursor: no-drop
-}
-input:focus{
-    outline: none;
-    outline-width: 0;
-    
-}
 
-.in-buscar:hover{
-    box-shadow: 0px 1px 8px 0px #1e5f74;
-}
 
-.slt{
-    display: inline-block;
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-right: 10px;
-    height: 25px;
-    width: 60px; 
-    border-radius: .5em;
-    border: none;
-    background:transparent ;
-    color: white;
-    border: solid 2px #1e5f74;
-    cursor: pointer;
-    
-}
-.slt:hover{
-    border: solid 2.5px #1e5f74;
-    box-shadow: 0px 2px 5px 0px #1e5f74;
-}
-.slt option{
-    color: black;
-    scrollbar-width: none;
-}
 
 .slt:focus{
     outline: none;
@@ -273,4 +246,62 @@ input:focus{
 }
 
 
+/* 2.0 inputs */
 
+
+.in-data{    
+    background-color: var(--color-contenedor);
+    text-transform: uppercase;
+    color: var(--color-texto);
+    width:90%;     
+    font-size: 14px;
+    padding: 2px;
+    padding-left: 10px;
+    border-radius: .5em;
+    border: solid 2px var(--color-contenedor);
+    text-align: left;
+    margin-top: 7px;
+}
+input:focus{
+    outline: none;
+    outline-width: 0;
+    
+}
+
+.in-data:hover{
+    box-shadow: 0px 1px 8px 0px var(--color-contenedor);
+}
+
+
+.in-lbl{
+    color: var(--color-texto);
+    font-size: 1.0rem;
+    
+    font-family: 'Roboto-m';  
+}
+
+
+.slt{
+    display: inline-block;
+    font-size: 14px;
+    font-family: 'Roboto-m';
+    height: 20px;
+    width: 60px; 
+    border-radius: .5em;
+    border: none;
+    background:transparent ;
+    color: var(--color-texto);
+    border: solid 3px var(--color-secundario);
+    cursor: pointer;
+    
+}
+.slt:hover{
+    
+    box-shadow: 0px 2px 10px 0px var(--color-secundario);
+}
+.slt option{
+    display: block;
+    color: var(--color-texto);
+    background-color: var(--color-secundario);
+    box-sizing: border-box;
+}

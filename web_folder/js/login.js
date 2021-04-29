@@ -4,15 +4,13 @@ async function  loginUser() {
 
     let control = document.getElementsByName("control")[0].value;
     let password = document.getElementsByName("password")[0].value;
-  
     if (control != '' && password != '') {
         let resp = await eel.pruebas_api(control, password)();
-        debugger;
         if (resp[0] != 200){
             error(resp[1]['non_field_errors'][0])
         }
         else{
-            window.location.replace("/buscar.html");
+            window.location.replace("/buscador.html");
         }
         
         
