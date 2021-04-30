@@ -24,7 +24,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    margin: 0px auto;
+    margin: 50px auto;
     padding: 20px;
     padding-top: 0px;
     background-color: var(--color-secundario); 
@@ -133,29 +133,28 @@ btn-plus-campo{
 
 /* Animaciones */
 
-@keyframes move {
-    
-    
-    
-    
-    0% {
-        transform: translate(0px, 0px);
-        
-    }
-    100% {
-        transform: translate(0px, 0px);
-        position: absolute;
-    top: 10px;
-    left: 10px;
-        
-
-    }  
-
-}
-
 .animate-move{
-    transform: translate(-550px,-200px);
+    transform: translate(-150%,-50%);
     transition: all 0.5s ease-in-out;
     box-shadow: none;
     
 }
+/* Vista de Resultados */
+
+#vista-resultado{
+    visibility: hidden;
+    position: fixed;
+    display: inline;
+    bottom: -600px;
+    right: 10px;
+    width: 50%;
+    height: 95%;
+}
+
+.animate-move-r{
+    display: block !important;
+    visibility: visible !important;
+    transform: translate(-10%, -67%);
+    transition: all 0.5s ease-in-out;
+}
+

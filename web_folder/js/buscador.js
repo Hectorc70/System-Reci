@@ -2,31 +2,15 @@
 
 
 function movimientosCardParametros(){
-    /* document.getElementById("parametros-busqueda").animate([
-        {transform: 'translateX(-300px)'},
-        {transform: 'translateY(-300px)'}
-    ],
-
-    {
-        duration:1000,
-        iterations:  1,
-    }
-    ); */
 
 
     let cardParams = document.getElementById("parametros-busqueda");
-
+    let vista = document.getElementById("vista-resultado");
+    window.hei
     cardParams.setAttribute('class', 'animate-move card-contenedor');
+    cardParams.style.transform = 'translate(-30px,-570px);'
+    vista.setAttribute('class', 'card-contenedor animate-move-r ');
 
-    
-
-    /* periodoIni.style.position = 'absolute';
-    periodoIni.style.top = '0px';
-    periodoIni.style.left = '10px';
-    periodoIni.style.boxShadow = 'none'; */
-    /* periodoIni.style.transition = '1000ms';
-    periodoIni.style.translateY = '100';
- */
 }
 
 function enviarDatosBusqueda() {
