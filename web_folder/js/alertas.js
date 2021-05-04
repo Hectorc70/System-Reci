@@ -1,6 +1,6 @@
 
 function Precaucion(mensaje) {
-    deshabilitar('principal');
+
     Swal.fire({
         title: 'AVISO',
         text: mensaje,
@@ -13,11 +13,11 @@ function Precaucion(mensaje) {
         heightAuto: false,
         
     })
-    habilitarElemento('principal');
+
 }
 
 function satisfactorio(mensaje) {
-    deshabilitar('principal');
+
     Swal.fire({
         title: 'HECHO',
         text: mensaje,
@@ -34,7 +34,6 @@ function satisfactorio(mensaje) {
 }
 
 function error(mensaje) {
-    deshabilitar('principal');
     Swal.fire({
         title: 'ERROR',
         text: mensaje,
@@ -46,6 +45,6 @@ function error(mensaje) {
         width: '18rem',
         heightAuto: false,
     })
-    habilitarElemento('principal');
+
 
 }

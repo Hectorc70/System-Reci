@@ -1,8 +1,9 @@
 'use strict'
 
 
-function movimientosCardParametros(){
 
+
+function AnimacionBuscador(){
 
     let cardParams = document.getElementById("parametros-busqueda");
     let vista = document.getElementById("vista-resultado");
@@ -13,31 +14,32 @@ function movimientosCardParametros(){
 
 }
 
-function enviarDatosBusqueda() {
+function validarInputs() {
 
     let control = document.getElementsByName("control")[0].value;
-    let ruta = document.getElementsByName("ruta-masivo")[0].value;
-    if (ruta != '') {
-        buscarVariosEmpleados()
-    }
-    else if (control != '') {
-        mostrarDatosRecibos()
+    let periodoIni = document.getElementsByName("periodo-ini")[0].value;
+    let annoIni = document.getElementsByName("anno-ini")[0].value;
+    let periodoFin = document.getElementsByName("periodo-fin")[0].value;
+    let annoFin = document.getElementsByName("anno-fin")[0].value;
+
+
+    if (periodoIni != '' && annoIni != '' && 
+        periodoFin != '' && annoFin != '' && 
+        control != '') {
+        AnimacionBuscador();
+        
 
     }
 
     else {
-        Precaucion('Escriba un numero de control para poder Buscar\
-        O seleccione archivo de carga masiva');
+        Precaucion('Debe proporcinar Numero de control \
+        e inicio y final');
     }
 }
 
 
 /* mostrar datos RECIBOS */
 async function mostrarDatosRecibos() {
-    let periodoIni = document.getElementsByName("periodo-ini")[0].value;
-    let annoIni = document.getElementsByName("anno-ini")[0].value;
-    let periodoFin = document.getElementsByName("periodo-fin")[0].value;
-    let annoFin = document.getElementsByName("anno-fin")[0].value;
     let nombre = '0'
 
 
