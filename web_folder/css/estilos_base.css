@@ -306,7 +306,7 @@ input:focus{
     height: 25px;
     padding-left: 15px;
 }
-#cuerpo-tabla{
+.cuerpo-tabla{
     justify-content: space-around;
     align-items: center;
     width: 100%;

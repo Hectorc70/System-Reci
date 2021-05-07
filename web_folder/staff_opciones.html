@@ -98,6 +98,10 @@
                 </div>
                 <hr>
                 <div id="tabla-resultados">
+                    <div id="conte-opciones-vista-tabla">
+                        <a id="pest-recibos" class="opcion-vista" onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'recibos-datos', 'timbres-datos')">Recibos</a>
+                        <a id="pest-timbres" class="opcion-vista" onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos')">Timbres</a>
+                    </div>
                     <div id="loader">
                         <div></div>
                         <div></div>
@@ -120,7 +124,23 @@
                         <div class="titulo-tabla">Visualizar</div>
                     </div>
 
-                    <div id="cuerpo-tabla">
+                    <div class= "cuerpo-tabla" id="recibos-datos">
+                        <div class="fila">
+                            <div class="cell">318212</div>
+                            <div class="cell">RECIBOS</div>
+                            <div class="cell">202101</div>
+                            <div class="cell">-</div>
+                            <div class="cell">-</div>
+                        </div>
+                        <div class="fila">
+                            <div class="cell">318232</div>
+                            <div class="cell">RECIBOS</div>
+                            <div class="cell">202101</div>
+                            <div class="cell">-</div>
+                            <div class="cell">-</div>
+                        </div>
+                    </div>
+                    <div class= "cuerpo-tabla" id="timbres-datos">
                         <div class="fila">
                             <div class="cell">318212</div>
                             <div class="cell">ORDINARIA</div>
@@ -141,7 +161,7 @@
                 </div>
                 <div class="conte-acciones">
                     <button class="btn btn-grande" onclick="cancelarVista()">Cancelar</button>
-                    <button class="btn btn-grande">Copiar</button>
+                    <button class="btn btn-grande" onclick="mostrarRutasRecibos()">Copiar</button>
                     
                 </div>
             </div>

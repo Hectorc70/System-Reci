@@ -108,7 +108,10 @@ def enviar_ruta_archivo():
                         ***RESPALDAR XML Y RECIBOS***
 **---------------------------------------------------------------------------------------------**
 """
-
+@eel.expose
+def enviar_rutas(ruta, periodo, anno):
+    rutas_timbres = rutas_timbres_orig(ruta, periodo, anno)
+    rutas_recibos = rutas_recibos_orig(ruta, periodo, anno)
 
 @eel.expose
 def rutas_timbres_orig(ruta, periodo, anno):
@@ -118,6 +121,13 @@ def rutas_timbres_orig(ruta, periodo, anno):
 
     return timbres
 
+@eel.expose
+def rutas_recibos_orig(ruta, anno, periodo):
+
+    originales = ArchivoRecibo(ruta, anno, periodo)
+    recibos = originales.recuperar_recibos()
+
+    return recibos
 
 @eel.expose
 def copiar_timbres(carpeta_origen, carpt_dest, archivos, anno, periodo):
@@ -128,16 +138,6 @@ def copiar_timbres(carpeta_origen, carpt_dest, archivos, anno, periodo):
         timbre.copiado_archivos(archivo)
 
     return True
-
-
-@eel.expose
-def rutas_recibos_orig(ruta, anno, periodo):
-
-    originales = ArchivoRecibo(ruta, anno, periodo)
-    recibos = originales.recuperar_recibos()
-
-    return recibos
-
 
 @eel.expose
 def copiado_recibos(carpt_orig, carpt_dest, archivos):

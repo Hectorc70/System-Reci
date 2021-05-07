@@ -1,5 +1,25 @@
 'use strict'
+function cambiardeTipoVista(idpest,idpestNoSelect,idTablaMostrar, idTablaNoMostrar){
+    let CuerpoTabla = document.getElementById(idTablaMostrar);
+    let CuerpoTablaNoMostrar = document.getElementById(idTablaNoMostrar);
 
+    let pestSelect = document.getElementById(idpest);
+    let pestNoSelect = document.getElementById(idpestNoSelect);
+    CuerpoTabla.style.transform = 'translate(0px,0px)';
+    CuerpoTabla.style.opacity = '100%';
+    CuerpoTabla.style.transition = 'all 0.5s ease-in-out';
+    
+
+    CuerpoTablaNoMostrar.style.transform = 'translate(2000px, 0px)';
+    CuerpoTablaNoMostrar.style.opacity = '0%';
+    CuerpoTablaNoMostrar.style.transition = 'all 0.5s ease-in-out';
+
+    
+
+    pestSelect.style.backgroundColor = 'var(--color-secundario)';
+    pestNoSelect.style.backgroundColor = 'var(--color-contenedor)';
+
+}
 function cancelarVista(){
     let cardParams = document.getElementById("respaldar-parametros");
     let vista = document.getElementById("vista-resultados-archivos");
@@ -39,7 +59,6 @@ function comprobarParametros(){
 
 
     if(ruta !='' && anno !='' && periodo != ''){
-        debugger;
         mostrarRutasRecibos(ruta, anno, periodo);
 
     }
@@ -73,13 +92,18 @@ function comprobarOpcionCopiar(){
         iniciarCopiadoTimbres();
     }
 }
+
+async function mostrarDatosTabla(){
+    let rutas = await eel.enviar_rutas(ruta, anno, periodo)();
+    debugger;
+
+}
 async function mostrarRutasRecibos(ruta, anno, periodo) {
 
     let rutas = await eel.rutas_recibos_orig(ruta, anno, periodo)();
         const rutasNum = Object.getOwnPropertyNames(rutas);
 
-        deshabilitar('principal');
-        loader_tarea();
+        
         for (let i = 1; i < rutasNum.length; i++) {
             let lista = document.getElementById("tbl-datos");
             let tr = document.createElement("tr");
@@ -108,7 +132,6 @@ async function mostrarRutasRecibos(ruta, anno, periodo) {
             tr.appendChild(columnaNomina);
             tr.appendChild(columnaArchivo);
 
-        habilitar('principal');
 }
 }
 
