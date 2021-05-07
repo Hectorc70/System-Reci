@@ -8,7 +8,6 @@
 #conte-opciones-vista-tabla{
     display: flex;
     width: 100%;
-    height: 60%;
     padding: 20px;
     position: absolute;
     top: 0;
@@ -48,4 +47,12 @@
     width: 95%;
     z-index: 1;
 }
-
+#vista-resultados-archivos .titulo-tabla:last-child{
+    width: 60%;
+}
+#timbres-datos .cell:last-child{
+    width: 60%;
+}
+#recibos-datos .cell:last-child{
+    width: 60%;
+}

@@ -8,12 +8,12 @@ function cambiardeTipoVista(idpest,idpestNoSelect,idTablaMostrar, idTablaNoMostr
     CuerpoTabla.style.transform = 'translate(0px,0px)';
     CuerpoTabla.style.opacity = '100%';
     CuerpoTabla.style.transition = 'all 0.5s ease-in-out';
-    
 
+    
     CuerpoTablaNoMostrar.style.transform = 'translate(2000px, 0px)';
     CuerpoTablaNoMostrar.style.opacity = '0%';
     CuerpoTablaNoMostrar.style.transition = 'all 0.5s ease-in-out';
-
+    
     
 
     pestSelect.style.backgroundColor = 'var(--color-secundario)';
@@ -94,8 +94,53 @@ function comprobarOpcionCopiar(){
 }
 
 async function mostrarDatosTabla(){
-    let rutas = await eel.enviar_rutas(ruta, anno, periodo)();
-    debugger;
+    let ruta = document.getElementsByName("ruta")[0].value;
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
+    animacionVistaRespaldar()
+    
+    let rutas = await eel.enviar_rutas(ruta, periodo, anno)();
+    
+    let tablavistaTimbres = document.getElementById("timbres-datos")
+    for(let i=0; i < rutas[0].length; i++){
+        let fila = document.createElement("div");
+        fila.setAttribute("class", "fila");
+
+        let celdaNom = document.createElement("div");
+        celdaNom.setAttribute("class", "cell");
+        celdaNom.innerHTML = rutas[0][i][1];
+        let celdaPer = document.createElement("div");
+        celdaPer.setAttribute("class", "cell");
+        celdaPer.innerHTML = rutas[0][i][0];
+        let celdaRuta = document.createElement("div");
+        celdaRuta.setAttribute("class", "cell");
+        celdaRuta.innerHTML = rutas[0][i][2];
+
+        tablavistaTimbres.appendChild(fila);
+        fila.appendChild(celdaNom);
+        fila.appendChild(celdaPer);
+        fila.appendChild(celdaRuta);
+    }
+    let tablavistaRecibos = document.getElementById("recibos-datos")
+    for(let i=0; i < rutas[1].length; i++){
+        let fila = document.createElement("div");
+        fila.setAttribute("class", "fila");
+
+        let celdaNom = document.createElement("div");
+        celdaNom.setAttribute("class", "cell");
+        celdaNom.innerHTML = rutas[1][i][1];
+        let celdaPer = document.createElement("div");
+        celdaPer.setAttribute("class", "cell");
+        celdaPer.innerHTML = rutas[1][i][0];
+        let celdaRuta = document.createElement("div");
+        celdaRuta.setAttribute("class", "cell");
+        celdaRuta.innerHTML = rutas[1][i][2];
+
+        tablavistaRecibos.appendChild(fila);
+        fila.appendChild(celdaNom);
+        fila.appendChild(celdaPer);
+        fila.appendChild(celdaRuta);
+    }
 
 }
 async function mostrarRutasRecibos(ruta, anno, periodo) {

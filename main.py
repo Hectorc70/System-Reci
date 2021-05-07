@@ -113,6 +113,7 @@ def enviar_rutas(ruta, periodo, anno):
     rutas_timbres = rutas_timbres_orig(ruta, periodo, anno)
     rutas_recibos = rutas_recibos_orig(ruta, periodo, anno)
 
+    return [rutas_timbres, rutas_recibos]
 @eel.expose
 def rutas_timbres_orig(ruta, periodo, anno):
 
@@ -122,7 +123,7 @@ def rutas_timbres_orig(ruta, periodo, anno):
     return timbres
 
 @eel.expose
-def rutas_recibos_orig(ruta, anno, periodo):
+def rutas_recibos_orig(ruta, periodo,anno):
 
     originales = ArchivoRecibo(ruta, anno, periodo)
     recibos = originales.recuperar_recibos()

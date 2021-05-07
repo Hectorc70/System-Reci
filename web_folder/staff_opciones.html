@@ -41,7 +41,7 @@
                 </div>
                 <div id="conte-fechas-respaldar">
                     <div class="conte-select">
-                        <select class="slt periodos" name="periodo-fin">
+                        <select class="slt periodos" name="periodo">
                             <option value=""></option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -68,7 +68,7 @@
                             <option value="23">23</option>
                             <option value="24">24</option>
                         </select>
-                        <select class="slt anno" name="anno-fin">
+                        <select class="slt anno" name="anno">
                             <option value=""> </option>
                             <option value="2019">2019</option>
                             <option value="2020">2020</option>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div id="conte-btn">
-                    <button class="btn" type="button" onclick="animacionVistaRespaldar()">Buscar</button>
+                    <button class="btn" type="button" onclick="mostrarDatosTabla()">Buscar</button>
                 </div>
             </div>
             <div class="card-contenedor" id="vista-resultados-archivos">
@@ -113,50 +113,16 @@
                         <div></div>
                     </div>
                     <div id="titulos-tabla">
-                        <div class="titulo-tabla">
-                            Nomina
-                        </div>
+                        <div class="titulo-tabla">Nomina</div>
                         <div class="titulo-tabla">Periodo</div>
                         <div class="titulo-tabla">Ruta de Archivo</div>
-                        <div class="titulo-tabla">
-                            Descargar
-                        </div>
-                        <div class="titulo-tabla">Visualizar</div>
                     </div>
 
                     <div class= "cuerpo-tabla" id="recibos-datos">
-                        <div class="fila">
-                            <div class="cell">318212</div>
-                            <div class="cell">RECIBOS</div>
-                            <div class="cell">202101</div>
-                            <div class="cell">-</div>
-                            <div class="cell">-</div>
-                        </div>
-                        <div class="fila">
-                            <div class="cell">318232</div>
-                            <div class="cell">RECIBOS</div>
-                            <div class="cell">202101</div>
-                            <div class="cell">-</div>
-                            <div class="cell">-</div>
-                        </div>
+                        <!-- DATOS DE LOS RECIBOS DE NOMINA -->
                     </div>
                     <div class= "cuerpo-tabla" id="timbres-datos">
-                        <div class="fila">
-                            <div class="cell">318212</div>
-                            <div class="cell">ORDINARIA</div>
-                            <div class="cell">202101</div>
-                            <div class="cell"></div>
-                            <div class="cell">-</div>
-                        </div>
-                        <div class="fila">
-                            <div class="cell">318232</div>
-                            <div class="cell">ORDINARIAaaaaaaaaaaaaaaaaaaaa</div>
-                            <div class="cell">202101</div>
-                            <div class="cell">
-                            </div>
-                            <div class="cell">
-                            </div>
-                        </div>
+                        <!-- DATOS DE LOS TIMBRES DE NOMINA -->
                     </div>
                 </div>
                 <div class="conte-acciones">
