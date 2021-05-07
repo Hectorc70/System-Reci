@@ -1,30 +1,38 @@
 'use strict'
 /* MAIN */
 window.onload = function () {
-    setTimeout(carga, 1000);
-}
+    setTimeout(carga, 1000);}
+/* 
 
 function carga(){
     $('#preloader').fadeOut();
     $('#menu-principal').removeClass('hide');
-}
+} */
 /* Funciones que son para mostrar una animación de loader*/
-function loader_tarea(){      
+function loader(){      
     let carga = document.getElementById("loader");    
-    carga.setAttribute("class", "preloader_2");
+    carga.setAttribute("class", "lds-roller");
 }
 
 function deshabilitar(elemento){
-    let etiqueta = document.getElementById(elemento);
-    etiqueta.setAttribute("class", "deshabilitado");
-    
-    
+    let elementoPadre = document.getElementById(elemento);
+    elementoPadre.setAttribute("class", "deshabilitado");
+    let backBlock = document.createElement("div");
+    backBlock.style.position = "absolute";
+    backBlock.style.width = "100%";
+    backBlock.style.height = "100%";
+    backBlock.style.top = "0";
+    backBlock.style.bottom = "0";
+    backBlock.style.left = "0";
+    backBlock.style.right = "0";
+    backBlock.style.opacity = "10%";
+    backBlock.style.background = "white";
+    elementoPadre.appendChild(backBlock);
 }
+
 function habilitarElemento(elemento){
     let etiqueta = document.getElementById(elemento);
     etiqueta.removeAttribute("class");
-    
-    
 }
 
 function habilitar(elemento){ 

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Reci - Version 3.2.0</title>
+    <link rel="stylesheet" type=text/css href="css/estilos_base.css">
+    <link rel="stylesheet" type=text/css href="css/opciones_stilos.css">
+    <link rel="stylesheet" type=text/css href="css/respaldar_estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="js/alertas.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
+    <script type="text/javascript" src="js/respaldar.js"></script>
+</head>
+
+<body>
+    <section id="conte-opciones">
+        <div id="menu" class="card-contenedor">
+            <div class="title-section">
+                <h3>Menu Principal</h3>
+
+            </div>
+            <hr>
+            <div id="opciones">
+                <div class="opcion-menu"></div>
+                <div class="opcion-menu"></div>
+                <div class="opcion-menu"></div>
+            </div>
+        </div>
+        <div id="conte-respaldar">
+            <div id="respaldar-parametros" class="card-contenedor">
+                <div class="title-section">
+                    <h3>Respaldar Recibos - Timbres</h3>
+                </div>
+                <hr>
+                <div class="conte-titulo-fechas">
+                    <label class="in-lbl">Periodo a Respaldar</label>
+                </div>
+                <div id="conte-fechas-respaldar">
+                    <div class="conte-select">
+                        <select class="slt periodos" name="periodo-fin">
+                            <option value=""></option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                        </select>
+                        <select class="slt anno" name="anno-fin">
+                            <option value=""> </option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="conte-ruta">
+                    <label class="in-lbl">Ruta de Periodo</label>
+                    <div class="conte-input-ruta">
+                        <div class="objeto-ruta">
+                            <input class="in-data in-ruta" type="text" name="ruta">
+                        </div>
+                        <div class="objeto-ruta">
+                            <button class="btn btn-explorar" onclick="mostrarRuta('ruta')">...</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="conte-btn">
+                    <button class="btn" type="button" onclick="animacionVistaRespaldar()">Buscar</button>
+                </div>
+            </div>
+            <div class="card-contenedor" id="vista-resultados-archivos">
+                <div class="title-section">
+                    <h3>Resultados de Busqueda</h3>
+                    
+                </div>
+                <hr>
+                <div id="tabla-resultados">
+                    <div id="loader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div id="titulos-tabla">
+                        <div class="titulo-tabla">
+                            Nomina
+                        </div>
+                        <div class="titulo-tabla">Periodo</div>
+                        <div class="titulo-tabla">Ruta de Archivo</div>
+                        <div class="titulo-tabla">
+                            Descargar
+                        </div>
+                        <div class="titulo-tabla">Visualizar</div>
+                    </div>
+
+                    <div id="cuerpo-tabla">
+                        <div class="fila">
+                            <div class="cell">318212</div>
+                            <div class="cell">ORDINARIA</div>
+                            <div class="cell">202101</div>
+                            <div class="cell"></div>
+                            <div class="cell">-</div>
+                        </div>
+                        <div class="fila">
+                            <div class="cell">318232</div>
+                            <div class="cell">ORDINARIAaaaaaaaaaaaaaaaaaaaa</div>
+                            <div class="cell">202101</div>
+                            <div class="cell">
+                            </div>
+                            <div class="cell">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="conte-acciones">
+                    <button class="btn btn-grande" onclick="cancelarVista()">Cancelar</button>
+                    <button class="btn btn-grande">Copiar</button>
+                    
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>

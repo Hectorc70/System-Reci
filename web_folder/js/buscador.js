@@ -15,7 +15,7 @@ function AnimacionBuscador(){
 }
 
 function validarInputs() {
-
+    
     let control = document.getElementsByName("control")[0].value;
     let periodoIni = document.getElementsByName("periodo-ini")[0].value;
     let annoIni = document.getElementsByName("anno-ini")[0].value;
@@ -26,6 +26,8 @@ function validarInputs() {
     if (periodoIni != '' && annoIni != '' && 
         periodoFin != '' && annoFin != '' && 
         control != '') {
+            deshabilitar("conte-buscador");
+            loader();
         AnimacionBuscador();
         
 
@@ -221,7 +223,7 @@ async function addCampo() {
 
     let inputControl = document.createElement("input");
     inputControl.setAttribute("type", "text");
-    inputControl.setAttribute("class", "in-data");
+    inputControl.setAttribute("class", "in-data in-control");
     inputControl.setAttribute("name", "control");
     inputControl.setAttribute("maxlength", "8");
 

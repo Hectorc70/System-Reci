@@ -397,7 +397,10 @@ def leer_txt(ruta):
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('buscador.html', port=8080)
+    eel.start('staff_opciones.html', port=8080)
+    
+    
+    #eel.start('buscador.html', port=8080)
 
 
 except(SystemExit, MemoryError, KeyboardInterrupt):

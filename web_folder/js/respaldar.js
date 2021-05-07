@@ -1,5 +1,52 @@
 'use strict'
 
+function cancelarVista(){
+    let cardParams = document.getElementById("respaldar-parametros");
+    let vista = document.getElementById("vista-resultados-archivos");
+    let menu  = document.getElementById('menu');
+    vista.style.transform = 'translate(0px,1000px)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+    menu.style.transform = 'translate(0px,0px)';
+    menu.style.transition = 'all 0.5s ease-in-out';
+
+    cardParams.style.transform = 'translate(0px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+
+}
+function animacionVistaRespaldar(){
+
+    let cardParams = document.getElementById("respaldar-parametros");
+    let vista = document.getElementById("vista-resultados-archivos");
+    let menu  = document.getElementById('menu');
+
+    menu.style.transform = 'translate(550px,-600px)';
+    menu.style.transition = 'all 0.5s ease-in-out';
+    cardParams.setAttribute('class', 'animate-move card-contenedor');
+    cardParams.style.transform = 'translate(-550px,-700px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+
+    vista.style.display     = 'block';
+    vista.style.visibility  = 'visible';
+    vista.style.transform   = 'translate(0%, -80%)';
+    vista.style.transition  = 'all 0.5s ease-in-out';
+
+}
+
+function comprobarParametros(){
+    let ruta = document.getElementsByName("ruta")[0].value;
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
+
+
+    if(ruta !='' && anno !='' && periodo != ''){
+        debugger;
+        mostrarRutasRecibos(ruta, anno, periodo);
+
+    }
+    
+    else Precaucion('Seleccione Ruta, Año y Periodo');
+}
+
 function comprobarOpcionMostrar() {
     let rBtnRecibos = document.getElementById('op-recibos');
     let rBtnTimbres = document.getElementById('op-timbres');   
@@ -26,20 +73,9 @@ function comprobarOpcionCopiar(){
         iniciarCopiadoTimbres();
     }
 }
-async function mostrarRutasRecibos() {
+async function mostrarRutasRecibos(ruta, anno, periodo) {
 
-
-    
-    let ruta = document.getElementsByName("ruta")[0].value;
-    let anno = document.getElementsByName("anno")[0].value;
-    let periodo = document.getElementsByName("periodo")[0].value;
-
-
-    if (ruta != '' && anno != '' && periodo != '') {
-
-
-
-        let rutas = await eel.rutas_recibos_orig(ruta, anno, periodo)();
+    let rutas = await eel.rutas_recibos_orig(ruta, anno, periodo)();
         const rutasNum = Object.getOwnPropertyNames(rutas);
 
         deshabilitar('principal');
@@ -72,11 +108,8 @@ async function mostrarRutasRecibos() {
             tr.appendChild(columnaNomina);
             tr.appendChild(columnaArchivo);
 
-        }
         habilitar('principal');
-
-    }
-    else Precaucion('Seleccione Ruta, Año y Periodo');
+}
 }
 
 async function mostrarRutasTimbres() {

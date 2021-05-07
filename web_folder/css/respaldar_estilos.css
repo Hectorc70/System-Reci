@@ -1,0 +1,17 @@
+
+
+#conte-respaldar{
+    display: block;
+    width: 100%;
+}
+
+#vista-resultados-archivos{
+    visibility: hidden;
+    position: fixed;
+    display: inline;
+    bottom: -700px;
+    right: 0px;
+    left: 0px;
+    width: 95%;
+}
+

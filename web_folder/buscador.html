@@ -8,14 +8,17 @@
     <title>System Reci - Version 3.2.0</title>
     <link rel="stylesheet" type=text/css href="css/estilos_base.css">
     <link rel="stylesheet" type=text/css href="css/buscador.css">
+    <link rel="stylesheet" type=text/css href="css/loaders.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="js/alertas.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="js/buscador.js"></script>
 </head>
 
 <body>
     <section id="conte-buscador">
+
         <div id="parametros-busqueda" class="card-contenedor">
             <div class="title-section">
                 <h3>Buscador de Recibos</h3>
@@ -106,7 +109,7 @@
             <label class="in-lbl" for="control">Numero de Control</label>
             <div id="conte-control-buscador">
                 <div class="conte-input-dinamico">
-                    <input class="in-data" type="text" name="control" maxlength="8">
+                    <input class="in-data in-control" type="text" name="control" maxlength="8">
                     <a class="btn-plus-campo" onclick="addCampo()">
                         <svg class="icono-plus-campo" version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
@@ -133,6 +136,16 @@
             <hr>
 
             <div id="tabla-resultados">
+                <div id="loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
                 <div id="titulos-tabla">
                     <div class="titulo-tabla">
                         Control
@@ -204,9 +217,10 @@
 
                         </div>
                         <div class="cell">
-                            <svg class="icon-opcion-buscador" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 469.333 469.333"
-                                style="enable-background:new 0 0 469.333 469.333;" xml:space="preserve">
+                            <svg class="icon-opcion-buscador" version="1.1" id="Capa_1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 469.333 469.333" style="enable-background:new 0 0 469.333 469.333;"
+                                xml:space="preserve">
                                 <g>
                                     <g>
                                         <g>

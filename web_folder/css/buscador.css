@@ -14,35 +14,19 @@
 
 
 /* BUSCADOR 2.0 */
+
+#conte-buscador{
+    position: relative;
+}
 #parametros-busqueda{
+    position: relative;
     display: block;
     width: 400px;
     height: 420px;
 
 }
-.card-contenedor{
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin: 50px auto;
-    padding: 20px;
-    padding-top: 0px;
-    background-color: var(--color-secundario); 
-    box-shadow:0px 10px 20px 0px var(--color-sombra-cards) ;  
-}
 
-.title-section{
-    width: 100%;
-    text-align: center;
-    padding-top: 10px;
-}
-.title-section h3{
-    font-size: 1.3rem;
-    text-align: center;
-    font-family: 'Roboto';
-    color: var(--color-texto);
-    margin: 0px;
-}
+
 
 #conte-control-buscador{
     display: block;
@@ -55,6 +39,11 @@
 #conte-control-buscador .conte-input-dinamico{
     display: flex;
     align-items: center;
+}
+
+.in-control{
+    margin-top: 10px;
+    width: 90%;
 }
 btn-plus-campo{
     display: block;
@@ -111,25 +100,9 @@ btn-plus-campo{
     display: inline-block;
     text-align: center;
 }
-.conte-select{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 49%;
-    height: 40px;
-    border-radius: .5em;
-    background-color: var(--color-contenedor);
 
-}
 
-#conte-btn{
 
-    display: block;
-    margin-top: 15px;
-    width: 100%;
-    text-align: right;
-    padding: 0px;
-}
 
 /* Animaciones */
 
@@ -164,26 +137,7 @@ btn-plus-campo{
     height: 80%;
     margin: 10px auto;
 }
-#titulos-tabla{
-    display: flex;;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    background-color: var(--color-contenedor);
-    border-radius: .5em;
-    padding: 5px;
-    
-    
-}
-.titulo-tabla{
-    color: var(--color-texto);
-    font-family: 'Roboto-m';
-    font-size: 1.0rem;
-    width: 20%;
-    height: 25px;
-    padding-left: 15px;
 
-}
 .opcion-reci{
     display: block;
     text-decoration: none;
@@ -196,43 +150,7 @@ btn-plus-campo{
     opacity: 10%;
 }
 
-#cuerpo-tabla{
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-}
-.fila{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    width: 100%;
-    padding: 5px;
-    border-radius: .5em;
-    background-color: var(--color-contenedor);
 
-    
-}
-
-/* .fila:hover{
-    background-color: var(--color-resalte);
-    cursor: pointer;
-    
-    
-} */
-.cell{
-    font-family: 'Roboto-m';
-    font-size: 1.0rem;
-    color: var(--color-texto);
-    height: 20px;
-    cursor: default;
-    width: 20%;
-    padding-left: 15px;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 .cell:nth-child(4){
     text-align: center !important;
     align-items: center !important;
