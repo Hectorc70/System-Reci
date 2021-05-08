@@ -68,7 +68,7 @@ section{
 
 .conte-acciones{
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     margin-bottom: 20px;
     flex-direction: row;
     position: absolute;
@@ -78,4 +78,8 @@ section{
     width: 100%;
     padding: 10px;
     margin: 1px auto;
+}
+
+.accion{
+    margin-right: 20px;
 }

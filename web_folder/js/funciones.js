@@ -18,6 +18,7 @@ function deshabilitar(elemento){
     let elementoPadre = document.getElementById(elemento);
     elementoPadre.setAttribute("class", "deshabilitado");
     let backBlock = document.createElement("div");
+    backBlock.setAttribute("id", "backloader");
     backBlock.style.position = "absolute";
     backBlock.style.width = "100%";
     backBlock.style.height = "100%";
@@ -37,9 +38,11 @@ function habilitarElemento(elemento){
 
 function habilitar(elemento){ 
     let carga = document.getElementById("loader");  
-    let etiqueta = document.getElementById(elemento);  
+    let elementoPadre = document.getElementById(elemento);  
+    let backloader = document.getElementById("backloader");  
     carga.removeAttribute("class");
-    etiqueta.removeAttribute("class");
+    elementoPadre.removeAttribute("class");
+    elementoPadre.removeChild(backloader);
     
         
 

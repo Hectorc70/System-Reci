@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Reci - Version 3.2.0</title>
     <link rel="stylesheet" type=text/css href="css/estilos_base.css">
+    <link rel="stylesheet" type=text/css href="css/loaders.css">
     <link rel="stylesheet" type=text/css href="css/opciones_stilos.css">
     <link rel="stylesheet" type=text/css href="css/respaldar_estilos.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
@@ -88,7 +89,7 @@
                     </div>
                 </div>
                 <div id="conte-btn">
-                    <button class="btn" type="button" onclick="mostrarDatosTabla()">Buscar</button>
+                    <button class="btn" type="button" onclick="comprobarParametros()">Buscar</button>
                 </div>
             </div>
             <div class="card-contenedor" id="vista-resultados-archivos">
@@ -98,10 +99,6 @@
                 </div>
                 <hr>
                 <div id="tabla-resultados">
-                    <div id="conte-opciones-vista-tabla">
-                        <a id="pest-recibos" class="opcion-vista" onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'recibos-datos', 'timbres-datos')">Recibos</a>
-                        <a id="pest-timbres" class="opcion-vista" onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos')">Timbres</a>
-                    </div>
                     <div id="loader">
                         <div></div>
                         <div></div>
@@ -112,6 +109,11 @@
                         <div></div>
                         <div></div>
                     </div>
+                    <div id="conte-opciones-vista-tabla">
+                        <a id="pest-recibos" class="opcion-vista" onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'recibos-datos', 'timbres-datos')">Recibos</a>
+                        <a id="pest-timbres" class="opcion-vista" onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos')">Timbres</a>
+                    </div>
+                    
                     <div id="titulos-tabla">
                         <div class="titulo-tabla">Nomina</div>
                         <div class="titulo-tabla">Periodo</div>
@@ -126,8 +128,8 @@
                     </div>
                 </div>
                 <div class="conte-acciones">
-                    <button class="btn btn-grande" onclick="cancelarVista()">Cancelar</button>
-                    <button class="btn btn-grande" onclick="mostrarRutasRecibos()">Copiar</button>
+                    <button class="accion btn btn-grande" onclick="cancelarVista()">Cancelar</button>
+                    <button class="accion btn btn-grande" onclick="mostrarRutasRecibos()">Copiar</button>
                     
                 </div>
             </div>
