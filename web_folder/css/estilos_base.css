@@ -336,13 +336,13 @@ input:focus{
     padding: 5px;
     border-radius: .5em;
     background-color: var(--color-contenedor);
-
+    border: 2px solid var(--color-contenedor);
     
 }
 
 .fila:hover{
-    background-color: var(--color-resalte);
     cursor: pointer;
+    border: 2px solid var(--color-resalte);
 }
 .cell{
     font-family: 'Roboto-m';

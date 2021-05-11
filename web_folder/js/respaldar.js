@@ -32,8 +32,10 @@ function cambiardeTipoVista(idpest,idpestNoSelect,idTablaMostrar, idTablaNoMostr
     
     
 
-    pestSelect.style.backgroundColor = 'var(--color-secundario)';
+    pestSelect.style.backgroundColor   = 'var(--color-secundario)';
+    pestSelect.style.borderTop         = '3px solid var(--color-resalte)' 
     pestNoSelect.style.backgroundColor = 'var(--color-contenedor)';
+    pestNoSelect.style.borderTop = '3px solid var(--color-contenedor)' ;
 
 }
 function cancelarVista(){
@@ -77,14 +79,20 @@ async function mostrarArchivosOriginales(ruta, anno, periodo){
     let rutas = await eel.enviar_rutas(ruta, periodo, anno)();
     
     cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos');
-    let tablavistaTimbres = document.getElementById("timbres-datos")
+    let tablavistaTimbres = document.getElementById("timbres-datos");
     for(let i=0; i < rutas[0].length; i++){
-        let fila = document.createElement("div");
+        let fila = document.createElement("a");
+        let idFila = "fila" + i;
+        fila.setAttribute("id", idFila);  
         fila.setAttribute("class", "fila");
+        let funcion = `SeleccionarFilaTabla('${idFila}')`;
+        fila.setAttribute("onclick", funcion);
+
 
         let celdaNom = document.createElement("div");
         celdaNom.setAttribute("class", "cell");
         celdaNom.innerHTML = rutas[0][i][1];
+
         let celdaPer = document.createElement("div");
         celdaPer.setAttribute("class", "cell");
         celdaPer.innerHTML = rutas[0][i][0];
@@ -99,8 +107,12 @@ async function mostrarArchivosOriginales(ruta, anno, periodo){
     }
     let tablavistaRecibos = document.getElementById("recibos-datos")
     for(let i=0; i < rutas[1].length; i++){
-        let fila = document.createElement("div");
+        let fila = document.createElement("a");
+        let idFila = "fila-reci" + i;
+        fila.setAttribute("id", idFila);  
         fila.setAttribute("class", "fila");
+        let funcion = `SeleccionarFilaTabla('${idFila}')`;
+        fila.setAttribute("onclick", funcion);
 
         let celdaNom = document.createElement("div");
         celdaNom.setAttribute("class", "cell");
@@ -122,6 +134,7 @@ async function mostrarArchivosOriginales(ruta, anno, periodo){
     habilitar("tabla-resultados");
 
 }
+
 
 async function iniciarCopiadoRecibos() {
     let carp_orig = document.getElementsByName("ruta")[0].value;
@@ -221,4 +234,31 @@ async function iniciarCopiadoTimbres() {
     else {
         Precaucion('Debe buscar primero los Archivos');
     }
+}
+
+
+
+
+async function SeleccionarTodoTablaRespaldar(){
+    let elementoPadre = document.getElementById("recibos-datos");
+    let estilo = window.getComputedStyle(elementoPadre);
+    let opacidad = estilo.getPropertyValue("opacity");
+    if(opacidad == '1'){
+        
+        let elementos = elementoPadre.childNodes;
+        
+        for (let i=0; i < elementos.length; i++){
+            SeleccionarFilaTabla("fila-reci"+i);
+        }
+    }
+    else{
+        let elementoPadre = document.getElementById("timbres-datos");
+
+        let elementos = elementoPadre.childNodes;
+        for (let i=0; i < elementos.length; i++){
+            SeleccionarFilaTabla("fila"+i);
+        }
+    }
+
+    
 }

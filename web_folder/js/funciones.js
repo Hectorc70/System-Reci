@@ -1,13 +1,10 @@
 'use strict'
-/* MAIN */
-window.onload = function () {
-    setTimeout(carga, 1000);}
-/* 
 
-function carga(){
+
+/* function carga(){
     $('#preloader').fadeOut();
     $('#menu-principal').removeClass('hide');
-} */
+} */ 
 /* Funciones que son para mostrar una animación de loader*/
 function loader(){      
     let carga = document.getElementById("loader");    
@@ -103,3 +100,20 @@ function limpiarTabla(nombreTabla, tabla2){
         tbl2.innerHTML = '';
     }
 }
+
+/* Nuevas */
+async function SeleccionarFilaTabla(idElemento){
+
+    let fila = document.getElementById(idElemento);
+    let elementoEstilo = window.getComputedStyle(fila);
+    let colorSelect = elementoEstilo.getPropertyValue("background-color");
+
+    debugger;
+    if (colorSelect == "rgb(255, 136, 130)"){
+        fila.style.backgroundColor = 'var(--color-contenedor)';
+    }
+    else{
+        fila.style.backgroundColor = 'var(--color-resalte)';
+    }
+}
+

@@ -121,6 +121,7 @@ def rutas_timbres_orig(ruta, periodo, anno):
     timbres = originales.recuperar_timbres()            
 
     return timbres
+    
 
 @eel.expose
 def rutas_recibos_orig(ruta, periodo,anno):
