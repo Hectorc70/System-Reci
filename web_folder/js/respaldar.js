@@ -1,10 +1,11 @@
 'use strict'
+/* Entrada */
 function comprobarParametros(){
     let ruta = document.getElementsByName("ruta")[0].value;
     let anno = document.getElementsByName("anno")[0].value;
     let periodo = document.getElementsByName("periodo")[0].value;
 
-
+    
     if(ruta !='' && anno !='' && periodo != ''){
         mostrarArchivosOriginales(ruta, anno, periodo);
 
@@ -12,9 +13,33 @@ function comprobarParametros(){
     
     else Precaucion('Seleccione Ruta, Año y Periodo');
 }
+function animacionCancelarVistaArchivos(){
+    let cardParams = document.getElementById("recuperar-parametros");
+    let dataTable = document.getElementsByClassName("cuerpo-tabla");
 
+    dataTable[0].innerHTML = '';
+    dataTable[1].innerHTML = '';
+    let vista = document.getElementById("vista-resultados-archivos");
+    let menu  = document.getElementById('menu');
+    vista.style.transform = 'translate(0px,1000px)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+    menu.style.transform = 'translate(0px,0px)';
+    menu.style.transition = 'all 0.5s ease-in-out';
 
+    cardParams.style.transform = 'translate(0px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+/* 
+    let divNoData = document.createElement("div");
+    divNoData.style.margin = "auto",
+    divNoData.innerHTML = 'Sin datos'; */
+    
+    
 
+    
+
+}
+
+/* Vista Data */
 function cambiardeTipoVista(idpest,idpestNoSelect,idTablaMostrar, idTablaNoMostrar){
     let CuerpoTabla = document.getElementById(idTablaMostrar);
     let CuerpoTablaNoMostrar = document.getElementById(idTablaNoMostrar);
@@ -38,22 +63,11 @@ function cambiardeTipoVista(idpest,idpestNoSelect,idTablaMostrar, idTablaNoMostr
     pestNoSelect.style.borderTop = '3px solid var(--color-contenedor)' ;
 
 }
-function cancelarVista(){
-    let cardParams = document.getElementById("respaldar-parametros");
-    let vista = document.getElementById("vista-resultados-archivos");
-    let menu  = document.getElementById('menu');
-    vista.style.transform = 'translate(0px,1000px)';
-    vista.style.transition = 'all 0.5s ease-in-out';
-    menu.style.transform = 'translate(0px,0px)';
-    menu.style.transition = 'all 0.5s ease-in-out';
 
-    cardParams.style.transform = 'translate(0px,0px)';
-    cardParams.style.transition = 'all 0.5s ease-in-out';
 
-}
-function animacionVistaRespaldar(){
+function animacionVistaArchivos(){
 
-    let cardParams = document.getElementById("respaldar-parametros");
+    let cardParams = document.getElementById("recuperar-parametros");
     let vista = document.getElementById("vista-resultados-archivos");
     let menu  = document.getElementById('menu');
 
@@ -72,7 +86,7 @@ function animacionVistaRespaldar(){
 
 
 async function mostrarArchivosOriginales(ruta, anno, periodo){
-    animacionVistaRespaldar()
+    animacionVistaArchivos()
 
     loader();
     deshabilitar("tabla-resultados");
@@ -80,6 +94,7 @@ async function mostrarArchivosOriginales(ruta, anno, periodo){
     
     cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos');
     let tablavistaTimbres = document.getElementById("timbres-datos");
+    
     for(let i=0; i < rutas[0].length; i++){
         let fila = document.createElement("a");
         let idFila = "fila" + i;
@@ -136,109 +151,6 @@ async function mostrarArchivosOriginales(ruta, anno, periodo){
 }
 
 
-async function iniciarCopiadoRecibos() {
-    let carp_orig = document.getElementsByName("ruta")[0].value;
-    let carp_dest = document.getElementsByName("ruta_destino")[0].value;
-    let archivos = [];
-    let filaPeriodo = document.getElementsByClassName("cl-per");
-
-    if (filaPeriodo.length > 0) {
-        for (let i = 0; i < filaPeriodo.length; i++) {
-            let checkBox = filaPeriodo[i].getElementsByClassName("c-box");
-
-            if (checkBox[0].checked == true) {
-                let filaRuta = document.getElementsByClassName("ruta-archivo")[i].innerText;
-                archivos.push(filaRuta);
-            }
-
-        }
-        if (archivos.length > 0 && carp_dest != '') {
-
-            if (carp_orig != carp_dest) {
-                deshabilitar('principal');
-                loader_tarea();
-                let proceso = await eel.copiado_recibos(carp_orig, carp_dest, archivos)();
-                debugger;
-                if (proceso[1] == true && proceso[0] != 'ERRORES') {
-                    habilitar('principal');
-                    satisfactorio('Archivos Copiados Sin errores');
-                }
-                else if(proceso[0] == 'ERRORES'){
-                    habilitar('principal');
-                    Precaucion('Archivos Copiado, Pero Hubo errores de Copiado');
-                }
-                else{
-                    error('ERROR INESPERADO INTENTE CORRER NUEVAMENTE EL PROCESO');
-                }
-            }
-            else {
-                Precaucion('La ruta de Destino y la Original No pueden ser la misma');
-            }
-        }
-
-        else {
-            Precaucion('Seleccione almenos una fila y la ruta de Destino');
-        }
-
-    }
-    else {
-        Precaucion('Debe buscar primero los Archivos');
-    }
-
-
-
-
-}
-
-async function iniciarCopiadoTimbres() {
-    let carp_orig = document.getElementsByName("ruta")[0].value;
-    let carp_dest = document.getElementsByName("ruta_destino")[0].value;
-    let archivos = [];
-    let anno = document.getElementsByName("anno")[0].value;
-    let periodo = document.getElementsByName("periodo")[0].value;
-
-    let filaPeriodo = document.getElementsByClassName("cl-per");
-
-    if (filaPeriodo.length > 0) {
-        for (let i = 0; i < filaPeriodo.length; i++) {
-            let checkBox = filaPeriodo[i].getElementsByClassName("c-box");
-
-            if (checkBox[0].checked == true) {
-                let filaRuta = document.getElementsByClassName("ruta-archivo")[i].innerText;
-                archivos.push(filaRuta);
-            }
-
-        }
-        debugger;
-        if (archivos.length > 0 && carp_dest != '') {
-            
-            if (carp_orig != carp_dest) {
-                deshabilitar('principal');
-                loader_tarea();
-                let proceso = await eel.copiar_timbres(carp_orig, carp_dest, archivos, anno, periodo)();
-                if (proceso == true) {
-                    habilitar('principal');
-                }
-                satisfactorio('Archivos Copiados');
-            }
-            else {
-                Precaucion('La ruta de Destino y la Original No pueden ser la misma');
-            }
-        }
-
-        else {
-            Precaucion('Seleccione almenos una fila y la ruta de Destino');
-        }
-
-    }
-    else {
-        Precaucion('Debe buscar primero los Archivos');
-    }
-}
-
-
-
-
 async function SeleccionarTodoTablaRespaldar(){
     let elementoPadre = document.getElementById("recibos-datos");
     let estilo = window.getComputedStyle(elementoPadre);
@@ -260,5 +172,66 @@ async function SeleccionarTodoTablaRespaldar(){
         }
     }
 
+    
+}
+
+
+
+/* SALIDA*/
+function animacionVistaParametrosRespaldar(){
+
+    let cardParams = document.getElementById("respaldar-parametros");
+    deshabilitar("vista-resultados-archivos");
+
+    cardParams.style.display     = 'block';
+    cardParams.style.visibility  = 'visible';
+    cardParams.style.transform = 'translate(200px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+
+
+}
+
+function cancelarVistaParametrosRespaldar(){
+    let cardParams = document.getElementById("respaldar-parametros");
+    cardParams.style.display     = 'inline';
+    cardParams.style.visibility  = 'hidden';
+    cardParams.style.transform = 'translate(-1000px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+    habilitar("vista-resultados-archivos");
+    document.getElementsByName('ruta-destino')[0].value = '';
+}
+async function iniciarCopiadoArchivos(){
+    
+    let elementoPadre = document.getElementById("recibos-datos");
+    let estilo = window.getComputedStyle(elementoPadre);
+    let opacidad = estilo.getPropertyValue("opacity");
+
+    if(opacidad == '1'){
+        let elementos = elementoPadre.childNodes;
+        
+        for (let i=0; i < elementos.length; i++){
+            let fila       = document.getElementById("fila-reci"+i);
+            let estiloFila = window.getComputedStyle(fila);
+            let colorFila = estiloFila.getPropertyValue("background-color");
+
+            if (colorFila == "rgb(255, 136, 130)"){
+                let respuesta = await eel.copiarArchivos('recibos', ruta, carpt_dest)();
+
+            }
+        }
+    }
+    else{
+        let elementoPadre = document.getElementById("timbres-datos");
+        let elementos = elementoPadre.childNodes;
+        for (let i=0; i < elementos.length; i++){
+            let fila       = document.getElementById("fila"+i);
+            let estiloFila = window.getComputedStyle(fila);
+            let colorFila = estiloFila.getPropertyValue("background-color");
+
+            if (colorFila == "rgb(255, 136, 130)"){
+                continue;
+            }
+        }
+    }
     
 }

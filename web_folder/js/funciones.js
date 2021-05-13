@@ -13,10 +13,12 @@ function loader(){
 
 function deshabilitar(elemento){
     let elementoPadre = document.getElementById(elemento);
-    elementoPadre.setAttribute("class", "deshabilitado");
+    //elementoPadre.setAttribute("class", );
+    elementoPadre.classList.add("deshabilitado");
     let backBlock = document.createElement("div");
     backBlock.setAttribute("id", "backloader");
-    backBlock.style.position = "absolute";
+    backBlock.style.position = "fixed";
+    backBlock.style.display = "inline-block";
     backBlock.style.width = "100%";
     backBlock.style.height = "100%";
     backBlock.style.top = "0";
@@ -28,17 +30,13 @@ function deshabilitar(elemento){
     elementoPadre.appendChild(backBlock);
 }
 
-function habilitarElemento(elemento){
-    let etiqueta = document.getElementById(elemento);
-    etiqueta.removeAttribute("class");
-}
 
 function habilitar(elemento){ 
     let carga = document.getElementById("loader");  
     let elementoPadre = document.getElementById(elemento);  
     let backloader = document.getElementById("backloader");  
     carga.removeAttribute("class");
-    elementoPadre.removeAttribute("class");
+    elementoPadre.classList.remove("deshabilitado");
     elementoPadre.removeChild(backloader);
     
         
@@ -49,7 +47,6 @@ function habilitar(elemento){
 async function mostrarRuta(nombre) {
     let ruta = await eel.enviar_ruta()();
     document.getElementsByName(nombre)[0].value = ruta;
-    console.log(ruta);
 }
 
 async function mostrarRutaArchivo(nombre){

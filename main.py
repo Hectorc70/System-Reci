@@ -14,7 +14,7 @@ from modulos.log import Log
 from almacenar.cliente import Cliente
 from configuraciones import Configuracion
 from almacenar.registro import RegistroRecibo, RegistroEmpleado
-from almacenar.ayuda.recibo import RutaRecibo
+from almacenar.ayuda.recibo import PERIODOS, RutaRecibo
 from almacenar.empleado import DatosEmpleados
 
 
@@ -132,14 +132,22 @@ def rutas_recibos_orig(ruta, periodo,anno):
     return recibos
 
 @eel.expose
-def copiar_timbres(carpeta_origen, carpt_dest, archivos, anno, periodo):
+def copiarArchivos(tipo, ruta, carpt_dest):
+    data_ruta = ruta.split("\\")
 
-    for archivo in archivos:
+    carpeta_origen   = data_ruta[-2]
+    archivo          = data_ruta[-1]
+    periodo_completo = data_ruta[1]  
+    anno             = periodo_completo.split('_')[1]
+    periodo          = periodo_completo.split('_')[0]
+    if tipo == 'timbre':
 
+        copiar_timbres(carpeta_origen, carpt_dest,archivo, anno, periodo)
+@eel.expose
+def copiar_timbres(carpeta_origen, carpt_dest, archivo, anno, periodo):
         timbre = TimbreCop(carpeta_origen, periodo, anno, carpt_dest)
         timbre.copiado_archivos(archivo)
 
-    return True
 
 @eel.expose
 def copiado_recibos(carpt_orig, carpt_dest, archivos):

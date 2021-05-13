@@ -44,27 +44,7 @@ section{
 /* Respaldar */
 
 
-#respaldar-parametros{
-    display: block;
-    width: 400px;
-    height: 420px;
-}
 
-#conte-fechas-respaldar{
-    margin-top: 10px;
-    margin-bottom: 15px;
-    display:flex;
-    width: 100%;
-    border-radius: .5em;
-    justify-content: flex-start;
-
-}
-#vista-resultados-archivos{
-    display: block;
-    position: relative;
-    width: 95%;
-    height: 95%;
-}
 
 .conte-acciones{
     display: flex;
