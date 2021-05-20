@@ -132,30 +132,30 @@ def rutas_recibos_orig(ruta, periodo,anno):
     return recibos
 
 @eel.expose
-def copiarArchivos(tipo, ruta, carpt_dest):
-    data_ruta = ruta.split("\\")
+def respaldar(tipo, carpeta_origen, ruta_archivo, carpt_dest):
+    
 
-    carpeta_origen   = data_ruta[-2]
-    archivo          = data_ruta[-1]
-    periodo_completo = data_ruta[1]  
-    anno             = periodo_completo.split('_')[1]
-    periodo          = periodo_completo.split('_')[0]
-    if tipo == 'timbre':
+    
+    
+    if tipo == 'timbres':
+        respaldar_timbres(carpeta_origen, carpt_dest,ruta_archivo)
 
-        copiar_timbres(carpeta_origen, carpt_dest,archivo, anno, periodo)
+    elif tipo == 'recibos':
+        respuesta = respaldar_recibos(carpeta_origen,ruta_archivo, carpt_dest)
+
+        return respuesta
 @eel.expose
-def copiar_timbres(carpeta_origen, carpt_dest, archivo, anno, periodo):
-        timbre = TimbreCop(carpeta_origen, periodo, anno, carpt_dest)
+def respaldar_timbres(carpeta_origen, carpt_dest, archivo,):
+        timbre = TimbreCop(carpeta_origen, carpt_dest)
         timbre.copiado_archivos(archivo)
 
 
+
+
 @eel.expose
-def copiado_recibos(carpt_orig, carpt_dest, archivos):
-
-    for archivo in archivos:
-
-        reci = ReciboCop(carpt_orig, archivo, carpt_dest)
-        reci.separar_en_recibos()
+def respaldar_recibos(carpeta_original, ruta_archivo, carpt_destino):
+    reci = ReciboCop(carpeta_original, ruta_archivo, carpt_destino)
+    reci.separar_en_recibos()
 
     try:
         log = Log('Log-copiado-Recibos.txt')   

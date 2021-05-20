@@ -4,14 +4,28 @@
 /* function carga(){
     $('#preloader').fadeOut();
     $('#menu-principal').removeClass('hide');
-} */ 
+} */
 /* Funciones que son para mostrar una animación de loader*/
-function loader(){      
-    let carga = document.getElementById("loader");    
-    carga.setAttribute("class", "lds-roller");
+function loader(elemento) {
+    let elementoPadre = document.getElementById(elemento);
+    let loader = document.createElement("div");
+    loader.setAttribute("id", "loader");
+    elementoPadre.appendChild(loader);
+
+    for(let i=0; i < 8; i++){
+        let divLoader = document.createElement("div");
+        loader.appendChild(divLoader);
+    }
+    loader.setAttribute("class", "lds-roller");
+}
+function noLoader(elemento) {
+    let elementoPadre = document.getElementById(elemento);
+    let loader = document.getElementById("loader");
+    elementoPadre.removeChild(loader);
+    
 }
 
-function deshabilitar(elemento){
+function deshabilitar(elemento) {
     let elementoPadre = document.getElementById(elemento);
     //elementoPadre.setAttribute("class", );
     elementoPadre.classList.add("deshabilitado");
@@ -31,15 +45,14 @@ function deshabilitar(elemento){
 }
 
 
-function habilitar(elemento){ 
-    let carga = document.getElementById("loader");  
-    let elementoPadre = document.getElementById(elemento);  
-    let backloader = document.getElementById("backloader");  
-    carga.removeAttribute("class");
+function habilitar(elemento) {
+    let elementoPadre = document.getElementById(elemento);
+    let backloader = document.getElementById("backloader");
     elementoPadre.classList.remove("deshabilitado");
     elementoPadre.removeChild(backloader);
     
-        
+
+
 
 }
 
@@ -49,7 +62,7 @@ async function mostrarRuta(nombre) {
     document.getElementsByName(nombre)[0].value = ruta;
 }
 
-async function mostrarRutaArchivo(nombre){
+async function mostrarRutaArchivo(nombre) {
     let ruta = await eel.enviar_ruta_archivo()();
 
     document.getElementsByName(nombre)[0].value = ruta;
@@ -65,7 +78,6 @@ async function mostrar_en_tabla() {
     let rutas = await eel.mostrar_rutas_recibos(directorio)();
     const rutas_num = Object.getOwnPropertyNames(rutas)
 
-    debugger;
     for (let i = 1; i < rutas_num.length; i++) {
 
         let tr = document.createElement('tr');
@@ -87,29 +99,28 @@ async function mostrar_en_tabla() {
 
 /* Limpia Tabla */
 
-function limpiarTabla(nombreTabla, tabla2){
-    
-    let tbl = document.getElementById(nombreTabla);   
-    tbl.innerHTML = '';    
+function limpiarTabla(nombreTabla, tabla2) {
 
-    if(tabla2 !=''){
+    let tbl = document.getElementById(nombreTabla);
+    tbl.innerHTML = '';
+
+    if (tabla2 != '') {
         let tbl2 = document.getElementById(tabla2);
         tbl2.innerHTML = '';
     }
 }
 
 /* Nuevas */
-async function SeleccionarFilaTabla(idElemento){
+async function SeleccionarFilaTabla(idElemento) {
 
     let fila = document.getElementById(idElemento);
     let elementoEstilo = window.getComputedStyle(fila);
     let colorSelect = elementoEstilo.getPropertyValue("background-color");
 
-    debugger;
-    if (colorSelect == "rgb(255, 136, 130)"){
+    if (colorSelect == "rgb(255, 136, 130)") {
         fila.style.backgroundColor = 'var(--color-contenedor)';
     }
-    else{
+    else {
         fila.style.backgroundColor = 'var(--color-resalte)';
     }
 }
