@@ -2,6 +2,21 @@
     box-sizing: border-box;
 }
 
+@font-face{
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Black.ttf");
+}
+
+@font-face{
+    font-family: "Roboto-m";
+    src: url("../fonts/Roboto-Medium.ttf");
+}
+@font-face{
+    font-family: "Nova-Flat";
+    src: url("../fonts/NovaFlat-Regular.ttf");
+}
+
+
 :root{
     --color-fondo:#1d2d50;
     --color-secundario:#133b5c;
@@ -12,6 +27,18 @@
     --color-titulos-tabla : #ac5a55
 }
 
+.alertas-msg{
+    color: var(--color-texto);
+    font-family: 'Roboto-m';
+    font-size: 1.0rem;
+
+}
+.alertas-titulo{
+    color: var(--color-texto);
+    font-family: 'Roboto';
+    font-size: 1.5=rem;
+
+}
 
 
 
@@ -36,19 +63,6 @@
 }
 
 
-@font-face{
-    font-family: "Roboto";
-    src: url("../fonts/Roboto-Black.ttf");
-}
-
-@font-face{
-    font-family: "Roboto-m";
-    src: url("../fonts/Roboto-Medium.ttf");
-}
-@font-face{
-    font-family: "Nova-Flat";
-    src: url("../fonts/NovaFlat-Regular.ttf");
-}
 
 
 

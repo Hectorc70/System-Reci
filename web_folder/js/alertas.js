@@ -1,13 +1,14 @@
 
 function Precaucion(mensaje) {
-
-    Swal.fire({
-        title: 'AVISO',
-        text: mensaje,
+    texto = '<p class="alertas-msg" >' + mensaje + '</p>';
+    titulo = '<p class="alertas-titulo" >' + 'AVISO' + '</p>';
+    Swal.fire({ 
+        title: titulo,
+        html: texto,
         icon: 'warning',
-        confirmButtonText: 'Entendido',
-        confirmButtonColor: '#008992',
-        background: '#363535',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: 'var(--color-resalte)',
+        background: 'var(--color-fondo)',
         backdrop: false,
         width: '18rem',
         heightAuto: false,
@@ -17,14 +18,16 @@ function Precaucion(mensaje) {
 }
 
 function satisfactorio(mensaje) {
-
+    texto = '<p class="alertas-msg" >' + mensaje + '</p>';
+    titulo = '<p class="alertas-titulo" >' + 'HECHO' + '</p>';
     Swal.fire({
-        title: 'HECHO',
-        text: mensaje,
+        title: titulo,
+        html: texto,
         icon: 'success',
-        confirmButtonText: 'Entendido',
-        confirmButtonColor: '#008992',
-        background: '#363535',
+        iconColor:'#06B056',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: 'var(--color-resalte)',
+        background: 'var(--color-fondo)',
         backdrop: false,
         width: '18rem',
         heightAuto: false,
@@ -34,13 +37,16 @@ function satisfactorio(mensaje) {
 }
 
 function error(mensaje) {
+    texto = '<p class="alertas-msg" >' + mensaje + '</p>';
+    titulo = '<p class="alertas-titulo" >' + 'ERROR' + '</p>';
     Swal.fire({
-        title: 'ERROR',
-        text: mensaje,
+        title: titulo,
+        html: texto,
         icon: 'error',
-        confirmButtonText: 'Entendido',
-        confirmButtonColor: '#008992',
-        background: '#363535',
+        iconColor: '#C52C03',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'var(--color-resalte)',
+        background: 'var(--color-fondo)',
         backdrop: false,
         width: '18rem',
         heightAuto: false,
@@ -48,3 +54,5 @@ function error(mensaje) {
 
 
 }
+
+
