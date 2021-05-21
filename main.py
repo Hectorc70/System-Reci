@@ -42,16 +42,8 @@ ejecutar(ruta, '01',  '2020', ruta_destino) """
                         ***HERRAMIENTAS***
 **---------------------------------------------------------------------------------------------**
 """
-@eel.expose
-def pruebas_api(user, password):
-    user = User(user,password)
-    resp = user.login()
+@eel.expose    
 
-    return resp
-
-    
-
-    
 
 
 def leer_config_bd():
@@ -404,14 +396,19 @@ def leer_txt(ruta):
                         ***CONFIG EEL***
 **---------------------------------------------------------------------------------------------**
 """
+@eel.expose
+def login_user(user, password):
+        user = User(user,password)
+        resp = user.login()
+
+        return resp
+
+
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('staff_opciones.html', port=8080)
+    eel.start('login.html', port=8080)
     
-    
-    #eel.start('buscador.html', port=8080)
-
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
     pass
