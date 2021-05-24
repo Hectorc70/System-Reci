@@ -81,7 +81,10 @@ class ReciboCop(ArchivoPdf):
 				self.carpeta_orig.replace('/','\\'), self.carpeta_dest.replace('/','\\'))
 
 		else:
-			carpeta_prin =  ruta[:self.ruta_num+3]
+			carpeta_prin =  ruta[:self.ruta_num+2]
+			carpeta_destino = nomina + '_' + 'PDF'
+
+			carpeta_prin.append(carpeta_destino)
 			ruta_dest = unir_cadenas('\\', carpeta_prin)
 			destino = ruta_dest.replace(
 				self.carpeta_orig.replace('/','\\'), self.carpeta_dest.replace('/','\\'))
@@ -135,23 +138,61 @@ class ReciboCop(ArchivoPdf):
 
 		return datos_recibo
 
-	def separar_en_recibos(self):
+	def separar_en_recibos(self, timbres_nombres):
 		"""Ejecuta la tarea de separar cada pagina
-		en un archivo independiente"""
+		en un archivo independiente
+		Parametros:timbres_nombres(Diccionario de datos que contenga el nombre dela archivo)"""
 
 
 		contenido_paginas = self._almacenar_datos()
 		if contenido_paginas:
 			for contenido in contenido_paginas:
-				control = contenido[0]
+				control = str("{:08d}".format(contenido[0]))
 				pagina = contenido[1]
-				per_anno = str(contenido[3]) + str("{:02d}".format(contenido[2]))
+				per_anno = str("{:02d}".format(contenido[2]) + '_' + str(contenido[3]))
 				nomina = self.datos_nom[1]
+				clave = unir_cadenas('', [per_anno, nomina, str(control)])
 				
-				nombre = unir_cadenas('_', [str(control), nomina, per_anno])
-				crear_directorio(self.datos_nom[0])
+				if nomina == 'JUBILADOS':
+					self.separar_en_recibos_jubilados()
+				else:
 
+					try:
+						nombre = timbres_nombres[clave]
+
+						crear_directorio(self.datos_nom[0])
+						self.extraer_hoja(int(pagina), self.datos_nom[0], nombre)
+					
+					except:
+						log = Log('Log-copiado-Recibos.txt')
+						error = 'ERROR:'
+
+						mensaje = unir_cadenas('|',[control, nomina, per_anno])
+						error_text = 'No se Encontro XML|' 
+						log.escribir_log(error, error_text + mensaje)
+					
+					continue
+				
+	
+	def separar_en_recibos_jubilados(self):
+		"""Ejecuta la tarea de separar cada pagina
+		en un archivo independiente
+		Parametros:timbres_nombres(Diccionario de datos que contenga el nombre dela archivo)"""
+
+
+		contenido_paginas = self._almacenar_datos()
+		if contenido_paginas:
+			for contenido in contenido_paginas:
+				control = str("{:08d}".format(contenido[0]))
+				pagina = contenido[1]
+				per_anno_jub =  str(str(contenido[3]) + "{:02d}".format(contenido[2]))
+				nomina = self.datos_nom[1]
+				nombre = unir_cadenas('_',[control, nomina, per_anno_jub])
+
+
+				crear_directorio(self.datos_nom[0])
 				self.extraer_hoja(int(pagina), self.datos_nom[0], nombre)
+				
 
 			
 		

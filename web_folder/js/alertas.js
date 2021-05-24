@@ -32,7 +32,6 @@ function satisfactorio(mensaje) {
         width: '18rem',
         heightAuto: false,
     })
-    habilitarElemento('principal');
 
 }
 

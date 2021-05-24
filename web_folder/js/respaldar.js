@@ -190,12 +190,13 @@ function cancelarVistaParametrosRespaldar() {
     cardParams.style.transform = 'translate(-1000px,0px)';
     cardParams.style.transition = 'all 0.5s ease-in-out';
     habilitar("vista-resultados-archivos");
-    document.n('ruta-destino')[0].value = '';
+    document.getElementsByName('ruta-destino')[0].value = '';
 }
 async function iniciarCopiadoArchivos() {
     let rutaDestino = document.getElementsByName("ruta-destino")[0].value;
-    let rutaOrigen= document.getElementsByName("ruta")[0].value;
-
+    let rutaOrigen  = document.getElementsByName("ruta")[0].value;
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
     if (rutaDestino != '') {
 
     
@@ -224,27 +225,41 @@ async function iniciarCopiadoArchivos() {
             /* Envia las rutas de los recibos y copia */
             loader("respaldar-parametros");
             deshabilitar("respaldar-parametros");
-            
+            debugger;
             for(let i = 0; i < recibosRutas.length; i++){
                 
+                    let respuesta = await eel.respaldar('recibos', rutaOrigen,recibosRutas[i], rutaDestino, periodo, anno)();
                     
-                    let respuesta = await eel.respaldar('recibos', rutaOrigen,recibosRutas[i], rutaDestino)();
-                    if (respuesta[0] == 'ERRORES'){
+                    if (respuesta[0] == 'ERROR'){
                         noLoader("respaldar-parametros");
                         habilitar("respaldar-parametros");
-                        Precaucion('Tarea Terminada pero hubo Errores de lectura mas info en el LOG');
+                        error('EL destino no contiene timbres. Primero copie los timbres');
                         cancelarVistaParametrosRespaldar();
                         
                     }
-                    if (respuesta[0] != 'ERRORES'){
-                        noLoader("respaldar-parametros");
-                        habilitar("respaldar-parametros");
-                        
-                        satisfactorio('Tarea Terminada');
-                        cancelarVistaParametrosRespaldar();
-                        
-                    }
+                    
             }
+
+            noLoader("respaldar-parametros");
+            habilitar("respaldar-parametros");
+
+
+            let respuesta = await eel.leer_log_recibos()();
+            
+            if (respuesta[0] == 'ERRORES'){
+                cancelarVistaParametrosRespaldar();
+                Precaucion('Tarea Terminada pero hubo Errores de lectura mas info en el LOG');
+                
+                
+            }
+            else{
+                cancelarVistaParametrosRespaldar();
+                satisfactorio('Tarea Terminada');
+                
+                
+            }
+
+
         }
         else {
 
@@ -270,7 +285,7 @@ async function iniciarCopiadoArchivos() {
             deshabilitar("respaldar-parametros");
             for (let i = 0; i < timbresRutas.length; i++) {
                 debugger;
-                await eel.respaldar('timbres', rutaOrigen, timbresRutas[i], rutaDestino)();
+                await eel.respaldar('timbres', rutaOrigen, timbresRutas[i], rutaDestino, periodo, anno)();
             }
             noLoader("respaldar-parametros");
             habilitar("respaldar-parametros");

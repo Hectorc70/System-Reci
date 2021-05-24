@@ -124,7 +124,7 @@ def rutas_recibos_orig(ruta, periodo,anno):
     return recibos
 
 @eel.expose
-def respaldar(tipo, carpeta_origen, ruta_archivo, carpt_dest):
+def respaldar(tipo, carpeta_origen, ruta_archivo, carpt_dest , periodo, anno):
     
 
     
@@ -133,7 +133,7 @@ def respaldar(tipo, carpeta_origen, ruta_archivo, carpt_dest):
         respaldar_timbres(carpeta_origen, carpt_dest,ruta_archivo)
 
     elif tipo == 'recibos':
-        respuesta = respaldar_recibos(carpeta_origen,ruta_archivo, carpt_dest)
+        respuesta = respaldar_recibos(carpeta_origen,ruta_archivo, carpt_dest,periodo, anno)
 
         return respuesta
 @eel.expose
@@ -145,10 +145,19 @@ def respaldar_timbres(carpeta_origen, carpt_dest, archivo,):
 
 
 @eel.expose
-def respaldar_recibos(carpeta_original, ruta_archivo, carpt_destino):
-    reci = ReciboCop(carpeta_original, ruta_archivo, carpt_destino)
-    reci.separar_en_recibos()
-
+def respaldar_recibos(carpeta_original, ruta_archivo, carpt_destino, periodo, anno):
+    periodo_copiado = ArchivoTimbre(carpt_destino, periodo, anno)
+    timbres_nombres = periodo_copiado.recuperar_timbres_nombres()
+    
+    if timbres_nombres:
+        reci = ReciboCop(carpeta_original, ruta_archivo, carpt_destino)
+        reci.separar_en_recibos(timbres_nombres)
+        return ['EXITOSO', True]
+    else:
+        return ['ERROR', True]
+        
+@eel.expose
+def leer_log_recibos():
     try:
         log = Log('Log-copiado-Recibos.txt')   
         errores = log.devolver_datos('ERROR')
