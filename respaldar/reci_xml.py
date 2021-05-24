@@ -9,12 +9,9 @@ from respaldar.modelos.buscador import Buscador
 
 
 class TimbreCop():
-	def __init__(self, origen, periodo, anno, destino):
-		self.carp_origen = origen
-		self.periodo = periodo
-		self.anno = anno
-
-		self.carp_destino = destino
+	def __init__(self, carpeta_origen, carpeta_destino):
+		self.carp_origen = carpeta_origen
+		self.carp_destino = carpeta_destino
 
 	def _formar_ruta_destino(self, ruta_orig):
 		"""Forma la ruta de destino del archivo XML(TIMBRE)"""
@@ -31,20 +28,21 @@ class TimbreCop():
 		tim = Archivo(ruta_archivo, ruta_destino, copiar=True)
 		tim.comprobar_acciones()
 
-		print('El proceso de copiado ah Terminado!!!')
 
 
 class ReciboCop(ArchivoPdf):
-	"""Clase que forma los datos
-	y llama a los metodos correspondientes
-	para el backup limpio de los recibos de nomina
+	"""Clase que forma los datos y llama a los metodos correspondientes
+	para el backup limpio de los recibos de nomina.\n
+	Parametros: string: carpeta_origen(Ruta de la carpeta raiz original:'C://CFDI_2020//'),
+	string: ruta_archivo_orig(Ruta del archivo pdf original:'C://CFDI_2020//01_2020//ORDINARIA//PDF//RECIBOS//CONFIANZA//RECI_CONF_202001.pdf'),
+	string: carpeta_destino(Ruta de la carpeta raiz de destino:'X://CFDI_2020//').\n
 	"""
 
-	def __init__(self, orig_carpeta, ruta_orig, carpeta_dest):
-		self.carpeta_orig = orig_carpeta
-		self.carpeta_dest = carpeta_dest
+	def __init__(self, carpeta_origen, ruta_archivo_orig, carpeta_destino):
+		self.carpeta_orig = carpeta_origen
+		self.carpeta_dest = carpeta_destino
 		self.ruta_num = len(self.carpeta_orig.split('/'))
-		self.ruta_origen = ruta_orig
+		self.ruta_origen = ruta_archivo_orig
 		self.datos_nom = self._formar_ruta_destino()		
 		self.patrones = ['CONTROL: [0123456789]{8}',
 						'PERIODO:[0123456789]{1,2}/[0123456789]{4}'
@@ -83,7 +81,10 @@ class ReciboCop(ArchivoPdf):
 				self.carpeta_orig.replace('/','\\'), self.carpeta_dest.replace('/','\\'))
 
 		else:
-			carpeta_prin =  ruta[:self.ruta_num+3]
+			carpeta_prin =  ruta[:self.ruta_num+2]
+			carpeta_destino = nomina + '_' + 'PDF'
+
+			carpeta_prin.append(carpeta_destino)
 			ruta_dest = unir_cadenas('\\', carpeta_prin)
 			destino = ruta_dest.replace(
 				self.carpeta_orig.replace('/','\\'), self.carpeta_dest.replace('/','\\'))
@@ -137,23 +138,61 @@ class ReciboCop(ArchivoPdf):
 
 		return datos_recibo
 
-	def separar_en_recibos(self):
+	def separar_en_recibos(self, timbres_nombres):
 		"""Ejecuta la tarea de separar cada pagina
-		en un archivo independiente"""
+		en un archivo independiente
+		Parametros:timbres_nombres(Diccionario de datos que contenga el nombre dela archivo)"""
 
 
 		contenido_paginas = self._almacenar_datos()
 		if contenido_paginas:
 			for contenido in contenido_paginas:
-				control = contenido[0]
+				control = str("{:08d}".format(contenido[0]))
 				pagina = contenido[1]
-				per_anno = str(contenido[3]) + str("{:02d}".format(contenido[2]))
+				per_anno = str("{:02d}".format(contenido[2]) + '_' + str(contenido[3]))
 				nomina = self.datos_nom[1]
+				clave = unir_cadenas('', [per_anno, nomina, str(control)])
 				
-				nombre = unir_cadenas('_', [str(control), nomina, per_anno])
-				crear_directorio(self.datos_nom[0])
+				if nomina == 'JUBILADOS':
+					self.separar_en_recibos_jubilados()
+				else:
 
+					try:
+						nombre = timbres_nombres[clave]
+
+						crear_directorio(self.datos_nom[0])
+						self.extraer_hoja(int(pagina), self.datos_nom[0], nombre)
+					
+					except:
+						log = Log('Log-copiado-Recibos.txt')
+						error = 'ERROR:'
+
+						mensaje = unir_cadenas('|',[control, nomina, per_anno])
+						error_text = 'No se Encontro XML|' 
+						log.escribir_log(error, error_text + mensaje)
+					
+					continue
+				
+	
+	def separar_en_recibos_jubilados(self):
+		"""Ejecuta la tarea de separar cada pagina
+		en un archivo independiente
+		Parametros:timbres_nombres(Diccionario de datos que contenga el nombre dela archivo)"""
+
+
+		contenido_paginas = self._almacenar_datos()
+		if contenido_paginas:
+			for contenido in contenido_paginas:
+				control = str("{:08d}".format(contenido[0]))
+				pagina = contenido[1]
+				per_anno_jub =  str(str(contenido[3]) + "{:02d}".format(contenido[2]))
+				nomina = self.datos_nom[1]
+				nombre = unir_cadenas('_',[control, nomina, per_anno_jub])
+
+
+				crear_directorio(self.datos_nom[0])
 				self.extraer_hoja(int(pagina), self.datos_nom[0], nombre)
+				
 
 			
 		
