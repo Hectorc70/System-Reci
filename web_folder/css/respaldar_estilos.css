@@ -1,0 +1,96 @@
+
+
+#conte-respaldar{
+    display: block;
+    width: 100%;
+}
+
+#conte-opciones-vista-tabla{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+#recuperar-parametros{
+    display: block;
+    width: 400px;
+    height: 420px;
+}
+
+#conte-fechas-respaldar{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display:flex;
+    width: 100%;
+    border-radius: .5em;
+    justify-content: flex-start;
+
+}
+
+
+#vista-resultados-archivos{
+    visibility: hidden;
+    position: fixed;
+    display: inline;
+    bottom: -700px;
+    right: 0px;
+    left: 0px;
+    width: 95%;
+    z-index: 1;
+    width: 95%;
+    height: 95%;
+}
+#vista-resultados-archivos .titulo-tabla:last-child{
+    width: 60%;
+}
+.opcion-vista{
+    position: relative;
+    top: -30px;
+    width: 100px;
+    height: 30px;
+    text-decoration: none;
+    color: var(--color-texto);
+    background-color:var(--color-contenedor);
+    cursor: pointer;
+    font-family: 'Roboto-m';
+    font-size: 0.8rem;
+    padding-top: 2px;
+    text-align: center;
+}
+.opcion-vista:nth-child(2){
+    left: 10px;
+}
+
+.opcion-vista:hover{
+    background-color: var(--color-secundario);
+}
+
+
+
+
+#timbres-datos .cell:last-child{
+    width: 60%;
+}
+#recibos-datos .cell:last-child{
+    width: 60%;
+}
+
+
+#respaldar-parametros{
+    visibility: hidden;
+    position: fixed;
+    display: inline;
+    left: -300px;
+    right: 0px;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+    height: 420px;
+    z-index: 2;
+    
+}
+

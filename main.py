@@ -3,6 +3,8 @@ from os.path import exists
 import eel
 import os.path
 
+from login.login import User
+
 from modulos.rutas import abrir_directorio, abrir_archivo, unir_cadenas
 from modulos.txt import ArchivoTxt
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
@@ -12,7 +14,7 @@ from modulos.log import Log
 from almacenar.cliente import Cliente
 from configuraciones import Configuracion
 from almacenar.registro import RegistroRecibo, RegistroEmpleado
-from almacenar.ayuda.recibo import RutaRecibo
+from almacenar.ayuda.recibo import PERIODOS, RutaRecibo
 from almacenar.empleado import DatosEmpleados
 
 
@@ -40,6 +42,8 @@ ejecutar(ruta, '01',  '2020', ruta_destino) """
                         ***HERRAMIENTAS***
 **---------------------------------------------------------------------------------------------**
 """
+@eel.expose    
+
 
 
 def leer_config_bd():
@@ -96,8 +100,12 @@ def enviar_ruta_archivo():
                         ***RESPALDAR XML Y RECIBOS***
 **---------------------------------------------------------------------------------------------**
 """
+@eel.expose
+def enviar_rutas(ruta, periodo, anno):
+    rutas_timbres = rutas_timbres_orig(ruta, periodo, anno)
+    rutas_recibos = rutas_recibos_orig(ruta, periodo, anno)
 
-
+    return [rutas_timbres, rutas_recibos]
 @eel.expose
 def rutas_timbres_orig(ruta, periodo, anno):
 
@@ -105,36 +113,51 @@ def rutas_timbres_orig(ruta, periodo, anno):
     timbres = originales.recuperar_timbres()            
 
     return timbres
-
-
-@eel.expose
-def copiar_timbres(carpeta_origen, carpt_dest, archivos, anno, periodo):
-
-    for archivo in archivos:
-
-        timbre = TimbreCop(carpeta_origen, periodo, anno, carpt_dest)
-        timbre.copiado_archivos(archivo)
-
-    return True
-
+    
 
 @eel.expose
-def rutas_recibos_orig(ruta, anno, periodo):
+def rutas_recibos_orig(ruta, periodo,anno):
 
     originales = ArchivoRecibo(ruta, anno, periodo)
     recibos = originales.recuperar_recibos()
 
     return recibos
 
+@eel.expose
+def respaldar(tipo, carpeta_origen, ruta_archivo, carpt_dest , periodo, anno):
+    
+
+    
+    
+    if tipo == 'timbres':
+        respaldar_timbres(carpeta_origen, carpt_dest,ruta_archivo)
+
+    elif tipo == 'recibos':
+        respuesta = respaldar_recibos(carpeta_origen,ruta_archivo, carpt_dest,periodo, anno)
+
+        return respuesta
+@eel.expose
+def respaldar_timbres(carpeta_origen, carpt_dest, archivo,):
+        timbre = TimbreCop(carpeta_origen, carpt_dest)
+        timbre.copiado_archivos(archivo)
+
+
+
 
 @eel.expose
-def copiado_recibos(carpt_orig, carpt_dest, archivos):
-
-    for archivo in archivos:
-
-        reci = ReciboCop(carpt_orig, archivo, carpt_dest)
-        reci.separar_en_recibos()
-
+def respaldar_recibos(carpeta_original, ruta_archivo, carpt_destino, periodo, anno):
+    periodo_copiado = ArchivoTimbre(carpt_destino, periodo, anno)
+    timbres_nombres = periodo_copiado.recuperar_timbres_nombres()
+    
+    if timbres_nombres:
+        reci = ReciboCop(carpeta_original, ruta_archivo, carpt_destino)
+        reci.separar_en_recibos(timbres_nombres)
+        return ['EXITOSO', True]
+    else:
+        return ['ERROR', True]
+        
+@eel.expose
+def leer_log_recibos():
     try:
         log = Log('Log-copiado-Recibos.txt')   
         errores = log.devolver_datos('ERROR')
@@ -382,11 +405,19 @@ def leer_txt(ruta):
                         ***CONFIG EEL***
 **---------------------------------------------------------------------------------------------**
 """
+@eel.expose
+def login_user(user, password):
+        user = User(user,password)
+        resp = user.login()
+
+        return resp
+
+
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('main.html')
-
+    eel.start('login.html', port=8080)
+    
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
     pass
