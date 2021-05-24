@@ -8,3 +8,5 @@ docs_pruebas/
 .vscode/settings.json
 
 *.txt
+
+logs/xvba_debug.log
