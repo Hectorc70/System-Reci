@@ -31,8 +31,8 @@
     color: var(--color-texto);
     font-family: 'Roboto-m';
     font-size: 1.0rem;
-
 }
+
 .alertas-titulo{
     color: var(--color-texto);
     font-family: 'Roboto';
@@ -86,6 +86,30 @@ body{
     /* background: radial-gradient(ellipse at center, rgba(66,65,66,1) 0%, rgba(66,66,66,1) 50%, rgba(64,64,64,1) 65%, rgba(59,59,59,1) 72%, rgba(38,38,38,1) 100%); */
     background-color: var(--color-fondo);
 }
+
+
+#regresar{
+    display: block;
+    visibility: visible;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 50px;
+    height: 50px;
+    padding-right: 20px;
+}
+
+.icon-back{
+    width: 100%;
+    height: 100%;
+
+    fill: var(--color-contenedor);
+}
+
+#regresar:hover .icon-back{
+    fill: var(--color-resalte);
+    cursor: pointer;
+}
 section {
     overflow: auto;
     scrollbar-width: 5px;
@@ -95,7 +119,6 @@ section {
     align-items: center;
     margin: 0px;
     padding: 1px;
-
 }
 
 .card-contenedor{
@@ -105,6 +128,7 @@ section {
     margin: 50px auto;
     padding: 20px;
     padding-top: 0px;
+    text-decoration: none;
     background-color: var(--color-secundario); 
     box-shadow:0px 10px 20px 0px var(--color-sombra-cards) ;  
 }
@@ -137,6 +161,11 @@ hr{
     
 }
 
+.parrafo{
+    color: var(--color-texto);
+    font-size: 1.0rem;
+    font-family: 'Roboto-m';
+}
 
 /* BOTONES */
 #conte-btn{
@@ -255,7 +284,6 @@ input:focus{
     height: 20px;
     width: 60px; 
     border-radius: .5em;
-    border: none;
     background:transparent ;
     color: var(--color-texto);
     border: solid 3px var(--color-secundario);
@@ -370,4 +398,22 @@ input:focus{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.conte-acciones{
+    display: flex;
+    justify-content:center;
+    margin-bottom: 20px;
+    flex-direction: row;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    margin: 1px auto;
+}
+
+.accion{
+    margin-right: 20px;
 }
