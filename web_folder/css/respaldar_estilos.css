@@ -1,4 +1,7 @@
-
+#conte-respaldar{
+    display: block;
+    width: 100%;
+}
 
 #conte-opciones-vista-tabla{
     display: flex;

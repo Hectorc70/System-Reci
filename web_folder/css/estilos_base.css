@@ -88,28 +88,6 @@ body{
 }
 
 
-#regresar{
-    display: block;
-    visibility: visible;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 50px;
-    height: 50px;
-    padding-right: 20px;
-}
-
-.icon-back{
-    width: 100%;
-    height: 100%;
-
-    fill: var(--color-contenedor);
-}
-
-#regresar:hover .icon-back{
-    fill: var(--color-resalte);
-    cursor: pointer;
-}
 section {
     overflow: auto;
     scrollbar-width: 5px;
@@ -119,8 +97,6 @@ section {
     align-items: center;
     margin: 0px;
     padding: 1px;
-    display: block;
-    width: 100%;
 }
 
 .card-contenedor{
@@ -177,6 +153,7 @@ hr{
     align-items: flex-end;
     justify-content: space-evenly;
     padding: 0px;
+    
 }
 .btn{
     background-color: var(--color-secundario);
@@ -192,6 +169,7 @@ hr{
     padding-left: 8px;
     padding-right: 8px;
     font-family: 'Roboto';
+    text-decoration: none;
 }
 .btn-grande{
     width: 200px;
@@ -223,7 +201,6 @@ hr{
 #check-todos:hover{
     cursor: pointer;
 }
-
 
 
 
@@ -438,4 +415,14 @@ input:focus{
     border-radius: .5em;
     justify-content: flex-start;
 
+}
+
+
+#conte-opciones-vista-tabla{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0; 
 }

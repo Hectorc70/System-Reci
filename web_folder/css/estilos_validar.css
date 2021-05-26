@@ -1,14 +1,11 @@
 
 
-
-#conte-opciones-vista-tabla{
-    display: flex;
+#conte-validar{
+    display: block;
     width: 100%;
-    padding: 20px;
-    position: absolute;
-    top: 0;
-    left: 0; 
 }
+
+
 
 #recuperar-parametros{
     display: block;

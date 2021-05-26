@@ -72,43 +72,7 @@ async function mostrarRutaArchivo(nombre) {
 
 
 
-async function mostrar_en_tabla() {
 
-    let directorio = document.getElementsByName("ruta-reci")[0].value;
-    let rutas = await eel.mostrar_rutas_recibos(directorio)();
-    const rutas_num = Object.getOwnPropertyNames(rutas)
-
-    for (let i = 1; i < rutas_num.length; i++) {
-
-        let tr = document.createElement('tr');
-        let rutas_datos_num = Object.getOwnPropertyDescriptor
-        for (j = 1; j < rutas[i].length; j++) {
-            let td = document.createElement('td');
-
-            td.appendChild(document.createTextNode(rutas[i][j]));
-            tr.appendChild(td)
-        }
-
-
-
-
-
-
-    }
-}
-
-/* Limpia Tabla */
-
-function limpiarTabla(nombreTabla, tabla2) {
-
-    let tbl = document.getElementById(nombreTabla);
-    tbl.innerHTML = '';
-
-    if (tabla2 != '') {
-        let tbl2 = document.getElementById(tabla2);
-        tbl2.innerHTML = '';
-    }
-}
 
 /* Nuevas */
 async function SeleccionarFilaTabla(idElemento) {
@@ -150,10 +114,6 @@ function animacionCancelarVistaArchivos(idTablaCuerpo) {
     }
     
     let vista = document.getElementById("vista-resultados-archivos");
-    let back = document.getElementById('regresar');
-
-    back.style.display = 'block';
-    back.style.visibility = 'visible';
     vista.style.transform = 'translate(0px,1000px)';
     vista.style.transition = 'all 0.5s ease-in-out';
 
@@ -166,10 +126,6 @@ function animacionVistaArchivos() {
 
     let cardParams = document.getElementById("recuperar-parametros");
     let vista = document.getElementById("vista-resultados-archivos");
-    let back = document.getElementById('regresar');
-
-    back.style.display = 'None';
-    back.style.visibility = 'hidden';
     cardParams.setAttribute('class', 'animate-move card-contenedor');
     cardParams.style.transform = 'translate(-550px,-700px)';
     cardParams.style.transition = 'all 0.5s ease-in-out';
