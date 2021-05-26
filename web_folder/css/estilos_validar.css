@@ -1,15 +1,31 @@
 
 
+
 #conte-opciones-vista-tabla{
     display: flex;
     width: 100%;
     padding: 20px;
     position: absolute;
     top: 0;
-    left: 0;
-    
+    left: 0; 
+}
+
+#recuperar-parametros{
+    display: block;
+    width: 400px;
+    height: 420px;
+}
+
+#conte-fechas-respaldar{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display:flex;
+    width: 100%;
+    border-radius: .5em;
+    justify-content: flex-start;
 
 }
+
 
 #vista-resultados-archivos{
     visibility: hidden;

@@ -125,3 +125,58 @@ async function SeleccionarFilaTabla(idElemento) {
     }
 }
 
+
+
+/* Animaciones de card de parametros de entrada */
+function comprobarParametros() {
+    let ruta = document.getElementsByName("ruta")[0].value;
+    let anno = document.getElementsByName("anno")[0].value;
+    let periodo = document.getElementsByName("periodo")[0].value;
+
+
+    if (ruta != '' && anno != '' && periodo != '') {
+        mostrarArchivosOriginales(ruta, anno, periodo);
+
+    }
+
+    else Precaucion('Seleccione Ruta, Año y Periodo');
+}
+
+function animacionCancelarVistaArchivos(idTablaCuerpo) {
+    let cardParams = document.getElementById("recuperar-parametros");
+    let dataTable = document.getElementById(idTablaCuerpo);
+    if (dataTable.innerHTML != ''){
+        dataTable.innerHTML = '';
+    }
+    
+    let vista = document.getElementById("vista-resultados-archivos");
+    let back = document.getElementById('regresar');
+
+    back.style.display = 'block';
+    back.style.visibility = 'visible';
+    vista.style.transform = 'translate(0px,1000px)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+
+    cardParams.style.transform = 'translate(0px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+}
+
+
+function animacionVistaArchivos() {
+
+    let cardParams = document.getElementById("recuperar-parametros");
+    let vista = document.getElementById("vista-resultados-archivos");
+    let back = document.getElementById('regresar');
+
+    back.style.display = 'None';
+    back.style.visibility = 'hidden';
+    cardParams.setAttribute('class', 'animate-move card-contenedor');
+    cardParams.style.transform = 'translate(-550px,-700px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+
+    vista.style.display = 'block';
+    vista.style.visibility = 'visible';
+    vista.style.transform = 'translate(0%, -80%)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+
+}

@@ -119,6 +119,8 @@ section {
     align-items: center;
     margin: 0px;
     padding: 1px;
+    display: block;
+    width: 100%;
 }
 
 .card-contenedor{
@@ -416,4 +418,24 @@ input:focus{
 
 .accion{
     margin-right: 20px;
+}
+
+/* Contenedores de opciones */
+
+
+#recuperar-parametros{
+    display: block;
+    width: 400px;
+    height: 420px;
+    
+}
+
+#conte-input-fechas{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display:flex;
+    width: 100%;
+    border-radius: .5em;
+    justify-content: flex-start;
+
 }
