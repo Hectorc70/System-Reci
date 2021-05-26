@@ -17,7 +17,7 @@ async function  loginUser() {
         else if (resp[0] == 200){
             if(resp[1]['is_staff'] == true){
                 
-                window.location.replace("/staff_opciones.html");
+                window.location.replace("/menu.html");
             }   
             else{
                 window.location.replace("/buscador.html");

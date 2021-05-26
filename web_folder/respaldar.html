@@ -18,24 +18,68 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
-        
+
     </script>
 </head>
 
 <body>
+    <div id="regresar">
+        <a href="menu.html">
+            <svg class="icon-back" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px" y="0px" width="199.404px" height="199.404px" viewBox="0 0 199.404 199.404"
+                style="enable-background:new 0 0 199.404 199.404;" xml:space="preserve">
+                <g>
+                    <polygon
+                        points="135.412,0 35.709,99.702 135.412,199.404 163.695,171.119 92.277,99.702 163.695,28.285 	" />
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+            </svg>
+        </a>
+    </div>
     <section id="conte-opciones">
-        <div id="menu" class="card-contenedor">
+        <!-- <div id="menu" class="card-contenedor">
             <div class="title-section">
                 <h3>Menu Principal</h3>
 
             </div>
             <hr>
             <div id="opciones">
-                <div class="opcion-menu"></div>
-                <div class="opcion-menu"></div>
-                <div class="opcion-menu"></div>
+                <div class="opcion-menu">
+                    <a href="">Respaldar</a>
+                </div>
+                <div class="opcion-menu">Validar</div>
+                <div class="opcion-menu">Subir</div>
             </div>
-        </div>
+        </div> -->
         <div id="conte-respaldar">
             <div id="recuperar-parametros" class="card-contenedor">
                 <div class="title-section">
@@ -102,7 +146,7 @@
                     <h3>Iniciar Respaldo</h3>
                 </div>
                 <hr>
-                
+
                 <div class="conte-ruta">
                     <label class="in-lbl">Ruta de Destino</label>
                     <div class="conte-input-ruta">
@@ -117,39 +161,42 @@
                 <div id="conte-btn">
                     <button class="btn" type="button" onclick="cancelarVistaParametrosRespaldar()">Cancelar</button>
                     <button class="btn" type="button" onclick="iniciarCopiadoArchivos()">Respaldar</button>
-                    
+
                 </div>
             </div>
             <div class="card-contenedor" id="vista-resultados-archivos">
                 <div class="title-section">
                     <h3>Resultados de Busqueda</h3>
-                    
+
                 </div>
                 <hr>
                 <div id="tabla-resultados">
                     <div id="conte-opciones-vista-tabla">
-                        <a id="pest-recibos" class="opcion-vista" onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'recibos-datos', 'timbres-datos')">Recibos</a>
-                        <a id="pest-timbres" class="opcion-vista" onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos')">Timbres</a>
+                        <a id="pest-recibos" class="opcion-vista"
+                            onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'recibos-datos', 'timbres-datos')">Recibos</a>
+                        <a id="pest-timbres" class="opcion-vista"
+                            onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos')">Timbres</a>
                     </div>
-                    
+
                     <div id="titulos-tabla">
                         <div class="titulo-tabla">Nomina</div>
                         <div class="titulo-tabla">Periodo</div>
                         <div class="titulo-tabla">Ruta de Archivo</div>
                     </div>
 
-                    <div class= "cuerpo-tabla" id="recibos-datos">
+                    <div class="cuerpo-tabla" id="recibos-datos">
                         <!-- DATOS DE LOS RECIBOS DE NOMINA -->
                     </div>
-                    <div class= "cuerpo-tabla" id="timbres-datos">
+                    <div class="cuerpo-tabla" id="timbres-datos">
                         <!-- DATOS DE LOS TIMBRES DE NOMINA -->
                     </div>
                 </div>
                 <div class="conte-acciones">
-                    <button class="accion btn btn-grande" onclick="SeleccionarTodoTablaRespaldar('fila')">Seleccionar Todo</button>
+                    <button class="accion btn btn-grande" onclick="SeleccionarTodoTablaRespaldar('fila')">Seleccionar
+                        Todo</button>
                     <button class="accion btn btn-grande" onclick="animacionCancelarVistaArchivos()">Cancelar</button>
                     <button class="accion btn btn-grande" onclick="animacionVistaParametrosRespaldar()">Copiar</button>
-                    
+
                 </div>
             </div>
 
