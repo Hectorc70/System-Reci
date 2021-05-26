@@ -20,11 +20,11 @@ function animacionCancelarVistaArchivos() {
     dataTable[0].innerHTML = '';
     dataTable[1].innerHTML = '';
     let vista = document.getElementById("vista-resultados-archivos");
-    let menu = document.getElementById('menu');
+    /* let menu = document.getElementById('menu'); */
     vista.style.transform = 'translate(0px,1000px)';
     vista.style.transition = 'all 0.5s ease-in-out';
-    menu.style.transform = 'translate(0px,0px)';
-    menu.style.transition = 'all 0.5s ease-in-out';
+    /* menu.style.transform = 'translate(0px,0px)';
+    menu.style.transition = 'all 0.5s ease-in-out'; */
 
     cardParams.style.transform = 'translate(0px,0px)';
     cardParams.style.transition = 'all 0.5s ease-in-out';
@@ -60,10 +60,10 @@ function animacionVistaArchivos() {
 
     let cardParams = document.getElementById("recuperar-parametros");
     let vista = document.getElementById("vista-resultados-archivos");
-    let menu = document.getElementById('menu');
+   /*  let menu = document.getElementById('menu');
 
     menu.style.transform = 'translate(550px,-600px)';
-    menu.style.transition = 'all 0.5s ease-in-out';
+    menu.style.transition = 'all 0.5s ease-in-out'; */
     cardParams.setAttribute('class', 'animate-move card-contenedor');
     cardParams.style.transform = 'translate(-550px,-700px)';
     cardParams.style.transition = 'all 0.5s ease-in-out';
