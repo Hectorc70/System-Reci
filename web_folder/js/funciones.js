@@ -92,19 +92,6 @@ async function SeleccionarFilaTabla(idElemento) {
 
 
 /* Animaciones de card de parametros de entrada */
-function comprobarParametros() {
-    let ruta = document.getElementsByName("ruta")[0].value;
-    let anno = document.getElementsByName("anno")[0].value;
-    let periodo = document.getElementsByName("periodo")[0].value;
-
-
-    if (ruta != '' && anno != '' && periodo != '') {
-        mostrarArchivosOriginales(ruta, anno, periodo);
-
-    }
-
-    else Precaucion('Seleccione Ruta, Año y Periodo');
-}
 
 function animacionCancelarVistaArchivos(idTablaCuerpo) {
     let cardParams = document.getElementById("recuperar-parametros");
@@ -134,5 +121,32 @@ function animacionVistaArchivos() {
     vista.style.visibility = 'visible';
     vista.style.transform = 'translate(0%, -80%)';
     vista.style.transition = 'all 0.5s ease-in-out';
+
+}
+
+
+/* Utilidades  tablas */
+
+function cambiardeTipoVista(idpest, idpestNoSelect, idTablaMostrar, idTablaNoMostrar) {
+    let CuerpoTabla = document.getElementById(idTablaMostrar);
+    let CuerpoTablaNoMostrar = document.getElementById(idTablaNoMostrar);
+
+    let pestSelect = document.getElementById(idpest);
+    let pestNoSelect = document.getElementById(idpestNoSelect);
+    CuerpoTabla.style.transform = 'translate(0px,0px)';
+    CuerpoTabla.style.opacity = '100%';
+    CuerpoTabla.style.transition = 'all 0.5s ease-in-out';
+
+
+    CuerpoTablaNoMostrar.style.transform = 'translate(2000px, 0px)';
+    CuerpoTablaNoMostrar.style.opacity = '0%';
+    CuerpoTablaNoMostrar.style.transition = 'all 0.5s ease-in-out';
+
+
+
+    pestSelect.style.backgroundColor = 'var(--color-secundario)';
+    pestSelect.style.borderTop = '3px solid var(--color-resalte)'
+    pestNoSelect.style.backgroundColor = 'var(--color-contenedor)';
+    pestNoSelect.style.borderTop = '3px solid var(--color-contenedor)';
 
 }

@@ -19,31 +19,13 @@ from almacenar.empleado import DatosEmpleados
 
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
-from respaldar.originales import ArchivoTimbre, ArchivoRecibo
-
+from respaldar.originales import ArchivoTimbre, ArchivoRecibo, ArchivosOrig
+from validacion.validacion import ArchivosValidar
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
-"""
-**---------------------------------------------------------------------------------------------**
-                        ***PRUEBAS***
-**---------------------------------------------------------------------------------------------**
-"""
-""" def ejecutar(ruta, periodo, anno, ruta_destino):
-    timbre = TimbreCop(ruta, periodo, anno, ruta_destino)
-    timbre.copiado_archivos()
 
-ruta = 'Y:/CFDI_2020/CFDI_NOMINA_2020'
-ruta_destino = 'X:/CFDI_NOMINA_2020'
-ejecutar(ruta, '01',  '2020', ruta_destino) """
-
-"""
-**---------------------------------------------------------------------------------------------**
-                        ***HERRAMIENTAS***
-**---------------------------------------------------------------------------------------------**
-"""
 @eel.expose    
-
 
 
 def leer_config_bd():
@@ -173,8 +155,22 @@ def leer_log_recibos():
         return[' ', False]
 
 
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***VALIDAR XML Y RECIBOS***
+**---------------------------------------------------------------------------------------------**
+"""
 
+@eel.expose
+def mostrar_archivos(ruta, anno, periodo):
+    archivos_orig = ArchivosOrig(ruta, periodo, anno)
 
+    rutas = archivos_orig.depurar_rutas()
+
+    #ArchivosValidar(rutas[1], rutas[0])
+    return rutas
+
+    
 
 """
 **---------------------------------------------------------------------------------------------**

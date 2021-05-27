@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div id="conte-btn">
-                    <button class="btn btn-grande" type="button" onclick="mostrarArchivos()">Buscar</button>
+                    <button class="btn btn-grande" type="button" onclick="comprobarParametrosV()">Buscar</button>
 
                 </div>
                 <div id="conte-btn">
@@ -121,19 +121,22 @@
                 <div id="tabla-resultados">
                     <div id="conte-opciones-vista-tabla">
                         <a id="pest-recibos" class="opcion-vista"
-                            onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'recibos-datos', 'timbres-datos')">Recibos</a>
+                            onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'datos-recibos-validadados', 'datos-timbres-validadados')">Recibos</a>
                         <a id="pest-timbres" class="opcion-vista"
-                            onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos')">Timbres</a>
+                            onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'datos-timbres-validadados', 'datos-recibos-validadados')">Timbres</a>
                     </div>
-
                     <div id="titulos-tabla">
-                        <div class="titulo-tabla">Nomina</div>
                         <div class="titulo-tabla">Periodo</div>
-                        <div class="titulo-tabla">Ruta de Archivo</div>
+                        <div class="titulo-tabla">Nomina</div>
+                        <div class="titulo-tabla">Ruta Archivo</div>
+
                     </div>
 
-                    <!-- DATOS DE LOS ARCHIVOS A VALIDAR -->
-                    <div class="cuerpo-tabla" id="datos-archivos-validadados">
+                    <!-- DATOS DE LOS RECIBOS A VALIDAR -->
+                    <div class="cuerpo-tabla" id="datos-recibos-validadados">
+                    </div>
+                    <!-- DATOS DE LOS TIMBRES A VALIDAR -->
+                    <div class="cuerpo-tabla" id="datos-timbres-validadados">
                     </div>
                 </div>
                 <div class="conte-acciones">
