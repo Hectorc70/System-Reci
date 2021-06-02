@@ -64,10 +64,10 @@
 
 
 
-#timbres-datos .cell:last-child{
+#datos-recibos-validadados .cell:last-child{
     width: 60%;
 }
-#recibos-datos .cell:last-child{
+#datos-timbres-validadados .cell:last-child{
     width: 60%;
 }
 

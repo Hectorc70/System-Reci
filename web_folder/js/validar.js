@@ -22,24 +22,24 @@ async function mostrarArchivos(ruta, anno, periodo){
     
     let tablavistaArchivos = document.getElementById("datos-recibos-validadados");
     cambiardeTipoVista('pest-recibos', 'pest-timbres', 'datos-recibos-validadados', 'datos-timbres-validadados')
+    debugger;
     for (let i = 0; i < rutas[0].length; i++) {
         let rutasRecibosLargo = rutas[0][i].length
         
         let fila = document.createElement("a");
-        let idFila = "fila" + i;
+        let idFila = "fila-reci" + i;
 
         fila.setAttribute("id", idFila);
         fila.setAttribute("class", "fila");
-        let funcion = `SeleccionarFilaTabla('${idFila}')`;
-        fila.setAttribute("onclick", funcion);
+        
 
         let celdaNom = document.createElement("div");
         celdaNom.setAttribute("class", "cell");
-        celdaNom.innerHTML = rutas[0][i][rutasRecibosLargo-2];
+        celdaNom.innerHTML = rutas[0][i][rutasRecibosLargo-4];
 
         let celdaPer = document.createElement("div");
         celdaPer.setAttribute("class", "cell");
-        celdaPer.innerHTML = rutas[0][i][rutasRecibosLargo-3];
+        celdaPer.innerHTML = rutas[0][i][rutasRecibosLargo-5];
 
         let celdaRutaRecibo = document.createElement("div");
         celdaRutaRecibo.setAttribute("class", "cell");
@@ -61,16 +61,15 @@ async function mostrarArchivos(ruta, anno, periodo){
 
         fila.setAttribute("id", idFila);
         fila.setAttribute("class", "fila");
-        let funcion = `SeleccionarFilaTabla('${idFila}')`;
-        fila.setAttribute("onclick", funcion);
+
 
         let celdaNom = document.createElement("div");
         celdaNom.setAttribute("class", "cell");
-        celdaNom.innerHTML = rutas[1][i][rutasTimbresLargo-2];
+        celdaNom.innerHTML = rutas[1][i][rutasTimbresLargo-4];
 
         let celdaPer = document.createElement("div");
         celdaPer.setAttribute("class", "cell");
-        celdaPer.innerHTML = rutas[1][i][rutasTimbresLargo-3];
+        celdaPer.innerHTML = rutas[1][i][rutasTimbresLargo-5];
 
         let celdaRutaTimbre = document.createElement("div");
         celdaRutaTimbre.setAttribute("class", "cell");
@@ -86,4 +85,47 @@ async function mostrarArchivos(ruta, anno, periodo){
 
 
 
+}
+
+async function validar(){
+    deshabilitar("vista-resultados-archivos");
+    loader("vista-resultados-archivos");
+    let tablaRecibos = document.getElementById("datos-recibos-validadados");
+    let tablaTimbres = document.getElementById("datos-timbres-validadados");
+    //let recibos = recuperarValoresFilas(tablaRecibos);
+
+    let filasRecibos = tablaRecibos.getElementsByClassName("fila");
+    let filasTimbres = tablaTimbres.getElementsByClassName("fila");
+    //let resp = await eel.mostrar_archivos(timbres, recibos)();
+    
+    let recibos = [];
+    for (let i = 0; i < filasRecibos.length; i++) {
+        
+        let fila = document.getElementById("fila-reci" + i);
+        let ruta = fila.lastElementChild.innerHTML;
+        recibos.push(ruta);
+    }
+
+    let timbres = [];
+    for (let i = 0; i < filasTimbres.length; i++) {
+        
+        let fila = document.getElementById("fila" + i);
+        let ruta = fila.lastElementChild.innerHTML;
+        timbres.push(ruta);
+    }
+
+    let respuesta = await eel.validar_archivos(timbres, recibos)();
+
+    habilitar("vista-resultados-archivos");
+    noLoader("vista-resultados-archivos");
+
+
+}
+
+
+
+
+function CancelarVistaArchivosValidar(){
+    animacionCancelarVistaArchivos('datos-recibos-validadados');
+    animacionCancelarVistaArchivos('datos-timbres-validadados');
 }

@@ -20,7 +20,7 @@ from almacenar.empleado import DatosEmpleados
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo, ArchivosOrig
-from validacion.validacion import ArchivosValidar
+from validacion.validacion import ArchivosPorValidar, ArchivosValidados
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
@@ -167,10 +167,26 @@ def mostrar_archivos(ruta, anno, periodo):
 
     rutas = archivos_orig.depurar_rutas()
 
-    #ArchivosValidar(rutas[1], rutas[0])
-    return rutas
+    recibo  = ArchivosPorValidar(ruta, rutas[0])
+    recibos = recibo.depurar_archivos()
+
+    timbre  = ArchivosPorValidar(ruta, rutas[1])
+    timbres = timbre.depurar_archivos()
+
+
+
+    return [recibos, timbres]
+
+@eel.expose
+def validar_archivos(timbres, recibos):
+
+    archivos = ArchivosValidados(timbres, recibos)
+
+    archivos_validados = archivos.validar()
 
     
+    return archivos_validados
+
 
 """
 **---------------------------------------------------------------------------------------------**
@@ -412,7 +428,7 @@ def login_user(user, password):
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('login.html', port=8080)
+    eel.start('validar.html', port=8080)
     
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
