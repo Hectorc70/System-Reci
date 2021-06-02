@@ -1,5 +1,6 @@
 'use strict'
-/* Entrada */
+
+/* Vista Data */
 function comprobarParametros() {
     let ruta = document.getElementsByName("ruta")[0].value;
     let anno = document.getElementsByName("anno")[0].value;
@@ -13,72 +14,13 @@ function comprobarParametros() {
 
     else Precaucion('Seleccione Ruta, Año y Periodo');
 }
-function animacionCancelarVistaArchivos() {
-    let cardParams = document.getElementById("recuperar-parametros");
-    let dataTable = document.getElementsByClassName("cuerpo-tabla");
-
-    dataTable[0].innerHTML = '';
-    dataTable[1].innerHTML = '';
-    let vista = document.getElementById("vista-resultados-archivos");
-    let back = document.getElementById('regresar');
-
-    back.style.display = 'block';
-    back.style.visibility = 'visible';
-    vista.style.transform = 'translate(0px,1000px)';
-    vista.style.transition = 'all 0.5s ease-in-out';
-
-    cardParams.style.transform = 'translate(0px,0px)';
-    cardParams.style.transition = 'all 0.5s ease-in-out';
-}
-
-/* Vista Data */
-function cambiardeTipoVista(idpest, idpestNoSelect, idTablaMostrar, idTablaNoMostrar) {
-    let CuerpoTabla = document.getElementById(idTablaMostrar);
-    let CuerpoTablaNoMostrar = document.getElementById(idTablaNoMostrar);
-
-    let pestSelect = document.getElementById(idpest);
-    let pestNoSelect = document.getElementById(idpestNoSelect);
-    CuerpoTabla.style.transform = 'translate(0px,0px)';
-    CuerpoTabla.style.opacity = '100%';
-    CuerpoTabla.style.transition = 'all 0.5s ease-in-out';
 
 
-    CuerpoTablaNoMostrar.style.transform = 'translate(2000px, 0px)';
-    CuerpoTablaNoMostrar.style.opacity = '0%';
-    CuerpoTablaNoMostrar.style.transition = 'all 0.5s ease-in-out';
-
-
-
-    pestSelect.style.backgroundColor = 'var(--color-secundario)';
-    pestSelect.style.borderTop = '3px solid var(--color-resalte)'
-    pestNoSelect.style.backgroundColor = 'var(--color-contenedor)';
-    pestNoSelect.style.borderTop = '3px solid var(--color-contenedor)';
-
-}
-
-
-function animacionVistaArchivos() {
-
-    let cardParams = document.getElementById("recuperar-parametros");
-    let vista = document.getElementById("vista-resultados-archivos");
-    let back = document.getElementById('regresar');
-
-    back.style.display = 'None';
-    back.style.visibility = 'hidden';
-    cardParams.setAttribute('class', 'animate-move card-contenedor');
-    cardParams.style.transform = 'translate(-550px,-700px)';
-    cardParams.style.transition = 'all 0.5s ease-in-out';
-
-    vista.style.display = 'block';
-    vista.style.visibility = 'visible';
-    vista.style.transform = 'translate(0%, -80%)';
-    vista.style.transition = 'all 0.5s ease-in-out';
-
-}
 
 
 async function mostrarArchivosOriginales(ruta, anno, periodo) {
     animacionVistaArchivos()
+
 
     loader("tabla-resultados");
     deshabilitar("tabla-resultados");
@@ -112,6 +54,8 @@ async function mostrarArchivosOriginales(ruta, anno, periodo) {
         fila.appendChild(celdaPer);
         fila.appendChild(celdaRuta);
     }
+
+    
     let tablavistaRecibos = document.getElementById("recibos-datos")
     for (let i = 0; i < rutas[1].length; i++) {
         let fila = document.createElement("a");
@@ -302,4 +246,9 @@ async function iniciarCopiadoArchivos() {
 
 function almacenarFilasSelecionadas(){
     
+}
+
+function cancelarVistaTbl(){
+    animacionCancelarVistaArchivos("recibos-datos");
+    animacionCancelarVistaArchivos("timbres-datos");
 }

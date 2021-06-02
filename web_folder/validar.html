@@ -8,12 +8,12 @@
     <title>System Reci - Version 4.0.0</title>
     <link rel="stylesheet" type=text/css href="css/estilos_base.css">
     <link rel="stylesheet" type=text/css href="css/loaders.css">
-    <link rel="stylesheet" type=text/css href="css/respaldar_estilos.css">
+    <link rel="stylesheet" type=text/css href="css/estilos_validar.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="js/alertas.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
-    <script type="text/javascript" src="js/respaldar.js"></script>
+    <script type="text/javascript" src="js/validar.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
@@ -22,18 +22,17 @@
 </head>
 
 <body>
-
     <section id="conte-opciones">
-        <div id="conte-respaldar">
+        <div id="conte-validar">
             <div id="recuperar-parametros" class="card-contenedor">
                 <div class="title-section">
-                    <h3>Respaldar Recibos - Timbres</h3>
+                    <h3>Validar Recibos - Timbres</h3>
                 </div>
                 <hr>
                 <div class="conte-titulo-fechas">
-                    <label class="in-lbl">Periodo a Respaldar</label>
+                    <label class="in-lbl">Periodo a Validar</label>
                 </div>
-                <div id="conte-fechas-respaldar">
+                <div id="conte-input-fechas">
                     <div class="conte-select">
                         <select class="slt periodos" name="periodo">
                             <option value=""></option>
@@ -82,10 +81,12 @@
                     </div>
                 </div>
                 <div id="conte-btn">
-                    <button class="btn btn-grande" type="button" onclick="comprobarParametros()">Buscar</button>
+                    <button class="btn btn-grande" type="button" onclick="comprobarParametrosV()">Buscar</button>
+
                 </div>
                 <div id="conte-btn">
                     <a class="btn btn-grande" type="button" href="menu.html">MENU</a>
+                    
                 </div>
             </div>
             <div class="card-contenedor" id="respaldar-parametros">
@@ -112,38 +113,35 @@
                 </div>
             </div>
             <div class="card-contenedor" id="vista-resultados-archivos">
-                <div class="title-section">
-                    <h3>Resultados de Busqueda</h3>
+                <div  class="title-section">
+                    <h3 id="titulo-tabla-vista-archivos">Resultados de Busqueda</h3>
 
                 </div>
                 <hr>
                 <div id="tabla-resultados">
                     <div id="conte-opciones-vista-tabla">
                         <a id="pest-recibos" class="opcion-vista"
-                            onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'recibos-datos', 'timbres-datos')">Recibos</a>
+                            onclick="cambiardeTipoVista('pest-recibos', 'pest-timbres', 'datos-recibos-validadados', 'datos-timbres-validadados')">Recibos</a>
                         <a id="pest-timbres" class="opcion-vista"
-                            onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'timbres-datos', 'recibos-datos')">Timbres</a>
+                            onclick="cambiardeTipoVista('pest-timbres', 'pest-recibos', 'datos-timbres-validadados', 'datos-recibos-validadados')">Timbres</a>
                     </div>
-
                     <div id="titulos-tabla">
-                        <div class="titulo-tabla">Nomina</div>
                         <div class="titulo-tabla">Periodo</div>
-                        <div class="titulo-tabla">Ruta de Archivo</div>
-                    </div>
-                    <!-- DATOS DE LOS RECIBOS DE NOMINA -->
-                    <div class="cuerpo-tabla" id="recibos-datos">
+                        <div class="titulo-tabla">Nomina</div>
+                        <div class="titulo-tabla">Nombre Archivo</div>
 
                     </div>
-                    <!-- DATOS DE LOS TIMBRES DE NOMINA -->
-                    <div class="cuerpo-tabla" id="timbres-datos">
 
+                    <!-- DATOS DE LOS RECIBOS A VALIDAR -->
+                    <div class="cuerpo-tabla" id="datos-recibos-validadados">
+                    </div>
+                    <!-- DATOS DE LOS TIMBRES A VALIDAR -->
+                    <div class="cuerpo-tabla" id="datos-timbres-validadados">
                     </div>
                 </div>
                 <div class="conte-acciones">
-                    <button class="accion btn btn-grande" onclick="SeleccionarTodoTablaRespaldar('fila')">Seleccionar
-                        Todo</button>
-                    <button class="accion btn btn-grande" onclick="cancelarVistaTbl()">Cancelar</button>
-                    <button class="accion btn btn-grande" onclick="animacionVistaParametrosRespaldar()">Copiar</button>
+                    <button class="accion btn btn-grande" onclick="CancelarVistaArchivosValidar()">Cancelar</button>
+                    <button class="accion btn btn-grande" onclick="validar()">Validar</button>
 
                 </div>
             </div>

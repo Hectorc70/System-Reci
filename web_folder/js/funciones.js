@@ -72,43 +72,7 @@ async function mostrarRutaArchivo(nombre) {
 
 
 
-async function mostrar_en_tabla() {
 
-    let directorio = document.getElementsByName("ruta-reci")[0].value;
-    let rutas = await eel.mostrar_rutas_recibos(directorio)();
-    const rutas_num = Object.getOwnPropertyNames(rutas)
-
-    for (let i = 1; i < rutas_num.length; i++) {
-
-        let tr = document.createElement('tr');
-        let rutas_datos_num = Object.getOwnPropertyDescriptor
-        for (j = 1; j < rutas[i].length; j++) {
-            let td = document.createElement('td');
-
-            td.appendChild(document.createTextNode(rutas[i][j]));
-            tr.appendChild(td)
-        }
-
-
-
-
-
-
-    }
-}
-
-/* Limpia Tabla */
-
-function limpiarTabla(nombreTabla, tabla2) {
-
-    let tbl = document.getElementById(nombreTabla);
-    tbl.innerHTML = '';
-
-    if (tabla2 != '') {
-        let tbl2 = document.getElementById(tabla2);
-        tbl2.innerHTML = '';
-    }
-}
 
 /* Nuevas */
 async function SeleccionarFilaTabla(idElemento) {
@@ -125,3 +89,66 @@ async function SeleccionarFilaTabla(idElemento) {
     }
 }
 
+async function borrarTabla(idTablaCuerpo){
+    let dataTable = document.getElementById(idTablaCuerpo);
+
+    if (dataTable.innerHTML != ''){
+        dataTable.innerHTML = '';
+    }
+}
+
+/* Animaciones de card de parametros de entrada */
+
+function animacionCancelarVistaArchivos(idTablaCuerpo) {
+    let cardParams = document.getElementById("recuperar-parametros");
+    borrarTabla(idTablaCuerpo)
+    let vista = document.getElementById("vista-resultados-archivos");
+    vista.style.transform = 'translate(0px,1000px)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+
+    cardParams.style.transform = 'translate(0px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+}
+
+
+function animacionVistaArchivos() {
+
+    let cardParams = document.getElementById("recuperar-parametros");
+    let vista = document.getElementById("vista-resultados-archivos");
+    cardParams.setAttribute('class', 'animate-move card-contenedor');
+    cardParams.style.transform = 'translate(-550px,-700px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+
+    vista.style.display = 'block';
+    vista.style.visibility = 'visible';
+    vista.style.transform = 'translate(0%, -80%)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+
+}
+
+
+/* Utilidades  tablas */
+
+function cambiardeTipoVista(idpest, idpestNoSelect, idTablaMostrar, idTablaNoMostrar) {
+    let CuerpoTabla = document.getElementById(idTablaMostrar);
+    let CuerpoTablaNoMostrar = document.getElementById(idTablaNoMostrar);
+
+    let pestSelect = document.getElementById(idpest);
+    let pestNoSelect = document.getElementById(idpestNoSelect);
+    CuerpoTabla.style.transform = 'translate(0px,0px)';
+    CuerpoTabla.style.opacity = '100%';
+    CuerpoTabla.style.transition = 'all 0.5s ease-in-out';
+
+
+    CuerpoTablaNoMostrar.style.transform = 'translate(2000px, 0px)';
+    CuerpoTablaNoMostrar.style.opacity = '0%';
+    CuerpoTablaNoMostrar.style.transition = 'all 0.5s ease-in-out';
+
+
+
+    pestSelect.style.backgroundColor = 'var(--color-secundario)';
+    pestSelect.style.borderTop = '3px solid var(--color-resalte)'
+    pestNoSelect.style.backgroundColor = 'var(--color-contenedor)';
+    pestNoSelect.style.borderTop = '3px solid var(--color-contenedor)';
+
+}

@@ -19,31 +19,13 @@ from almacenar.empleado import DatosEmpleados
 
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
-from respaldar.originales import ArchivoTimbre, ArchivoRecibo
-
+from respaldar.originales import ArchivoTimbre, ArchivoRecibo, ArchivosOrig
+from validacion.validacion import ArchivosPorValidar, ArchivosValidados
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
-"""
-**---------------------------------------------------------------------------------------------**
-                        ***PRUEBAS***
-**---------------------------------------------------------------------------------------------**
-"""
-""" def ejecutar(ruta, periodo, anno, ruta_destino):
-    timbre = TimbreCop(ruta, periodo, anno, ruta_destino)
-    timbre.copiado_archivos()
 
-ruta = 'Y:/CFDI_2020/CFDI_NOMINA_2020'
-ruta_destino = 'X:/CFDI_NOMINA_2020'
-ejecutar(ruta, '01',  '2020', ruta_destino) """
-
-"""
-**---------------------------------------------------------------------------------------------**
-                        ***HERRAMIENTAS***
-**---------------------------------------------------------------------------------------------**
-"""
 @eel.expose    
-
 
 
 def leer_config_bd():
@@ -173,7 +155,37 @@ def leer_log_recibos():
         return[' ', False]
 
 
+"""
+**---------------------------------------------------------------------------------------------**
+                        ***VALIDAR XML Y RECIBOS***
+**---------------------------------------------------------------------------------------------**
+"""
 
+@eel.expose
+def mostrar_archivos(ruta, anno, periodo):
+    archivos_orig = ArchivosOrig(ruta, periodo, anno)
+
+    rutas = archivos_orig.depurar_rutas()
+
+    recibo  = ArchivosPorValidar(ruta, rutas[0])
+    recibos = recibo.depurar_archivos()
+
+    timbre  = ArchivosPorValidar(ruta, rutas[1])
+    timbres = timbre.depurar_archivos()
+
+
+
+    return [recibos, timbres]
+
+@eel.expose
+def validar_archivos(timbres, recibos):
+
+    archivos = ArchivosValidados(timbres, recibos)
+
+    archivos_validados = archivos.validar()
+
+    
+    return archivos_validados
 
 
 """
@@ -416,7 +428,7 @@ def login_user(user, password):
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('login.html', port=8080)
+    eel.start('validar.html', port=8080)
     
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
