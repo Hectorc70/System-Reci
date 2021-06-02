@@ -106,21 +106,20 @@ class ArchivosValidados():
             if len(self.timbres[0][clave]) == 1:
                 datos = clave.split('_')
                 periodo = unir_cadenas('_', [datos[0],datos[1]])
-                nomina = datos[1]
+                nomina = datos[2]
 
                 datos_salida = [periodo, nomina, self.timbres[1][clave]]
                 timbres.append(datos_salida)
-                print (datos_salida)
+
 
 
         for clave, datos in self.recibos[0].items():
             if len(self.recibos[0][clave]) == 1:
                 datos = clave.split('_')
                 periodo = unir_cadenas('_', [datos[0],datos[1]])
-                nomina = datos[1]
+                nomina = datos[2]
 
                 datos_salida = [periodo, nomina, self.recibos[1][clave]]
                 recibos.append(datos_salida)
-                print (datos_salida)
         
-        return timbres, recibos
+        return [recibos, timbres]

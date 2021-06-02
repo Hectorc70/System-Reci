@@ -89,17 +89,19 @@ async function SeleccionarFilaTabla(idElemento) {
     }
 }
 
+async function borrarTabla(idTablaCuerpo){
+    let dataTable = document.getElementById(idTablaCuerpo);
 
+    if (dataTable.innerHTML != ''){
+        dataTable.innerHTML = '';
+    }
+}
 
 /* Animaciones de card de parametros de entrada */
 
 function animacionCancelarVistaArchivos(idTablaCuerpo) {
     let cardParams = document.getElementById("recuperar-parametros");
-    let dataTable = document.getElementById(idTablaCuerpo);
-    if (dataTable.innerHTML != ''){
-        dataTable.innerHTML = '';
-    }
-    
+    borrarTabla(idTablaCuerpo)
     let vista = document.getElementById("vista-resultados-archivos");
     vista.style.transform = 'translate(0px,1000px)';
     vista.style.transition = 'all 0.5s ease-in-out';
