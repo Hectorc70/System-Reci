@@ -11,10 +11,10 @@ PERIODOS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
 
 class RutaRecibo(Rutas):
 	def __init__(self, ruta, in_anno, in_periodo, periodos=PERIODOS):
-		self.ruta = ruta
-		self.in_periodo = in_periodo
-		self.in_anno = in_anno
-		self.periodos = periodos
+		self.ruta 			  = ruta
+		self.in_periodo 	  = in_periodo
+		self.in_anno 		  = in_anno
+		self.periodos 		  = periodos
 		
 		self.ruta_base = self._formar_ruta_directorio()
 		self.ruta_num = len(self.ruta.split('/'))
@@ -36,61 +36,42 @@ class RutaRecibo(Rutas):
 		rutas = self.recuperar_rutas(self.ruta_base, True)
 
 		for ruta in rutas:			
-			archivo=splitext(ruta[-1])
-			tipo_archivo=archivo[-1]
+			archivo      = splitext(ruta[-1])
+			tipo_archivo = archivo[-1]
 
 
 			if tipo_archivo == '.pdf':
-				nombre_archivo=archivo[0]
-				periodo=nombre_archivo.split('_')[-1][-2:]
-				anno=nombre_archivo.split('_')[-1][:4]
-				nomina=nombre_archivo.split('_')[1]
+				nombre_archivo = archivo[0]
+				periodo    	   = ruta[self.ruta_num]
+				nomina		   = ruta[self.ruta_num+1].split('_')[0]
+				carpeta_nomina = ruta[self.ruta_num+1]
 
-				if nomina == 'ORDINARIA':
-					ruta_ord=self._recuperar_recibos_ordinaria(
-					    ruta, nomina, periodo, anno)
-					rutas_archivos.append(ruta_ord)
-
-				elif nomina == 'JUBILADOS':
+				if nomina == 'JUBILADOS':
 					ruta_jub = unir_cadenas('/', ruta)
-					datos_recibos_rutas=[periodo, anno, nomina, ruta_jub]
+					datos_recibos_rutas=[nombre_archivo, periodo, carpeta_nomina, ruta_jub]
 
 					rutas_archivos.append(datos_recibos_rutas)
 				else:
-					ruta_esp=self._recuperar_recibos_especiales(
-					    ruta, nomina, periodo, anno)
-					rutas_archivos.append(ruta_esp)
+					ruta_ord=self.__recuperar_recibos(
+					ruta, carpeta_nomina, nombre_archivo, periodo)
+					rutas_archivos.append(ruta_ord)
 
 
 		return rutas_archivos
 
-	def _recuperar_recibos_ordinaria(self, datos, nomina, periodo, anno):
+	def __recuperar_recibos(self, datos, nomina, nombre_recibo, periodo):
 		
-		carpeta=datos[self.ruta_num+2].upper()
-
-		if carpeta.split('_')[-1] == 'PDF':
-			ruta=unir_cadenas('/', datos)
-			datos_recibos_rutas=[periodo, anno, nomina, ruta]
+		try:
+			carpeta	= datos[self.ruta_num+2].split('_')[1].upper()
+			if carpeta == 'PDF':
+				ruta=unir_cadenas('/', datos)
+				datos_recibos_rutas=[nombre_recibo, periodo, nomina, ruta]
+				return datos_recibos_rutas
+		
+		except:
+			pass
 		
 
-			return datos_recibos_rutas
-
-
-	def _recuperar_recibos_especiales(self, datos, nomina, periodo, anno):
-		
-		carpeta=datos[self.ruta_num+2].upper()
-
-		if carpeta == 'PDF':
-			ruta=unir_cadenas('/', datos)
-			datos_recibos_rutas=[periodo, anno, nomina, ruta]		
-
-			return datos_recibos_rutas
-
-		else:
-			datos_recibos_rutas = self._recuperar_recibos_ordinaria(datos, nomina, periodo, anno)
-
-
-			return datos_recibos_rutas
 
 
 

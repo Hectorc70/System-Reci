@@ -422,13 +422,13 @@ def leer_txt(ruta):
 @eel.expose
 def login_user(user, password):
         user = User(user,password)
-        token = user.get_token_user()
+        #token = user.get_token_user()
         resp = user.login()
         
-        cliente = Cliente(token[1])
-        respuesta_reci = cliente.enviar_datos_recibo()
+        #cliente = Cliente(token[1])
+        #respuesta_reci = cliente.enviar_datos_recibo()
 
-        print(respuesta_reci)
+        
         return resp
 
 
