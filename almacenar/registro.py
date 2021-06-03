@@ -1,4 +1,4 @@
-from almacenar.cliente import Cliente
+from subir.cliente import Cliente
 
 from modulos.rutas import unir_cadenas
 

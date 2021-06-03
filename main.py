@@ -11,7 +11,7 @@ from modulos.periodos import armar_periodos_intermedios, armar_periodos
 from modulos.archivo import Archivo
 from modulos.log import Log
 
-from almacenar.cliente import Cliente
+
 from configuraciones import Configuracion
 from almacenar.registro import RegistroRecibo, RegistroEmpleado
 from almacenar.ayuda.recibo import PERIODOS, RutaRecibo
@@ -21,6 +21,8 @@ from almacenar.empleado import DatosEmpleados
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo, ArchivosOrig
 from validacion.validacion import ArchivosPorValidar, ArchivosValidados
+
+from subir.cliente import Cliente
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
@@ -420,15 +422,20 @@ def leer_txt(ruta):
 @eel.expose
 def login_user(user, password):
         user = User(user,password)
+        token = user.get_token_user()
         resp = user.login()
+        
+        cliente = Cliente(token[1])
+        respuesta_reci = cliente.enviar_datos_recibo()
 
+        print(respuesta_reci)
         return resp
 
 
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('validar.html', port=8080)
+    eel.start('login.html', port=8080)
     
 
 except(SystemExit, MemoryError, KeyboardInterrupt):

@@ -9,7 +9,7 @@ class User:
         self.base     = 'http://10.1.2.209:8000'
 
 
-    def __get_token_user(self):
+    def get_token_user(self):
         """Retorna el Token del usuario dado"""
         uri = 'api-token-auth/'
         ur_full = '{0}/{1}'.format(self.base, uri)
@@ -33,7 +33,7 @@ class User:
 
 
     def login(self):
-        token= self.__get_token_user()
+        token= self.get_token_user()
         
         if token[0] == 200:
 
