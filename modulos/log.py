@@ -9,7 +9,7 @@ class Log(ArchivoTxt):
     def __init_(self, nombre):
         self.ruta_actual = (getcwd())
         self.nombre = nombre
-        self.ruta_completa = self.ruta_actual + '/' + nombre
+        self.ruta_completa = self.ruta_actual + '\\' + nombre
     
         ArchivoTxt.__init__(self, self.ruta_completa)
 
