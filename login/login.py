@@ -1,42 +1,35 @@
-
+from json.encoder import JSONEncoder
 import sys
+from os import getcwd
 import tempfile
 import requests
-import json
-
-from cryptography.fernet import Fernet
 
 class ArchivoTemp():
     def __init__(self):
-        self.temp = open('data.json','w', encoding='utf-8')
-        self.key  = Fernet.generate_key()
-        self.f    = Fernet(self.key)
+        self.temp = tempfile.TemporaryFile('w+t')
 
 
     def save_data_user(self, control, password):
         """guarda en archivo temporal el control y password
             del usuario logueado"""
 
-        data_format  = control  + '|' + password
-        data         = self.f.encrypt(data_format.encode())
-        data_for_json = {'key' : data}
-        json.dump(data_for_json, self.temp)
+        self.temp.write(control  + '|' + password)
+        self.temp.seek(0)
 
     def get_data_user(self):
         """Retorna lista con control y password"""
         try:
-            json_file = open('data.json','r')
-            conte_encrypt= json.load(json_file)
-            conte = self.f.decrypt(conte_encrypt).decode() 
+            conte = self.temp.read()
+
             data = conte.split('|')
             return data
         
         except:
             return []
+
+
     def close_temp(self):
         self.temp.close()
-
-    
 
 
 class User():
