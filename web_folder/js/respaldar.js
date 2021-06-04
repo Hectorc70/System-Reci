@@ -170,7 +170,6 @@ async function iniciarCopiadoArchivos() {
             /* Envia las rutas de los recibos y copia */
             loader("respaldar-parametros");
             deshabilitar("respaldar-parametros");
-            debugger;
             for(let i = 0; i < recibosRutas.length; i++){
                 
                     let respuesta = await eel.respaldar('recibos', rutaOrigen,recibosRutas[i], rutaDestino, periodo, anno)();

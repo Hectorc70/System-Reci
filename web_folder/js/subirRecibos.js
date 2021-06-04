@@ -61,6 +61,65 @@ async function mostrarRecibos(ruta, anno, periodo) {
 
 }
 
+
+async function SubirDatosRecibos() {
+    let elementoPadre = document.getElementById("recibos-a-subir");
+    let elementos = elementoPadre.getElementsByClassName("fila");
+
+    let datosRecibos = [];
+
+    for (let i = 0; i < elementos.length; i++) {
+        let fila = document.getElementById("fila" + i);
+        let estiloFila = window.getComputedStyle(fila);
+        let colorFila = estiloFila.getPropertyValue("background-color");
+        let ruta = fila.lastElementChild.innerHTML;
+
+        if (colorFila == "rgb(255, 136, 130)") {
+            datosRecibos.push(ruta);
+        }
+    }
+
+
+    /* Envia datos  */
+    loader("recibos-a-subir");
+    deshabilitar("recibos-a-subir");
+
+    let resp= await eel.guardar_mdatos_recibos(datosRecibos)();
+
+    if (resp != 'ERROR') {
+        let respuesta = await eel.leer_log_recibos_subidos()();
+
+        if (respuesta[0] == 'ERRORES') {
+            noLoader("recibos-a-subir");
+            habilitar("recibos-a-subir");
+            Precaucion('Tarea Terminada pero hubo Errores');
+
+
+
+        }
+        else {
+            noLoader("recibos-a-subir");
+            habilitar("recibos-a-subir");
+            satisfactorio('Tarea Terminada');
+
+
+        }
+    }
+    else{
+        noLoader("recibos-a-subir");
+        habilitar("recibos-a-subir");
+        error('No se pudo realizar la Tarea \
+                reinicie la aplicacion \
+                e Inicie Sesion nuevamente')
+        
+    }
+
+
+
+
+}
+
+
 async function SeleccionarTodoTablaSubirReci() {
     let elementoPadre = document.getElementById("recibos-a-subir");
     let elementos = elementoPadre.childNodes;

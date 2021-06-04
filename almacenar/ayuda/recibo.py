@@ -42,7 +42,8 @@ class RutaRecibo(Rutas):
 
 			if tipo_archivo == '.pdf':
 				nombre_archivo = archivo[0]
-				periodo    	   = ruta[self.ruta_num]
+				periodo    	   = unir_cadenas('', [ruta[self.ruta_num].split('_')[1],
+													ruta[self.ruta_num].split('_')[0]]), 
 				nomina		   = ruta[self.ruta_num+1].split('_')[0]
 				carpeta_nomina = ruta[self.ruta_num+1]
 
