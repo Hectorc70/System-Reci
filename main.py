@@ -1,9 +1,12 @@
 from os.path import exists
+from os import startfile
+from os import getpid
+import tempfile 
 
 import eel
 import os.path
 
-from login.login import User
+from login.login import User, ArchivoTemp, Token
 
 from modulos.rutas import abrir_directorio, abrir_archivo, unir_cadenas
 from modulos.txt import ArchivoTxt
@@ -11,7 +14,7 @@ from modulos.periodos import armar_periodos_intermedios, armar_periodos
 from modulos.archivo import Archivo
 from modulos.log import Log
 
-from almacenar.cliente import Cliente
+
 from configuraciones import Configuracion
 from almacenar.registro import RegistroRecibo, RegistroEmpleado
 from almacenar.ayuda.recibo import PERIODOS, RutaRecibo
@@ -22,12 +25,16 @@ from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo, ArchivosOrig
 from validacion.validacion import ArchivosPorValidar, ArchivosValidados
 
+from subir.cliente import Cliente
+
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
 
+
+file_data_user = ArchivoTemp()
+
+
 @eel.expose    
-
-
 def leer_config_bd():
     opciones = Configuracion()
     opciones_param = opciones.cargar_opciones()
@@ -40,17 +47,6 @@ def leer_config_bd():
         print("No existen configuraciones")
 
 
-
-@eel.expose
-def directorios(ruta1, ruta2):
-    directorio_orig = Directorio(ruta1)
-    directorio_dos = Directorio(ruta2)
-
-    dif_rutas1 = directorio_orig.comparar_directorios(
-        directorio_dos.rutas_sin_base)
-    # dif_rutas2 = directorio_dos.comparar_directorios(directorio_orig.contenido)
-
-    return dif_rutas1
 
 
 """
@@ -144,8 +140,9 @@ def leer_log_recibos():
         log = Log('Log-copiado-Recibos.txt')   
         errores = log.devolver_datos('ERROR')
         if errores:
-
+            
             return ['ERRORES', True]
+            
         else:
             return [' ', True]
     except FileNotFoundError:
@@ -204,34 +201,47 @@ def mostrar_rutas_recibos(directorio, anno, periodo):
 
 
 @eel.expose
-def guardar_mdatos(archivos_pdf):
-    opciones = Configuracion()
-    opciones_param = opciones.cargar_opciones()
+def guardar_mdatos_recibos(datos_archivos_pdf):
+    data = file_data_user.get_data_user()
 
-    if opciones_param:
-        ip = opciones_param['SERVER-HOST']
-        puerto = opciones_param['PUERTO']
-        usuario = opciones_param['USUARIO']
-        psw = opciones_param['PSWORD']
-        bd = opciones_param['BASE-DATOS']
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+        
+        for datos in datos_archivos_pdf:
+            datos_format = {
+                'archivo':datos[0],
+                'ruta':datos[-1],
+                'periodo':datos[1],
+                'nomina':[2],
+                'control':datos[0].split('_')[0]
+            }
+            
 
-    for datos in archivos_pdf:
-        archivo = datos[-1].split('/')[-1]
-        control = archivo.split('_')[0]
-        periodo = str(datos[1]) + str(datos[0])
+            cliente = Cliente(token[1])
+            cliente.enviar_datos_recibo(datos_format)
 
-        recibo = RegistroRecibo(control, periodo,datos[2], archivo, datos[-1])
-        cadena_accion = recibo.guardar()
-        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'recibos')
-        respuesta = conexion.enviar_datos(cadena_accion)
-        conexion.cerrar_conexion()
+        return True     
+    else:
+        return 'ERROR'
 
-        print(respuesta)
-        print("Datos Procesados: {}".format(datos))
 
+@eel.expose
+def leer_log_recibos_subidos():
+    try:
+        log = Log('Log_Set_Recibos_Data.txt')   
+        errores = log.devolver_datos('ERROR')
+        if errores:
+            log.abrir_log()
+            return ['ERRORES', True]
+
+        else:
+            return [' ', True]
+    except FileNotFoundError:
+        return [' ', True]
     
-
-    return True
+    except:
+        return[' ', False]
 
 @eel.expose
 def guardar_empleados(ruta):   
@@ -418,20 +428,24 @@ def leer_txt(ruta):
 **---------------------------------------------------------------------------------------------**
 """
 @eel.expose
-def login_user(user, password):
-        user = User(user,password)
-        resp = user.login()
+def login_user(control, password):
 
+        user = User()
+        resp = user.get_database_user(control, password)
+        if resp[0] == 200:
+            file_data_user.save_data_user(control, password)
+        
         return resp
 
 
 try:
     opciones = [{'size':(1080, 720)}]
 
-    eel.start('validar.html', port=8080)
+    eel.start('login.html', port=8080)
     
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
     pass
-
+file_data_user.close_temp()
 print("ventana cerrada")
+
