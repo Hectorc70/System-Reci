@@ -54,4 +54,24 @@ function error(mensaje) {
 
 }
 
+function error(mensaje) {
+    texto = '<p class="alertas-msg" >' + mensaje + '</p>';
+    titulo = '<p class="alertas-titulo" >' + 'ERROR' + '</p>';
+    Swal.fire({
+        title: titulo,
+        html: texto,
+        icon: 'error',
+        iconColor: '#C52C03',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'var(--color-resalte)',
+        background: 'var(--color-fondo)',
+        backdrop: false,
+        width: '18rem',
+        heightAuto: false,
+    })
+
+
+}
+
+
 
