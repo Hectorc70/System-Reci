@@ -21,6 +21,7 @@ from validacion.validacion import ArchivosPorValidar, ArchivosValidados
 
 from subir.cliente import Cliente
 from subir.empleado import DatosEmpleados
+from subir.recibo import RutaRecibo
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
@@ -201,12 +202,13 @@ def guardar_mdatos_recibos(datos_archivos_pdf):
         token = user.get_token_user()
         
         for datos in datos_archivos_pdf:
+            control = int(datos[0].split('_')[0])
             datos_format = {
                 'archivo':datos[0],
                 'ruta':datos[-1],
                 'periodo':datos[1],
-                'nomina':[2],
-                'control':datos[0].split('_')[0]
+                'nomina':datos[2],
+                'control':str(control)
             }
             
 
@@ -245,12 +247,45 @@ def mostrar_datos_empleados(ruta):
     return datos
 
 @eel.expose
-def subir_empleados(datos_empleados):   
+def subir_datos_empleados(datos_empleados):   
+    data = file_data_user.get_data_user()
+
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+
+        for datos in datos_empleados:
+            datos_format = {
+                'control':datos[0],
+                'nombre':datos[1],
+                'ape_p':datos[2],
+                'ape_m':datos[3],
+            }
+            
+
+            cliente = Cliente(token[1])
+            cliente.enviar_datos_empleado(datos_format)
+
+        return ''
+    else:
+        return 'ERROR'
+
+@eel.expose
+def leer_log_empleados_subidos():
+    try:
+        log = Log('Log_Set_Empleados_Data.txt')   
+        errores = log.devolver_datos('ERROR')
+        if errores:
+            log.abrir_log()
+            return ['ERRORES', True]
+
+        else:
+            return [' ', True]
+    except FileNotFoundError:
+        return [' ', True]
     
-   pass
-
-
-
+    except:
+        return[' ', False]
 
 """
 **---------------------------------------------------------------------------------------------**

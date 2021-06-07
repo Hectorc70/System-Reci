@@ -17,7 +17,7 @@ async function mostrarDatosEmpleados(ruta) {
 
     let tablavistaDatos = document.getElementById("empleados-a-subir");
 
-    debugger;
+
     for (let i = 0; i < datosEmpleados.length; i++) {
 
         let fila = document.createElement("a");
@@ -57,6 +57,61 @@ async function mostrarDatosEmpleados(ruta) {
 
 }
 
+async function enviarDatosEmpleados() {
+    let elementoPadre = document.getElementById("empleados-a-subir");
+    let elementos = elementoPadre.getElementsByClassName("fila");
+
+    let datosEmpleados = [];
+    for (let i = 0; i < elementos.length; i++) {
+        let fila = document.getElementById("fila" + i);
+        let estiloFila = window.getComputedStyle(fila);
+        let colorFila = estiloFila.getPropertyValue("background-color");
+
+        if (colorFila == "rgb(255, 136, 130)") {
+            let control = fila.childNodes[0].innerHTML;
+            let nombre = fila.childNodes[1].innerHTML;
+            let apePaterno = fila.childNodes[2].innerHTML;
+            let apeMaterno = fila.childNodes[3].innerHTML;
+            let datos = [control, nombre, apePaterno, apeMaterno];
+
+            datosEmpleados.push(datos);
+        }
+    }
+
+    loader("empleados-a-subir");
+    deshabilitar("empleados-a-subir");
+
+    let resp= await eel.subir_datos_empleados(datosEmpleados)();
+    debugger;
+    if (resp != 'ERROR') {
+        let respuesta = await eel.leer_log_empleados_subidos()();
+
+        if (respuesta[0] == 'ERRORES') {
+            noLoader("empleados-a-subir");
+            habilitar("empleados-a-subir");
+            Precaucion('Tarea Terminada pero hubo Errores');
+
+
+
+        }
+        else {
+            noLoader("empleados-a-subir");
+            habilitar("empleados-a-subir");
+            satisfactorio('Tarea Terminada');
+
+
+        }
+    }
+    else{
+        noLoader("empleados-a-subir");
+        habilitar("empleados-a-subir");
+        error('No se pudo realizar la Tarea \
+                reinicie la aplicacion \
+                e Inicie Sesion nuevamente')
+        
+    }
+
+}
 
 async function SeleccionarTodoTablaSubirEmp() {
     let elementoPadre = document.getElementById("empleados-a-subir");
