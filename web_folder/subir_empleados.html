@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Reci - Version 4.0.0</title>
+    <link rel="stylesheet" type=text/css href="css/estilos_base.css">
+    <link rel="stylesheet" type=text/css href="css/loaders.css">
+    <link rel="stylesheet" type=text/css href="css/estilos_subir_emp.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="js/alertas.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
+    <script type="text/javascript" src="js/subirEmpleados.js"></script>
+</head>
+
+<body>
+
+    <section id="conte-opciones">
+        <div id="conte-subir-emp">
+            <div id="recuperar-parametros" class="card-contenedor">
+                <div class="title-section">
+                    <h3>Subir Datos de Empleados</h3>
+                </div>
+                <hr>
+
+                <div class="conte-ruta">
+                    <div style="height: 30px;"></div>
+                    <label class="in-lbl">Seleccionar Excel con datos</label>
+                    <div class="conte-input-ruta">
+                        <div class="objeto-ruta">
+                            <input class="in-data in-ruta" type="text" name="ruta">
+                        </div>
+                        <div class="objeto-ruta">
+                            <button class="btn btn-explorar" onclick="mostrarRutaArchivo('ruta')">...</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="conte-btn">
+                    <button class="btn btn-grande" type="button" onclick="comprobarParametrosEmp()">Leer Archivo</button>
+                </div>
+                <div id="conte-btn">
+                    <a class="btn btn-grande" type="button" href="menu.html">MENU</a>
+                </div>
+            </div>
+            
+            <div class="card-contenedor" id="vista-resultados-archivos">
+                <div class="title-section">
+                    <h3>Datos a Cargar</h3>
+                </div>
+                <hr>
+                <div id="tabla-resultados">
+                    <div id="titulos-tabla">
+                        <div class="titulo-tabla">Control</div>
+                        <div class="titulo-tabla">Nombre</div>
+                        <div class="titulo-tabla">Apellido Paterno</div>
+                        <div class="titulo-tabla">Apellido Materno</div>
+                    </div>
+                    <!-- DATOS DE LOS RECIBOS DE NOMINA -->
+                    <div class="cuerpo-tabla" id="empleados-a-subir">
+                    </div>
+                </div>
+                <div class="conte-acciones">
+                    <button class="accion btn btn-grande" onclick="SeleccionarTodoTablaSubirEmp()">Seleccionar
+                        Todo</button>
+                    <button class="accion btn btn-grande" onclick="animacionCancelarVistaArchivos('empleados-a-subir')">Cancelar</button>
+                    <button class="accion btn btn-grande" onclick="">Subir Datos</button>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>

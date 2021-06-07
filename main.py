@@ -14,26 +14,18 @@ from modulos.periodos import armar_periodos_intermedios, armar_periodos
 from modulos.archivo import Archivo
 from modulos.log import Log
 
-
-from configuraciones import Configuracion
-from almacenar.registro import RegistroRecibo, RegistroEmpleado
-from almacenar.ayuda.recibo import PERIODOS, RutaRecibo
-from almacenar.empleado import DatosEmpleados
-
-
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo, ArchivosOrig
+
 from validacion.validacion import ArchivosPorValidar, ArchivosValidados
 
 from subir.cliente import Cliente
+from subir.empleado import DatosEmpleados
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
 
-
 file_data_user = ArchivoTemp()
-
-
 @eel.expose    
 def leer_config_bd():
     opciones = Configuracion()
@@ -191,7 +183,7 @@ def validar_archivos(timbres, recibos):
 **---------------------------------------------------------------------------------------------**
 """
 
-
+#RECIBOS DE NOMINA
 @eel.expose
 def mostrar_rutas_recibos(directorio, anno, periodo):
     ruta_archivos = RutaRecibo(directorio, anno, periodo)
@@ -243,29 +235,19 @@ def leer_log_recibos_subidos():
     except:
         return[' ', False]
 
+#EMPLEADOS
 @eel.expose
-def guardar_empleados(ruta):   
-    datos = DatosEmpleados(ruta)
-    datos_empleados = datos.leer_datos_empleados()
+def mostrar_datos_empleados(ruta):   
 
-    opciones_param = leer_config_bd()   
-    ip = opciones_param['SERVER-HOST']
-    puerto = opciones_param['PUERTO']
-    usuario = opciones_param['USUARIO']
-    psw = opciones_param['PSWORD']
-    bd = opciones_param['BASE-DATOS']
+    empleados = DatosEmpleados(ruta)
+    datos = empleados.leer_datos_empleados()
+
+    return datos
+
+@eel.expose
+def subir_empleados(datos_empleados):   
     
-    for dato in datos_empleados:
-        registro = RegistroEmpleado(dato[0], dato[1], dato[2], dato[3])
-        query_empleado = registro.guardar()
-        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'empleados')
-        respuesta = conexion.enviar_datos(query_empleado)
-        conexion.cerrar_conexion()
-    
-
-
-    print('PROCESO TERMINADO')
-    return True
+   pass
 
 
 
@@ -446,6 +428,6 @@ try:
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
     pass
-file_data_user.close_temp()
+
 print("ventana cerrada")
 
