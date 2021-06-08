@@ -14,26 +14,19 @@ from modulos.periodos import armar_periodos_intermedios, armar_periodos
 from modulos.archivo import Archivo
 from modulos.log import Log
 
-
-from configuraciones import Configuracion
-from almacenar.registro import RegistroRecibo, RegistroEmpleado
-from almacenar.ayuda.recibo import PERIODOS, RutaRecibo
-from almacenar.empleado import DatosEmpleados
-
-
 from respaldar.reci_xml import TimbreCop, ReciboCop
 from respaldar.originales import ArchivoTimbre, ArchivoRecibo, ArchivosOrig
+
 from validacion.validacion import ArchivosPorValidar, ArchivosValidados
 
 from subir.cliente import Cliente
+from subir.empleado import DatosEmpleados
+from subir.recibo import RutaRecibo
 
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
 
-
 file_data_user = ArchivoTemp()
-
-
 @eel.expose    
 def leer_config_bd():
     opciones = Configuracion()
@@ -191,7 +184,7 @@ def validar_archivos(timbres, recibos):
 **---------------------------------------------------------------------------------------------**
 """
 
-
+#RECIBOS DE NOMINA
 @eel.expose
 def mostrar_rutas_recibos(directorio, anno, periodo):
     ruta_archivos = RutaRecibo(directorio, anno, periodo)
@@ -209,12 +202,13 @@ def guardar_mdatos_recibos(datos_archivos_pdf):
         token = user.get_token_user()
         
         for datos in datos_archivos_pdf:
+            control = int(datos[0].split('_')[0])
             datos_format = {
                 'archivo':datos[0],
                 'ruta':datos[-1],
                 'periodo':datos[1],
-                'nomina':[2],
-                'control':datos[0].split('_')[0]
+                'nomina':datos[2],
+                'control':str(control)
             }
             
 
@@ -243,32 +237,55 @@ def leer_log_recibos_subidos():
     except:
         return[' ', False]
 
+#EMPLEADOS
 @eel.expose
-def guardar_empleados(ruta):   
-    datos = DatosEmpleados(ruta)
-    datos_empleados = datos.leer_datos_empleados()
+def mostrar_datos_empleados(ruta):   
 
-    opciones_param = leer_config_bd()   
-    ip = opciones_param['SERVER-HOST']
-    puerto = opciones_param['PUERTO']
-    usuario = opciones_param['USUARIO']
-    psw = opciones_param['PSWORD']
-    bd = opciones_param['BASE-DATOS']
+    empleados = DatosEmpleados(ruta)
+    datos = empleados.leer_datos_empleados()
+
+    return datos
+
+@eel.expose
+def subir_datos_empleados(datos_empleados):   
+    data = file_data_user.get_data_user()
+
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+
+        for datos in datos_empleados:
+            datos_format = {
+                'control':datos[0],
+                'nombre':datos[1],
+                'ape_p':datos[2],
+                'ape_m':datos[3],
+            }
+            
+
+            cliente = Cliente(token[1])
+            cliente.enviar_datos_empleado(datos_format)
+
+        return ''
+    else:
+        return 'ERROR'
+
+@eel.expose
+def leer_log_empleados_subidos():
+    try:
+        log = Log('Log_Set_Empleados_Data.txt')   
+        errores = log.devolver_datos('ERROR')
+        if errores:
+            log.abrir_log()
+            return ['ERRORES', True]
+
+        else:
+            return [' ', True]
+    except FileNotFoundError:
+        return [' ', True]
     
-    for dato in datos_empleados:
-        registro = RegistroEmpleado(dato[0], dato[1], dato[2], dato[3])
-        query_empleado = registro.guardar()
-        conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'empleados')
-        respuesta = conexion.enviar_datos(query_empleado)
-        conexion.cerrar_conexion()
-    
-
-
-    print('PROCESO TERMINADO')
-    return True
-
-
-
+    except:
+        return[' ', False]
 
 """
 **---------------------------------------------------------------------------------------------**
@@ -446,6 +463,6 @@ try:
 
 except(SystemExit, MemoryError, KeyboardInterrupt):
     pass
-file_data_user.close_temp()
+
 print("ventana cerrada")
 

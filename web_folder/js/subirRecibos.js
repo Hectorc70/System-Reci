@@ -72,10 +72,17 @@ async function SubirDatosRecibos() {
         let fila = document.getElementById("fila" + i);
         let estiloFila = window.getComputedStyle(fila);
         let colorFila = estiloFila.getPropertyValue("background-color");
-        let ruta = fila.lastElementChild.innerHTML;
+       
 
         if (colorFila == "rgb(255, 136, 130)") {
-            datosRecibos.push(ruta);
+            let archivo = fila.childNodes[0].innerHTML;
+            let periodo = fila.childNodes[1].innerHTML;
+            let nomina = fila.childNodes[2].innerHTML;
+            let ruta = fila.childNodes[3].innerHTML;
+
+            let datos = [archivo, periodo,nomina, ruta];
+            
+            datosRecibos.push(datos);
         }
     }
 
