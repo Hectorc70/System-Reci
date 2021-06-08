@@ -1,11 +1,32 @@
-.red{
-    background-color: #eb9d97 !important;
-    border-bottom-color: #222121 !important;
-    border-bottom-style: solid;  
+#conte-tipos-busqueda{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-.ocultar-colum{
-    display: none;
-    visibility: hidden;
+
+.opcion-vista{
+    position: relative;
+    top: -30px;
+    width: 100px;
+    height: 30px;
+    text-decoration: none;
+    color: var(--color-texto);
+    background-color:var(--color-contenedor);
+    cursor: pointer;
+    font-family: 'Roboto-m';
+    font-size: 0.8rem;
+    padding-top: 2px;
+    text-align: center;
+}
+.opcion-vista:nth-child(2){
+    left: 10px;
+}
+
+.opcion-vista:hover{
+    background-color: var(--color-secundario);
 }
 
 
@@ -13,7 +34,10 @@
 
 
 
-/* BUSCADOR 2.0 */
+
+/* BUSCADOR 2.0 CONTROL*/
+
+
 
 #conte-buscador{
     position: relative;
@@ -21,22 +45,40 @@
 #parametros-busqueda{
     position: relative;
     display: block;
-    width: 400px;
-    height: 420px;
-
+    width: 420px;
+    height:480px;
+}
+#conte-opcion-param{
+    display: block;
+    height: 50%;
+    align-items: center;
 }
 
-
-
-#conte-control-buscador{
-    display: block;
+#buscador-por-nombre{
+    display: none;
+    align-items: center;
+    position: relative;
+    bottom: 0;
     width: 100%;
-    height: 50%;
+    height: 95%;
+    padding: 0px;
+    margin: 0px;
+}
+#buscador-por-nombre .inputs-b-name{
+    margin-top: 1px;
+    margin-bottom: 10px;
+}
+#buscador-por-control{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 95%;
     overflow: auto;
     padding: 0px;
     margin: 0px;
 }
-#conte-control-buscador .conte-input-dinamico{
+
+#conte-in-control .conte-input-dinamico{
     display: flex;
     align-items: center;
 }
@@ -167,3 +209,4 @@ btn-plus-campo{
     fill: var(--color-resalte);
 }
 
+/* BUSCADOR 2.0 Nombre*/

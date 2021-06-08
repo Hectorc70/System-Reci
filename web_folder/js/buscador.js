@@ -7,16 +7,14 @@ function AnimacionBuscador(){
 
     let cardParams = document.getElementById("parametros-busqueda");
     let vista = document.getElementById("vista-resultado");
-    window.hei
+
     cardParams.setAttribute('class', 'animate-move card-contenedor');
     cardParams.style.transform = 'translate(-30px,-570px);'
     vista.setAttribute('class', 'card-contenedor animate-move-r ');
 
 }
 
-function validarInputs() {
-    
-    let control = document.getElementsByName("control")[0].value;
+function validarInputsBuscador() {
     let periodoIni = document.getElementsByName("periodo-ini")[0].value;
     let annoIni = document.getElementsByName("anno-ini")[0].value;
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
@@ -24,21 +22,58 @@ function validarInputs() {
 
 
     if (periodoIni != '' && annoIni != '' && 
-        periodoFin != '' && annoFin != '' && 
-        control != '') {
-            deshabilitar("conte-buscador");
-            loader();
-        AnimacionBuscador();
-        
+        periodoFin != '' && annoFin != '') {
+        return true;
 
     }
+}
+function enviarControl() {
+    let control = document.getElementsByName("control")[0].value;
+    let paramsValidados = validarInputsBuscador()
+    if(control !='' && paramsValidados){
+        deshabilitar("conte-buscador");
+        loader();
+        AnimacionBuscador();
+    }
+    else{
+        Precaucion('Escriba un numero de control y seleccione periodo de\
+        Inicio Y de Fin');
 
-    else {
-        Precaucion('Debe proporcinar Numero de control \
-        e inicio y final');
     }
 }
 
+function enviarNombre() {
+    let nombre = document.getElementsByName("control")[0].value;
+    let apeP = document.getElementsByName("ape-p")[0].value;
+    let apeM = document.getElementsByName("ape-m")[0].value;
+    let paramsValidados = validarInputsBuscador()
+    
+    if(nombre !='' && apeP !='' &&
+    apeM !='' && paramsValidados){
+        deshabilitar("conte-buscador");
+        loader();
+        AnimacionBuscador();
+    }
+    else{
+        Precaucion('Llene todos los campos y seleccione periodo de\
+        Inicio Y de Fin');
+
+    }
+}
+
+async function enviarParametrosBusqueda(){
+    let tipoBusqueda = document.getElementById("buscador-por-control");
+    let estilo = window.getComputedStyle(tipoBusqueda);
+    let opacidad = estilo.getPropertyValue("opacity");
+
+    debugger;
+    if(opacidad == "1"){
+        enviarControl();
+    }
+    else{
+        enviarNombre();
+    }
+}
 
 /* mostrar datos RECIBOS */
 async function mostrarDatosRecibos() {
@@ -216,9 +251,9 @@ async function addCampo() {
     num = num +1;
     let numStr = num.toString();
 
-    let card = document.getElementById("conte-control-buscador");
+    let card = document.getElementById("conte-in-control");
     let divCampo = document.createElement("div");
-    divCampo.setAttribute("class", "conte-input-dinamico");
+    divCampo.setAttribute("class", "conte-input-dinamico in-buscar-control");
     divCampo.setAttribute("id", numStr);
 
     let inputControl = document.createElement("input");
@@ -250,8 +285,41 @@ async function addCampo() {
 }
 
 async function removeCampo(num){
-    let card = document.getElementById("conte-control-buscador");
+    let card = document.getElementById("conte-in-control");
     let campo = document.getElementById(num);
 
     card.removeChild(campo);
+}
+
+
+function cambiardeTipoBusqueda(idpest, idpestNoSelect, idMostrar, idNoMostrar) {
+    
+    let contenedorParams= document.getElementById(idMostrar);
+    let contenedorParamsNoMostrar = document.getElementById(idNoMostrar);
+
+    let pestSelect = document.getElementById(idpest);
+    let pestNoSelect = document.getElementById(idpestNoSelect);
+    contenedorParams.style.transform = 'translate(0px,0px)';
+    contenedorParams.style.display = 'block';
+    contenedorParams.style.opacity = '100%';
+    contenedorParams.style.width = '100%';
+    contenedorParams.style.height = '95%';
+    contenedorParams.style.transition = 'all 0.5s ease-in-out';
+    
+
+
+    contenedorParamsNoMostrar.display = 'none';
+    contenedorParamsNoMostrar.style.transform = 'translate(200px, 0px)';
+    contenedorParamsNoMostrar.style.width = '0px';
+    contenedorParamsNoMostrar.style.height = '0px';
+    contenedorParamsNoMostrar.style.opacity = '0%';
+    contenedorParamsNoMostrar.style.transition = 'all 0.5s ease-in-out';
+
+
+
+    pestSelect.style.backgroundColor = 'var(--color-secundario)';
+    pestSelect.style.borderTop = '3px solid var(--color-resalte)'
+    pestNoSelect.style.backgroundColor = 'var(--color-contenedor)';
+    pestNoSelect.style.borderTop = '3px solid var(--color-contenedor)';
+
 }

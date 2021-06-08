@@ -18,13 +18,18 @@
 
 <body>
     <section id="conte-buscador">
-
         <div id="parametros-busqueda" class="card-contenedor">
+            <div id="conte-tipos-busqueda">
+                <a id="pest-1" class="opcion-vista"
+                    onclick="cambiardeTipoBusqueda('pest-1', 'pest-2', 'buscador-por-control', 'buscador-por-nombre')">Control</a>
+                <a id="pest-2" class="opcion-vista"
+                    onclick="cambiardeTipoBusqueda('pest-2', 'pest-1', 'buscador-por-nombre', 'buscador-por-control')">Nombre</a>
+            </div>
+            <div style="height: 50px;"></div>
             <div class="title-section">
                 <h3>Buscador de Recibos</h3>
             </div>
             <hr>
-
             <div class="conte-titulo-fechas">
                 <label class="in-lbl">Inicio</label>
             </div>
@@ -34,7 +39,7 @@
             </div>
             <div id="conte-fechas-buscador">
                 <div class="conte-select">
-                    <select class="slt periodos" name="periodo-ini">
+                    <select class="parametro-in-obligatorio slt periodos" name="periodo-ini">
                         <option value=""></option>
                         <option value="01">01</option>
                         <option value="02">02</option>
@@ -71,7 +76,7 @@
 
                 <div class="conte-select">
 
-                    <select class="slt periodos" name="periodo-fin">
+                    <select class="parametro-in-obligatorio slt periodos" name="periodo-fin">
                         <option value=""></option>
                         <option value="01">01</option>
                         <option value="02">02</option>
@@ -106,24 +111,45 @@
                     </select>
                 </div>
             </div>
-            <label class="in-lbl" for="control">Numero de Control</label>
-            <div id="conte-control-buscador">
-                <div class="conte-input-dinamico">
-                    <input class="in-data in-control" type="text" name="control" maxlength="8">
-                    <a class="btn-plus-campo" onclick="addCampo()">
-                        <svg class="icono-plus-campo" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-                            <path class="borde" fill="#fcdab7"
-                                d="M8 1c3.9 0 7 3.1 7 7s-3.1 7-7 7-7-3.1-7-7 3.1-7 7-7zM8 0c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8v0z">
-                            </path>
-                            <path class="plus" fill="#fcdab7" d="M13 7h-4v-4h-2v4h-4v2h4v4h2v-4h4z"></path>
-                        </svg>
-                    </a>
+            <div id="conte-opcion-param">
+                <div id="buscador-por-control">
+                    <label class="in-lbl" for="control">Numero de Control</label>
+                    <div id="conte-in-control">
+                        <div class="conte-input-dinamico">
+                            <input class="parametro-in-obligatorio in-data in-control in-buscar-control" type="text" name="control" maxlength="8">
+                            <a class="btn-plus-campo" onclick="addCampo()">
+                                <svg class="icono-plus-campo" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"
+                                    viewBox="0 0 16 16">
+                                    <path class="borde" fill="#fcdab7"
+                                        d="M8 1c3.9 0 7 3.1 7 7s-3.1 7-7 7-7-3.1-7-7 3.1-7 7-7zM8 0c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8v0z">
+                                    </path>
+                                    <path class="plus" fill="#fcdab7" d="M13 7h-4v-4h-2v4h-4v2h4v4h2v-4h4z"></path>
+                                </svg>
+                            </a>
 
+                        </div>
+                    </div>
                 </div>
+                <div id="buscador-por-nombre">
+
+                    <div id="conte-nombre">
+                        <label class="in-lbl" for="control">Nombre</label>
+                        <input class="parametro-in-obligatorio in-data inputs-b-name" type="text" name="nombre">
+                    </div>
+                    <div id="conte-ape-p">
+                        <label class="in-lbl" for="ape-p">Apellido Paterno</label>
+                        <input class="parametro-in-obligatorio in-data inputs-b-name" type="text" name="ape-p">
+                    </div>
+                    <div id="conte-ape-m">
+                        <label class="in-lbl" for="ape-m">Apellido Materno</label>
+                        <input class="parametro-in-obligatorio in-data inputs-b-name" type="text" name="ape-m">
+                    </div>
+                </div>
+
             </div>
             <div id="conte-btn">
-                <button class="btn" type="button" onclick="validarInputs()">Buscar</button>
+                <button class="btn" type="button" onclick="enviarParametrosBusqueda()">Buscar</button>
             </div>
 
         </div>
