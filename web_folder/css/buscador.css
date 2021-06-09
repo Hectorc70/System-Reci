@@ -71,6 +71,7 @@
 #buscador-por-control{
     display: block;
     position: relative;
+    opacity: 100%;
     width: 100%;
     height: 95%;
     overflow: auto;
@@ -210,3 +211,8 @@ btn-plus-campo{
 }
 
 /* BUSCADOR 2.0 Nombre*/
+
+.colum-oculta{
+    display:block;
+    visibility: hidden;
+}
