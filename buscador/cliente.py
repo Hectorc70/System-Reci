@@ -60,8 +60,28 @@ class ClienteBuscador():
 
             return [ 0, '']
 
-    def recuperar_recibo(self):
-        pass
+    def recuperar_recibo(self, id_recibo):
+        
+        uri = 'api/recibo-file/{}'.format(id_recibo)
+        ur_full = '{0}/{1}'.format(self.base, uri)
+
+        headers = {'Authorization': 'Token {}'.format(self.token)}
+
+        try:
+            response = requests.get(ur_full, headers=headers)
+            resp = response.content
+
+            if response.status_code == 200:
+
+                return [response.status_code, resp]
+            
+            else:
+                return [response.status_code, str(resp)]
+
+        except:
+
+            return [ 0, '']
+
 
     def recuperar_datos_recibo(self, control, periodo):
         datos_busqueda = unir_cadenas('_',[control, periodo])

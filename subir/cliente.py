@@ -101,7 +101,7 @@ class Cliente():
                                             data
                                             ])
 
-                log = Log('Log_Set_Empleados_Data.txt')
+                log = Log('Log_Send_Empleados_Data.txt')
                 log.escribir_log('OK', cadena)
 
             else:
@@ -112,7 +112,7 @@ class Cliente():
                                             str(resp),
                                             data
                                             ])
-                log = Log('Log_Set_Empleados_Data.txt')
+                log = Log('Log_Send_Empleados_Data.txt')
                 log.escribir_log('ERROR', cadena)
 
         
@@ -123,7 +123,7 @@ class Cliente():
                                         datos_empleado['control']
                                         ])
             
-            log = Log('Log_Set_Empleados_Data.txt')
+            log = Log('Log_Send_Empleados_Data.txt')
             log.escribir_log('ERROR', cadena)
 
 

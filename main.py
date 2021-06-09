@@ -338,14 +338,6 @@ def comprobar_fechas(**kwargs):
 
 
 @eel.expose
-def abrir_recibo(ruta):
-
-
-    import os
-    os.startfile(ruta)
-
-
-@eel.expose
 def recuperar_por_nombre(nombre, ape_p, ape_m, periodo_i, anno_i, periodo_f, anno_f):
     data = file_data_user.get_data_user()
     periodos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
@@ -416,34 +408,23 @@ def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
 
 
 @eel.expose
-def recuperar_recibo(datos, control, periodo):
-    """llama al metodo que busca registros
-    en la base de datos pasando como parametro el id
-    del registro de la bd"""
+def recuperar_recibo(id_recibo):
+    """llama al metodo que retorna el recibo
+    de nomina con el id pasado como parametro
+    """
 
-    for dato_ruta in datos:
-        archivo = dato_ruta[1].split('/')[-1]
-        ruta_destino = ruta_guardado + '/' + dato_ruta[0] + '/' +archivo
-        nuevo_archivo = Archivo(dato_ruta[1], ruta_destino, copiar=True)
-        nuevo_archivo.comprobar_acciones()
+    data = file_data_user.get_data_user()
 
-    print('Archivos Guardados en: ' + ruta_guardado)
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+        cliente = ClienteBuscador(token[1])
 
-    """  import os
-    # Abre una carpeta del escritorio en el explorador.
-    
-    os.system(f'start {os.path.realpath(ruta_guardado)}') """
-    
-    return True
+        resp = cliente.recuperar_recibo(id_recibo)
 
+        if resp[0] == 200:
+            return resp
 
-@eel.expose
-def leer_txt(ruta):
-    txt = ArchivoTxt(ruta)
-    contenido = txt.leer()
-
-    print(contenido)
-    return contenido
 
 
 """

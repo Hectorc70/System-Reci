@@ -130,7 +130,7 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
             periodoIni, annoIni,
             periodoFin, annoFin)();
             
-        debugger;
+
         if (resp != 'ERROR') {
             mostrarDatosRecibos(resp);
             noLoader('conte-buscador');
@@ -180,7 +180,6 @@ async function enviarParametrosBusqueda() {
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
     let annoFin = document.getElementsByName("anno-fin")[0].value;
 
-    debugger;
     if (opacidad == "1") {
         enviarControl(periodoIni, annoIni, periodoFin, annoFin);
     }
@@ -193,14 +192,14 @@ async function enviarParametrosBusqueda() {
 async function mostrarDatosRecibos(datos) {
 
     let tablavista = document.getElementById("recibos-datos-buscador");
-    debugger;
+
     for (let i = 0; i < datos.length; i++) {
         let fila = document.createElement("a");
         let idFila = "fila" + i;
         fila.setAttribute("id", idFila);
         fila.setAttribute("class", "fila");
-        let funcion = `SeleccionarFilaTabla('${idFila}')`;
-        fila.setAttribute("onclick", funcion);
+        /* let funcion = `SeleccionarFilaTabla('${idFila}')`;
+        fila.setAttribute("onclick", funcion); */
 
         let celdaId = document.createElement("div");
         celdaId.setAttribute("class", "cell colum-oculta");
@@ -221,12 +220,15 @@ async function mostrarDatosRecibos(datos) {
         celdaNomina.innerHTML = datos[i][3];
 
         let celdaVer = document.createElement("a");
+        let funcionVer = `verRecibo('${datos[i][0]}')`;
         celdaVer.setAttribute("class", "cell-con-icono");
-        celdaVer.setAttribute("onclick", "cell-con-icono");
+        celdaVer.setAttribute("onclick", funcionVer);
         celdaVer.innerHTML = iconVer;
         
         let celdaDescargar = document.createElement("a");
+        let funcionDescargar = `descargarRecibo('${datos[i][0]}')`;
         celdaDescargar.setAttribute("class", "cell-con-icono");
+        celdaDescargar.setAttribute("onclick", funcionDescargar);
         celdaDescargar.innerHTML = iconDownload;
 
         tablavista.appendChild(fila);
@@ -245,80 +247,14 @@ async function mostrarDatosRecibos(datos) {
 
 
 
-async function abrirReciboExt(clase) {
 
-    let filaRuta = document.getElementById(clase);
-    let ruta = filaRuta.innerText
 
-    let verReci = await eel.abrir_recibo(ruta)();
+/*  UTULIDADES DE RECIBOS*/
+async function descargarRecibo(){
 
 }
 
 
-/* FUNCIONES QUE EJECUTAN EL PROCESO DE EXTRACCION */
-async function EnviarDatosExtraccion() {
-
-    let rutaGuardado = document.getElementsByName("ruta-guardado")[0].value;
-    let control = document.getElementsByName("control")[0].value;
-    let recibos = [];
-    let filaControl = document.getElementsByClassName("cl-ctrl");
-
-    for (let i = 0; i < filaControl.length; i++) {
-        let checkBox = filaControl[i].getElementsByClassName("c-box");
-        if (checkBox[0].checked == true) {
-
-            let filaRuta = document.getElementsByClassName("ruta-recibo")[i].innerText;
-
-            let datos = [];
-            datos = [filaControl[i].innerText, filaRuta]
-            recibos.push(datos);
-        }
-    }
-
-
-    if (rutaGuardado != '' & recibos.length > 0) {
-        deshabilitar('principal');
-        loader_tarea();
-        let reci = await eel.recuperar_recibos(recibos, rutaGuardado)();
-        if (reci == true) {
-            habilitar('principal');
-            satisfactorio("Se Guardaron todos los Recibos en: " + rutaGuardado + "/" + control)
-        }
-    }
-
-    else {
-        Precaucion("Seleccione ruta de guardado, Y Recibo(s) para extraer");
-    }
-
-}
-
-async function buscarVariosEmpleados() {
-    let ruta = document.getElementsByName("ruta-masivo")[0].value;
-    let controles = await eel.leer_txt(ruta)();
-    const controlNum = Object.getOwnPropertyNames(controles);
-
-    for (let i = 1; i < controlNum.length; i++) {
-        document.getElementsByName("control")[0].value = controles[i - 1];
-        mostrarDatosRecibos();
-    }
-    document.getElementsByName("control")[0].value = '';
-
-}
-
-
-async function verRecibo() {
-    let visualizador = document.getElementById("overlay");
-    visualizador.removeAttribute("class");
-    deshabilitar("menu")
-}
-
-async function salirVerRecibo() {
-    let visualizador = document.getElementById("overlay");
-    visualizador.setAttribute("class", "no-mostrar")
-    habilitarElemento("menu")
-}
-
-let num = 1;
 async function addCampo() {
 
     num = num + 1;
@@ -399,3 +335,33 @@ function cambiardeTipoBusqueda(idpest, idpestNoSelect, idMostrar, idNoMostrar) {
 
 
 
+
+
+/* VISOR DE RECIBO */
+
+async function verRecibo(idRecibo){
+    let resp = await eel.recuperar_recibo(idRecibo)();
+    debugger;
+
+    if (resp[0]==200){
+        animacionVisor();
+
+    }
+
+    else{
+        erro('No se puede ver el recibo');
+    }
+
+}
+
+
+function animacionVisor(){
+    let visor = document.getElementById('conte-view-recibo')
+
+    visor.style.display = "block";
+    visor.style.visibility = "visible";
+    visor.style.transition = 'all 0.5s ease-in-out';
+    visor.style.width = '60%';
+    visor.style.height = '80%';
+
+}
