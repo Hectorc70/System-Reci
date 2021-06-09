@@ -377,7 +377,7 @@ def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
                 id_recibo = datos_recibos['id_recibo']
                 control = datos_recibos['no_control']
                 periodo = datos_recibos['periodo']
-                nomina = datos_recibos['no_control']
+                nomina = datos_recibos['tipo_nomina']
 
                 return [id_recibo, control, periodo, nomina]
             

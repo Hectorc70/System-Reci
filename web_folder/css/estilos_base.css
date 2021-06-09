@@ -370,7 +370,6 @@ input:focus{
     font-size: 1.0rem;
     color: var(--color-texto);
     height: 20px;
-    cursor: default;
     width: 20%;
     padding-left: 15px;
     cursor: pointer;

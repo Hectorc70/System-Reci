@@ -3,6 +3,95 @@
 
 
 
+/* ICONOS */
+let iconDownload = '<svg class="icon-opcion-buscador" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\
+viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">\
+<g>\
+<g>\
+   <path d="M412.907,214.08C398.4,140.693,333.653,85.333,256,85.333c-61.653,0-115.093,34.987-141.867,86.08\
+       C50.027,178.347,0,232.64,0,298.667c0,70.72,57.28,128,128,128h277.333C464.213,426.667,512,378.88,512,320\
+       C512,263.68,468.16,218.027,412.907,214.08z M256,384L149.333,277.333h64V192h85.333v85.333h64L256,384z"/>\
+</g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+</svg>'
+
+let iconVer = '<svg class="icon-opcion-buscador" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\
+viewBox="0 0 469.333 469.333" style="enable-background:new 0 0 469.333 469.333;" xml:space="preserve">\
+<g>\
+<g>\
+   <g>\
+       <path d="M234.667,170.667c-35.307,0-64,28.693-64,64s28.693,64,64,64s64-28.693,64-64S269.973,170.667,234.667,170.667z"/>\
+       <path d="M234.667,74.667C128,74.667,36.907,141.013,0,234.667c36.907,93.653,128,160,234.667,160\
+           c106.773,0,197.76-66.347,234.667-160C432.427,141.013,341.44,74.667,234.667,74.667z M234.667,341.333\
+           c-58.88,0-106.667-47.787-106.667-106.667S175.787,128,234.667,128s106.667,47.787,106.667,106.667\
+           S293.547,341.333,234.667,341.333z"/>\
+   </g>\
+</g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+<g>\
+</g>\
+</svg>'
+
+/* FUNCIONES */
+
 function AnimacionBuscador() {
 
     let cardParams = document.getElementById("parametros-busqueda");
@@ -36,12 +125,16 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
         deshabilitar("conte-buscador");
         loader("conte-buscador");
         AnimacionBuscador();
+        
         let resp = await eel.recuperar_por_control(control,
             periodoIni, annoIni,
             periodoFin, annoFin)();
-
+            
+        debugger;
         if (resp != 'ERROR') {
-            resp
+            mostrarDatosRecibos(resp);
+            noLoader('conte-buscador');
+            habilitar('conte-buscador');
         }
         else {
             noLoader('conte-buscador');
@@ -106,8 +199,10 @@ async function mostrarDatosRecibos(datos) {
         let idFila = "fila" + i;
         fila.setAttribute("id", idFila);
         fila.setAttribute("class", "fila");
+        let funcion = `SeleccionarFilaTabla('${idFila}')`;
+        fila.setAttribute("onclick", funcion);
 
-        let celdaId = document.createElement("a");
+        let celdaId = document.createElement("div");
         celdaId.setAttribute("class", "cell colum-oculta");
         celdaId.innerHTML = datos[i][0];
 
@@ -118,17 +213,29 @@ async function mostrarDatosRecibos(datos) {
 
         let celdaPeriodo = document.createElement("div");
         celdaPeriodo.setAttribute("class", "cell");
-        celdaPeriodo.innerHTML = datos[i][2];;
+        celdaPeriodo.innerHTML = datos[i][2];
+
 
         let celdaNomina = document.createElement("div");
         celdaNomina.setAttribute("class", "cell");
-        celdaNomina.innerHTML = datos[i][3];;
+        celdaNomina.innerHTML = datos[i][3];
+
+        let celdaVer = document.createElement("a");
+        celdaVer.setAttribute("class", "cell-con-icono");
+        celdaVer.setAttribute("onclick", "cell-con-icono");
+        celdaVer.innerHTML = iconVer;
+        
+        let celdaDescargar = document.createElement("a");
+        celdaDescargar.setAttribute("class", "cell-con-icono");
+        celdaDescargar.innerHTML = iconDownload;
 
         tablavista.appendChild(fila);
         fila.appendChild(celdaId);
         fila.appendChild(celdaControl);
         fila.appendChild(celdaPeriodo);
         fila.appendChild(celdaNomina);
+        fila.appendChild(celdaDescargar);
+        fila.appendChild(celdaVer);
 
     }
 
@@ -289,3 +396,6 @@ function cambiardeTipoBusqueda(idpest, idpestNoSelect, idMostrar, idNoMostrar) {
     pestNoSelect.style.borderTop = '3px solid var(--color-contenedor)';
 
 }
+
+
+

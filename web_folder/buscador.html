@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Reci - Version 4.0.0</title>
     <link rel="stylesheet" type=text/css href="css/estilos_base.css">
-    <link rel="stylesheet" type=text/css href="css/buscador.css">
     <link rel="stylesheet" type=text/css href="css/loaders.css">
+    <link rel="stylesheet" type=text/css href="css/buscador.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="js/alertas.js"></script>
@@ -116,7 +116,8 @@
                     <label class="in-lbl" for="control">Numero de Control</label>
                     <div id="conte-in-control">
                         <div class="conte-input-dinamico">
-                            <input class="parametro-in-obligatorio in-data in-control in-buscar-control" type="text" name="control" maxlength="8">
+                            <input class="parametro-in-obligatorio in-data in-control in-buscar-control" type="text"
+                                name="control" maxlength="8">
                             <a class="btn-plus-campo" onclick="addCampo()">
                                 <svg class="icono-plus-campo" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"
@@ -162,27 +163,32 @@
             <hr>
 
             <div id="tabla-resultados">
-                <div id="conte-opciones-vista-tabla">
-                    <div id="titulos-tabla">
-                        <div class="titulo-tabla colum-oculta">
-                            id
-                        </div>
-                        <div class="titulo-tabla">
-                            Control
-                        </div>
-                        <div class="titulo-tabla">Nomina</div>
-                        <div class="titulo-tabla">Periodo</div>
-                        <div class="titulo-tabla">
-                            Descargar
-                        </div>
-                        <div class="titulo-tabla">Visualizar</div>
+                <div id="titulos-tabla">
+                    <div class="titulo-tabla colum-oculta">
+                        id
                     </div>
+                    <div class="titulo-tabla">
+                        Control
+                    </div>
+                    <div class="titulo-tabla">Periodo</div>
+                    <div class="titulo-tabla">Nomina</div>
+                    <div class="titulo-tabla">
+                        Descargar
+                    </div>
+                    <div class="titulo-tabla">Visualizar</div>
                 </div>
                 <!-- DATOS DE LOS RECIBOS DE NOMINA -->
-                <div id="cuerpo-tabla" id="recibos-datos-buscador">
+                <div class="cuerpo-tabla" id="recibos-datos-buscador">
 
                 </div>
 
+
+            </div>
+            <div class="conte-acciones">
+                <button class="accion btn btn-grande" onclick="SeleccionarTodoTablaRespaldar('fila')">Seleccionar
+                    Todo</button>
+                <button class="accion btn btn-grande" onclick="cancelarVistaTbl()">Cancelar</button>
+                <button class="accion btn btn-grande" onclick="">Copiar</button>
 
             </div>
         </div>

@@ -192,14 +192,12 @@ btn-plus-campo{
     opacity: 10%;
 }
 
-
+/* 
 .cell:nth-child(4){
-    text-align: center !important;
-    align-items: center !important;
-}
+    
+} */
 
 .icon-opcion-buscador{
-
     display: block;
     text-align: center;
     width: 100%;
@@ -210,9 +208,18 @@ btn-plus-campo{
     fill: var(--color-resalte);
 }
 
+.cell-con-icono{
+    display: flex;
+    text-align: center;
+    align-items: center; 
+    cursor: pointer;
+    height: 20px;
+    width: 20%;
+    padding: 0px;
+}
 /* BUSCADOR 2.0 Nombre*/
 
 .colum-oculta{
-    display:block;
+    display:none;
     visibility: hidden;
 }
