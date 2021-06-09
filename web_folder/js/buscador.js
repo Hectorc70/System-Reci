@@ -125,11 +125,11 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
         deshabilitar("conte-buscador");
         loader("conte-buscador");
         AnimacionBuscador();
-        
+
         let resp = await eel.recuperar_por_control(control,
             periodoIni, annoIni,
             periodoFin, annoFin)();
-            
+
 
         if (resp != 'ERROR') {
             mostrarDatosRecibos(resp);
@@ -208,7 +208,7 @@ async function mostrarDatosRecibos(datos) {
         let celdaControl = document.createElement("div");
         celdaControl.setAttribute("class", "cell");
         celdaControl.innerHTML = datos[i][1];
-        
+
 
         let celdaPeriodo = document.createElement("div");
         celdaPeriodo.setAttribute("class", "cell");
@@ -224,7 +224,7 @@ async function mostrarDatosRecibos(datos) {
         celdaVer.setAttribute("class", "cell-con-icono");
         celdaVer.setAttribute("onclick", funcionVer);
         celdaVer.innerHTML = iconVer;
-        
+
         let celdaDescargar = document.createElement("a");
         let funcionDescargar = `descargarRecibo('${datos[i][0]}')`;
         celdaDescargar.setAttribute("class", "cell-con-icono");
@@ -250,7 +250,7 @@ async function mostrarDatosRecibos(datos) {
 
 
 /*  UTULIDADES DE RECIBOS*/
-async function descargarRecibo(){
+async function descargarRecibo() {
 
 }
 
@@ -339,29 +339,65 @@ function cambiardeTipoBusqueda(idpest, idpestNoSelect, idMostrar, idNoMostrar) {
 
 /* VISOR DE RECIBO */
 
-async function verRecibo(idRecibo){
+async function verRecibo(idRecibo) {
     let resp = await eel.recuperar_recibo(idRecibo)();
     debugger;
 
-    if (resp[0]==200){
-        animacionVisor();
+    if (resp[0] == 200) {
+        animacionVisor(resp[1]);
+
 
     }
 
-    else{
+    else {
         erro('No se puede ver el recibo');
     }
 
 }
 
 
-function animacionVisor(){
+function animacionVisor(archivo) {
+    
     let visor = document.getElementById('conte-view-recibo')
+    let btn = document.getElementById('btn-cerrar')
+    let visorRecibo = document.getElementById('visor')
 
     visor.style.display = "block";
     visor.style.visibility = "visible";
     visor.style.transition = 'all 0.5s ease-in-out';
-    visor.style.width = '60%';
-    visor.style.height = '80%';
+    visor.style.width = '50%';
+    visor.style.height = '90%';
 
+    btn.style.display = 'flex';
+    debugger;
+    let ArchivoDecode =  b64EncodeUnicode(archivo)
+    let data = 'data:application/pdf;base64,' + [archivo];
+    let obj = document.createElement('embed');
+    obj.setAttribute("width","100%")
+    obj.setAttribute("height","100%")
+    obj.setAttribute("type","application/pdf")
+    obj.setAttribute("src", data)
+
+    /* obj.style.width = '100%';
+    obj.style.height = '100%'; 
+    obj.type = 'application/pdf';
+    */
+    visorRecibo.appendChild(obj);
+
+
+}
+
+async function cerrarVisor(){
+    let visor = document.getElementById('conte-view-recibo')
+    let btn = document.getElementById('btn-cerrar')
+    
+    
+    visor.style.width = '0px';
+    visor.style.height = '0px';
+    visor.style.transition = 'all 0.5s ease-in-out';
+    setTimeout(1000);
+    visor.style.display = "none";
+    visor.style.visibility = "visible";
+
+    btn.style.display = 'none';
 }

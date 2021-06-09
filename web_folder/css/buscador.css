@@ -230,11 +230,45 @@ btn-plus-campo{
     visibility: visible;
     position: fixed;
     z-index: 2;
-    width: 80%;
-    height: 90%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color:chartreuse;
+    width: 0px;
+    height: 0px;
+    top:40px;
+    left: 25%;
+    background-color:var(--color-contenedor);
+    opacity: 70%;
+}
+
+#conte-btn-cerrar{
+    width: 100%;
+    height: 30px;
+}
+
+#btn-cerrar{
+    display: none;
+    padding: 0px;
+    margin: 0px;
+    align-items: center;
+    justify-items: center;
+    vertical-align: middle;
+    float: right;
+    cursor: pointer;
+    
+}
+#btn-cerrar:hover{
+    background-color: #641818;
+}
+
+
+#btn-cerrar p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    color: white;
 }

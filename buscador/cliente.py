@@ -69,13 +69,13 @@ class ClienteBuscador():
 
         try:
             response = requests.get(ur_full, headers=headers)
-            resp = response.content
-
+            
             if response.status_code == 200:
-
-                return [response.status_code, resp]
+                resp = response.text
+                return [response.status_code, str(resp)]
             
             else:
+                resp = response.content
                 return [response.status_code, str(resp)]
 
         except:
