@@ -1,11 +1,32 @@
-.red{
-    background-color: #eb9d97 !important;
-    border-bottom-color: #222121 !important;
-    border-bottom-style: solid;  
+#conte-tipos-busqueda{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-.ocultar-colum{
-    display: none;
-    visibility: hidden;
+
+.opcion-vista{
+    position: relative;
+    top: -30px;
+    width: 100px;
+    height: 30px;
+    text-decoration: none;
+    color: var(--color-texto);
+    background-color:var(--color-contenedor);
+    cursor: pointer;
+    font-family: 'Roboto-m';
+    font-size: 0.8rem;
+    padding-top: 2px;
+    text-align: center;
+}
+.opcion-vista:nth-child(2){
+    left: 10px;
+}
+
+.opcion-vista:hover{
+    background-color: var(--color-secundario);
 }
 
 
@@ -13,7 +34,10 @@
 
 
 
-/* BUSCADOR 2.0 */
+
+/* BUSCADOR 2.0 CONTROL*/
+
+
 
 #conte-buscador{
     position: relative;
@@ -21,22 +45,41 @@
 #parametros-busqueda{
     position: relative;
     display: block;
-    width: 400px;
-    height: 420px;
-
+    width: 420px;
+    height:480px;
+}
+#conte-opcion-param{
+    display: block;
+    height: 50%;
+    align-items: center;
 }
 
-
-
-#conte-control-buscador{
-    display: block;
+#buscador-por-nombre{
+    display: none;
+    align-items: center;
+    position: relative;
+    bottom: 0;
     width: 100%;
-    height: 50%;
+    height: 95%;
+    padding: 0px;
+    margin: 0px;
+}
+#buscador-por-nombre .inputs-b-name{
+    margin-top: 1px;
+    margin-bottom: 10px;
+}
+#buscador-por-control{
+    display: block;
+    position: relative;
+    opacity: 100%;
+    width: 100%;
+    height: 95%;
     overflow: auto;
     padding: 0px;
     margin: 0px;
 }
-#conte-control-buscador .conte-input-dinamico{
+
+#conte-in-control .conte-input-dinamico{
     display: flex;
     align-items: center;
 }
@@ -149,14 +192,12 @@ btn-plus-campo{
     opacity: 10%;
 }
 
-
+/* 
 .cell:nth-child(4){
-    text-align: center !important;
-    align-items: center !important;
-}
+    
+} */
 
 .icon-opcion-buscador{
-
     display: block;
     text-align: center;
     width: 100%;
@@ -167,3 +208,67 @@ btn-plus-campo{
     fill: var(--color-resalte);
 }
 
+.cell-con-icono{
+    display: flex;
+    text-align: center;
+    align-items: center; 
+    cursor: pointer;
+    height: 20px;
+    width: 20%;
+    padding: 0px;
+}
+/* BUSCADOR 2.0 Nombre*/
+
+.colum-oculta{
+    display:none;
+    visibility: hidden;
+}
+
+/* VISOR DE RECIBO */
+#conte-view-recibo{
+    display: block;
+    visibility: visible;
+    position: fixed;
+    z-index: 2;
+    width: 0px;
+    height: 0px;
+    top:40px;
+    left: 25%;
+    background-color:var(--color-contenedor);
+    opacity: 70%;
+}
+
+#conte-btn-cerrar{
+    width: 100%;
+    height: 30px;
+}
+
+#btn-cerrar{
+    display: none;
+    padding: 0px;
+    margin: 0px;
+    align-items: center;
+    justify-items: center;
+    vertical-align: middle;
+    float: right;
+    cursor: pointer;
+    
+}
+#btn-cerrar:hover{
+    background-color: #641818;
+}
+
+
+#btn-cerrar p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    color: white;
+}

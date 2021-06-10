@@ -23,6 +23,9 @@ from subir.cliente import Cliente
 from subir.empleado import DatosEmpleados
 from subir.recibo import RutaRecibo
 
+from buscador.cliente import ClienteBuscador
+
+
 from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
 
@@ -294,25 +297,12 @@ def leer_log_empleados_subidos():
 """
 
 
-@eel.expose
-def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, anno_f):
-    """ Devuelve todos los datos encontrados de acuerdo a los parametros
-    pasados
-    """
+
     
-    opciones_param = leer_config_bd()
 
-    ip = opciones_param['SERVER-HOST']
-    puerto = opciones_param['PUERTO']
-    usuario = opciones_param['USUARIO']
-    psw = opciones_param['PSWORD']
-    bd = opciones_param['BASE-DATOS']
-
-    def comprobar_fechas(**kwargs):
+def comprobar_fechas(**kwargs):
         """Busca recibos de los periodos
         indicados pasados como parametros"""
-
-        periodos_por_buscar = list()
 
         if kwargs['anno_inicial'] == kwargs['anno_final']:
 
@@ -345,98 +335,96 @@ def mostrar_datos_encontrados(control, nombre, periodo_i, anno_i, periodo_f, ann
             return [periodos_ini, periodos_interm, periodos_finales]
 
 
-    def convertir_datos(datos_encontrados):
 
-        datos_format = list()  
 
-        for registros in datos_encontrados:    
-            if ',' in registros:
-                registros_datos = registros.split(',')
-
-                for datos_r in registros_datos:
-                    datos = datos_r.split('|')
-
-                    datos_format.append(datos)
-            if ',' not in registros:
-                datos = registros.split('|')
-                datos_format.append(datos)
-
-                
-        return datos_format
-
-    if control != '':
-        annos_periodos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
+@eel.expose
+def recuperar_por_nombre(nombre, ape_p, ape_m, periodo_i, anno_i, periodo_f, anno_f):
+    data = file_data_user.get_data_user()
+    periodos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
                         periodo_final=periodo_f, anno_final=anno_f)
 
-        campos = "empleados.NoControl, recibos.Periodo, recibos.TipoNomina, recibos.IdRecibo, recibos.RutaArchivo"
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+
         
-        datos_encontrados = list()
-        for anno_per in annos_periodos:
-            for anno , periodos in anno_per.items():
-                for periodo in periodos: 
-                    conexion = Cliente(ip, int(puerto), usuario, psw, bd, 'empleados')                   
-                    condiciones = "ON empleados.NoControl = recibos.NoControl WHERE empleados.NoControl = '{}' AND recibos.Periodo='{}'".format(control, periodo)
-                    empleado = RegistroEmpleado(control,'','','')
-                    query_consulta = empleado.consultar(campos, condiciones)                   
-                    respuesta = conexion.enviar_datos(query_consulta)
-                    conexion.cerrar_conexion()
-                    
-                    if respuesta != '':                        
-                        datos_encontrados.append(respuesta)
+        cliente  = ClienteBuscador(token)
+        control = cliente.recuperar_control()
+    
+    if control:
+        for periodo in periodos:
 
-                    else:
-                        continue
+
+            pass
+
+
+
+@eel.expose
+def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
+    def formatear_datos(periodos_datos_recibos):
         
-        if datos_encontrados:
-            datos = convertir_datos(datos_encontrados)
-            return datos
-        else:
-            return False
+        for datos_recibos in periodos_datos_recibos:
 
+            for keys in datos_recibos.keys():
+                id_recibo = datos_recibos['id_recibo']
+                control = datos_recibos['no_control']
+                periodo = datos_recibos['periodo']
+                nomina = datos_recibos['tipo_nomina']
 
-    elif control =='':
-        pass
-
-
-@eel.expose
-def abrir_recibo(ruta):
-
-
-    import os
-    os.startfile(ruta)
-
-
-
-
-@eel.expose
-def recuperar_recibos(datos, ruta_guardado):
-    """llama al metodo que busca registros
-    en la base de datos pasando como parametro el id
-    del registro de la bd"""
-
-    for dato_ruta in datos:
-        archivo = dato_ruta[1].split('/')[-1]
-        ruta_destino = ruta_guardado + '/' + dato_ruta[0] + '/' +archivo
-        nuevo_archivo = Archivo(dato_ruta[1], ruta_destino, copiar=True)
-        nuevo_archivo.comprobar_acciones()
-
-    print('Archivos Guardados en: ' + ruta_guardado)
-
-    """  import os
-    # Abre una carpeta del escritorio en el explorador.
+                return [id_recibo, control, periodo, nomina]
+            
     
-    os.system(f'start {os.path.realpath(ruta_guardado)}') """
     
-    return True
+    
+    
+    
+    data = file_data_user.get_data_user()
+    annos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
+                        periodo_final=periodo_f, anno_final=anno_f)
+
+
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+        cliente = ClienteBuscador(token[1])
+
+
+        datos_recuperados = list()
+        for anno in annos:
+            for periodos in anno.values():
+                for periodo in periodos:
+                    resp = cliente.recuperar_datos_recibo(control, periodo)
+                    if resp[0] ==200:
+                        datos_format = formatear_datos(resp[1])
+                        datos_recuperados.append(datos_format)
+
+        return datos_recuperados
+
+    else:
+        return 'ERROR'
+
+
+
 
 
 @eel.expose
-def leer_txt(ruta):
-    txt = ArchivoTxt(ruta)
-    contenido = txt.leer()
+def recuperar_recibo(id_recibo):
+    """llama al metodo que retorna el recibo
+    de nomina con el id pasado como parametro
+    """
 
-    print(contenido)
-    return contenido
+    data = file_data_user.get_data_user()
+
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+        cliente = ClienteBuscador(token[1])
+
+        resp = cliente.recuperar_recibo(id_recibo)
+
+        if resp[0] == 200:
+            return resp
+
 
 
 """

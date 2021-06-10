@@ -24,7 +24,6 @@ class ArchivoTxt:
 		
 		archivo_r.close() 
 		
-		print("leido y escrita la INFO")
 
 	def leer(self, lineas = True):
 		conte_txt = list()
