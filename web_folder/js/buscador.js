@@ -130,8 +130,8 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
             periodoIni, annoIni,
             periodoFin, annoFin)();
 
-
-        if (resp != 'ERROR') {
+        debugger;
+        if (resp.length > 0) {
             mostrarDatosRecibos(resp);
             noLoader('conte-buscador');
             habilitar('conte-buscador');
@@ -139,9 +139,10 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
         else {
             noLoader('conte-buscador');
             habilitar('conte-buscador');
-            error('No se pudo realizar la Tarea \
-                    reinicie la aplicacion \
-                    e Inicie Sesion nuevamente')
+            error('Posibles Causas. \n \
+                    -Datos no encontrados\n \
+                    -Servidor no disponible \n \
+                    -contacte a Soporte')
 
         }
     }

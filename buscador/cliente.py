@@ -80,7 +80,7 @@ class ClienteBuscador():
 
         except:
 
-            return [ 0, '']
+            return [ 0, str(sys.exc_info()[1])]
 
 
     def recuperar_datos_recibo(self, control, periodo):

@@ -30,18 +30,6 @@ from herramientas.directorio import Directorio
 eel.init('web_folder', allowed_extensions=['.js', '.html'])
 
 file_data_user = ArchivoTemp()
-@eel.expose    
-def leer_config_bd():
-    opciones = Configuracion()
-    opciones_param = opciones.cargar_opciones()
-
-    if opciones_param:       
-
-        return opciones_param
-
-    else: 
-        print("No existen configuraciones")
-
 
 
 
@@ -226,7 +214,7 @@ def guardar_mdatos_recibos(datos_archivos_pdf):
 @eel.expose
 def leer_log_recibos_subidos():
     try:
-        log = Log('Log_Set_Recibos_Data.txt')   
+        log = Log('Log_Send_Recibos_Data.txt')   
         errores = log.devolver_datos('ERROR')
         if errores:
             log.abrir_log()
@@ -276,7 +264,7 @@ def subir_datos_empleados(datos_empleados):
 @eel.expose
 def leer_log_empleados_subidos():
     try:
-        log = Log('Log_Set_Empleados_Data.txt')   
+        log = Log('Log_Send_Empleados_Data.txt')   
         errores = log.devolver_datos('ERROR')
         if errores:
             log.abrir_log()
@@ -397,6 +385,9 @@ def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
                     if resp[0] ==200:
                         datos_format = formatear_datos(resp[1])
                         datos_recuperados.append(datos_format)
+    
+
+                    
 
         return datos_recuperados
 

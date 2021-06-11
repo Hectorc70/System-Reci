@@ -40,21 +40,20 @@ class Cliente():
             resp = response.json()
 
             if response.status_code == 200 or response.status_code == 201:
-                response_token = resp['token']
                 
                 cadena = unir_cadenas('|', [str(response.status_code), 
-                                            str(response_token),
                                             datos_recibo['ruta']
                                             ])
-                log = Log('Log_Set_Recibos_Data.txt')
+                log = Log('Log_Send_Recibos_Data.txt')
                 log.escribir_log('OK', cadena)
 
             else:
+
                 cadena = unir_cadenas('|', [str(response.status_code), 
                                             str(resp),
                                             datos_recibo['ruta']
                                             ])
-                log = Log('Log_Set_Recibos_Data.txt')
+                log = Log('Log_Send_Recibos_Data.txt')
                 log.escribir_log('ERROR', cadena)
 
         
@@ -65,11 +64,9 @@ class Cliente():
                                         datos_recibo['ruta']
                                         ])
             
-            log = Log('Log_Set_Recibos_Data.txt')
+            log = Log('Log_Send_Recibos_Data.txt')
             log.escribir_log('ERROR', cadena)
 
-
-            return [ 0, ]
 
     
     def enviar_datos_empleado(self, datos_empleado):
