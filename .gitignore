@@ -10,3 +10,5 @@ docs_pruebas/
 *.txt
 
 logs/xvba_debug.log
+
+*.pdf

@@ -370,19 +370,25 @@ function animacionVisor(archivo) {
     visor.style.height = '90%';
 
     btn.style.display = 'flex';
-    debugger;
-    let ArchivoDecode =  b64EncodeUnicode(archivo)
-    let data = 'data:application/pdf;base64,' + [archivo];
+    /* let data = 'data:application/pdf;base64,' + [archivo]; */
+    /* let data = 'web_folder/03149921_00041_20210527.pdf'
     let obj = document.createElement('embed');
     obj.setAttribute("width","100%")
     obj.setAttribute("height","100%")
-    obj.setAttribute("type","application/pdf")
     obj.setAttribute("src", data)
+    obj.setAttribute("type","application/pdf") */
 
     /* obj.style.width = '100%';
     obj.style.height = '100%'; 
     obj.type = 'application/pdf';
     */
+
+    let obj = document.createElement('object');
+    obj.style.width = '100%';
+    obj.style.height = '842pt';
+    obj.type = 'application/pdf';
+    /* obj.data = '03149921_00041_20210527.pdf'; */
+    obj.data = "data:application/pdf;base64, " + [archivo.slice(1,archivo.length-1)];
     visorRecibo.appendChild(obj);
 
 

@@ -1,5 +1,6 @@
 import requests
 import sys
+import base64
 
 from modulos.rutas import unir_cadenas
 from modulos.log import Log
@@ -71,8 +72,10 @@ class ClienteBuscador():
             response = requests.get(ur_full, headers=headers)
             
             if response.status_code == 200:
+                resp_decode = base64.b64decode(response.content)
+
                 resp = response.text
-                return [response.status_code, str(resp)]
+                return [response.status_code, resp]
             
             else:
                 resp = response.content
