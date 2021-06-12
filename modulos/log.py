@@ -6,7 +6,7 @@ from modulos.fechas import RangoFechas
 
 class Log(ArchivoTxt):
 
-    def __init_(self, nombre):
+    def __init__(self, nombre):
         self.ruta_actual = (getcwd())
         self.nombre = nombre
         self.ruta_completa = self.ruta_actual + '\\' + nombre

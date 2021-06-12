@@ -24,22 +24,24 @@ class ArchivoTemp():
         token = self.f.encrypt(data.encode())
         archivo = open(self.archivo, 'w')
         archivo.write(token.decode())
-
+        archivo.close()
     def get_data_user(self):
         """Retorna lista con control y password"""
         try:
             archivo = open(self.archivo, 'r')
             data = archivo.read()
+            
             data_decry = self.f.decrypt(data.encode()).decode()
             data = data_decry.split('|')
+
+
+            archivo.close()
             return data
         
         except:
             return []
 
 
-    def close_temp(self):
-        self.temp.close()
 
 
 class User():

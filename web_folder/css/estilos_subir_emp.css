@@ -1,0 +1,29 @@
+
+
+#conte-subir-emp{
+    display: block;
+    width: 100%;
+}
+
+
+
+#recuperar-parametros{
+    display: block;
+    width: 400px;
+    height: 420px;
+}
+
+
+
+#vista-resultados-archivos{
+    visibility: hidden;
+    position: fixed;
+    display: inline;
+    bottom: -700px;
+    right: 0px;
+    left: 0px;
+    width: 95%;
+    z-index: 1;
+    width: 95%;
+    height: 95%;
+}
