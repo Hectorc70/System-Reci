@@ -130,7 +130,6 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
             periodoIni, annoIni,
             periodoFin, annoFin)();
 
-        debugger;
         if (resp.length > 0) {
             mostrarDatosRecibos(resp);
             noLoader('conte-buscador');
@@ -342,7 +341,6 @@ function cambiardeTipoBusqueda(idpest, idpestNoSelect, idMostrar, idNoMostrar) {
 
 async function verRecibo(idRecibo) {
     let resp = await eel.recuperar_recibo(idRecibo)();
-    debugger;
 
     if (resp[0] == 200) {
         animacionVisor(resp[1]);
@@ -365,29 +363,17 @@ function animacionVisor(archivo) {
 
     visor.style.display = "block";
     visor.style.visibility = "visible";
-    visor.style.transition = 'all 0.5s ease-in-out';
     visor.style.width = '50%';
-    visor.style.height = '90%';
-
+    visor.style.height = '80%';
     btn.style.display = 'flex';
-    /* let data = 'data:application/pdf;base64,' + [archivo]; */
-    /* let data = 'web_folder/03149921_00041_20210527.pdf'
-    let obj = document.createElement('embed');
-    obj.setAttribute("width","100%")
-    obj.setAttribute("height","100%")
-    obj.setAttribute("src", data)
-    obj.setAttribute("type","application/pdf") */
-
-    /* obj.style.width = '100%';
-    obj.style.height = '100%'; 
-    obj.type = 'application/pdf';
-    */
+    visor.style.transition = 'all 0.5s ease-in-out';
 
     let obj = document.createElement('object');
+    obj.setAttribute("id", "archivo-pdf")
+    obj.setAttribute("src", "zoom=100")
     obj.style.width = '100%';
     obj.style.height = '842pt';
     obj.type = 'application/pdf';
-    /* obj.data = '03149921_00041_20210527.pdf'; */
     obj.data = "data:application/pdf;base64, " + [archivo.slice(1,archivo.length-1)];
     visorRecibo.appendChild(obj);
 
@@ -395,16 +381,18 @@ function animacionVisor(archivo) {
 }
 
 async function cerrarVisor(){
-    let visor = document.getElementById('conte-view-recibo')
-    let btn = document.getElementById('btn-cerrar')
-    
-    
-    visor.style.width = '0px';
-    visor.style.height = '0px';
-    visor.style.transition = 'all 0.5s ease-in-out';
-    setTimeout(1000);
-    visor.style.display = "none";
-    visor.style.visibility = "visible";
+    let conteVisor = document.getElementById('conte-view-recibo');
+    let visor = document.getElementById('visor');
+    let reciboconte = document.getElementById('archivo-pdf');
 
-    btn.style.display = 'none';
+    let btn = document.getElementById('btn-cerrar');
+    visor.removeChild(reciboconte);
+    
+    conteVisor.style.width = '0px';
+    conteVisor.style.height = '0px';
+    conteVisor.style.top = '0';
+    conteVisor.style.left = '0';
+    conteVisor.style.transition = 'all 0.5s ease-in-out';
+    conteVisor.style.display = "block";
+    conteVisor.style.visibility = "visible";
 }
