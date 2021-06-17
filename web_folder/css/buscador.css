@@ -232,10 +232,9 @@ btn-plus-campo{
     z-index: 2;
     width: 0px;
     height: 0px;
-    top:40px;
-    left: 25%;
+    top: 0;
+    left: 0%;
     background-color:var(--color-contenedor);
-    opacity: 70%;
 }
 
 #conte-btn-cerrar{
