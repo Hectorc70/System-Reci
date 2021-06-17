@@ -402,7 +402,8 @@ def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
 def recuperar_recibo(id_recibo):
     """llama al metodo que retorna el recibo
     de nomina con el id pasado como parametro
-    """
+    """ 
+
 
     data = file_data_user.get_data_user()
 
@@ -414,6 +415,14 @@ def recuperar_recibo(id_recibo):
         resp = cliente.recuperar_recibo(id_recibo)
 
         if resp[0] == 200:
+
+            """ pdf_salida = PdfFileWriter()
+            pdf_salida.addPage(resp[1])	
+            
+            nombre_archivo ='nombre_pdf' + '.pdf'
+            with open(nombre_archivo,'wb') as fp: 
+                pdf_salida.write(fp)	 """
+            
             return resp
 
 
