@@ -91,15 +91,44 @@ viewBox="0 0 469.333 469.333" style="enable-background:new 0 0 469.333 469.333;"
 </svg>'
 
 /* FUNCIONES */
+function animacionBuscadorCancelarVista(idTablaCuerpo) {
+    let cardParams = document.getElementById("parametros-busqueda");
+    borrarTabla(idTablaCuerpo)
 
+    let vista = document.getElementById("vista-resultado");
+    vista.style.transform = 'translate(0px,1000px)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+
+    cardParams.style.transform = 'translate(0px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+}
 function AnimacionBuscador() {
+    let withScreen = window.screen.width;
+    let calculoWith = withScreen/3
+    let calculoStrW = '-'+ calculoWith.toString() + 'px';
+
+    let heightScreen = window.screen.height;
+    let calculoHeight = heightScreen /1.64;
+    let calculoStr = '-'+ calculoHeight.toString() + 'px'
 
     let cardParams = document.getElementById("parametros-busqueda");
     let vista = document.getElementById("vista-resultado");
+    cardParams.setAttribute('class', 'card-contenedor');
+    cardParams.style.transform = 'translate( '+ calculoStrW +')';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+    vista.style.display = 'block';
+    vista.style.visibility = 'visible';
+    vista.style.transform = 'translate(0%,' + calculoStr +' )';
+    vista.style.transition = 'all 0.5s ease-in-out';
 
-    cardParams.setAttribute('class', 'animate-move card-contenedor');
+    /*  
+    let cardParams = document.getElementById("parametros-busqueda");
+    let vista = document.getElementById("vista-resultado");
+
+
+    cardParams.style.transform =
     cardParams.style.transform = 'translate(-30px,-570px);'
-    vista.setAttribute('class', 'card-contenedor animate-move-r ');
+    vista.setAttribute('class', 'card-contenedor animate-move-r '); */
 
 }
 
@@ -256,6 +285,7 @@ async function mostrarDatosRecibos(datos) {
 
 
 /*  UTULIDADES DE RECIBOS*/
+
 async function descargarRecibo(data) {
     let resp = await eel.descargar_recibo(data)();
 

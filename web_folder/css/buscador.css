@@ -158,12 +158,12 @@ btn-plus-campo{
 
 /* Animaciones */
 
-.animate-move{
+/* .animate-move{
     transform: translate(-150%,-50%);
     transition: all 0.5s ease-in-out;
     box-shadow: none;
     
-}
+}  */
 /* Vista de Resultados */
 
 #vista-resultado{
