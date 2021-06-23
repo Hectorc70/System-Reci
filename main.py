@@ -1,17 +1,23 @@
+import base64
 from os.path import exists
 from os import startfile
 from os import getpid
 import tempfile 
+import base64
 
 import eel
 import os.path
 
 from login.login import User, ArchivoTemp, Token
 
-from modulos.rutas import abrir_directorio, abrir_archivo, unir_cadenas
-from modulos.txt import ArchivoTxt
+from modulos.rutas import (
+crear_directorio, 
+abrir_directorio, 
+abrir_archivo, 
+unir_cadenas)
+
 from modulos.periodos import armar_periodos_intermedios, armar_periodos
-from modulos.archivo import Archivo
+
 from modulos.log import Log
 
 from respaldar.reci_xml import TimbreCop, ReciboCop
@@ -324,29 +330,6 @@ def comprobar_fechas(**kwargs):
 
 
 
-
-@eel.expose
-def recuperar_por_nombre(nombre, ape_p, ape_m, periodo_i, anno_i, periodo_f, anno_f):
-    data = file_data_user.get_data_user()
-    periodos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
-                        periodo_final=periodo_f, anno_final=anno_f)
-
-    if data or data == ['']:
-        user = Token(data[0], data[1])
-        token = user.get_token_user()
-
-        
-        cliente  = ClienteBuscador(token)
-        control = cliente.recuperar_control()
-    
-    if control:
-        for periodo in periodos:
-
-
-            pass
-
-
-
 @eel.expose
 def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
     def formatear_datos(periodos_datos_recibos):
@@ -426,7 +409,28 @@ def recuperar_recibo(id_recibo):
             return resp
 
 
+@eel.expose
+def descargar_recibo(data):
+    data_format = data.split(',')
+    nombre_recibo = unir_cadenas('_', [data_format[0],data_format[1],data_format[2],data_format[3]])
+    resp = recuperar_recibo(data_format[0])
+    
+    if resp[0] == 200:
+        directorio = enviar_ruta()
+        if directorio !='':
 
+            directorio_comp = unir_cadenas('\\', [directorio.replace('/','\\'), data_format[1]])
+            crear_directorio(directorio_comp)
+            ruta_completa = unir_cadenas('\\',[directorio_comp, nombre_recibo])
+
+            with open(ruta_completa + '.pdf', "wb") as f:
+                f.write(base64.b64decode(resp[1])) 
+
+            return [1,'Se guardo en {}'.format(directorio_comp)]
+        else:
+            return [0,'No se selecciono Ruta Intentente Nuevamente']
+    else:
+        return [0,'Error {} Intente nuevamente'.format(str(resp[0]))]
 """
 **---------------------------------------------------------------------------------------------**
                         ***CONFIG EEL***
