@@ -197,7 +197,11 @@ async function mostrarDatosRecibos(datos) {
         let fila = document.createElement("a");
         let idFila = "fila" + i;
         fila.setAttribute("id", idFila);
-        fila.setAttribute("class", "fila");
+        fila.setAttribute("class", "fila fila-buscador");
+
+        let checkBox = document.createElement("input");
+        checkBox.setAttribute("type", "checkbox");
+        checkBox.setAttribute("class", "c-box");
         /* let funcion = `SeleccionarFilaTabla('${idFila}')`;
         fila.setAttribute("onclick", funcion); */
 
@@ -233,7 +237,9 @@ async function mostrarDatosRecibos(datos) {
 
         tablavista.appendChild(fila);
         fila.appendChild(celdaId);
-        fila.appendChild(celdaControl);
+        /* fila.appendChild(celdaControl); */
+        checkBox.appendChild(celdaControl);
+        fila.appendChild(checkBox);
         fila.appendChild(celdaPeriodo);
         fila.appendChild(celdaNomina);
         fila.appendChild(celdaDescargar);
@@ -250,6 +256,19 @@ async function mostrarDatosRecibos(datos) {
 
 
 /*  UTULIDADES DE RECIBOS*/
+/* function getCheckBoxCustom(){
+    let componentCheck = '<p>\
+    <label class="custom-radio-checkbox">\
+        <input class="custom-radio-checkbox__input" type="checkbox" name="genero" value="hombre">\
+        <span class="custom-radio-checkbox__show custom-radio-checkbox__show--checkbox"></span>\
+        <span class="custom-radio-checkbox__text">Acepto las condiciones de uso y privacidad</span>\
+    </label>\
+</p>'
+
+    return componentCheck;
+} */
+
+
 async function descargarRecibo() {
 
 }

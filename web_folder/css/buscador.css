@@ -1,3 +1,6 @@
+
+
+
 #conte-tipos-busqueda{
     display: flex;
     width: 100%;
@@ -127,7 +130,13 @@ btn-plus-campo{
     margin-left: 5px;
 }
 
-
+.fila-buscador{
+    cursor: auto;
+    border: none;
+}
+.fila-buscador:hover{
+    border: none;
+}
 #conte-fechas-buscador{
     margin-top: 10px;
     margin-bottom: 15px;

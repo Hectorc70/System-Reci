@@ -14,6 +14,26 @@
     <script type="text/javascript" src="js/alertas.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="js/buscador.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#check-todos').click(function () {
+                if ($(this).is(':checked')) {
+                    $('.c-box').prop("checked", true);
+                    console.log('todos seleccionado');
+                }
+                else {
+                    $('.c-box').prop("checked", false);
+                }
+            })
+
+
+
+
+
+
+        });
+    </script>
 </head>
 
 <body>
@@ -168,6 +188,7 @@
                         id
                     </div>
                     <div class="titulo-tabla">
+                        <input id="check-todos" type="checkbox">
                         Control
                     </div>
                     <div class="titulo-tabla">Periodo</div>
@@ -200,7 +221,7 @@
                 </a>
             </div>
             <div id="visor">
-                
+
             </div>
         </div>
     </section>
