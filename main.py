@@ -332,35 +332,38 @@ def comprobar_fechas(**kwargs):
 
 @eel.expose
 def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
-    def formatear_datos(periodos_datos_recibos):
-        
-        for datos_recibos in periodos_datos_recibos:
-
-            for keys in datos_recibos.keys():
-                id_recibo = datos_recibos['id_recibo']
-                control = datos_recibos['no_control']
-                periodo = datos_recibos['periodo']
-                nomina = datos_recibos['tipo_nomina']
-
-                return [id_recibo, control, periodo, nomina]
-            
-    
-    
-    
-    
-    
-    data = file_data_user.get_data_user()
     annos = comprobar_fechas(anno_inicial=anno_i, periodo_inicial=periodo_i,
                         periodo_final=periodo_f, anno_final=anno_f)
 
+    if len(annos) < 3:
+        data = recuperar_datos(annos, control)
+    else:
+        data1 = recuperar_datos([annos[0]], control)
+        data2 = recuperar_datos_int([annos[1]], control)
+        data3 = recuperar_datos([annos[2]], control)
+        data_f = [data1, data2, data3]
+        return data_f
+
+def formatear_datos(periodos_datos_recibos):
+    for datos_recibos in periodos_datos_recibos:
+        for keys in datos_recibos.keys():
+            id_recibo = datos_recibos['id_recibo']
+            control = datos_recibos['no_control']
+            periodo = datos_recibos['periodo']
+            nomina = datos_recibos['tipo_nomina']
+            
+            return [id_recibo, control, periodo, nomina]
+
+def recuperar_datos(annos, control):
+    datos_recuperados = list()
+
+    data = file_data_user.get_data_user()
 
     if data or data == ['']:
         user = Token(data[0], data[1])
         token = user.get_token_user()
         cliente = ClienteBuscador(token[1])
 
-
-        datos_recuperados = list()
         for anno in annos:
             for periodos in anno.values():
                 for periodo in periodos:
@@ -369,17 +372,27 @@ def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
                         datos_format = formatear_datos(resp[1])
                         datos_recuperados.append(datos_format)
     
+    return datos_recuperados
 
-                    
+def recuperar_datos_int(annos_int, control):
+    datos_recuperados = list()
 
-        return datos_recuperados
+    data = file_data_user.get_data_user()
 
-    else:
-        return 'ERROR'
+    if data or data == ['']:
+        user = Token(data[0], data[1])
+        token = user.get_token_user()
+        cliente = ClienteBuscador(token[1])
 
-
-
-
+        for anno in annos_int:
+            for _anno in anno:
+                for periodo in _anno:
+                    resp = cliente.recuperar_datos_recibo(control, periodo)
+                    if resp[0] ==200:
+                        datos_format = formatear_datos(resp[1])
+                        datos_recuperados.append(datos_format)
+    
+    return datos_recuperados
 
 @eel.expose
 def recuperar_recibo(id_recibo):

@@ -131,26 +131,36 @@ function AnimacionBuscador() {
     vista.setAttribute('class', 'card-contenedor animate-move-r '); */
 
 }
-
-async function validarInputsBuscador() {
+async function validarInputsPeriodos(){
     let periodoIni = document.getElementsByName("periodo-ini")[0].value;
     let annoIni = document.getElementsByName("anno-ini")[0].value;
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
     let annoFin = document.getElementsByName("anno-fin")[0].value;
-
-
-    if (periodoIni != '' && annoIni != '' &&
-        periodoFin != '' && annoFin != '') {
-        return true;
-
+    
+    if(parseInt(annoIni,10) < parseInt(annoFin,10)){
+        enviarControl(periodoIni, annoIni, periodoFin, annoFin);
     }
+    else if(parseInt(annoIni,10) == parseInt(annoFin,10)){
+        if(parseInt(periodoIni,10) <= parseInt(periodoFin,10)){
+            enviarControl(periodoIni, annoIni, periodoFin, annoFin);
+        }
+        else{
+            Precaucion('Rango de periodos Invalido');
+        }
+        
+    }
+    else{
+        Precaucion('Rango de periodos Invalido');
+    }
+
+
 }
+
+
 async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
     let control = document.getElementsByName("control")[0].value;
-    let paramsValidados = validarInputsBuscador()
 
-
-    if (control != '' && paramsValidados) {
+    if (control != '') {
         loader("recibos-datos-buscador");
         deshabilitar("parametros-busqueda");
         AnimacionBuscador();
@@ -175,8 +185,8 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
         }
     }
     else {
-        Precaucion('Escriba un numero de control y seleccione periodo de\
-        Inicio Y de Fin');
+        Precaucion('Escriba un numero de control.'
+        );
 
     }
 }
@@ -204,13 +214,9 @@ async function enviarParametrosBusqueda() {
     let tipoBusqueda = document.getElementById("buscador-por-control");
     let estilo = window.getComputedStyle(tipoBusqueda);
     let opacidad = estilo.getPropertyValue("opacity");
-    let periodoIni = document.getElementsByName("periodo-ini")[0].value;
-    let annoIni = document.getElementsByName("anno-ini")[0].value;
-    let periodoFin = document.getElementsByName("periodo-fin")[0].value;
-    let annoFin = document.getElementsByName("anno-fin")[0].value;
 
     if (opacidad == "1") {
-        enviarControl(periodoIni, annoIni, periodoFin, annoFin);
+        validarInputsPeriodos();
     }
     else {
         enviarNombre();
