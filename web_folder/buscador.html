@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Reci - Version 4.0.0</title>
+    <title>System Reci - Version 4.1</title>
     <link rel="stylesheet" type=text/css href="css/estilos_base.css">
     <link rel="stylesheet" type=text/css href="css/loaders.css">
     <link rel="stylesheet" type=text/css href="css/buscador.css">
@@ -14,18 +14,19 @@
     <script type="text/javascript" src="js/alertas.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
     <script type="text/javascript" src="js/buscador.js"></script>
+    
 </head>
 
 <body>
     <section id="conte-buscador">
         <div id="parametros-busqueda" class="card-contenedor">
-            <div id="conte-tipos-busqueda">
+            <!-- <div id="conte-tipos-busqueda">
                 <!--  <a id="pest-1" class="opcion-vista"
                     onclick="cambiardeTipoBusqueda('pest-1', 'pest-2', 'buscador-por-control', 'buscador-por-nombre')">Control</a> -->
                 <!-- <a id="pest-2" class="opcion-vista"
-                    onclick="cambiardeTipoBusqueda('pest-2', 'pest-1', 'buscador-por-nombre', 'buscador-por-control')">Nombre</a> -->
-            </div>
-            <div style="height: 50px;"></div>
+                    onclick="cambiardeTipoBusqueda('pest-2', 'pest-1', 'buscador-por-nombre', 'buscador-por-control')">Nombre</a> 
+            </div> -->
+            <!-- <div style="height: 50px;"></div> -->
             <div class="title-section">
                 <h3>Buscador de Recibos</h3>
             </div>
@@ -108,6 +109,7 @@
                         <option value="2019">2019</option>
                         <option value="2020">2020</option>
                         <option value="2021">2021</option>
+                        <option value="2022">2022</option>
                     </select>
                 </div>
             </div>
@@ -118,39 +120,16 @@
                         <div class="conte-input-dinamico">
                             <input class="parametro-in-obligatorio in-data in-control in-buscar-control" type="text"
                                 name="control" maxlength="8">
-                            <a class="btn-plus-campo" onclick="addCampo()">
-                                <svg class="icono-plus-campo" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"
-                                    viewBox="0 0 16 16">
-                                    <path class="borde" fill="#fcdab7"
-                                        d="M8 1c3.9 0 7 3.1 7 7s-3.1 7-7 7-7-3.1-7-7 3.1-7 7-7zM8 0c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8v0z">
-                                    </path>
-                                    <path class="plus" fill="#fcdab7" d="M13 7h-4v-4h-2v4h-4v2h4v4h2v-4h4z"></path>
-                                </svg>
-                            </a>
-
                         </div>
-                    </div>
-                </div>
-                <div id="buscador-por-nombre">
-
-                    <div id="conte-nombre">
-                        <label class="in-lbl" for="control">Nombre</label>
-                        <input class="parametro-in-obligatorio in-data inputs-b-name" type="text" name="nombre">
-                    </div>
-                    <div id="conte-ape-p">
-                        <label class="in-lbl" for="ape-p">Apellido Paterno</label>
-                        <input class="parametro-in-obligatorio in-data inputs-b-name" type="text" name="ape-p">
-                    </div>
-                    <div id="conte-ape-m">
-                        <label class="in-lbl" for="ape-m">Apellido Materno</label>
-                        <input class="parametro-in-obligatorio in-data inputs-b-name" type="text" name="ape-m">
                     </div>
                 </div>
 
             </div>
             <div id="conte-btn">
-                <button class="btn" type="button" onclick="enviarParametrosBusqueda()">Buscar</button>
+                <button class="btn btn-grande" type="button" onclick="enviarParametrosBusqueda()">Buscar</button>
+            </div>
+            <div id="conte-btn">
+                <a class="btn btn-grande" type="button" href="menu.html">MENU</a>
             </div>
 
         </div>
@@ -177,18 +156,14 @@
                     </div>
                     <div class="titulo-tabla">Visualizar</div>
                 </div>
-                <!-- DATOS DE LOS RECIBOS DE NOMINA -->
                 <div class="cuerpo-tabla" id="recibos-datos-buscador">
-
                 </div>
-
-
             </div>
             <div class="conte-acciones">
-                <button class="accion btn btn-grande" onclick="SeleccionarTodoTablaRespaldar('fila')">Descargar
+                <button class="accion btn btn-grande" onclick="borrarTabla('recibos-datos-buscador')">Limpiar Tabla</button>
+                <button class="accion btn btn-grande" onclick="DescargarTodo('fila')">Descargar
                     Todo</button>
-                <button class="accion btn btn-grande" onclick="cancelarVistaTbl()">Cancelar</button>
-                <button class="accion btn btn-grande" onclick="">Copiar</button>
+                <button class="accion btn btn-grande" onclick="animacionBuscadorCancelarVista('recibos-datos-buscador')">Cancelar</button>
 
             </div>
         </div>
@@ -200,7 +175,7 @@
                 </a>
             </div>
             <div id="visor">
-                
+
             </div>
         </div>
     </section>

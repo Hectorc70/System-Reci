@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="img/buscador.svg" />
-    
-    <title>System Reci - Version 4.0.0</title>
+
+    <title>System Reci - Version 4.1</title>
     <link rel="stylesheet" type=text/css href="css/estilos_base.css">
     <link rel="stylesheet" type=text/css href="css/loaders.css">
     <link rel="stylesheet" type=text/css href="css/estilos_login.css">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
@@ -20,27 +20,44 @@
 
 <body>
     <section>
-        <div style="color: aliceblue;" id="form-login" >
+        <div style="color: aliceblue;" id="form-login">
             <div>
-                <h1 class="title" >Login</h1>
+                <h1 class="title">Login</h1>
             </div>
             <hr>
             <label class="in-label" for="control">Control</label>
-            <input class="input-data" type="text" name="control">
-            
+            <input id="input-control-l" class="input-data" type="text" name="control">
+
             <div>
                 <label class="in-label" for="password">Contraseña</label>
             </div>
-            
-            
-            <input class="input-data" type="password" name="password">
-            <button class="btn btn-login" type="button" onclick="loginUser()">
+
+
+            <input id="input-pass-l" class="input-data" type="password" name="password">
+            <button id="btn-login-sub" class="btn btn-login" type="submit" onclick="loginUser()">
                 Entrar
             </button>
         </div>
 
     </section>
-        
+    <script>
+        let input = document.getElementById("input-control-l");
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("btn-login-sub").click();
+            }
+        });
+
+        let input2 = document.getElementById("input-pass-l");
+        input2.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("btn-login-sub").click();
+            }
+        });
+    </script>
+
 
 </body>
 
