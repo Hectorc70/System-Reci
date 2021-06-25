@@ -337,6 +337,7 @@ def recuperar_por_control(control, periodo_i, anno_i, periodo_f, anno_f):
 
     if len(annos) < 3:
         data = recuperar_datos(annos, control)
+        return data
     else:
         data1 = recuperar_datos([annos[0]], control)
         data2 = recuperar_datos_int([annos[1]], control)
@@ -386,7 +387,7 @@ def recuperar_datos_int(annos_int, control):
 
         for anno in annos_int:
             for _anno in anno:
-                for periodo in _anno:
+                for periodo in _anno.values():
                     resp = cliente.recuperar_datos_recibo(control, periodo)
                     if resp[0] ==200:
                         datos_format = formatear_datos(resp[1])
