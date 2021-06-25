@@ -72,7 +72,6 @@ async function SubirDatosRecibos() {
         let fila = document.getElementById("fila" + i);
         let estiloFila = window.getComputedStyle(fila);
         let colorFila = estiloFila.getPropertyValue("background-color");
-       
 
         if (colorFila == "rgb(255, 136, 130)") {
             let archivo = fila.childNodes[0].innerHTML;

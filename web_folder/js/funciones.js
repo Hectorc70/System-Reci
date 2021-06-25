@@ -113,15 +113,19 @@ function animacionCancelarVistaArchivos(idTablaCuerpo) {
 
 function animacionVistaArchivos() {
 
+    let heightScreen = window.screen.height;
+    let calculoHeight = heightScreen + (-285)
+    let calculoStr = '-' + calculoHeight.toString() + 'px'
+
     let cardParams = document.getElementById("recuperar-parametros");
     let vista = document.getElementById("vista-resultados-archivos");
     cardParams.setAttribute('class', 'animate-move card-contenedor');
-    cardParams.style.transform = 'translate(-550px,-700px)';
+    cardParams.style.transform = 'translate(-1000px, -1000px)';
     cardParams.style.transition = 'all 0.5s ease-in-out';
 
     vista.style.display = 'block';
     vista.style.visibility = 'visible';
-    vista.style.transform = 'translate(0%, -80%)';
+    vista.style.transform = 'translate(0%,' + calculoStr + ' )';
     vista.style.transition = 'all 0.5s ease-in-out';
 
 }

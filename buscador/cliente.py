@@ -100,7 +100,7 @@ class ClienteBuscador():
 
             if response.status_code == 200:
                 cadena = unir_cadenas('|', [str(response.status_code), 
-                                            datos_busqueda
+                                            datos_busqueda, str(resp)
                                             ])
 
                 log = Log('Log_Buscador_Recibos.txt')

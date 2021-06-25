@@ -91,39 +91,79 @@ viewBox="0 0 469.333 469.333" style="enable-background:new 0 0 469.333 469.333;"
 </svg>'
 
 /* FUNCIONES */
+function animacionBuscadorCancelarVista(idTablaCuerpo) {
+    let cardParams = document.getElementById("parametros-busqueda");
+    borrarTabla(idTablaCuerpo)
 
+    let vista = document.getElementById("vista-resultado");
+    vista.style.transform = 'translate(0px,1000px)';
+    vista.style.transition = 'all 0.5s ease-in-out';
+
+    cardParams.style.transform = 'translate(0px,0px)';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+}
 function AnimacionBuscador() {
+    let withScreen = window.screen.width;
+    let calculoWith = withScreen / 3
+    let calculoStrW = '-' + calculoWith.toString() + 'px';
+
+
+    let heightScreen = window.screen.height;
+    let calculoHeight = heightScreen / 1.64;
+    let calculoStr = '-' + calculoHeight.toString() + 'px'
 
     let cardParams = document.getElementById("parametros-busqueda");
     let vista = document.getElementById("vista-resultado");
+    cardParams.setAttribute('class', 'card-contenedor');
+    cardParams.style.transform = 'translate( ' + calculoStrW + ')';
+    cardParams.style.transition = 'all 0.5s ease-in-out';
+    vista.style.display = 'block';
+    vista.style.visibility = 'visible';
+    vista.style.transform = 'translate(0%,' + calculoStr + ' )';
+    vista.style.transition = 'all 0.5s ease-in-out';
 
-    cardParams.setAttribute('class', 'animate-move card-contenedor');
+    /*  
+    let cardParams = document.getElementById("parametros-busqueda");
+    let vista = document.getElementById("vista-resultado");
+
+
+    cardParams.style.transform =
     cardParams.style.transform = 'translate(-30px,-570px);'
-    vista.setAttribute('class', 'card-contenedor animate-move-r ');
+    vista.setAttribute('class', 'card-contenedor animate-move-r '); */
 
 }
-
-async function validarInputsBuscador() {
+async function validarInputsPeriodos() {
     let periodoIni = document.getElementsByName("periodo-ini")[0].value;
     let annoIni = document.getElementsByName("anno-ini")[0].value;
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
     let annoFin = document.getElementsByName("anno-fin")[0].value;
 
-
-    if (periodoIni != '' && annoIni != '' &&
-        periodoFin != '' && annoFin != '') {
-        return true;
+    if (parseInt(annoIni, 10) < parseInt(annoFin, 10)) {
+        enviarControl(periodoIni, annoIni, periodoFin, annoFin);
+    }
+    else if (parseInt(annoIni, 10) == parseInt(annoFin, 10)) {
+        if (parseInt(periodoIni, 10) <= parseInt(periodoFin, 10)) {
+            enviarControl(periodoIni, annoIni, periodoFin, annoFin);
+        }
+        else {
+            Precaucion('Rango de periodos Invalido');
+        }
 
     }
+    else {
+        Precaucion('Rango de periodos Invalido');
+    }
+
+
 }
+
+
 async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
     let control = document.getElementsByName("control")[0].value;
-    let paramsValidados = validarInputsBuscador()
 
-
-    if (control != '' && paramsValidados) {
-        deshabilitar("conte-buscador");
-        loader("conte-buscador");
+    if (control != '') {
+        loader("recibos-datos-buscador");
+        deshabilitar("parametros-busqueda");
         AnimacionBuscador();
 
         let resp = await eel.recuperar_por_control(control,
@@ -132,8 +172,8 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
 
         if (resp.length > 0) {
             mostrarDatosRecibos(resp);
-            noLoader('conte-buscador');
-            habilitar('conte-buscador');
+            noLoader("recibos-datos-buscador");
+            habilitar("parametros-busqueda")
         }
         else {
             noLoader('conte-buscador');
@@ -146,8 +186,8 @@ async function enviarControl(periodoIni, annoIni, periodoFin, annoFin) {
         }
     }
     else {
-        Precaucion('Escriba un numero de control y seleccione periodo de\
-        Inicio Y de Fin');
+        Precaucion('Escriba un numero de control.'
+        );
 
     }
 }
@@ -175,13 +215,9 @@ async function enviarParametrosBusqueda() {
     let tipoBusqueda = document.getElementById("buscador-por-control");
     let estilo = window.getComputedStyle(tipoBusqueda);
     let opacidad = estilo.getPropertyValue("opacity");
-    let periodoIni = document.getElementsByName("periodo-ini")[0].value;
-    let annoIni = document.getElementsByName("anno-ini")[0].value;
-    let periodoFin = document.getElementsByName("periodo-fin")[0].value;
-    let annoFin = document.getElementsByName("anno-fin")[0].value;
 
     if (opacidad == "1") {
-        enviarControl(periodoIni, annoIni, periodoFin, annoFin);
+        validarInputsPeriodos();
     }
     else {
         enviarNombre();
@@ -198,6 +234,10 @@ async function mostrarDatosRecibos(datos) {
         let idFila = "fila" + i;
         fila.setAttribute("id", idFila);
         fila.setAttribute("class", "fila");
+
+        /* let checkBox = document.createElement("input");
+        checkBox.setAttribute("type", "checkbox");
+        checkBox.setAttribute("class", "c-box"); */
         /* let funcion = `SeleccionarFilaTabla('${idFila}')`;
         fila.setAttribute("onclick", funcion); */
 
@@ -226,7 +266,8 @@ async function mostrarDatosRecibos(datos) {
         celdaVer.innerHTML = iconVer;
 
         let celdaDescargar = document.createElement("a");
-        let funcionDescargar = `descargarRecibo('${datos[i][0]}')`;
+        let data = [datos[i][0], datos[i][1], datos[i][3], datos[i][2]]
+        let funcionDescargar = `descargarRecibo('${data}')`;
         celdaDescargar.setAttribute("class", "cell-con-icono");
         celdaDescargar.setAttribute("onclick", funcionDescargar);
         celdaDescargar.innerHTML = iconDownload;
@@ -234,6 +275,7 @@ async function mostrarDatosRecibos(datos) {
         tablavista.appendChild(fila);
         fila.appendChild(celdaId);
         fila.appendChild(celdaControl);
+
         fila.appendChild(celdaPeriodo);
         fila.appendChild(celdaNomina);
         fila.appendChild(celdaDescargar);
@@ -250,9 +292,8 @@ async function mostrarDatosRecibos(datos) {
 
 
 /*  UTULIDADES DE RECIBOS*/
-async function descargarRecibo() {
 
-}
+
 
 
 async function addCampo() {
@@ -334,8 +375,56 @@ function cambiardeTipoBusqueda(idpest, idpestNoSelect, idMostrar, idNoMostrar) {
 }
 
 
+async function descargarRecibo(data) {
+    let resp = await eel.descargar_recibo(data)();
+
+    if (resp[0] != 0) {
+        satisfactorio(resp[1]);
+    }
+    else {
+        Precaucion(resp[1]);
+    }
 
 
+}
+async function DescargarTodo() {
+    let elementoPadre = document.getElementById("recibos-datos-buscador");
+    let elementos = elementoPadre.childNodes;
+    let datosRecibos = [];
+    for (let i = 1; i < elementos.length; i++) {
+        let count = i-1;
+        let fila = document.getElementById("fila" + count.toString());
+        
+        let idRecibo = fila.childNodes[0].innerHTML;
+        let control = fila.childNodes[1].innerHTML;
+        let periodo = fila.childNodes[2].innerHTML;
+        let nomina = fila.childNodes[3].innerHTML;
+
+        let datos = [idRecibo, control, nomina, periodo]
+
+        datosRecibos.push(datos);
+    }
+
+
+    loader("conte-buscador");
+    deshabilitar("conte-buscador");
+    let resp = await eel.descargar_recibo_masivo(datosRecibos)();
+    
+    if (resp[0] != 0) {
+        
+        noLoader("conte-buscador");
+        habilitar("conte-buscador");
+        satisfactorio(resp[1]);
+        
+
+    }
+    else {
+        noLoader("conte-buscador");
+        habilitar("conte-buscador");
+        Precaucion(resp[1]);
+    }
+
+}
 
 /* VISOR DE RECIBO */
 
@@ -349,45 +438,60 @@ async function verRecibo(idRecibo) {
     }
 
     else {
-        erro('No se puede ver el recibo');
+        error('No se puede ver el recibo');
     }
 
 }
 
 
 function animacionVisor(archivo) {
-    
+
     let visor = document.getElementById('conte-view-recibo')
     let btn = document.getElementById('btn-cerrar')
     let visorRecibo = document.getElementById('visor')
 
-    visor.style.display = "block";
-    visor.style.visibility = "visible";
-    visor.style.width = '50%';
-    visor.style.height = '80%';
-    btn.style.display = 'flex';
-    visor.style.transition = 'all 0.5s ease-in-out';
+    let elementoEstilo = window.getComputedStyle(visor);
+    let widthVisor = elementoEstilo.getPropertyValue("width");
 
+    if (widthVisor == '0px') {
+        visor.style.display = "block";
+        visor.style.visibility = "visible";
+        visor.style.width = '50%';
+        visor.style.height = '80%';
+        btn.style.display = 'flex';
+        visor.style.transition = 'all 0.5s ease-in-out';
+    }
+    
+    
+    let recibo = document.getElementById("archivo-pdf");
+    
+    if(recibo != null){
+        visorRecibo.removeChild(recibo);
+    }
     let obj = document.createElement('object');
-    obj.setAttribute("id", "archivo-pdf")
-    obj.setAttribute("src", "zoom=100")
+    obj.setAttribute("id", "archivo-pdf");
+    obj.setAttribute("src", "zoom=100");
     obj.style.width = '100%';
     obj.style.height = '842pt';
     obj.type = 'application/pdf';
-    obj.data = "data:application/pdf;base64, " + [archivo.slice(1,archivo.length-1)];
+    obj.data = "data:application/pdf;base64, " + [archivo.slice(1, archivo.length - 1)];
+    
+    
     visorRecibo.appendChild(obj);
+
+
 
 
 }
 
-async function cerrarVisor(){
+async function cerrarVisor() {
     let conteVisor = document.getElementById('conte-view-recibo');
     let visor = document.getElementById('visor');
     let reciboconte = document.getElementById('archivo-pdf');
 
     let btn = document.getElementById('btn-cerrar');
     visor.removeChild(reciboconte);
-    
+
     conteVisor.style.width = '0px';
     conteVisor.style.height = '0px';
     conteVisor.style.top = '0';

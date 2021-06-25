@@ -44,3 +44,6 @@ def armar_periodos(anno, periodo_ini ='01',ultimo_periodo='24', format=False):
     anno_periodos[anno] = periodos
 
     return anno_periodos
+
+
+
