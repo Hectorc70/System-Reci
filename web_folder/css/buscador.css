@@ -215,6 +215,7 @@
 }
 .icon-opcion-buscador:hover{
     fill: var(--color-resalte);
+    cursor: pointer;
 }
 
 .cell-con-icono{
@@ -259,11 +260,11 @@
     justify-items: center;
     vertical-align: middle;
     float: right;
-    cursor: pointer;
     
 }
 #btn-cerrar:hover{
     background-color: #641818;
+    cursor: pointer;
 }
 
 
@@ -279,4 +280,5 @@
     margin-top: 2px;
     margin-bottom: 2px;
     color: white;
+    cursor: pointer;
 }

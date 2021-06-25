@@ -104,21 +104,22 @@ function animacionBuscadorCancelarVista(idTablaCuerpo) {
 }
 function AnimacionBuscador() {
     let withScreen = window.screen.width;
-    let calculoWith = withScreen/3
-    let calculoStrW = '-'+ calculoWith.toString() + 'px';
+    let calculoWith = withScreen / 3
+    let calculoStrW = '-' + calculoWith.toString() + 'px';
+
 
     let heightScreen = window.screen.height;
-    let calculoHeight = heightScreen /1.64;
-    let calculoStr = '-'+ calculoHeight.toString() + 'px'
+    let calculoHeight = heightScreen / 1.64;
+    let calculoStr = '-' + calculoHeight.toString() + 'px'
 
     let cardParams = document.getElementById("parametros-busqueda");
     let vista = document.getElementById("vista-resultado");
     cardParams.setAttribute('class', 'card-contenedor');
-    cardParams.style.transform = 'translate( '+ calculoStrW +')';
+    cardParams.style.transform = 'translate( ' + calculoStrW + ')';
     cardParams.style.transition = 'all 0.5s ease-in-out';
     vista.style.display = 'block';
     vista.style.visibility = 'visible';
-    vista.style.transform = 'translate(0%,' + calculoStr +' )';
+    vista.style.transform = 'translate(0%,' + calculoStr + ' )';
     vista.style.transition = 'all 0.5s ease-in-out';
 
     /*  
@@ -131,25 +132,25 @@ function AnimacionBuscador() {
     vista.setAttribute('class', 'card-contenedor animate-move-r '); */
 
 }
-async function validarInputsPeriodos(){
+async function validarInputsPeriodos() {
     let periodoIni = document.getElementsByName("periodo-ini")[0].value;
     let annoIni = document.getElementsByName("anno-ini")[0].value;
     let periodoFin = document.getElementsByName("periodo-fin")[0].value;
     let annoFin = document.getElementsByName("anno-fin")[0].value;
-    
-    if(parseInt(annoIni,10) < parseInt(annoFin,10)){
+
+    if (parseInt(annoIni, 10) < parseInt(annoFin, 10)) {
         enviarControl(periodoIni, annoIni, periodoFin, annoFin);
     }
-    else if(parseInt(annoIni,10) == parseInt(annoFin,10)){
-        if(parseInt(periodoIni,10) <= parseInt(periodoFin,10)){
+    else if (parseInt(annoIni, 10) == parseInt(annoFin, 10)) {
+        if (parseInt(periodoIni, 10) <= parseInt(periodoFin, 10)) {
             enviarControl(periodoIni, annoIni, periodoFin, annoFin);
         }
-        else{
+        else {
             Precaucion('Rango de periodos Invalido');
         }
-        
+
     }
-    else{
+    else {
         Precaucion('Rango de periodos Invalido');
     }
 
@@ -274,7 +275,7 @@ async function mostrarDatosRecibos(datos) {
         tablavista.appendChild(fila);
         fila.appendChild(celdaId);
         fila.appendChild(celdaControl);
-        
+
         fila.appendChild(celdaPeriodo);
         fila.appendChild(celdaNomina);
         fila.appendChild(celdaDescargar);
@@ -295,15 +296,14 @@ async function mostrarDatosRecibos(datos) {
 async function descargarRecibo(data) {
     let resp = await eel.descargar_recibo(data)();
 
-    debugger;
-    if (resp[0] != 0){
+    if (resp[0] != 0) {
         satisfactorio(resp[1]);
     }
-    else{
+    else {
         Precaucion(resp[1]);
     }
-    
-    
+
+
 }
 
 
@@ -415,38 +415,54 @@ async function verRecibo(idRecibo) {
 
 
 function animacionVisor(archivo) {
-    
+
     let visor = document.getElementById('conte-view-recibo')
     let btn = document.getElementById('btn-cerrar')
     let visorRecibo = document.getElementById('visor')
 
-    visor.style.display = "block";
-    visor.style.visibility = "visible";
-    visor.style.width = '50%';
-    visor.style.height = '80%';
-    btn.style.display = 'flex';
-    visor.style.transition = 'all 0.5s ease-in-out';
+    let elementoEstilo = window.getComputedStyle(visor);
+    let widthVisor = elementoEstilo.getPropertyValue("width");
 
+    debugger;
+    if (widthVisor == '0px') {
+        visor.style.display = "block";
+        visor.style.visibility = "visible";
+        visor.style.width = '50%';
+        visor.style.height = '80%';
+        btn.style.display = 'flex';
+        visor.style.transition = 'all 0.5s ease-in-out';
+    }
+    
+    
+    let recibo = document.getElementById("archivo-pdf");
+    
+    if(recibo != null){
+        visorRecibo.removeChild(recibo);
+    }
     let obj = document.createElement('object');
-    obj.setAttribute("id", "archivo-pdf")
-    obj.setAttribute("src", "zoom=100")
+    obj.setAttribute("id", "archivo-pdf");
+    obj.setAttribute("src", "zoom=100");
     obj.style.width = '100%';
     obj.style.height = '842pt';
     obj.type = 'application/pdf';
-    obj.data = "data:application/pdf;base64, " + [archivo.slice(1,archivo.length-1)];
+    obj.data = "data:application/pdf;base64, " + [archivo.slice(1, archivo.length - 1)];
+    
+    
     visorRecibo.appendChild(obj);
+
+
 
 
 }
 
-async function cerrarVisor(){
+async function cerrarVisor() {
     let conteVisor = document.getElementById('conte-view-recibo');
     let visor = document.getElementById('visor');
     let reciboconte = document.getElementById('archivo-pdf');
 
     let btn = document.getElementById('btn-cerrar');
     visor.removeChild(reciboconte);
-    
+
     conteVisor.style.width = '0px';
     conteVisor.style.height = '0px';
     conteVisor.style.top = '0';
