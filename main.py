@@ -298,7 +298,7 @@ def leer_log_empleados_subidos():
 """
 
 
-def comprobar_fechas(**kwargs):
+def all_range_periods(**kwargs):
     """Busca recibos de los periodos
     indicados pasados como parametros"""
 
@@ -362,27 +362,10 @@ def comprobar_fechas(**kwargs):
 @eel.expose
 def recuperar_por_control(control, period_i, year_ini, period_f, year_f):
     
-    years_periods = comprobar_fechas(year_ini=year_ini, period_ini=period_i,
+    years_periods = all_range_periods(year_ini=year_ini, period_ini=period_i,
                                     period_f=period_f, year_f=year_f)
 
-    resp = recuperar_datos(years_periods, control)
-
-    print(resp)
-
-
-def formatear_datos(periodos_datos_recibos):
-    for datos_recibos in periodos_datos_recibos:
-        for keys in datos_recibos.keys():
-            id_recibo = datos_recibos['id_recibo']
-            control = datos_recibos['no_control']
-            periodo = datos_recibos['periodo']
-            nomina = datos_recibos['tipo_nomina']
-
-            return [id_recibo, control, periodo, nomina]
-
-
-def recuperar_datos(years_periods, control):
-    datos_recuperados = list()
+    data_recov = list()
 
     data = file_data_user.get_data_user()
 
@@ -391,15 +374,32 @@ def recuperar_datos(years_periods, control):
         token = user.get_token_user()
         cliente = ClienteBuscador(token[1])
 
-        for anno in years_periods:
-            for periodos in anno.values():
-                for periodo in periodos:
-                    resp = cliente.recuperar_datos_recibo(control, periodo)
-                    if resp[0] == 200:
-                        datos_format = formatear_datos(resp[1])
-                        datos_recuperados.append(datos_format)
+        for period in years_periods:
+            resp = cliente.recuperar_datos_recibo(control, period)
+            if resp[0] == 200:
+                data_format = format_data(resp[1])
+                data_recov = data_recov + data_format
 
-    return datos_recuperados
+    return data_recov
+
+def format_data(periodos_datos_recibos):
+    data_format = list()
+    all_data  = list()
+    for datos_recibos in periodos_datos_recibos:
+        id_recibo = datos_recibos['id_recibo']
+        control = datos_recibos['no_control']
+        periodo = datos_recibos['periodo']
+        nomina = datos_recibos['tipo_nomina']
+        data_server = [id_recibo, control, periodo, nomina]
+        data_format.append(data_server)
+    
+    """ for recibo_data in data_format:
+        all_data = all_data +  recibo_data """
+    
+    return data_format
+
+
+
 
 
 def recuperar_datos_int(annos_int, control):
