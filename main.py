@@ -324,10 +324,9 @@ def all_range_periods(**kwargs):
             year=kwargs['year_f'],
             period_final=kwargs['period_f']
         )
-        
+
         year_ini.to_create_all_periods()
         year_f.to_create_all_periods()
-
 
         year_periods_all = year_ini.all_periods_format + \
             year_f.all_periods_format
@@ -349,7 +348,6 @@ def all_range_periods(**kwargs):
             period_final=kwargs['period_f']
         )
 
-
         year_ini.to_create_all_periods()
         year_f.to_create_all_periods()
 
@@ -361,9 +359,9 @@ def all_range_periods(**kwargs):
 
 @eel.expose
 def recuperar_por_control(control, period_i, year_ini, period_f, year_f):
-    
+
     years_periods = all_range_periods(year_ini=year_ini, period_ini=period_i,
-                                    period_f=period_f, year_f=year_f)
+                                      period_f=period_f, year_f=year_f)
 
     data_recov = list()
 
@@ -382,9 +380,10 @@ def recuperar_por_control(control, period_i, year_ini, period_f, year_f):
 
     return data_recov
 
+
 def format_data(periodos_datos_recibos):
     data_format = list()
-    all_data  = list()
+    all_data = list()
     for datos_recibos in periodos_datos_recibos:
         id_recibo = datos_recibos['id_recibo']
         control = datos_recibos['no_control']
@@ -392,14 +391,11 @@ def format_data(periodos_datos_recibos):
         nomina = datos_recibos['tipo_nomina']
         data_server = [id_recibo, control, periodo, nomina]
         data_format.append(data_server)
-    
+
     """ for recibo_data in data_format:
         all_data = all_data +  recibo_data """
-    
+
     return data_format
-
-
-
 
 
 def recuperar_datos_int(annos_int, control):
@@ -475,6 +471,36 @@ def descargar_recibo(data):
             return [0, 'No se selecciono Ruta Intentente Nuevamente']
     else:
         return [0, 'Error {} Intente nuevamente'.format(str(resp[0]))]
+
+
+@eel.expose
+def descargar_recibo_masivo(data):
+    directorio = enviar_ruta()
+    if directorio != '':
+        for data_format in data:
+            nombre_recibo = unir_cadenas(
+                '_', [data_format[0], data_format[1], data_format[2], data_format[3]])
+            resp = recuperar_recibo(data_format[0])
+
+            if resp[0] == 200:
+                directorio_comp = unir_cadenas(
+                    '\\', [directorio.replace('/', '\\'), data_format[1]])
+                crear_directorio(directorio_comp)
+                ruta_completa = unir_cadenas(
+                    '\\', [directorio_comp, nombre_recibo])
+
+                with open(ruta_completa + '.pdf', "wb") as f:
+                    f.write(base64.b64decode(resp[1]))
+
+            else:
+                cadena = unir_cadenas('|', [resp[0], str(data_format)])
+                log = Log('Log_Recibos_Descargados-error_.txt')
+                log.escribir_log('ERROR', cadena)
+
+        return [1, 'Recibos descargados en la ruta Especificada: {}'.format(directorio)]
+
+    else:
+        return [0, 'No se selecciono Ruta Intentente Nuevamente']
 
 
 """

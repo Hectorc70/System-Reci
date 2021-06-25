@@ -293,18 +293,7 @@ async function mostrarDatosRecibos(datos) {
 
 /*  UTULIDADES DE RECIBOS*/
 
-async function descargarRecibo(data) {
-    let resp = await eel.descargar_recibo(data)();
 
-    if (resp[0] != 0) {
-        satisfactorio(resp[1]);
-    }
-    else {
-        Precaucion(resp[1]);
-    }
-
-
-}
 
 
 async function addCampo() {
@@ -386,14 +375,55 @@ function cambiardeTipoBusqueda(idpest, idpestNoSelect, idMostrar, idNoMostrar) {
 }
 
 
+async function descargarRecibo(data) {
+    let resp = await eel.descargar_recibo(data)();
 
-async function SeleccionarTodoTablaBuscar() {
+    if (resp[0] != 0) {
+        satisfactorio(resp[1]);
+    }
+    else {
+        Precaucion(resp[1]);
+    }
+
+
+}
+async function DescargarTodo() {
     let elementoPadre = document.getElementById("recibos-datos-buscador");
     let elementos = elementoPadre.childNodes;
+    let datosRecibos = [];
+    for (let i = 1; i < elementos.length; i++) {
+        let count = i-1;
+        let fila = document.getElementById("fila" + count.toString());
+        
+        let idRecibo = fila.childNodes[0].innerHTML;
+        let control = fila.childNodes[1].innerHTML;
+        let periodo = fila.childNodes[2].innerHTML;
+        let nomina = fila.childNodes[3].innerHTML;
 
-    for (let i = 0; i < elementos.length; i++) {
-        SeleccionarFilaTabla("fila" + i);
+        let datos = [idRecibo, control, nomina, periodo]
+
+        datosRecibos.push(datos);
     }
+
+
+    loader("conte-buscador");
+    deshabilitar("conte-buscador");
+    let resp = await eel.descargar_recibo_masivo(datosRecibos)();
+    
+    if (resp[0] != 0) {
+        
+        noLoader("conte-buscador");
+        habilitar("conte-buscador");
+        satisfactorio(resp[1]);
+        
+
+    }
+    else {
+        noLoader("conte-buscador");
+        habilitar("conte-buscador");
+        Precaucion(resp[1]);
+    }
+
 }
 
 /* VISOR DE RECIBO */
@@ -423,7 +453,6 @@ function animacionVisor(archivo) {
     let elementoEstilo = window.getComputedStyle(visor);
     let widthVisor = elementoEstilo.getPropertyValue("width");
 
-    debugger;
     if (widthVisor == '0px') {
         visor.style.display = "block";
         visor.style.visibility = "visible";
