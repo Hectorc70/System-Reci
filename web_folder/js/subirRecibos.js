@@ -15,8 +15,8 @@ function comprobarParametrosRespReci() {
 
 async function mostrarRecibos(ruta, anno, periodo) {
     animacionVistaArchivos()
-    loader("tabla-resultados");
-    deshabilitar("tabla-resultados");
+    loader("recibos-a-subir");
+    deshabilitar("recibos-a-subir");
     let recibosNomina = await eel.mostrar_rutas_recibos(ruta, anno, periodo)();
 
     let tablavistaArchivos = document.getElementById("recibos-a-subir");
@@ -56,8 +56,8 @@ async function mostrarRecibos(ruta, anno, periodo) {
     }
 
 
-    noLoader("tabla-resultados");
-    habilitar("tabla-resultados");
+    noLoader("recibos-a-subir");
+    habilitar("recibos-a-subir");
 
 }
 
@@ -90,6 +90,7 @@ async function SubirDatosRecibos() {
     loader("recibos-a-subir");
     deshabilitar("recibos-a-subir");
 
+    
     let resp= await eel.guardar_mdatos_recibos(datosRecibos)();
 
     if (resp != 'ERROR') {
