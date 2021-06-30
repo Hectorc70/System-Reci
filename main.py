@@ -398,27 +398,6 @@ def format_data(periodos_datos_recibos):
     return data_format
 
 
-def recuperar_datos_int(annos_int, control):
-    datos_recuperados = list()
-
-    data = file_data_user.get_data_user()
-
-    if data or data == ['']:
-        user = Token(data[0], data[1])
-        token = user.get_token_user()
-        cliente = ClienteBuscador(token[1])
-
-        for anno in annos_int:
-            for _anno in anno:
-                for periodo in _anno.values():
-                    resp = cliente.recuperar_datos_recibo(control, periodo)
-                    if resp[0] == 200:
-                        datos_format = formatear_datos(resp[1])
-                        datos_recuperados.append(datos_format)
-
-    return datos_recuperados
-
-
 @eel.expose
 def recuperar_recibo(id_recibo):
     """llama al metodo que retorna el recibo
