@@ -90,6 +90,7 @@ async function SubirDatosRecibos() {
     loader("recibos-a-subir");
     deshabilitar("recibos-a-subir");
 
+    
     let resp= await eel.guardar_mdatos_recibos(datosRecibos)();
 
     if (resp != 'ERROR') {
